@@ -102,7 +102,7 @@ const STORAGE_KEY = 'documento_consorcio_data'
     especificacoes: "",
     osServicosSeraoPrestadosNosSeguintesLocaisEHorarios: "sim",
     locaisEHorarios: [] as LocalHorario[],
-    texto_locais_e_horarios_contratante: "Os serviços serão prestados nos locais e horários indicados pela contratante, conforme demanda.",
+    texto_locais_e_horarios_contratante: "3.2.1 Os serviços serão prestados nos locais e horários indicados pela contratante, conforme demanda.",
     
     prazoExecucaoDoContrato: "",
     texto_prazo_execucao: "3.2.2 O início da execução contratual deve se dar no prazo máximo de {prazoExecucaoDoContrato} ({prazoPorExtenso}) dias úteis, contados a partir da assinatura do contrato OU da emissão da ordem de serviço.",
@@ -124,7 +124,7 @@ const STORAGE_KEY = 'documento_consorcio_data'
     ObjetoRecebidoProvisoriamente: "",
     ObjetoRecebidoDefinitivamente: "",
     texto_recebimento_provisorio: "A. Provisoriamente, pelo fiscal do CONTRATO no prazo de {ObjetoRecebidoProvisoriamente} ({prazoPorExtenso}) dias, mediante termo detalhado que ateste o cumprimento das exigências de caráter técnico e administrativo e a comprovação da prestação dos serviços;",
-    texto_recebimento_definitivo: "A. Definitivamente, por servidor ou comissão designada pela autoridade competente, no prazo de {ObjetoRecebidoDefinitivamente} ({definitivoPorExtenso}) dias úteis, contados...",
+    texto_recebimento_definitivo: "B. Definitivamente, por servidor ou comissão designada pela autoridade competente, no prazo de {ObjetoRecebidoDefinitivamente} ({definitivoPorExtenso}) dias úteis, contados...",
 
     texto_recebimento_definitivo_podera_ser_excepcionalmente: "b.1.) O prazo para recebimento definitivo poderá ser excepcionalmente prorrogado, de forma justificada, por igual período, quando houver necessidade de diligências para a aferição do atendimento das exigências contratuais. (Utilizar, se for o caso)",
     recebimentoDefinitivoPoderaSerExcepcionalmente:"",
@@ -152,7 +152,7 @@ const STORAGE_KEY = 'documento_consorcio_data'
     sera_admitida_indicacao: "",
     sim_texto_dois_presente_contratacao_sera_admitida: "3.3.2 A Justificativa para a indicação de marca(s) ou modelo(s) encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar (item {numero_etp} do ETP), apêndice deste Termo de Referência.",
     numero_etp: "",
-    nao_texto_preve_indicacao_marcas_ou_modelos: "3.3.1 Na presente contratação será admitida a indicação da(s) seguinte(s) marca(s) ou modelo(s): {marcas_ou_modelos_indicadas}, devido a {devido_a} (justificar com base no art. 41, inciso I, da Lei nº 14.133, de 2021. Por exemplo: necessidade de padronização do objeto, compatibilidade com plataformas e padrões já adotados pela Administração, marca ou modelo comercializados por mais de um fornecedor forem os únicos capazes de atender às necessidades do contratante, quando a descrição do objeto a ser licitado puder ser mais bem compreendida pela identificação de determinada marca ou determinado modelo aptos a servir apenas como referência.) ",
+    nao_texto_preve_indicacao_marcas_ou_modelos: "3.3.1 Na presente contratação será admitida a indicação da(s) seguinte(s) marca(s) ou modelo(s): {marcas_ou_modelos_indicadas}, devido a {devido_a}",
     marcas_ou_modelos_indicadas: "",
     devido_a: "",
 
@@ -161,16 +161,16 @@ const STORAGE_KEY = 'documento_consorcio_data'
     condicoesAdicionaisExecucao: "",
     rcamentoSigiloso: "nao",
     tipoValorEstimado: "",
-    texto_valor_estimado_nao_sigiloso: "4.1.1 O valor estimado {tipoValor} para a contratação é de R$ {valorGlobal} ({valorGlobalExtenso}) , para {prazoMeses} ({prazoMesesExtenso}) meses, sendo assim distribuídos:", // (Baseado no DOCX )
+    texto_valor_estimado_nao_sigiloso: "4.1.1 O valor estimado {tipoValor} para a contratação é de R$ {valorGlobal} ({valorGlobalExtenso}) , para {prazoMeses} ({prazoMesesExtenso}) meses, sendo assim distribuídos:",
     valorEstimadoMensal: "",
     valorEstimadoGlobal: "",
     prazoMesesContrato: "",
-    texto_maior_desconto: "4.1.1 O valor de referência para aplicação do maior desconto corresponde a R$ {valorReferencia} ({valorReferenciaExtenso})", // (Baseado no DOCX )
+    texto_maior_desconto: "4.1.1 O valor de referência para aplicação do maior desconto corresponde a R$ {valorReferencia} ({valorReferenciaExtenso})",
     valorReferenciaMaiorDesconto: "",
-    texto_orcamento_sigiloso: "4.1.1 O valor estimado da presente contratação é de caráter sigiloso e consta de anexo classificado acostado ao presente processo, conforme dispõe o art. 24 da Lei Federal nº 14.133/2021, uma vez que {justificativaSigilo}.", // (Baseado no DOCX )
+    texto_orcamento_sigiloso: "4.1.1 O valor estimado da presente contratação é de caráter sigiloso e consta de anexo classificado acostado ao presente processo, conforme dispõe o art. 24 da Lei Federal nº 14.133/2021, uma vez que {justificativaSigilo}.",
     justificativaOrcamentoSigiloso: "",
-    texto_valor_estimado_todos_casos_p1: "4.1.2 No preço total do objeto deverão estar inclusos todos os tributos (impostos, taxas e contribuições), sejam federais, estaduais e municipais, bem como frete, comissões, pessoal, embalagem, seguros, encargos sociais e trabalhistas, assim como demais insumos inerentes que incidam ou venham a incidir sobre o objeto, sejam de que naturezas forem.", // (Baseado no DOCX )
-    texto_valor_estimado_todos_casos_p2: "4.1.3 Os preços ﬁnais unitários e totais propostos pelos licitantes não poderão ultrapassar o preço unitário e total estimado pela Administração, sob pena de desclassiﬁcação da proposta.", // (Baseado no DOCX )
+    texto_valor_estimado_todos_casos_p1: "4.1.2 No preço total do objeto deverão estar inclusos todos os tributos (impostos, taxas e contribuições), sejam federais, estaduais e municipais, bem como frete, comissões, pessoal, embalagem, seguros, encargos sociais e trabalhistas, assim como demais insumos inerentes que incidam ou venham a incidir sobre o objeto, sejam de que naturezas forem.",
+    texto_valor_estimado_todos_casos_p2: "4.1.3 Os preços ﬁnais unitários e totais propostos pelos licitantes não poderão ultrapassar o preço unitário e total estimado pela Administração, sob pena de desclassiﬁcação da proposta.",
 
     // 4.2 Classificação Orçamentária
     classificacoesOrcamentarias: [] as ClassificacaoOrcamentaria[],
@@ -204,15 +204,15 @@ const STORAGE_KEY = 'documento_consorcio_data'
     motivacaoParametrosLicitacao: "",
     inversaoFases: "nao",
     justificativaInversaoFases: "",
-    texto_licitacao_p1: "5.1.1 A licitação será processada na modalidade {modalidadeLicitacao}, tendo como critério de julgamento o {criterioJulgamento}.", // (Baseado no DOCX )
-    texto_licitacao_p2: "5.1.2 O objeto será executado por meio do regime de {regimeExecucao}.", // (Baseado no DOCX )
+    texto_licitacao_p1: "5.1.1 A licitação será processada na modalidade {modalidadeLicitacao}, tendo como critério de julgamento o {criterioJulgamento}.",
+    texto_licitacao_p2: "5.1.2 O objeto será executado por meio do regime de {regimeExecucao}.",
     texto_licitacao_p3: "5.1.3 O modo de disputa a ser utilizado é o {modoDisputa}.", 
-    texto_licitacao_p4: "5.1.4 A combinação dos parâmetros modalidade de licitação, critério de julgamento e modo de disputa descritos neste Termo de Referência se mostram adequadas e eficientes para seleção da proposta apta a gerar o resultado de contratação mais vantajoso para a Administração Pública, uma vez que {motivacaoParametrosLicitacao}.", // (Baseado no DOCX )
-    texto_inversao_fases: "5.1.5 A fase de habilitação antecederá, excepcionalmente, a fase de apresentação das propostas e lances, tendo em vista que {justificativaInversaoFases}.", // (Baseado no DOCX )
+    texto_licitacao_p4: "5.1.4 A combinação dos parâmetros modalidade de licitação, critério de julgamento e modo de disputa descritos neste Termo de Referência se mostram adequadas e eficientes para seleção da proposta apta a gerar o resultado de contratação mais vantajoso para a Administração Pública, uma vez que {motivacaoParametrosLicitacao}.",
+    texto_inversao_fases: "5.1.5 A fase de habilitação antecederá, excepcionalmente, a fase de apresentação das propostas e lances, tendo em vista que {justificativaInversaoFases}.", 
 
     // 5.2 Proposta
     prazoValidadePropostaDias: "60",
-    texto_prazo_validade_proposta: "5.2.1.1 As propostas deverão ter validade de, no mínimo, {prazoValidadePropostaDias} ({prazoValidadePropostaDiasExtenso}) dias, contados da data de abertura da sessão pública, independente de declaração da licitante.", // (Baseado no DOCX )
+    texto_prazo_validade_proposta: "5.2.1.1 As propostas deverão ter validade de, no mínimo, {prazoValidadePropostaDias} ({prazoValidadePropostaDiasExtenso}) dias, contados da data de abertura da sessão pública, independente de declaração da licitante.", 
     requerDocumentoAdicionalProposta: "nao",
     documentosAdicionaisProposta: "",
     texto_condicoes_proposta: "5.2.2.1 Para o(s) item(ns) ou lote(s) _________,(especificar os item(ns) ou lote(s), se for o caso) a(s) proposta(s)enviada(s) deverá(ão) ser acompanhada(s) do(s) seguinte(s) documento(s): {documentosAdicionaisProposta}",

@@ -259,7 +259,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
         
         {/* --- SEÇÃO 3 --- */}
         <h2 className="text-xl font-bold pt-6 pb-2 text-justify">3. DAS ESPECIFICAÇÕES DO OBJETO</h2>
-        <p className="pt-4 pb-2 text-justify font-semibold">3.1 Descrição dos serviços / Detalhamento do objeto</p>
+        <p className="pt-4 pb-2 text-justify font-semibold">3.1 DESCRIÇÃO DOS SERVIÇOS / DETALHAMENTO DO OBJETO'</p>
         <div className="mt-2 space-y-4">
           <GerarTabelasDeItens formData={formData} />
         </div>
@@ -271,6 +271,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
         
           {formData.osServicosSeraoPrestadosNosSeguintesLocaisEHorarios === 'sim' ? (
             <div>
+              <p className="pt-4 text-justify font-semibold">3.2 DA EXECUÇÃO DOS SERVIÇOS</p>
               <p className="pt-4 pb-2 text-justify">
                 3.2.1 Os serviços serão prestados nos seguintes locais <span className="text-blue-600">e horários:</span>
               </p>
@@ -278,6 +279,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
             </div>
           ):(
             <div>
+              <p className="pt-4 text-justify font-semibold">3.2 DA EXECUÇÃO DOS SERVIÇOS</p>
               <EditableTextarea
                 initialValue={formData.texto_locais_e_horarios_contratante}
                 onSave={(novoValor) => setFormData(prev => ({ ...prev, texto_locais_e_horarios_contratante: novoValor }))}
@@ -328,7 +330,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
         </div>
       </div>
       <div>
-          <p className="pt-4 pb-2 text-justify font-semibold">
+          <p className="pt-4 pb-2 text-justify">
             3.2.7 O objeto será recebido (deve ser incluído, se cabível):
           </p>
           <GerarTextoRecebimentoObjeto
@@ -357,6 +359,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
           />
         </div>
         <div>
+          <p className="pt-4 text-justify font-semibold">3.3 INDICAÇÃO DE MARCAS OU MODELOS</p>
           <IndicacaoMarcaouModelo
             formData={formData}
             setFormData={setFormData}
@@ -767,7 +770,7 @@ function GerarPrazoDeExecucao({formData, setFormData, isEditing}: GerarTextoProp
   return(
     <p>
       <p
-      className="text-lg p-2 rounded-md font-bold"
+      className="text-lg p-2 rounded-md"
       dangerouslySetInnerHTML={{ __html: textoComValores }}
     />
     </p>
@@ -811,7 +814,7 @@ function CronogramaRealizacaoDosServicos({formData, setFormData, isEditing}: Ger
 
   return(
       <p
-      className="text-lg p-2 rounded-md font-bold"
+      className="text-lg p-2 rounded-md"
       dangerouslySetInnerHTML={{ __html: textoComValores }}
     />
   )
@@ -854,13 +857,13 @@ function PerfeitaExecucaoDosServicos({formData, setFormData, isEditing}: GerarTe
 
   return(
       <p
-      className="text-lg p-2 rounded-md font-bold"
+      className="text-lg p-2 rounded-md"
       dangerouslySetInnerHTML={{ __html: textoComValores }}
     />
   )
 }
 
-function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTextoProps){
+/* function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTextoProps){
   const { objetoSeraRecebido } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -891,7 +894,7 @@ function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTe
           />
         ) : (
           <p
-            className="text-lg p-2 rounded-md font-bold"
+            className="text-lg p-2 rounded-md"
             dangerouslySetInnerHTML={{ __html: textoComValores }}
           />
         )
@@ -909,7 +912,7 @@ function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTe
           />
         ) : (
           <p
-            className="text-lg p-2 rounded-md font-bold"
+            className="text-lg p-2 rounded-md"
             dangerouslySetInnerHTML={{ __html: textoComValores }}
           />
         )
@@ -918,6 +921,63 @@ function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTe
     default:
       return <p className="text-gray-400 italic">Opção de recebimento não selecionada.</p>;
   }
+} */
+
+function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTextoProps){
+  const { objetoSeraRecebido } = formData;
+
+  const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [campo]: novoValor
+    }));
+  };
+
+  // Prepara os valores para substituição
+  const valores = {
+    ObjetoRecebidoProvisoriamente: formData.prazoRecebimentoProvisorio || "___", 
+    prazoPorExtenso: numeroPorExtenso(formData.prazoRecebimentoProvisorio || '') || "____",
+    ObjetoRecebidoDefinitivamente: formData.prazoRecebimentoDefinitivo || "___",
+    definitivoPorExtenso: numeroPorExtenso(formData.prazoRecebimentoDefinitivo || '') || "____"
+  };
+
+  // Funções auxiliares para renderizar cada bloco
+  const renderProvisorio = () => {
+    const textoComValores = substituirPlaceholders(formData.texto_recebimento_provisorio, valores);
+    return isEditing ? (
+      <EditableTextarea
+        initialValue={formData.texto_recebimento_provisorio}
+        onSave={(novoValor: string) => handleSave('texto_recebimento_provisorio', novoValor)}
+        className="text-lg"
+        isEditing={isEditing}
+      />
+    ) : (
+      <p className="text-lg p-2 rounded-md" dangerouslySetInnerHTML={{ __html: textoComValores }} />
+    );
+  };
+
+  const renderDefinitivo = () => {
+    const textoComValores = substituirPlaceholders(formData.texto_recebimento_definitivo, valores);
+    return isEditing ? (
+      <EditableTextarea
+        initialValue={formData.texto_recebimento_definitivo}
+        onSave={(novoValor: string) => handleSave('texto_recebimento_definitivo', novoValor)}
+        className="text-lg"
+        isEditing={isEditing}
+      />
+    ) : (
+      <p className="text-lg p-2 rounded-md" dangerouslySetInnerHTML={{ __html: textoComValores }} />
+    );
+  };
+
+  // Lógica principal de exibição
+  return (
+    <div className="space-y-2">
+      {(objetoSeraRecebido === 'provisoriamente' || objetoSeraRecebido === 'ProvisorioEDefinitivo') && renderProvisorio()}
+      {(objetoSeraRecebido === 'definitivamente' || objetoSeraRecebido === 'ProvisorioEDefinitivo') && renderDefinitivo()}
+      {!objetoSeraRecebido && <p className="text-gray-400 italic">Opção de recebimento não selecionada.</p>}
+    </div>
+  );
 }
 
 function RecebimentoDefinitivoPoderaSerExcepcionalmente({formData, setFormData, isEditing}: GerarTextoProps){
@@ -949,7 +1009,7 @@ function RecebimentoDefinitivoPoderaSerExcepcionalmente({formData, setFormData, 
           />
         ) : (
           <p
-            className="text-lg p-2 rounded-md font-bold"
+            className="text-lg p-2 rounded-md"
             dangerouslySetInnerHTML={{ __html: textoComValores }}
           />
         )
@@ -1005,7 +1065,7 @@ function ResponsabilidadeEticoProfissional({formData, setFormData, isEditing}: G
   return(
     <p>
       <p
-      className="text-lg p-2 rounded-md font-bold"
+      className="text-lg p-2 rounded-md"
       dangerouslySetInnerHTML={{ __html: textoComValores }}
     />
     </p>
@@ -1049,7 +1109,7 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
             />
           ) : (
             <p
-              className="text-lg p-2 rounded-md font-bold"
+              className="text-lg p-2 rounded-md"
               dangerouslySetInnerHTML={{ __html: primeiroTextoComValores }}
             />
           )}
@@ -1064,7 +1124,7 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
             />
           ) : (
             <p
-              className="text-lg p-2 rounded-md font-bold"
+              className="text-lg p-2 rounded-md"
               dangerouslySetInnerHTML={{ __html: segundoTextoComValores }}
             />
           )}
@@ -1083,7 +1143,7 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
           />
         ) : (
           <p
-            className="text-lg p-2 rounded-md font-bold"
+            className="text-lg p-2 rounded-md"
             dangerouslySetInnerHTML={{ __html: textoComValores }}
           />
         )

@@ -551,6 +551,12 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               />
             </FieldsetContainer>
             <FieldsetContainer titleLegend="3.2 Da execução dos serviços">
+              <CollapsibleText title="Orientações para preenchimento">
+                <ol>
+                  <li>Caso haja mais de um endereço, deve-se especificar. Do mesmo modo, se os endereços se modificarem conforme cada etapa/fase do serviço. Ademais, se houver a necessidade de previamente se acordar a data ou hora de prestação do serviço com o contratado, deve-se especificar essa obrigação.</li>
+                  <li>Na licitação de serviços de manutenção e assistência técnica, deverá ser definido o local de realização dos serviços, admitida a exigência de deslocamento de técnico ao local da repartição ou a exigência de que o contratado tenha unidade de prestação de serviços em distância compatível com as necessidades da Administração  - Art. 47, §2º, Lei nº 14.133/2021</li>
+                </ol>
+              </CollapsibleText>
               <div className='flex flex-col'>
                 <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em locais e horários fixos?</label>
                 <select name="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" id="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" value={formData.osServicosSeraoPrestadosNosSeguintesLocaisEHorarios} onChange={(e)=>setFormData({...formData,osServicosSeraoPrestadosNosSeguintesLocaisEHorarios: e.target.value})} className="border rounded-sm p-2 flex-grow w-1/5">
@@ -644,20 +650,13 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 </select>
               </div>
               {formData.objetoSeraRecebido === 'provisoriamente' ? (
-              <>
-                <div className="flex flex-col">
-                  <label htmlFor="ObjetoRecebidoProvisoriamente" className="font-semibold">Quantas empresas serão admitidas em cada consórcio ?</label>
-                  <input type="number" id='ObjetoRecebidoProvisoriamente' className='border rounded-sm p-2 w-full' value={formData.prazoRecebimentoProvisorio} onChange={(e)=>setFormData({...formData, prazoRecebimentoProvisorio: e.target.value})} />
-                </div>
-                <InputComponent
+              <InputComponent
                   label="qual o prazo para o recebimento provisório?"
                   id="prazoRecebimentoProvisorio"
                   type="number"
-                  value={formData.valorEstimadoMensal}
+                  value={formData.prazoRecebimentoProvisorio}
                   onChange={(e) => setFormData({...formData, prazoRecebimentoProvisorio: e.target.value})}
                 />
-              </>
-              
             ):(
               <div>
                 <div className="flex flex-col mt-2">
@@ -800,6 +799,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </div>
                 ):(
                   <div>
+                    
                     <div>
                       <div className="flex flex-col mt-2">
                         <label htmlFor="marcas_ou_modelos_indicadas" className="font-semibold">Será admitida a indicação da(s) seguinte(s) narca(s) ou modelo(s)?</label>
@@ -807,6 +807,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                       </div>
                       <div className="flex flex-col mt-2">
                         <label htmlFor="devido_a" className="font-semibold">Devido a?</label>
+                        <p className="orientacoes py-1.5">Justificar com base no art. 41, inciso I, da Lei nº 14.133, de 2021. Por exemplo: necessidade de padronização do objeto, compatibilidade com plataformas e padrões já adotados pela Administração, marca ou modelo comercializados por mais de um fornecedor forem os únicos capazes de atender às necessidades do contratante, quando a descrição do objeto a ser licitado puder ser mais bem compreendida pela identificação de determinada marca ou determinado modelo aptos a servir apenas como referência.</p>
                         <input type="text" id='devido_a' className='border rounded-sm p-2 w-full' value={formData.devido_a} onChange={(e)=>setFormData({...formData, devido_a: e.target.value})} />
                       </div>
                     </div>
