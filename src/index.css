@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+body, html, p, h1,h2{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.orientacoes{
+    text-align: justify;
+    color: red;
+    font-size: 0.875rem;
+}
+
+p{
+    text-align: justify;
+}
+
+p + p {
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+}
+
+fieldset{
+    padding: 0.7rem;
+    border-radius: 0.75rem;
+    border: 2px solid black;
+}
+

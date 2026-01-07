@@ -1,0 +1,482 @@
+
+import {useState} from 'react' 
+import { Modal } from './components/Modal';
+import { ConteudoDocumento } from './components/ConteudoDocumento';
+import { Formulario } from './components/Formulario';
+import type { 
+  Item, 
+  Grupo, 
+  LocalHorario, 
+  ClassificacaoOrcamentaria, 
+  AtorGestaoContrato, 
+  OutroAnexo 
+} from './types/types';
+
+
+const STORAGE_KEY = 'documento_consorcio_data'
+
+  const defaultFormData = {
+    // 1.1 Formação de registro de preço
+    eRegistroPreco: "",
+    sim_texto_e_registro_preco: "1.1 Formação de registro de preços {qualTipoContratacao} para contratação eventual de prestação de serviços de {visandoAtenderNecessidades},conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} e neste Termo de Referência.",
+    nao_texto_e_registro_preco: "1.1 Contratação de prestação de serviços de {paraContratacaoEventualPrestacaoServico}, visando atender as necessidades do(a) {visandoAtenderNecessidades} conforme as condições, especificações, quantidades e exigências contidas{eEstudosTecnicosPreliminares} e neste Termo de Referência.",
+    paraContratacaoEventualPrestacaoServico: "",
+    visandoAtenderNecessidades: "",
+    eEstudosTecnicosPreliminares:"",
+    seCoperativa:"1.2 O escopo de participantes da Ata Corporativa proveniente da presente contratação teve por base o permissivo legal do art. 45, do Decreto Estadual nº 54.700/2023 e se justifica no caso concreto, uma vez que {justificaCasoConcretoUmaVezQue}.",
+    justificaCasoConcretoUmaVezQue: "",
+    qualTipoContratacao: "",
+    objetoDestaLicitacaoEstaoDivididos: "",
+    texto_objetoDestaLicitacaoEstaoDivididos:"1.3 As especificações e os quantitativos do objeto desta licitação estão divididos por {objetoDestaLicitacaoEstaoDivididos} e descritos conforme quadro(s) constante no anexo E.",
+    emCasoDiscordanciaExistenteTermoECatser:"1.4 Em caso de discordância existente entre as especificações do objeto descritas no E-fisco/Termo de Referência e no CATSER, prevalecerá a descrição do E-fisco/Termo de Referência.",
+    existEtpOuInformacaoPresenteExtratoSigiloso: "",
+    itemEtpEstudosTecnicos: "",
+    texto_sim_existEtpOuInformacaoPresenteExtratoSigiloso: "2.1.1 A Justificativa e objetivo da contratação encontram-se pormenorizadas em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",
+    texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso: "2.1.1 A presente contratação se dará em função da necessidade dos serviços de {presenteContratacaoNecessidadeServicos}, os quais são essenciais para o desempenho das atribuições funcionais da {desempenhoAtribuicoesFuncionais}, uma vez que {umaVezQueAtribuicoesFuncionais}, de acordo com as especificações e quantidades constantes neste Termo de Referência.Informe-se, por oportuno, que tal objeto atenderá o dever legal exposto no {deverLegalExposto}, que determina {queDeterminaDispositivoLegalCitado}.",
+    presenteContratacaoNecessidadeServicos: "",
+    desempenhoAtribuicoesFuncionais: "",
+    umaVezQueAtribuicoesFuncionais: "",
+    deverLegalExposto: "",
+    queDeterminaDispositivoLegalCitado: "",
+    existEtpOuInformacaoPresenteExtratoSigilosoItemDois:"",
+    osQuantitativosPrecistoDefinidosNoDocumento:"",
+    fundamentadoEm:"",
+    texto_sim_justificativa_quantitativo: "2.2.1 A Justificativa para o quantitativo necessário ao atendimento da necessidade pública encontra-se pormenorizada em tópico específico dos Estudo Técnico Preliminar, anexo deste Termo de Referência.",
+    itemEtpQuantitativo: "",
+    texto_nao_justificativa_quantitativo: "2.2.1 Os quantitativos previstos no presente Termo de Referência foram definidos no documento {osQuantitativosPrecistoDefinidosNoDocumento}, fundamentado em {fundamentadoEm}, conforme os cálculos apresentados abaixo:",
+    // 2.3.1
+    existEtpOuInformacaoPresenteExtratoSigilosoItemDois_tres: "",
+    texto_sim_justificativa_solucao: "2.3.1 A Justificativa da escolha da solução a ser licitada encontra-se pormenorizada em tópico específico dos Estudo Técnico Preliminar (item {itemEtpJustificativaSolucao} do ETP)OUdo Extrato dos Estudo Técnico Preliminar, anexo deste Termo de Referência.",
+    itemEtpJustificativaSolucao: "",
+    texto_nao_justificativa_solucao: "2.3.1 Visando atender à necessidade pública do órgão OU entidade demandante já exposta no item acima, uma vez que se mostra como essencial para o desenvolvimento de suas atividades, a Administração Pública optou por contratar o serviço em tela, uma vez que {justificativaEscolhaSolucaoNaoEtp}",
+    justificativaEscolhaSolucaoNaoEtp: "",
+
+    // 2.4.1
+    justificativaParcelamentoEtp: "", // 'sim' ou 'nao' (para ETP)
+    texto_sim_justificativa_parcelamento: "2.4.1 A Justificativa para o parcelamento OU para o não parcelamento do objeto encontra-se pormenorizada em tópico específico dos Estudo Técnico Preliminar (item {itemEtpJustificativaParcelamento} do ETP)OUdo Extrato dos Estudo Técnico Preliminar, anexo deste Termo de Referência, de modo a permitir a ampliação da competitividade, diante das particularidades do caso concreto.",
+    itemEtpJustificativaParcelamento: "",
+    
+    tipoParcelamentoNaoEtp: "",
+    
+    // Textos para 'nao' ETP -> 'item'
+    texto_nao_parcelamento_item_p1: "2.4.1 A regra a ser observada pela Administração nas licitações é a do parcelamento do objeto quando, no caso concreto, a divisão for tecnicamente viável e economicamente vantajosa, de modo a ampliar a competição e evitar a concentração de mercado. (Art. 47, inciso II combinado com §1º do mesmo artigo, da Lei 14.1333/2021).",
+    texto_nao_parcelamento_item_p2: "2.4.2 Na presente contratação, resta demonstrado que o parcelamento por item(ns)buscou permitir a participação de maior número de interessados, fomentando, assim, o princípio da ampla concorrência.",
+    texto_nao_parcelamento_item_p3: "2.4.3 A(s) razão(ões) técnica(s) e/ou econômica(s) para a preservação do objeto parcelado por item(ns) foram {razoesParcelamentoItem}.",
+    razoesParcelamentoItem: "",
+    texto_nao_parcelamento_item_p4: "2.4.4 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado tanto técnica quanto economicamente, sem restringir ou prejudicar a competitividade do certame e, consequentemente, o mais adequado para promover a maior vantajosidade para o Estado.",
+    
+    // Textos para 'nao' ETP -> 'lote'
+    texto_nao_parcelamento_lote_p1: "2.4.1 Neste caso em concreto, em virtude da natureza do serviço a ser contratado, a opção pelo agrupamento dos itens em lote(s) é a mais vantajosa para a Administração, uma vez que {justificativaAgrupamentoLote}.",
+    justificativaAgrupamentoLote: "",
+    texto_nao_parcelamento_lote_p2: "2.4.2 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado tanto técnica, quanto economicamente, sem restringir ou prejudicar a competitividade do certame e, consequentemente, o mais propício para promover maior vantajosidade para o Estado.",
+
+    // Textos para 'lotes espelhados' (add-on)
+    usaLotesEspelhados: "", // 'sim' ou 'nao'
+    texto_lotes_espelhados_p1: "2.4.3 Por fim, o objeto da licitação está disposto em itens/lotes idênticos, diante do vulto da contratação, a fim de ampliar ainda mais a competitividade do certame.",
+    texto_lotes_espelhados_p2: "2.4.4 Ressalte-se que {argumentosLotesEspelhados}",
+    argumentosLotesEspelhados: "",
+    texto_lotes_espelhados_p3: "2.4.5 Dessa forma, entende-se que a licitação está disposta com vistas ao melhor aproveitamento dos recursos disponíveis no mercado e à ampliação da competitividade, sem perda da economia de escala.",
+
+    descricao: 'sim',
+    numeroConsorciadas: '',
+    justificativa: '',
+    nao_havendo_complexidade_objeto: '',
+    nao_havendo_grande_vulto_da_contratacao: '',
+    texto_sim: "2.5.1 No caso vertente, é permitida a participação de empresas sob a forma de consórcio, na forma do art. 15, da Lei nº 14.133/2021.",
+    texto_sim_limitado_p1: "2.5.1 No caso vertente, é permitida a participação de empresas sob a forma de consórcio, na forma do art. 15, da Lei nº 14.133/2021.",
+    texto_sim_limitado_p2: "2.5.2 O número máximo de empresas admitidas em cada consórcio será de {numStr} ({extensoStr}), uma vez que {justificativa}.",
+    texto_nao_p1: "2.5.1. De acordo com o art. 15 da Lei nº 14.133/2021, a participação de empresas reunidas em consórcio poderá ser vedada, segundo discricionariedade da Administração, com base em justificativa técnica que leve em consideração as peculiaridades do caso concreto.",
+    texto_nao_p2: "2.5.2 Assim, não poderá participar desta licitação consórcio de empresa, qualquer que seja sua forma de constituição, visto que não se faz necessária a conjugação de esforços para a prestação do presente serviço.",
+    texto_nao_p3: "2.5.3. Além disso, no caso vertente, não se faz presente a premissa da complexidade do objeto, uma vez que {nao_havendo_complexidade_objeto}. Também não está presente o grande vulto da contratação, pois {nao_havendo_grande_vulto_da_contratacao}.",
+    texto_nao_p4: "2.5.4.Por todo o exposto, conclui-se que a vedação da participação de empresas sob a forma de consórcio é a medida que melhor atende o interesse público, por prestigiar os princípios da competitividade, economicidade e moralidade. ",
+    vedacaoOuParticipacaoCooperativa: "sim",
+    vedacaoParticipacaoCooperativaNao: "2.6.1 É vedada a participação de profissionais organizados em cooperativas na presente licitação, uma vez que {justificativa_vedacao}.",
+    permitidaParticipacaoCooperativaSim: "2.6.1 É permitida a participação de profissionais organizados em cooperativas, na forma do disposto no art. 16, da Lei nº 14.133/2021, na presente licitação.",
+    vedacaoParticipacaoPessoaFisicaSim: "2.7.1 É permitida a participação de pessoas físicas na presente licitação.",
+    vedacaoParticipacaoPessoaFisicaNao: "2.7.1 É vedada a participação de pessoas físicas na presente licitação, uma vez que {justificativa_vedacao_pessoafisica}.",
+    vedacaoOuParticipacaoPessoasFisicas: "sim",
+    justificativa_vedacao_pessoafisica: "",
+    justificativa_vedacao: "",
+    itensPorUnidade: [] as Item[],
+    grupos: [] as Grupo[],
+    especificacoes: "",
+    osServicosSeraoPrestadosNosSeguintesLocaisEHorarios: "sim",
+    locaisEHorarios: [] as LocalHorario[],
+    texto_locais_e_horarios_contratante: "Os serviços serão prestados nos locais e horários indicados pela contratante, conforme demanda.",
+    
+    prazoExecucaoDoContrato: "",
+    texto_prazo_execucao: "3.2.2 O início da execução contratual deve se dar no prazo máximo de {prazoExecucaoDoContrato} ({prazoPorExtenso}) dias úteis, contados a partir da assinatura do contrato OU da emissão da ordem de serviço.",
+    /* 3.2.3 descrição detalhada dos métodos */
+    texto_descricao_detalhada: "3.2.3 Descrição detalhada dos métodos, rotinas, etapas, tecnologias procedimentos, frequência e periodicidade de execução do trabalho: {descricaoDetalhadaMetodosExecucaoTrabalho}",
+    descricaoDetalhadaMetodosExecucaoTrabalho: "",
+    /* 3.2.4 Horário da prestação de serviço: */
+    texto_horario_prestacao: "3.2.4 Horário da prestação de serviço: {horarioPrestacaoServico}",
+    horarioPrestacaoServico: "",
+    /* 3.2.5 cronograma de realização dos serviços */
+    existeCronograma: "",
+    texto_cronograma_realizacao_servicos: "3.2.5 Cronograma de realização dos serviços: {cronogramaRealizacaoDosServicos}",
+    cronogramaRealizacaoDosServicos: "",
+
+    texto_para_perfeita_execucao_servicos: "3.2.6 Para a perfeita execução dos serviços, a Contratada deverá disponibilizar os materiais, equipamentos, ferramentas e utensílios necessários, nas quantidades estimadas e qualidades a seguir estabelecidas, promovendo sua substituição quando necessário: {perfeitaExecucaoservicos}",
+    perfeitaExecucaoservicos: "",
+
+    objetoSeraRecebido: "",
+    ObjetoRecebidoProvisoriamente: "",
+    ObjetoRecebidoDefinitivamente: "",
+    texto_recebimento_provisorio: "A. Provisoriamente, pelo fiscal do CONTRATO no prazo de {ObjetoRecebidoProvisoriamente} ({prazoPorExtenso}) dias, mediante termo detalhado que ateste o cumprimento das exigências de caráter técnico e administrativo e a comprovação da prestação dos serviços;",
+    texto_recebimento_definitivo: "A. Definitivamente, por servidor ou comissão designada pela autoridade competente, no prazo de {ObjetoRecebidoDefinitivamente} ({definitivoPorExtenso}) dias úteis, contados...",
+
+    texto_recebimento_definitivo_podera_ser_excepcionalmente: "b.1.) O prazo para recebimento definitivo poderá ser excepcionalmente prorrogado, de forma justificada, por igual período, quando houver necessidade de diligências para a aferição do atendimento das exigências contratuais. (Utilizar, se for o caso)",
+    recebimentoDefinitivoPoderaSerExcepcionalmente:"",
+
+    //3.2.7 
+    prazoRecebimentoProvisorio: "",
+    prazoRecebimentoDefinitivo: "",
+    ProvisorioEDefinitivo: "",
+
+    //3.2.8 O termo detalhado
+    TermoDetalhadoDeRecebimentoProvisorio: "",
+    texto_termo_detalhado_de_recebimento_provisorio_se_realizado_imr:"3.2.8 O termo detalhado do recebimento provisório, com a análise das ocorrências registradas na execução do CONTRATO serão encaminhados ao gestor para fins de apuração dos descontos e glosas cabíveis na fatura correspondente, em virtude de serviços total ou parcialmente não executados ou, se for o caso, da pontuação obtida na avaliação da qualidade dos serviços em consonância com os indicadores previstos no Instrumento de Medição de Resultado (IMR)",
+    texto_termo_detalhado_de_recebimento_provisorio_se_nao_realizado_imr:"3.2.8 O termo detalhado do recebimento provisório, com a análise das ocorrências registradas na execução do CONTRATO serão encaminhados ao gestor para fins de apuração dos descontos e glosas cabíveis na fatura correspondente, em virtude de serviços total ou parcialmente não executados",
+
+    // 3.2.9 responsabilidade ético-profissional
+    responsabilidadeEticoProfissional: "3.2.9 O recebimento provisório ou definitivo do objeto não exclui a responsabilidade ético-profissional da contratada pela perfeita execução da contratação, nem a responsabilidade pelos prejuízos resultantes da sua incorreta execução;",
+
+    //3.2.10 condições adicionais de execução do objeto
+    mostrarCondicoesAdicionais: "nao",
+    condicoesAdicionais: [] as string[],
+    texto_condicoes_adicionais: '3.2.10 Condições gerais e específicas para a prestação do serviço: (deve ser incluído, se cabível, condições adicionais de execução do objeto)',
+    //3.3 Indocação de marcas ou modelos
+    preveIndicacaoMarcasOuModelos: "nao",
+    sim_texto_preve_indicacao_marcas_ou_modelos: "3.3.1 Na presente contratação será admitida a indicação da(s) seguinte(s) marca(s), característica(s) ou modelo(s): {sera_admitida_indicacao} de acordo com as justificativas contidas no Estudo Técnico Preliminar.",
+    sera_admitida_indicacao: "",
+    sim_texto_dois_presente_contratacao_sera_admitida: "3.3.2 A Justificativa para a indicação de marca(s) ou modelo(s) encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar (item {numero_etp} do ETP), apêndice deste Termo de Referência.",
+    numero_etp: "",
+    nao_texto_preve_indicacao_marcas_ou_modelos: "3.3.1 Na presente contratação será admitida a indicação da(s) seguinte(s) marca(s) ou modelo(s): {marcas_ou_modelos_indicadas}, devido a {devido_a} (justificar com base no art. 41, inciso I, da Lei nº 14.133, de 2021. Por exemplo: necessidade de padronização do objeto, compatibilidade com plataformas e padrões já adotados pela Administração, marca ou modelo comercializados por mais de um fornecedor forem os únicos capazes de atender às necessidades do contratante, quando a descrição do objeto a ser licitado puder ser mais bem compreendida pela identificação de determinada marca ou determinado modelo aptos a servir apenas como referência.) ",
+    marcas_ou_modelos_indicadas: "",
+    devido_a: "",
+
+    // 3.4 da vedação de utilização de marca/produto na execução do serviço
+    necessarioCondicoesAdicionaisParaExecucaoDoObjeto: "",
+    condicoesAdicionaisExecucao: "",
+    rcamentoSigiloso: "nao",
+    tipoValorEstimado: "",
+    texto_valor_estimado_nao_sigiloso: "4.1.1 O valor estimado {tipoValor} para a contratação é de R$ {valorGlobal} ({valorGlobalExtenso}) , para {prazoMeses} ({prazoMesesExtenso}) meses, sendo assim distribuídos:", // (Baseado no DOCX )
+    valorEstimadoMensal: "",
+    valorEstimadoGlobal: "",
+    prazoMesesContrato: "",
+    texto_maior_desconto: "4.1.1 O valor de referência para aplicação do maior desconto corresponde a R$ {valorReferencia} ({valorReferenciaExtenso})", // (Baseado no DOCX )
+    valorReferenciaMaiorDesconto: "",
+    texto_orcamento_sigiloso: "4.1.1 O valor estimado da presente contratação é de caráter sigiloso e consta de anexo classificado acostado ao presente processo, conforme dispõe o art. 24 da Lei Federal nº 14.133/2021, uma vez que {justificativaSigilo}.", // (Baseado no DOCX )
+    justificativaOrcamentoSigiloso: "",
+    texto_valor_estimado_todos_casos_p1: "4.1.2 No preço total do objeto deverão estar inclusos todos os tributos (impostos, taxas e contribuições), sejam federais, estaduais e municipais, bem como frete, comissões, pessoal, embalagem, seguros, encargos sociais e trabalhistas, assim como demais insumos inerentes que incidam ou venham a incidir sobre o objeto, sejam de que naturezas forem.", // (Baseado no DOCX )
+    texto_valor_estimado_todos_casos_p2: "4.1.3 Os preços ﬁnais unitários e totais propostos pelos licitantes não poderão ultrapassar o preço unitário e total estimado pela Administração, sob pena de desclassiﬁcação da proposta.", // (Baseado no DOCX )
+
+    // 4.2 Classificação Orçamentária
+    classificacoesOrcamentarias: [] as ClassificacaoOrcamentaria[],
+    texto_classificacao_orcamentaria_p1: "4.2.1 As despesas decorrentes desta licitação serão incluídas no orçamento do Estado de Pernambuco, para o presente exercício, na classificação abaixo:", // (Baseado no DOCX )
+    elemento_de_despesa:"",
+
+    // 4.3 Justificativa LC 123/2006
+    aplicarCotaExclusiva: "nao",
+    cotaReservadaNaturezaDivisivel: "nao",
+    justificativaBeneficioLC123Opcao: "",
+    texto_cota_exclusiva_sim: "4.3.1 Considerando que os itens OU lotes {itensLotesCotaExclusiva} desta licitação possuem valor igual ou inferior a R$ 80.000,00 (oitenta mil) reais, serão estes considerados de participação exclusiva de microempresa ou empresa de pequeno porte ou microempreendedor individual.", // (Baseado no DOCX )
+    itensLotesCotaExclusiva: "",
+    texto_cota_exclusiva_nao_enquadra: "4.3.1 Considerando que não há itens ou lotes de valor igual ou inferior a R$ 80.000,00 (oitenta mil reais), a presente licitação não possui itens oulotes exclusivo à participação de microempresa, empresa de pequeno porte ou microempreendedor individual.", // (Baseado no DOCX )
+    texto_cota_exclusiva_nao_art_49: "4.3.1 O presente processo se enquadra no(s) inciso(s) {incisosArt49LC123} do art. 49 da Lei Complementar nº 123/2006 E/OU {incisosArt9Decreto45140} do art. 9º do Decreto nº 45.140/2017 citado(s) acima , uma vez que {justificativaNaoAplicacaoArt49}.", // (Baseado no DOCX )
+    incisosArt49LC123: "",
+    incisosArt9Decreto45140: "",
+    justificativaNaoAplicacaoArt49: "",
+    texto_cota_exclusiva_nao_art_4_lei_14133: "4.3.1 Uma vez que o(s) preço(s) anual(is) estimado(s) do(s) item(ns) OU lote(s) {itensLotesNaoAplicacaoArt4} deste processo super(am) individualmente o valor da receita bruta máxima admitida para fins de enquadramento como empresa de pequeno porte (art. 3º, inciso II, da Lei Complementar nº 123/2006), não serão aplicados a tal(is)item(ns) OU lote(s) os benefícios presentes nos arts. 42 a 49 da Lei Complementar nº 123/2006 e arts. 5º ao 7º do Decreto nº 45.140/2017, por disposição expressa no inciso I, do § 1º, do art. 4º, da lei nº 14.133/2021.", // (Baseado no DOCX )
+    itensLotesNaoAplicacaoArt4: "",
+    nao_aplicar_art_4_lei_14133: "",
+    nao_aplicar_art_49: "",
+    aplicarCotaExclusica: "",
+    nao_aplicar_sem_enquadramento: "",
+
+    // 5.1 Modalidade
+    modalidadeLicitacao: "",
+    criterioJulgamento: "",
+    regimeExecucao: "",
+    criterioAceitabilidadePrecos: "unitario",
+    modoDisputa: "aberto_fechado",
+    motivacaoParametrosLicitacao: "",
+    inversaoFases: "nao",
+    justificativaInversaoFases: "",
+    texto_licitacao_p1: "5.1.1 A licitação será processada na modalidade {modalidadeLicitacao}, tendo como critério de julgamento o {criterioJulgamento}.", // (Baseado no DOCX )
+    texto_licitacao_p2: "5.1.2 O objeto será executado por meio do regime de {regimeExecucao}.", // (Baseado no DOCX )
+    texto_licitacao_p3: "5.1.3 O modo de disputa a ser utilizado é o {modoDisputa}.", 
+    texto_licitacao_p4: "5.1.4 A combinação dos parâmetros modalidade de licitação, critério de julgamento e modo de disputa descritos neste Termo de Referência se mostram adequadas e eficientes para seleção da proposta apta a gerar o resultado de contratação mais vantajoso para a Administração Pública, uma vez que {motivacaoParametrosLicitacao}.", // (Baseado no DOCX )
+    texto_inversao_fases: "5.1.5 A fase de habilitação antecederá, excepcionalmente, a fase de apresentação das propostas e lances, tendo em vista que {justificativaInversaoFases}.", // (Baseado no DOCX )
+
+    // 5.2 Proposta
+    prazoValidadePropostaDias: "60",
+    texto_prazo_validade_proposta: "5.2.1.1 As propostas deverão ter validade de, no mínimo, {prazoValidadePropostaDias} ({prazoValidadePropostaDiasExtenso}) dias, contados da data de abertura da sessão pública, independente de declaração da licitante.", // (Baseado no DOCX )
+    requerDocumentoAdicionalProposta: "nao",
+    documentosAdicionaisProposta: "",
+    texto_condicoes_proposta: "5.2.2.1 Para o(s) item(ns) ou lote(s) _________,(especificar os item(ns) ou lote(s), se for o caso) a(s) proposta(s)enviada(s) deverá(ão) ser acompanhada(s) do(s) seguinte(s) documento(s): {documentosAdicionaisProposta}",
+    requeGarantiaProposta: "nao",
+    percentualGarantiaProposta: "",
+    justificativaGarantiaProposta: "",
+    texto_garantia_proposta_p1: "5.2.3.1 Será exigida, no ato da apresentação da proposta, a prestação de garantia, no percentual de {percentualGarantiaProposta}% ({percentualGarantiaPropostaExtenso}) por cento do valor estimado da contratação...", 
+    texto_garantia_proposta_p2: "5.2.3.2 A solicitação da garantia de proposta se justifica no presente caso, uma vez que {justificativaGarantiaProposta}",
+
+    requeAmostra: "nao",
+    tipoAmostra: "",
+    outroTipoAmostra: "",
+    justificativaAmostra: "",
+    prazoAmostraDiasUteis: "",
+    faseApresentacaoAmostra: "julgamento_proposta",
+    enderecoApresentacaoAmostra: "",
+    horarioApresentacaoAmostra: "",
+    agendamentoAmostra: "",
+    duracaoAmostraDiasUteis: "",
+    descricaoTesteAmostra: [] as string[],
+    percentilMinimoAprovacaoAmostra: "",
+    setorResponsavelAmostra: "",
+    prazoAnaliseAmostraDiasUteis: "",
+    prazoRetiradaAmostraDiasUteis: "",
+    texto_amostra_fase_julgamento: "5.2.7 Havendo o aceite da proposta (...), o licitante classificado provisoriamente em primeiro lugar deverá (...), no prazo de {prazoAmostraDiasUteis} ({prazoAmostraDiasUteisExtenso}) dias úteis, contados a partir do primeiro dia útil subsequente à convocação (...), sob pena de desclassificação.",
+    texto_amostra_fase_contratual: "5.2.4.3 No prazo de {prazoAmostraDiasUteis} ({prazoAmostraDiasUteisExtenso}) 5.2.4.3dias contados da assinatura do CONTRATO e antes da emissão da primeira ordem de serviço (OU contados da assinatura da ata de registro de preços), a contratada OU detentora da ata deverá fornecer amostra para fins de verificação das especificações contidas no Termo de Referência. (Especificar o prazo)", 
+    texto_amostra_fase_condicao_assinatura: "5.2.4.3 No prazo de {prazoAmostraDiasUteis} ({prazoAmostraDiasUteisExtenso}) dias contados da homologação do certame (OU convocação pela Administração Pública), como condição para a assinatura do contrato, a adjudicatária deverá fornecer amostra para fins de verificação das especificações contidas no Termo de Referência.",
+    
+    texto_amostra_requisicao_p1: "5.2.4.1 Visando realizar análise conclusiva da adequação e conformidade do produto/solução ofertado(a) para o atendimento da necessidade pública, será exigida(o), no presente certame, {tipoAmostra} em virtude de {justificativaAmostra}.", 
+    texto_amostra_requisicao_p2: "5.2..4.1 Visando realizar análise conclusiva da adequação e conformidade do produto/solução ofertado(a) para o atendimento da necessidade pública, será exigida amostra em virtude de {justificativaAmostra}.",
+    texto_amostra_prazo_p1: "5.2.4.2 O prazo definido para sua apresentação, conforme definido no subitem abaixo, é reputado razoável para as providências de realização da {tipoAmostra} pelo licitante OU adjudicatária OU contratada OU detentora da ata de registro de preços.", 
+
+
+    texto_amostra_comum_p1: "5.2.8 A {tipoAmostra} deverá ser apresentado(a) no endereço {enderecoApresentacaoAmostra}, no horário das {horarioApresentacaoAmostra}, mediante agendamento (...).", 
+    texto_amostra_comum_p2: "5.2.9 A {tipoAmostra} consistirá em: (descrito na lista abaixo).", 
+    texto_amostra_comum_p3: "5.2.10 A {tipoAmostra} será acompanhada, examinada e avaliada pelo Setor {setorResponsavelAmostra} (...).", 
+
+    // 5.3 Habilitação
+    habilitacaoJuridicaLeiEspecial: "nao",
+    texto_habilitacao_juridica: "5.3.1 Ato de autorização para o exercício da atividade de {atividadeAutorizacaoJuridica}, expedido por {orgaoAutorizacaoJuridica} nos termos do art. _________ da (Lei/Decreto) n° {numeroLeiAutorizacaoJuridica}.", 
+    atividadeAutorizacaoJuridica: "",
+    orgaoAutorizacaoJuridica: "",
+    artigoLeiAutorizacaoJuridica: "",
+    numeroLeiAutorizacaoJuridica: "",
+    objetoExigeRegistroFuncionamento: "nao",
+
+    // 5.3.2 Qualificação Técnica
+    requerRegistroEntidadeProfissional: "nao",
+    nomeEntidadeProfissional: "",
+    texto_qualificacao_tecnica_registro: "5.3.2 Registro ou inscrição da empresa na entidade profissional {nomeEntidadeProfissional}, em plena validade;", 
+    requerComprovacaoAptidao: "nao",
+    texto_qualificacao_tecnica_aptidao_p1: "5.3.3 Comprovação de aptidão para execução de serviço (...), por meio da apresentação de certidões ou atestados (...). Para fins de comprovação, os atestados/certidões devem dizer respeito a prestação de serviços de {servicosComprovacaoAptidao}, com as seguintes características mínimas: {caracteristicasMinimasAptidao}.", 
+    servicosComprovacaoAptidao: "",
+    caracteristicasMinimasAptidao: "",
+    texto_qualificacao_tecnica_aptidao_p2: "5.3.4 Será considerado compatível com a quantidade os atestados ou certidões que apresentarem, no mínimo, {percentualMinimoAtestadoTecnico}% ({percentualMinimoAtestadoTecnicoExtenso}) por cento das quantidades estimadas na licitação (...);", 
+    percentualMinimoAtestadoTecnico: "",
+    texto_qualificacao_tecnica_aptidao_p3: "5.3.5 Para fins de aferição do percentual mínimo de {percentualMinimoAtestadoTecnico}% ({percentualMinimoAtestadoTecnicoExtenso}) por centro relativo à qualificação técnica, (...), deverá ser realizado arredondamento para o primeiro menor número inteiro.", 
+    texto_qualificacao_tecnica_aptidao_p4: "5.3.6 Justifica-se o percentual fixado para fins de qualificação técnica, no que se refere à comprovação das quantidades a serem indicadas em atestados/certidões, por {justificativaPercentualAtestadoTecnico}.", 
+    justificativaPercentualAtestadoTecnico: "",
+    texto_qualificacao_tecnica_aptidao_p5: "5.3.7 Será admitida a apresentação de atestados relativos a potencial subcontratado em relação à parcela do serviço de {parcelaServicoSubcontratado}, (...).", 
+    parcelaServicoSubcontratado: "",
+
+    preveVistoriaPrevia: "nao",
+    texto_vistoria_previa_p1: "5.3.8 A avaliação prévia do local de execução dos serviços é imprescindível para o conhecimento pleno das condições e peculiaridades do objeto a ser contratado, pois {justificativaVistoriaPrevia}, sendo assegurado ao interessado o direito de realização de vistoria prévia (...).", 
+    justificativaVistoriaPrevia: "",
+    horarioVistoriaPrevia: "",
+    agendamentoVistoriaPreviaSetor: "",
+    agendamentoVistoriaPreviaTelefone: "",
+    agendamentoVistoriaPreviaEmail: "",
+    texto_vistoria_previa_p2: "5.3.9 Caso a licitante opte por não realizar a vistoria, deverá apresentar declaração formal assinada por seu responsável técnico acerca do conhecimento pleno das condições e peculiaridades da contratação, (...).", 
+
+    // 5.3.3 Qualificação Econômico-Financeira
+    habilitacaoEconomicaPor: "",
+    percentualHabilitacaoEconomica: "",
+    texto_habilitacao_economica_p1: "5.3.10 Comprovação do {habilitacaoEconomicaPor} Mínimo correspondente a {percentualHabilitacaoEconomica}% ({percentualHabilitacaoEconomicaExtenso}) do valor estimado da licitação (...).", 
+    percentualAcrescimoConsorcio: "10",
+    texto_habilitacao_economica_consorcio: "5.3.11 Quando permitida a participação (...) em consórcio, este deve apresentar o somatório dos valores de {habilitacaoEconomicaPor} Mínimo (...), constituindo-se de um acréscimo de {percentualAcrescimoConsorcio}% ({percentualAcrescimoConsorcioExtenso}) sobre o valor exigido de licitante individual (...).", 
+    requerIndicesContabeis: "nao",
+    texto_habilitacao_economica_indices_p1: "5.3.12 Comprovação da boa situação financeira da licitante através do cumprimento dos índices de Liquidez Geral (LG), Solvência Geral (SG) e Liquidez Corrente, (...) = igual ou superior a 1", 
+    texto_habilitacao_economica_indices_p2: "5.3.13 A adoção dos índices acima se mostra suficiente ao cumprimento das obrigações decorrentes da presente licitação, uma vez que {justificativaIndicesContabeis}.", 
+    justificativaIndicesContabeis: "",
+    texto_habilitacao_economica_indices_p3: "5.3.14 Ademais, os seus valores iguais ou superiores a {valorIndicesContabeis} foram adotados para o presente certame, pois {justificativaValorIndicesContabeis}.", 
+    valorIndicesContabeis: "1", // Padrão do doc
+    justificativaValorIndicesContabeis: "são os valores usuais de mercado",
+
+    texto_justificativa_srp: "6.1.1 A opção pelo sistema de registro de preços ... tem fundamentação no art. 3º, caput E/OU inciso {incisoDecreto54700} do Decreto nº 54.700/2023, visto que {justificativaUsoSrp}.",
+    incisoDecreto54700: "", 
+    justificativaUsoSrp: "", 
+    texto_orgao_gerenciador: "6.2.1 {orgaoGerenciador} é o(a) órgão OU entidade gerenciador(a)deste Registro de Preços;",
+    orgaoGerenciador: "", 
+    texto_orgaos_participantes_tipo: "corporativa", 
+    texto_orgaos_participantes_p1: "6.3.1 Figuram como órgãos OU entidades participantes deste Registro de Preços:", 
+    orgaosParticipantes: [] as string[], 
+    texto_orgaos_participantes_unico: "6.3.1 {orgaoParticipanteUnico} é o(a) único(a) órgão OU entidade participante deste Registro de Preços;", 
+    orgaoParticipanteUnico: "", 
+    texto_orgaos_participantes_corporativa: "6.3.1 Figuram como PARTICIPANTES da presente Ata de Registro de Preços Corporativa todos os órgãos da Administração Direta, fundos especiais, Autarquias e Fundações Públicas integrantes do Poder Executivo do Estado de Pernambuco .", 
+    texto_prazo_assinatura_arp: "6.4.1 Após a homologação do resultado desta licitação, a adjudicatária será convocada para assinar a Ata de Registro de Preços, no prazo de {prazoAssinaturaArpDiasUteis} ({prazoAssinaturaArpDiasUteisExtenso}) dias úteis, contados da convocação, sob pena de decair o direito à contratação.",
+    prazoAssinaturaArpDiasUteis: "5", 
+    permiteContratacaoIndividualItemLote: "nao", 
+    texto_contratacao_individual_item_lote: "6.6.1 Os Participantes poderão fazer a contratação individual de itens registrados de forma aglutinada, ficando dispensada a comprovação da vantajosidade (...), conforme § 3º, do art. 13, do Decreto nº 54.700/2023. A previsão acima se justifica técnica, econômica e/ou gerencialmente, uma vez que {justificativaContratacaoIndividualItemLote}.",
+    justificativaContratacaoIndividualItemLote: "", 
+    permiteAdesaoOrgaosNaoParticipantes: "sim", 
+    texto_adesao_sim_p1: "6.7.2 As possíveis solicitações de adesão deverão ser encaminhadas à gerenciadora da ata de registro de preços, por meio do telefone: (81) {telefoneAdesao}, e-mail: {emailAdesao}, para autorização.",
+    emailAdesao: "", 
+    telefoneAdesao: "", 
+    usarLimitesAdesaoPadronizados: "sim", 
+    texto_adesao_sim_limites_nao_padronizados_p1: "6.7.3 Para a estimativa de quantidades a serem adquiridas por órgãos não participantes serão observados os seguintes limites:",
+    texto_adesao_sim_limites_nao_padronizados_a: "A adesão de cada órgão não poderá exceder a {limiteAdesaoTotal} % dos quantitativos registrados na Ata de Registro de Preços; ",
+    texto_adesao_sim_limites_nao_padronizados_b: "A soma de todas as adesões à Ata de Registro de Preços, não poderá exceder o {somaDeTodasAsAdesões} do quantitativo registrado.",
+    somaDeTodasAsAdesões: "",
+    limiteAdesaoCadaOrgao: "", 
+    limiteAdesaoTotal: "", 
+    texto_adesao_nao: "6.7.1 Não serão admitidas adesões à Ata de Registro de Preços resultante da presente licitação por órgãos ou entidades não participantes. A não previsão de adesão por órgãos não participantes se justifica devido a {justificativaNaoAdesao}.",
+    justificativaNaoAdesao: "", 
+    obrigacoesGerenciadoraUsarPadrao: "sim", 
+    obrigacoesGerenciadoraIncluirExtras: "nao", 
+    texto_obrigacoes_gerenciadora_padrao: "6.9.1 As obrigações do órgão OU entidade gerenciador(a) da ata de registro de preços serão dispostas em item específico da minuta da ata de registro de preços do presente processo.",
+    texto_obrigacoes_gerenciadora_extras: "6.9.1 Além das obrigações que serão dispostas na minuta da ata de registro de preços, são requeridas as seguintes obrigações específicas da gerenciadora da ata na presente contratação:",
+    obrigacoesGerenciadoraExtras: [] as string[], 
+    obrigacoesDetentoraUsarPadrao: "sim", 
+    obrigacoesDetentoraIncluirExtras: "nao", 
+    texto_obrigacoes_detentora_padrao: "6.10.1 As obrigações da detentora da ata de registro de preços serão dispostas em item específico da minuta da ata de registro de preços do presente processo.",
+    texto_obrigacoes_detentora_extras: "6.10.1 Além das obrigações que serão dispostas na minuta da ata de registro de preços, são requeridas as seguintes obrigações específicas da gerenciadora da ata na presente contratação:",
+    obrigacoesDetentoraExtras: [] as string[], 
+    
+    // ==================================================================
+    // ADIÇÃO - SEÇÃO 7
+    // ==================================================================
+    tipoContratoPrazo: "", 
+    prazoVigenciaEscopoDefinido: "", 
+    texto_prazo_vigencia_escopo_definido: "7.1.1 O prazo de vigência do contrato será de {prazoVigenciaEscopoDefinido}, contados a partir da data de sua assinatura, na forma do art. 105 da Lei nº 14.133, de 2021.",
+    prazoVigenciaContinuo: "", 
+    justificativaServicoContinuo: "", 
+    texto_prazo_vigencia_continuo_p1: "7.1.1 O prazo de vigência do contrato é de {prazoVigenciaContinuo} contados a partir da data de sua assinatura, prorrogável até 10 (dez) anos, na forma dos arts. 106 e 107 da Lei nº 14.133, de 2021.",
+    texto_prazo_vigencia_continuo_p2: "7.1.2 O serviço é enquadrado como continuado tendo em vista que {justificativaServicoContinuo}.",
+    vigenciaPlurianual: "nao", 
+    texto_vigencia_plurianual: "7.1.3 A contratação com vigência plurianual torna-se mais vantajosa no caso em tela considerando que {justificativaVigenciaPlurianual}.",
+    justificativaVigenciaPlurianual: "", 
+    prazoAssinaturaContratoDiasUteis: "5", 
+    texto_prazo_assinatura_contrato: "7.2.1 Após a homologação da licitação, a adjudicatária será convocada para assinatura do termo de contrato (...) no prazo de {prazoAssinaturaContratoDiasUteis} ({prazoAssinaturaContratoDiasUteisExtenso}) dias úteis, contados a partir da convocação, sob pena de decair o direito à contratação.", 
+    texto_prazo_assinatura_contrato_srp: "7.2.1 O Detentor da Ata será convocada para assinatura do contrato, no prazo de {prazoAssinaturaContratoDiasUteis} ({prazoAssinaturaContratoDiasUteisExtenso}) dias úteis, contados a partir da convocação, sob pena de decair o direito à contratação.", 
+    requerCartaSolidariedade: "nao", 
+    texto_carta_solidariedade: "7.3.1 Em caso de fornecedor revendedor ou distribuidor, será exigida, no momento da assinatura do contrato, carta de solidariedade emitida pelo fabricante (...). A exigência se faz necessária em virtude de {justificativaCartaSolidariedade}.",
+    justificativaCartaSolidariedade: "", 
+    requerRequisitosSustentabilidade: "nao", 
+    texto_requisitos_sustentabilidade: "7.3.2 Além dos critérios de sustentabilidade inseridos na descrição do objeto, devem ser atendidos, no momento da assinatura do contrato, os seguintes requisitos adicionais previstos {requisitosSustentabilidade}",
+    requisitosSustentabilidade: "", 
+    obrigacoesContratanteUsarPadrao: "", 
+    obrigacoesContratanteIncluirExtras: "", 
+    texto_obrigacoes_contratante_padrao: "7.4.1 As obrigações da Contratante serão detalhadas na minuta do contrato anexa ao Edital da presente licitação.",
+    texto_obrigacoes_contratante_extras: "7.4.1 Além das obrigações que serão dispostas na minuta do contrato (...), são requeridas as seguintes obrigações específicas na presente contratação:",
+    obrigacoesContratanteExtras: [] as string[], 
+    obrigacoesContratadaUsarPadrao: "sim", 
+    obrigacoesContratadaIncluirExtras: "nao", 
+    texto_obrigacoes_contratada_padrao: "7.5.1 As obrigações da Contratada encontram-se detalhadas na Minuta do Contrato anexa ao Edital da presente licitação.",
+    texto_obrigacoes_contratada_extras: "7.5.1 Além das obrigações que serão dispostas na minuta do contrato (...), são requeridas as seguintes obrigações específicas na presente contratação:",
+    obrigacoesContratadaExtras: [] as string[], 
+    preveGarantiaContratual: "nao", 
+    texto_garantia_contratual_nao: "7.6.1 Não haverá exigência da garantia contratual da execução (...), pelas seguintes razões expostas neste termo de referência: {justificativaNaoGarantia}.",
+    justificativaNaoGarantia: "", 
+    texto_garantia_contratual_sim: "7.6.1 A CONTRATADA prestará garantia de execução contratual, no percentual de {percentualGarantiaContratual}% ({percentualGarantiaContratualExtenso}) do valor total OU anual do CONTRATO, nos termos dos artigos 96 a 98 da Lei nº 14.133, de 2021.",
+    percentualGarantiaContratual: "5", 
+    permiteSubcontratacao: "nao", 
+    texto_subcontratacao_nao: "7.7.1 Não será permitida a subcontratação de qualquer parcela do objeto (...), uma vez que {justificativaNaoSubcontratacao}.",
+    justificativaNaoSubcontratacao: "", 
+    texto_subcontratacao_sim_acessorias: "7.7.1 É permitida a subcontratação de parcela do objeto (...) correspondente à/ao {parcelasAcessoriasSubcontratacao}, tendo em vista que se trata de prestação acessória, até o limite de {percentualLimiteSubcontratacaoAcessorias}% (...) do valor total do contrato.",
+    parcelasAcessoriasSubcontratacao: "", 
+    percentualLimiteSubcontratacaoAcessorias: "", 
+    texto_subcontratacao_sim_tecnicos: "7.7.1 É permitida a subcontratação de parcela do objeto (...) correspondente à/ao {aspectosTecnicosSubcontratacao}, tendo em vista que se trata de aspectos técnicos específicos do serviço, até o limite de {percentualLimiteSubcontratacaoTecnicos}% (...) do valor total do contrato.",
+    aspectosTecnicosSubcontratacao: "", 
+    percentualLimiteSubcontratacaoTecnicos: "", 
+    texto_subcontratacao_sim_fundamento: "7.7.2 Tal permissão se fundamenta em {fundamentoSubcontratacao}.",
+    fundamentoSubcontratacao: "", 
+    condicoesSubcontratacao: "", 
+    atoresGestaoContrato: [] as AtorGestaoContrato[],
+    meioComunicacaoOficial: "", 
+    enderecoEntregaNotaFiscal: "", 
+    setorGestaoContrato: "", 
+    setorFiscalizacaoContrato: "", 
+    texto_gestao_contrato_p1: "7.8.1 As obrigações dos agentes responsáveis pela gestão e fiscalização da presente contratação estão detalhadas no Decreto Estadual nº 51.651/2021, bem como, serão dispostas na minuta do contrato, anexo ao Edital deste certame.",
+    texto_gestao_contrato_p2: "7.8.2 (Atores da Gestão/Fiscalização - ver tabela)", // Placeholder para a tabela
+    texto_gestao_contrato_p3: "7.8.3 A comunicação entre a Contratante e a Contratada se dará por meio de {meioComunicacaoOficial}, sem prejuízo de outros meios disponíveis.",
+    texto_gestao_contrato_p4: "7.8.4 A contratada deverá apresentar a Nota Fiscal ou fatura para atesto da Administração no seguinte endereço: {enderecoEntregaNotaFiscal}.",
+    texto_gestao_contrato_p5: "7.8.5 A Gestão da presente contratação ficará a cargo do(a) {setorGestaoContrato}. A Fiscalização da presente contratação ficará a cargo do(a) {setorFiscalizacaoContrato}.",
+
+    // --- Seções 8, 9, 10, 11 e Anexos (ainda não implementados no Formulario) ---
+    pagamentoUsarPadrao: "sim",
+    texto_pagamento_padrao: "8.1 As disposições sobre o tema serão detalhadas na minuta do contrato, anexo do Edital do presente certame.",
+    preverAntecipacaoPagamento: "nao",
+    texto_antecipacao_pagamento_p1: "8.1 A presente contratação permite a antecipação do pagamento do valor {preverAntecipacaoPagamento} da contratação e se justifica devido a {justificativaAntecipacaoPagamento}.",
+    justificativaAntecipacaoPagamento: "",
+    texto_antecipacao_pagamento_p2: "8.2 O pagamento antecipado será efetuado no prazo de {prazoAntecipacaoPagamento} dias...",
+    prazoAntecipacaoPagamento: "",
+    requerGarantiaAdicionalAntecipacao: "sim",
+    texto_antecipacao_pagamento_p3: "8.3 A CONTRATADA deverá, como condição (...), apresentar garantia adicional (...) no percentual de {percentualGarantiaAdicionalAntecipacao}%.",
+    percentualGarantiaAdicionalAntecipacao: "",
+    texto_antecipacao_pagamento_parcial_p1: "8.4 A(s) etapa(s) {etapasItensAntecipacaoParcial} e seu(s) respectivo(s) item(ns) podem ser objeto de pagamento antecipado.",
+    etapasItensAntecipacaoParcial: "",
+    usaImr: "nao",
+    texto_imr_p1: "9.1 Os indicadores abaixo serão utilizados para avaliação dos serviços prestados: {quadroIndicadoresImr}",
+    quadroIndicadoresImr: "",
+    texto_imr_p2: "9.2 O Gestor/Fiscal do contrato deve elaborar relatório mensal...",
+    texto_imr_p3: "9.3 O pagamento será parcial ou totalmente glosado...",
+    texto_imr_p4: "9.4 Após a conferência dos quantitativos e valores (...), a CONTRATANTE (...) atestará a medição mensal, no prazo de {prazoAtesteMedicao} dias úteis...",
+    prazoAtesteMedicao: "",
+    sancoesLicitacaoUsarPadrao: "sim",
+    sancoesLicitacaoIncluirExtras: "nao",
+    texto_sancoes_licitacao_padrao: "10.1.1 As disposições sobre sanções administrativas aplicáveis durante a licitação (...) serão previstas no Edital do presente certame.",
+    sancoesAtaUsarPadrao: "sim",
+    sancoesAtaIncluirExtras: "nao",
+    texto_sancoes_ata_padrao: "10.2.1 As disposições sobre sanções administrativas aplicáveis em relação à detentora da ata (...) estarão previstas na Minuta da Ata, anexo do Edital do presente certame.",
+    texto_sancoes_ata_extras: "10.2.1 Além das sanções que serão dispostas na minuta da ata (...), são requeridas as seguintes sanções específicas:",
+    sancoesAtaExtras: [] as string[],
+    sancoesContratoUsarPadrao: "sim",
+    sancoesContratoIncluirExtras: "nao",
+    texto_sancoes_contrato_padrao: "10.3.1 As penalidades relativas a infrações cometidas no curso da contratação serão devidamente consignadas na minuta do contrato, anexa ao Edital do presente certame.",
+    texto_sancoes_contrato_extras: "10.3.1 Além das sanções que serão dispostas na minuta do contrato (...), são requeridas as seguintes sanções específicas:",
+    sancoesContratoExtras: [] as string[],
+    demaisCondicoes: "",
+    outrosAnexos: [] as OutroAnexo[],
+
+  }
+
+function App() {
+  const [formData, setFormData] = useState(defaultFormData)
+
+  const [isEditing, setIsEditing] = useState(false)
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
+
+  const toggleEditMode = () =>{
+    if(isEditing){
+      setIsEditing(false)
+    }else{
+      setIsConfirmModalOpen(true)
+    }
+  }
+
+  const handleConfirmEdit = ()=>{
+    setIsEditing(true)
+    setIsConfirmModalOpen(false)
+  }
+
+  const handleCancelEdit = ()=>{
+    setIsConfirmModalOpen(false)
+  }
+
+  return (
+    <div className='p-4 flex flex-col md:flex-row gap-4'>
+      <Formulario formData={formData} setFormData={setFormData} className='w-full md:w-1/2'/> 
+      <ConteudoDocumento formData={formData} setFormData={setFormData} isEditing={isEditing} onToggleEdit={toggleEditMode} className='w-full md:w-1/2'/>
+      <Modal isOpen={isConfirmModalOpen} onClose={handleCancelEdit}>
+        <div className='bg-white p-6 rounded-lg shadow-xl max-w-md mx-auto'>
+          <h3 className='text-xl font-semibold text-gray-900 mb-4'>Deseja entrar no modo edição de documento?</h3>
+          <p className='text-gray-700 mb-6'>Este sistema disponibiliza os modelos padronizados de Termo de Referência (TR), elaborados pela Secretaria de Administração (SAD), de uso obrigatório na elaboração do seu documento, conforme estabelecido nos Decretos nº 53.384/2022 e nº 54.884/2023.
+          As alterações no modelo devem ser realizadas apenas para eventuais necessidades de adequação às peculiaridades do caso concreto e ao objeto da licitação, de forma devidamente justificada, ficando registradas no sistema.
+          Ao prosseguir com a alteração, o usuário declara ciência e concordância com essas regras.</p>
+          <div className='flex justify-end space-x-4'>
+            <button type='button' onClick={handleCancelEdit} className="px-4 py-2 bg-red-300 text-white rounded-md hover:bg-red-400 font-medium cursor-pointer">Cancelar</button>
+            <button type='button' onClick={handleConfirmEdit} className="px-4 py-2 bg-green-300 text-white rounded-md hover:bg-green-400 font-medium cursor-pointer">Confirmar</button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  )
+}
+
+export default App
