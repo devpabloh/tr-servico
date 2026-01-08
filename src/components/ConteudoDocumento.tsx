@@ -1687,23 +1687,27 @@ function GerarTextoValorEstimado({formData, setFormData, isEditing}: GerarTextoP
     );
   };
 
-  return (
-    <>
-      {orcamentoSigiloso === 'nao' ? (
-        <>
-          {tipoValorEstimado === 'valor_estimado' && renderTexto(formData.texto_valor_estimado_nao_sigiloso, 'texto_valor_estimado_nao_sigiloso')}
-          {tipoValorEstimado === 'maior_desconto' && renderTexto(formData.texto_maior_desconto, 'texto_maior_desconto')}
-          {!tipoValorEstimado && !isEditing && <p className="text-gray-400 italic">Selecione o tipo de valor.</p>}
-        </>
-      ) : (
-        renderTexto(formData.texto_orcamento_sigiloso, 'texto_orcamento_sigiloso')
-      )}
-
-      {/* Textos comuns a todos os casos */}
-      {renderTexto(formData.texto_valor_estimado_todos_casos_p1, 'texto_valor_estimado_todos_casos_p1')}
-      {orcamentoSigiloso === 'nao' && renderTexto(formData.texto_valor_estimado_todos_casos_p2, 'texto_valor_estimado_todos_casos_p2')}
-    </>
-  );
+ return (
+  <>
+    {orcamentoSigiloso === 'nao' ? (
+      <>
+        {renderTexto(formData.texto_valor_estimado_nao_sigiloso, 'texto_valor_estimado_nao_sigiloso')}
+        {/* {renderTexto(formData.texto_maior_desconto, 'texto_maior_desconto')} */}
+        {!tipoValorEstimado && !isEditing && (
+          <p className="text-gray-400 italic">Selecione o tipo de valor.</p>
+        )}
+      </>
+    ) : (
+      <>
+        {renderTexto(formData.texto_orcamento_sigiloso, 'texto_orcamento_sigiloso')}
+        
+      </>
+    )}
+    {/* Textos comuns a todos os casos */}
+    {renderTexto(formData.texto_valor_estimado_todos_casos_p1, 'texto_valor_estimado_todos_casos_p1')}
+    {renderTexto(formData.texto_valor_estimado_todos_casos_p2, 'texto_valor_estimado_todos_casos_p2')}
+  </>
+);
 }
 
 function GerarTextoClassificacaoOrcamentaria({formData, setFormData, isEditing}: GerarTextoProps) {

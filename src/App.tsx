@@ -159,7 +159,7 @@ import type {
     condicoesAdicionaisExecucao: "",
     orcamentoSigiloso: "nao",
     tipoValorEstimado: "",
-    texto_valor_estimado_nao_sigiloso: "4.1.1 O valor estimado {tipoValor} para a contratação é de R$ {valorGlobal} ({valorGlobalExtenso}) , para {prazoMeses} ({prazoMesesExtenso}) meses, sendo assim distribuídos:",
+    texto_valor_estimado_nao_sigiloso: "4.1.1 O valor estimado global da contratação é de R$ {valorGlobal} ({valorGlobalExtenso}).",
     valorEstimadoMensal: "",
     valorEstimadoGlobal: "",
     prazoMesesContrato: "",

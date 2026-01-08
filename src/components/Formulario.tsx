@@ -817,7 +817,23 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
             {formData.orcamentoSigiloso === 'nao' ? (
               <div className="mt-4">
-                <SelectComponent
+
+                <InputComponent
+                      label="Valor estimado global"
+                      id="valorEstimadoGlobal"
+                      type="number"
+                      value={formData.valorEstimadoGlobal}
+                      onChange={(e) => setFormData({...formData, valorEstimadoGlobal: e.target.value})}
+                    />
+                    {/* <InputComponent
+                      label="Prazo do contrato (meses)"
+                      id="prazoMesesContrato"
+                      type="number"
+                      value={formData.prazoMesesContrato}
+                      onChange={(e) => setFormData({...formData, prazoMesesContrato: e.target.value})}
+                    /> */}
+
+                {/* <SelectComponent
                   label="Tipo de valor para critério de julgamento"
                   id="tipoValorEstimado"
                   value={formData.tipoValorEstimado}
@@ -826,9 +842,9 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   <option value="">Selecione...</option>
                   <option value="valor_estimado">Valor Estimado</option>
                   <option value="maior_desconto">Maior Desconto</option>
-                </SelectComponent>
+                </SelectComponent> */}
 
-                {formData.tipoValorEstimado === 'valor_estimado' && (
+                {/* {formData.tipoValorEstimado === 'valor_estimado' && (
                   <div className="pl-4 border-l-4">
                     <InputComponent
                       label="Valor estimado global"
@@ -845,9 +861,9 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                       onChange={(e) => setFormData({...formData, prazoMesesContrato: e.target.value})}
                     />
                   </div>
-                )}
+                )} */}
                 
-                {formData.tipoValorEstimado === 'maior_desconto' && (
+                {/* {formData.tipoValorEstimado === 'maior_desconto' && (
                    <InputComponent
                       label="Valor de referência (Maior Desconto)"
                       id="valorReferenciaMaiorDesconto"
@@ -855,16 +871,16 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                       value={formData.valorReferenciaMaiorDesconto}
                       onChange={(e) => setFormData({...formData, valorReferenciaMaiorDesconto: e.target.value})}
                     />
-                )}
+                )} */}
               </div>
             ) : (
               <InputComponent
-                label="Justificativa do orçamento sigiloso"
-                id="justificativaOrcamentoSigiloso"
-                value={formData.justificativaOrcamentoSigiloso}
-                onChange={(e) => setFormData({...formData, justificativaOrcamentoSigiloso: e.target.value})}
-                orientacoes="Apresentar justificativa para evidenciar a vantagem de manter o sigilo."
-              />
+                      label="Justificar o orçamento sigiloso"
+                      id="JustificarOrcamentoSigiloso"
+                      type="text"
+                      value={formData.justificativaOrcamentoSigiloso}
+                      onChange={(e) => setFormData({...formData, justificativaOrcamentoSigiloso: e.target.value})}
+                    />
             )}
           </FieldsetContainer>
 
