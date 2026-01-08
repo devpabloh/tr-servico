@@ -644,54 +644,10 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 <label htmlFor="objetoSeraRecebido" className="font-semibold">O objeto será recebido?</label>
                 <select name="objetoSeraRecebido" id="objetoSeraRecebido" value={formData.objetoSeraRecebido} onChange={(e)=>setFormData({...formData,objetoSeraRecebido: e.target.value})} className="border rounded-sm p-2 flex-grow w-1/5">
                   <option value="">Selecione uma opção</option>
-                  <option value="provisoriamente">Provisoriamente, pelo fiscal do contrato</option>
-                  <option value="definitivamente" >Definitivamente, por servidor ou comissão designada</option>
+                  <option value="nao">Não</option>
                   <option value="ProvisorioEDefinitivo">Provisorio e Definitivo</option>
                 </select>
               </div>
-              {formData.objetoSeraRecebido === 'provisoriamente' ? (
-              <InputComponent
-                  label="qual o prazo para o recebimento provisório?"
-                  id="prazoRecebimentoProvisorio"
-                  type="number"
-                  value={formData.prazoRecebimentoProvisorio}
-                  onChange={(e) => setFormData({...formData, prazoRecebimentoProvisorio: e.target.value})}
-                />
-            ):(
-              <div>
-                <div className="flex flex-col mt-2">
-                  <label htmlFor="ObjetoRecebidoDefinitivamente" className="font-semibold">Quantas empresas serão admitidas em cada consórcio ?</label>
-                  <input type="number" id='ObjetoRecebidoDefinitivamente' className='border rounded-sm p-2 w-full ' value={formData.ObjetoRecebidoDefinitivamente} onChange={(e)=>setFormData({...formData, ObjetoRecebidoDefinitivamente: e.target.value})} />
-                </div>
-                <div className="flex flex-col mt-2">
-                  <label htmlFor="recebimentoDefinitivoPoderaSerExcepcionalmente" className="font-semibold">Recebimento Definitivo Poderá Ser Excepcionalmente Prorrogado ?</label>
-                  <span className="orientacoes my-1">(Utilizar, se for o caso)</span>
-                  <select 
-                    name="vedacaoOuParticipacaoPessoasFisicas"
-                    id="vedacaoOuParticipacaoPessoasFisicas"  
-                    className="border rounded-sm p-2 flex-grow w-1/5" 
-                    value={formData.recebimentoDefinitivoPoderaSerExcepcionalmente} 
-                    onChange={(e)=> setFormData({...formData, recebimentoDefinitivoPoderaSerExcepcionalmente: e.target.value })}
-                  >
-                    <option value="">Selecione uma opção</option>
-                    <option value="sim">Sim</option>
-                    <option value="nao">Não</option>
-                  </select>
-                  
-                </div>
-              </div>
-            )}
-            {
-              formData.objetoSeraRecebido === "definitivamente" && (
-                <InputComponent
-                  label="qual o prazo para o recebimento definitivo?"
-                  id="prazoRecebimentoDefinitivo"
-                  type="number"
-                  value={formData.prazoRecebimentoDefinitivo}
-                  onChange={(e) => setFormData({...formData, prazoRecebimentoDefinitivo: e.target.value})}
-                />
-              )
-            }
             {
               formData.objetoSeraRecebido === "ProvisorioEDefinitivo" && (
                 <>
@@ -709,6 +665,22 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                     value={formData.prazoRecebimentoProvisorio}
                     onChange={(e) => setFormData({...formData, prazoRecebimentoProvisorio: e.target.value})}
                   />
+                  <div className="flex flex-col mt-2">
+                  <label htmlFor="recebimentoDefinitivoPoderaSerExcepcionalmente" className="font-semibold">Recebimento Definitivo Poderá Ser Excepcionalmente Prorrogado ?</label>
+                  <span className="orientacoes my-1">(Utilizar, se for o caso)</span>
+                  <select 
+                    name="vedacaoOuParticipacaoPessoasFisicas"
+                    id="vedacaoOuParticipacaoPessoasFisicas"  
+                    className="border rounded-sm p-2 flex-grow w-1/5" 
+                    value={formData.recebimentoDefinitivoPoderaSerExcepcionalmente} 
+                    onChange={(e)=> setFormData({...formData, recebimentoDefinitivoPoderaSerExcepcionalmente: e.target.value })}
+                  >
+                    <option value="">Selecione uma opção</option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                  </select>
+                  
+                </div>
                 </>
               )
             }
@@ -771,22 +743,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   Embora a contratação seja de serviços, é possível que a Administração indique, de forma excepcional e devidamente justificada, marcas ou modelos de eventuais bens necessários à execução do objeto da contratação, observando as hipóteses previstas no art. 41, inciso I, da Lei nº 14.133/2021. 
                 </p>
               </CollapsibleText>
-              <div className="flex flex-col mt-2">
-                  <label htmlFor="preveIndicacaoMarcasOuModelos" className="font-semibold">Será necessário condições adicionais para execução do objeto?</label>
-                  <span className="orientacoes my-1">Redação a ser utilizada na hipótese de existir ETP</span>
-                  <select 
-                    name="preveIndicacaoMarcasOuModelos"
-                    id="preveIndicacaoMarcasOuModelos"  
-                    className="border rounded-sm p-2 flex-grow w-1/5" 
-                    value={formData.preveIndicacaoMarcasOuModelos} 
-                    onChange={(e)=> setFormData({...formData, preveIndicacaoMarcasOuModelos: e.target.value })}
-                  >
-                    <option value="">Selecione uma opção</option>
-                    <option value="sim">Sim</option>
-                    <option value="nao">Não</option>
-                  </select>
-                </div>
-                {formData.preveIndicacaoMarcasOuModelos === 'sim' ? (
+              
+                {formData.eEstudosTecnicosPreliminares === 'sim' ? (
                   <div>
                     <div className="flex flex-col mt-2">
                       <label htmlFor="sera_admitida_indicacao" className="font-semibold">Na presente contratação, será admitida a indicão da(s) seguinte(s) marca(s), característica(s) ou modelo(s)?</label>
@@ -799,7 +757,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </div>
                 ):(
                   <div>
-                    
                     <div>
                       <div className="flex flex-col mt-2">
                         <label htmlFor="marcas_ou_modelos_indicadas" className="font-semibold">Será admitida a indicação da(s) seguinte(s) narca(s) ou modelo(s)?</label>
@@ -821,7 +778,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 </p>
             </CollapsibleText>
                 <div className="flex flex-col mt-2">
-                  <label htmlFor="preveIndicacaoMarcasOuModelos" className="font-semibold">Será necessário condições adicionais para execução do objeto?</label>
+                  <label htmlFor="preveIndicacaoMarcasOuModelos" className="font-semibold">Prevê vedação a marcas ou modelos?</label>
                   <select 
                     name="preveIndicacaoMarcasOuModelos"
                     id="preveIndicacaoMarcasOuModelos"  
@@ -836,8 +793,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 </div>
                 {formData.necessarioCondicoesAdicionaisParaExecucaoDoObjeto === 'sim' && (
                   <TextAreaComBotao
-                    label="Condições adicionais para execução do objeto"
-                    placeholder="Digite as condições adicionais aqui..."
+                    label="Não será aceito os seguintes produtos/marcas"
+                    placeholder="Digite os produtos/marcas..."
                     valorInicial={formData.condicoesAdicionaisExecucao}
                     onSalvar={(novoValor)=>{
                       setFormData({...formData, condicoesAdicionaisExecucao: novoValor})

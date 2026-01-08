@@ -1073,7 +1073,7 @@ function ResponsabilidadeEticoProfissional({formData, setFormData, isEditing}: G
 }
 
 function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoProps){
-  const {preveIndicacaoMarcasOuModelos, 
+  const {eEstudosTecnicosPreliminares, 
     } = formData
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1094,7 +1094,7 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
     
   };
 
-  switch (preveIndicacaoMarcasOuModelos) {
+  switch (eEstudosTecnicosPreliminares) {
     case 'sim': {
       const primeiroTextoComValores = substituirPlaceholders(formData.sim_texto_preve_indicacao_marcas_ou_modelos, valores);
       const segundoTextoComValores = substituirPlaceholders(formData.sim_texto_dois_presente_contratacao_sera_admitida, valores)
