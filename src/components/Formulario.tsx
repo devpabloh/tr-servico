@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import React from "react"
 import type { FormDataCompleto } from "../types/types"
 import {CollapsibleText} from './CollapsibleText'
 import {numeroPorExtenso} from '../lib/utils'
