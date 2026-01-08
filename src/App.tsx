@@ -9,11 +9,9 @@ import type {
   LocalHorario, 
   ClassificacaoOrcamentaria, 
   AtorGestaoContrato, 
-  OutroAnexo 
+  OutroAnexo, 
+  FormDataCompleto 
 } from './types/types';
-
-
-const STORAGE_KEY = 'documento_consorcio_data'
 
   const defaultFormData = {
     // 1.1 Formação de registro de preço
@@ -159,7 +157,7 @@ const STORAGE_KEY = 'documento_consorcio_data'
     // 3.4 da vedação de utilização de marca/produto na execução do serviço
     necessarioCondicoesAdicionaisParaExecucaoDoObjeto: "",
     condicoesAdicionaisExecucao: "",
-    rcamentoSigiloso: "nao",
+    orcamentoSigiloso: "nao",
     tipoValorEstimado: "",
     texto_valor_estimado_nao_sigiloso: "4.1.1 O valor estimado {tipoValor} para a contratação é de R$ {valorGlobal} ({valorGlobalExtenso}) , para {prazoMeses} ({prazoMesesExtenso}) meses, sendo assim distribuídos:",
     valorEstimadoMensal: "",
@@ -320,9 +318,8 @@ const STORAGE_KEY = 'documento_consorcio_data'
     telefoneAdesao: "", 
     usarLimitesAdesaoPadronizados: "sim", 
     texto_adesao_sim_limites_nao_padronizados_p1: "6.7.3 Para a estimativa de quantidades a serem adquiridas por órgãos não participantes serão observados os seguintes limites:",
-    texto_adesao_sim_limites_nao_padronizados_a: "A adesão de cada órgão não poderá exceder a {limiteAdesaoTotal} % dos quantitativos registrados na Ata de Registro de Preços; ",
-    texto_adesao_sim_limites_nao_padronizados_b: "A soma de todas as adesões à Ata de Registro de Preços, não poderá exceder o {somaDeTodasAsAdesões} do quantitativo registrado.",
     somaDeTodasAsAdesões: "",
+    justificativaParaAplicacao: "",
     limiteAdesaoCadaOrgao: "", 
     limiteAdesaoTotal: "", 
     texto_adesao_nao: "6.7.1 Não serão admitidas adesões à Ata de Registro de Preços resultante da presente licitação por órgãos ou entidades não participantes. A não previsão de adesão por órgãos não participantes se justifica devido a {justificativaNaoAdesao}.",
@@ -437,7 +434,7 @@ const STORAGE_KEY = 'documento_consorcio_data'
   }
 
 function App() {
-  const [formData, setFormData] = useState(defaultFormData)
+  const [formData, setFormData] = useState<FormDataCompleto>(defaultFormData as FormDataCompleto)
 
   const [isEditing, setIsEditing] = useState(false)
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
