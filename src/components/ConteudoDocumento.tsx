@@ -1,4 +1,4 @@
-import { FolhaDocumento } from "./FolhaDocumento";
+﻿import { FolhaDocumento } from "./FolhaDocumento";
 import { numeroPorExtenso } from "../lib/utils";
 import { EditableTextarea } from "./EditableTextarea";
 import type {FormDataCompleto, AtorGestaoContrato}from '../types/types'
@@ -1244,7 +1244,7 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
     return <p className="text-gray-400 italic">Selecione se é Registro de Preços.</p>;
   }
 
-  let textoEstudo: string;
+  let textoEstudo: string = "";
   if (eEstudosTecnicosPreliminares === 'sim') {
     textoEstudo = "no Estudo Técnico Preliminar";
   } else if (eEstudosTecnicosPreliminares === 'nao') {
@@ -1253,7 +1253,7 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
   const valores = {
     paraContratacaoEventualPrestacaoServico: paraContratacaoEventualPrestacaoServico || "______",
     visandoAtenderNecessidades: visandoAtenderNecessidades || "______",
-    eEstudosTecnicosPreliminares: textoEstudo, 
+    eEstudosTecnicosPreliminares: textoEstudo || "", 
     qualTipoContratacao: mapTipoContratacao[qualTipoContratacao] || "______"
   };
 
