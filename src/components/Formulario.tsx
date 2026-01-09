@@ -25,10 +25,10 @@ interface TextAreaComBotaoProps {
 }
 
 function TextAreaComBotao({ valorInicial, onSalvar, label, placeholder }: TextAreaComBotaoProps) {
-  const [texto, setTexto] = useState(valorInicial);
+  const [texto, setTexto] = useState(valorInicial ?? "");
 
   useEffect(() => {
-    setTexto(valorInicial);
+    setTexto(valorInicial ?? "");
   }, [valorInicial]);
 
   return (
@@ -53,6 +53,13 @@ function TextAreaComBotao({ valorInicial, onSalvar, label, placeholder }: TextAr
 }
 
 export function Formulario({formData, setFormData, className}:FormularioProps){
+
+  const toggleOpcao = (valor: string)=> {
+    const atual = formData.justificativaBeneficioLC123Opcao || [];
+    const novo = atual.includes(valor) ? atual.filter(v => v !== valor) : [...atual,valor]
+    setFormData({...formData, justificativaBeneficioLC123Opcao: novo})
+  }
+
   return(
       <div className={`space-y-6 ${className}`}>
         <FieldsetContainer titleLegend="Termo de referência">
@@ -915,26 +922,14 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
              
              {formData.aplicarCotaExclusiva === 'sim' && (
               <>
-                {/* <SelectComponent
-              label="Aplicação do benefício"
-              id="justificativaBeneficioLC123Opcao"
-              value={formData.justificativaBeneficioLC123Opcao}
-              onChange={(e) => setFormData({...formData, justificativaBeneficioLC123Opcao: e.target.value})}
-             >
-                <option value="">Selecione uma opção</option>
-                <option value="aplicar">Aplicar cota exclusiva (Itens/lotes até R$ 80.000,00)</option>
-                <option value="nao_aplicar_sem_enquadramento">Não aplicar (Não há itens/lotes de valor igual ou inferior)</option>
-                <option value="nao_aplicar_art_49">Não aplicar (Exceção Art. 49 da LC 123/2006)</option>
-                <option value="nao_aplicar_art_4_lei_14133">Não aplicar (Preço anual superior ao limite de EPP - Art. 4º, § 1º, I, Lei 14.133)</option>
-             </SelectComponent> */}
              <div className="flex gap-2">
               <input 
                 type="checkbox" 
                 id="aplicarCotaExclusica" 
                 name="justificativaBeneficioLC123Opcao" 
                 value="aplicar" 
-                checked={formData.justificativaBeneficioLC123Opcao === 'aplicar'}
-                onChange={(e) => setFormData({...formData, justificativaBeneficioLC123Opcao: e.target.value})}
+                checked={formData.justificativaBeneficioLC123Opcao?.includes('aplicar') || false}
+                onChange={()=> toggleOpcao("aplicar")}
               />
               <label htmlFor="aplicarCotaExclusica">Aplicar cota exclusiva (Itens/lotes até R$ 80.000,00)</label>
              </div>
@@ -944,8 +939,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 id="nao_aplicar_sem_enquadramento" 
                 name="justificativaBeneficioLC123Opcao" 
                 value="nao_aplicar_sem_enquadramento"
-                checked={formData.justificativaBeneficioLC123Opcao === 'nao_aplicar_sem_enquadramento'}
-                onChange={(e) => setFormData({...formData, justificativaBeneficioLC123Opcao: e.target.value})} 
+                checked={formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_sem_enquadramento') || false}
+                onChange={()=> toggleOpcao("nao_aplicar_sem_enquadramento")} 
               />
               <label htmlFor="nao_aplicar_sem_enquadramento">Não aplicar (Não há itens/lotes de valor igual ou inferior)</label>
              </div>
@@ -955,8 +950,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                     id="nao_aplicar_art_49" 
                     name="justificativaBeneficioLC123Opcao" 
                     value="nao_aplicar_art_49" 
-                    checked={formData.justificativaBeneficioLC123Opcao === 'nao_aplicar_art_49'}
-                    onChange={(e) => setFormData({...formData, justificativaBeneficioLC123Opcao: e.target.value})} 
+                    checked={formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_49') || false}
+                    onChange={()=> toggleOpcao("nao_aplicar_art_49")} 
                   />
               <label htmlFor="nao_aplicar_art_49">Não aplicar (Exceção Art. 49 da LC 123/2006)</label>
              </div>
@@ -966,13 +961,13 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 id="nao_aplicar_art_4_lei_14133" 
                 name="justificativaBeneficioLC123Opcao" 
                 value="nao_aplicar_art_4_lei_14133" 
-                checked={formData.justificativaBeneficioLC123Opcao === 'nao_aplicar_art_4_lei_14133'}
-                onChange={(e) => setFormData({...formData, justificativaBeneficioLC123Opcao: e.target.value})}
+                checked={formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_4_lei_14133') || false }
+                onChange={()=> toggleOpcao("nao_aplicar_art_4_lei_14133")}
               />
               <label htmlFor="nao_aplicar_art_4_lei_14133">Não aplicar (Preço anual superior ao limite de EPP - Art. 4º, § 1º, I, Lei 14.133)</label>
              </div>
 
-            {formData.justificativaBeneficioLC123Opcao === 'aplicar' && (
+            {formData.justificativaBeneficioLC123Opcao?.includes('aplicar') && (
               <InputComponent
                 label="Itens OU lotes com cota exclusiva"
                 id="itensLotesCotaExclusiva"
@@ -982,7 +977,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               />
             )}
 
-            {formData.justificativaBeneficioLC123Opcao === 'nao_aplicar_art_49' && (
+            {formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_49') && (
               <div className="pl-4 border-l-4">
                  <InputComponent
                   label="Inciso(s) do art. 49 da LC nº 123/2006"
@@ -1005,7 +1000,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               </div>
             )}
 
-            {formData.justificativaBeneficioLC123Opcao === 'nao_aplicar_art_4_lei_14133' && (
+            {formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_4_lei_14133') && (
                <InputComponent
                   label="Item(ns) OU lote(s) que superam o valor"
                   id="itensLotesNaoAplicacaoArt4"
@@ -1075,6 +1070,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
             <SelectComponent
               label="Modo de Disputa"
+              orientacoes="A escolha do modo aberto-fechado é uma indicação descrita na Portaria SAD nº   2.293/2025. O órgão demandante pode alterar o modo de disputa conforme o caso concreto."
               id="modoDisputa"
               value={formData.modoDisputa}
               onChange={(e) => setFormData({...formData, modoDisputa: e.target.value})}
@@ -1122,6 +1118,33 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               onChange={(e) => setFormData({...formData, prazoValidadePropostaDias: e.target.value})}
               orientacoes="Mínimo sugerido: 60 dias."
             />
+
+            <SelectComponent
+              label="Requer condição de proposta?"
+              id="requerCondicaoProposta"
+              value={formData.requerCondicaoProposta}
+              onChange={(e) => setFormData({...formData, requerCondicaoProposta: e.target.value})}
+            >
+              <option value="nao">Não</option>
+              <option value="sim">Sim (Excepcional)</option>
+            </SelectComponent>
+
+            {formData.requerCondicaoProposta === 'sim' && (
+              <>
+                <InputComponent
+                  label="Condições da proposta para os item(ns) ou lote(s)"
+                  id="condicoesProposta"
+                  value={formData.requerCondicaoPropostaParaos}
+                  onChange={(e) => setFormData({...formData, requerCondicaoPropostaParaos: e.target.value})}
+                />
+                <InputComponent
+                  label="Quais documentos acompanham a proposta"
+                  id="documentoQueAcompanhaProposta"
+                  value={formData.requerCondicaoPropostaAcompanhadaDoSeguinteDocumento}
+                  onChange={(e) => setFormData({...formData, requerCondicaoPropostaAcompanhadaDoSeguinteDocumento: e.target.value})}
+                />
+              </>
+            )}
 
             <SelectComponent
               label="Requer garantia de proposta?"
@@ -1608,7 +1631,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
       </FieldsetContainer>
 
       <FieldsetContainer titleLegend="6.9 Obrigações da Gerenciadora da ATA">
-        <SelectComponent
+        {/* <SelectComponent
           label="Usar redação padronizada (PGE)?"
           id="obrigacoesGerenciadoraUsarPadrao"
           value={formData.obrigacoesGerenciadoraUsarPadrao}
@@ -1616,9 +1639,9 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
         >
           <option value="sim">Sim</option>
           <option value="nao">Não (Usar texto personalizado)</option>
-        </SelectComponent>
+        </SelectComponent> */}
         <SelectComponent
-          label="Incluir obrigações além das padronizadas?"
+          label="Obrigações específicas da gerenciadora da ata na presente contratação?"
           id="obrigacoesGerenciadoraIncluirExtras"
           value={formData.obrigacoesGerenciadoraIncluirExtras}
           onChange={(e) => setFormData({...formData, obrigacoesGerenciadoraIncluirExtras: e.target.value})}
@@ -1627,13 +1650,13 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           <option value="sim">Sim</option>
         </SelectComponent>
         {formData.obrigacoesGerenciadoraIncluirExtras === 'sim' && (
-           <ListaDeStringsEditavel
-            titulo="Obrigações Extras da Gerenciadora"
-            placeholder="Descreva a obrigação"
-            labelBotao="Adicionar Obrigação"
-            itens={formData.obrigacoesGerenciadoraExtras}
-            onItensChange={(novosItens) => setFormData(prev => ({ ...prev, obrigacoesGerenciadoraExtras: novosItens }))}
-          />
+           <TextAreaComBotao
+              label="Obrigações Extras da Contratante"
+              valorInicial={formData.obrigacoesGerenciadoraExtras}
+              onSalvar={(novoValor)=>{
+                setFormData({...formData, obrigacoesGerenciadoraExtras: novoValor})
+              }}
+            />
         )}
       </FieldsetContainer>
 

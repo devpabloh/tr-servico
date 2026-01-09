@@ -244,7 +244,7 @@ export type FormDataCompleto = {
   somaDeTodasAsAdesões: string
   justificativaParaAplicacao: string;
   
-  justificativaBeneficioLC123Opcao: string; // 'aplicar', 'nao_aplicar_sem_enquadramento', 'nao_aplicar_art_49', 'nao_aplicar_art_4_lei_14133'
+  justificativaBeneficioLC123Opcao: string[]; // 'aplicar', 'nao_aplicar_sem_enquadramento', 'nao_aplicar_art_49', 'nao_aplicar_art_4_lei_14133'
   
   texto_cota_exclusiva_sim: string;
   itensLotesCotaExclusiva: string;
@@ -281,7 +281,11 @@ export type FormDataCompleto = {
   
   requerDocumentoAdicionalProposta: string; 
   documentosAdicionaisProposta: string; 
+  
+  requerCondicaoProposta: string;
   texto_condicoes_proposta: string;
+  requerCondicaoPropostaParaos: string;
+  requerCondicaoPropostaAcompanhadaDoSeguinteDocumento: string;
 
   requeGarantiaProposta: string; 
   percentualGarantiaProposta: string; 
@@ -389,10 +393,13 @@ export type FormDataCompleto = {
   texto_orgaos_participantes_corporativa: string; 
 
   texto_prazo_assinatura_arp: string;
-  prazoAssinaturaArpDiasUteis: string; 
+  prazoAssinaturaArpDiasUteis: string;
+  
+  textoexistePrazoDeVigenciaAta: string;
 
   permiteContratacaoIndividualItemLote: string; 
   texto_contratacao_individual_item_lote: string;
+  texto_contratacao_individual_item_lote_dois: string;
   justificativaContratacaoIndividualItemLote: string; 
 
   permiteAdesaoOrgaosNaoParticipantes: string; 
@@ -412,7 +419,7 @@ export type FormDataCompleto = {
   obrigacoesGerenciadoraIncluirExtras: string; 
   texto_obrigacoes_gerenciadora_padrao: string;
   texto_obrigacoes_gerenciadora_extras: string;
-  obrigacoesGerenciadoraExtras: string[]; 
+  obrigacoesGerenciadoraExtras: string; 
   
   obrigacoesDetentoraUsarPadrao: string; 
   obrigacoesDetentoraIncluirExtras: string; 

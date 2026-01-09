@@ -768,12 +768,10 @@ function GerarPrazoDeExecucao({formData, setFormData, isEditing}: GerarTextoProp
   }
 
   return(
-    <p>
-      <p
-      className="text-lg p-2 rounded-md"
-      dangerouslySetInnerHTML={{ __html: textoComValores }}
+     <p
+    className="text-lg p-2 rounded-md"
+    dangerouslySetInnerHTML={{ __html: textoComValores }}
     />
-    </p>
   )
 }
 
@@ -814,9 +812,9 @@ function CronogramaRealizacaoDosServicos({formData, setFormData, isEditing}: Ger
 
   return(
       <p
-      className="text-lg p-2 rounded-md"
-      dangerouslySetInnerHTML={{ __html: textoComValores }}
-    />
+    className="text-lg p-2 rounded-md"
+    dangerouslySetInnerHTML={{ __html: textoComValores }}
+  />
   )
 }
 
@@ -1063,12 +1061,10 @@ function ResponsabilidadeEticoProfissional({formData, setFormData, isEditing}: G
   }
 
   return(
-    <p>
-      <p
-      className="text-lg p-2 rounded-md"
-      dangerouslySetInnerHTML={{ __html: textoComValores }}
+     <p
+    className="text-lg p-2 rounded-md"
+    dangerouslySetInnerHTML={{ __html: textoComValores }}
     />
-    </p>
   )
 }
 
@@ -1784,18 +1780,25 @@ function GerarTextoJustificativaLC123({formData, setFormData, isEditing}: GerarT
     );
   };
 
-  switch (justificativaBeneficioLC123Opcao) {
-    case 'aplicar':
-      return renderTexto(formData.texto_cota_exclusiva_sim, 'texto_cota_exclusiva_sim');
-    case 'nao_aplicar_sem_enquadramento':
-      return renderTexto(formData.texto_cota_exclusiva_nao_enquadra, 'texto_cota_exclusiva_nao_enquadra');
-    case 'nao_aplicar_art_49':
-      return renderTexto(formData.texto_cota_exclusiva_nao_art_49, 'texto_cota_exclusiva_nao_art_49');
-    case 'nao_aplicar_art_4_lei_14133':
-      return renderTexto(formData.texto_cota_exclusiva_nao_art_4_lei_14133, 'texto_cota_exclusiva_nao_art_4_lei_14133');
-    default:
-      return <p className="text-gray-400 italic">Opção de aplicação do benefício (4.3) não selecionada.</p>;
+  const templateByOption: Record<string, { tpl: string; key: keyof FormDataCompleto }> = {
+    aplicar: { tpl: formData.texto_cota_exclusiva_sim, key: 'texto_cota_exclusiva_sim' },
+    nao_aplicar_sem_enquadramento: { tpl: formData.texto_cota_exclusiva_nao_enquadra, key: 'texto_cota_exclusiva_nao_enquadra' },
+    nao_aplicar_art_49: { tpl: formData.texto_cota_exclusiva_nao_art_49, key: 'texto_cota_exclusiva_nao_art_49' },
+    nao_aplicar_art_4_lei_14133: { tpl: formData.texto_cota_exclusiva_nao_art_4_lei_14133, key: 'texto_cota_exclusiva_nao_art_4_lei_14133' },
+  };
+
+  if (!Array.isArray(justificativaBeneficioLC123Opcao) || justificativaBeneficioLC123Opcao.length === 0) {
+    return <p className="text-gray-400 italic">Opção de aplicação do benefício (4.3) não selecionada.</p>;
   }
+  return (
+    <>
+      {justificativaBeneficioLC123Opcao.map((opt) => {
+        const entry = templateByOption[opt];
+        if (!entry) return null;
+        return renderTexto(entry.tpl, entry.key);
+      })}
+    </>
+  );
 }
 
 // --- SEÇÃO 5 ---
@@ -1886,7 +1889,8 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
     percentualGarantiaProposta: formData.percentualGarantiaProposta || "__",
     percentualGarantiaPropostaExtenso: numeroPorExtenso(formData.percentualGarantiaProposta || ''),
     justificativaGarantiaProposta: formData.justificativaGarantiaProposta || "____",
-    
+    requerCondicaoPropostaParaos: formData.requerCondicaoPropostaParaos || "____",
+  requerCondicaoPropostaAcompanhadaDoSeguinteDocumento: formData.requerCondicaoPropostaAcompanhadaDoSeguinteDocumento || "____",
     tipoAmostra: mapTipoAmostra[formData.tipoAmostra] || "teste",
     justificativaAmostra: formData.justificativaAmostra || "____",
     prazoAmostraDiasUteis: formData.prazoAmostraDiasUteis || "__",
@@ -1933,6 +1937,13 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
     <>
       <p className="font-semibold">5.2.1 prazo de validade da proposta</p>
       {renderTexto(formData.texto_prazo_validade_proposta, 'texto_prazo_validade_proposta')}
+
+      {formData.requerCondicaoProposta === 'sim' && (
+        <>
+          <p className="font-semibold">5.2.2 Condições da Proposta</p>
+          {renderTexto(formData.texto_condicoes_proposta, 'texto_condicoes_proposta')}
+        </>
+      )}
       
       {/* Garantia de Proposta */}
       {formData.requeGarantiaProposta === 'sim' && (
@@ -2176,6 +2187,7 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
     limiteAdesaoCadaOrgao: formData.limiteAdesaoCadaOrgao || "__",
     limiteAdesaoTotal: formData.limiteAdesaoTotal || "__",
     justificativaNaoAdesao: formData.justificativaNaoAdesao || "____",
+    textoexistePrazoDeVigenciaAta: formData.textoexistePrazoDeVigenciaAta || "______"
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -2197,13 +2209,19 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
     );
   };
   
-  const renderLista = (itens: string[]) => (
+  const renderLista = (itens: string[] | string) => {
+  const array = Array.isArray(itens)
+    ? itens
+    : (itens ? itens.split(/\r?\n/).map(s => s.trim()).filter(Boolean) : []);
+  if (array.length === 0) return null;
+  return (
     <ol type="a" className="list-outside list-[upper-alpha] pl-8 text-lg space-y-2">
-      {itens.map((item, index) => (
+      {array.map((item, index) => (
         <li key={index} className="text-gray-800 text-justify">{item}</li>
       ))}
     </ol>
   );
+};
 
   return (
     <div>
@@ -2227,9 +2245,17 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.4 Prazo para assinatura da Ata de Registro de Preços</h3>
       {renderTexto(formData.texto_prazo_assinatura_arp, 'texto_prazo_assinatura_arp')}
+
+      <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.5 PRAZO DE VIGÊNCIA DA ATA DE REGISTRO DE PREÇOS</h3>
+      {renderTexto(formData.textoexistePrazoDeVigenciaAta, 'textoexistePrazoDeVigenciaAta')}
       
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.6 Possibilidade de contratação individual de itens registrados em lotes</h3>
-      {formData.permiteContratacaoIndividualItemLote === 'sim' && renderTexto(formData.texto_contratacao_individual_item_lote, 'texto_contratacao_individual_item_lote')}
+      {formData.permiteContratacaoIndividualItemLote === 'sim' && (
+        <>
+        {renderTexto(formData.texto_contratacao_individual_item_lote, 'texto_contratacao_individual_item_lote')}
+        {renderTexto(formData.texto_contratacao_individual_item_lote_dois, 'texto_contratacao_individual_item_lote_dois')}
+        </>
+      )}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.7 Previsão e justificativa da possibilidade de adesão por não participantes</h3>
       {formData.permiteAdesaoOrgaosNaoParticipantes === 'nao' ? (

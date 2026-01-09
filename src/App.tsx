@@ -172,21 +172,21 @@ import type {
 
     // 4.2 Classificação Orçamentária
     classificacoesOrcamentarias: [] as ClassificacaoOrcamentaria[],
-    texto_classificacao_orcamentaria_p1: "4.2.1 As despesas decorrentes desta licitação serão incluídas no orçamento do Estado de Pernambuco, para o presente exercício, na classificação abaixo:", // (Baseado no DOCX )
+    texto_classificacao_orcamentaria_p1: "4.2.1 As despesas decorrentes desta licitação serão incluídas no orçamento do Estado de Pernambuco, para o presente exercício, na classificação abaixo:", 
     elemento_de_despesa:"",
 
     // 4.3 Justificativa LC 123/2006
     aplicarCotaExclusiva: "nao",
     cotaReservadaNaturezaDivisivel: "nao",
     justificativaBeneficioLC123Opcao: "",
-    texto_cota_exclusiva_sim: "4.3.1 Considerando que os itens OU lotes {itensLotesCotaExclusiva} desta licitação possuem valor igual ou inferior a R$ 80.000,00 (oitenta mil) reais, serão estes considerados de participação exclusiva de microempresa ou empresa de pequeno porte ou microempreendedor individual.", // (Baseado no DOCX )
+    texto_cota_exclusiva_sim: "4.3.2 Considerando que os itens OU lotes {itensLotesCotaExclusiva} desta licitação possuem valor igual ou inferior a R$ 80.000,00 (oitenta mil) reais, serão estes considerados de participação exclusiva de microempresa ou empresa de pequeno porte ou microempreendedor individual.", 
     itensLotesCotaExclusiva: "",
-    texto_cota_exclusiva_nao_enquadra: "4.3.1 Considerando que não há itens ou lotes de valor igual ou inferior a R$ 80.000,00 (oitenta mil reais), a presente licitação não possui itens oulotes exclusivo à participação de microempresa, empresa de pequeno porte ou microempreendedor individual.", // (Baseado no DOCX )
-    texto_cota_exclusiva_nao_art_49: "4.3.1 O presente processo se enquadra no(s) inciso(s) {incisosArt49LC123} do art. 49 da Lei Complementar nº 123/2006 E/OU {incisosArt9Decreto45140} do art. 9º do Decreto nº 45.140/2017 citado(s) acima , uma vez que {justificativaNaoAplicacaoArt49}.", // (Baseado no DOCX )
+    texto_cota_exclusiva_nao_enquadra: "4.3.1 Considerando que não há itens ou lotes de valor igual ou inferior a R$ 80.000,00 (oitenta mil reais), a presente licitação não possui itens oulotes exclusivo à participação de microempresa, empresa de pequeno porte ou microempreendedor individual.", 
+    texto_cota_exclusiva_nao_art_49: "4.3.1 O presente processo se enquadra no(s) inciso(s) {incisosArt49LC123} do art. 49 da Lei Complementar nº 123/2006 E/OU {incisosArt9Decreto45140} do art. 9º do Decreto nº 45.140/2017 citado(s) acima , uma vez que {justificativaNaoAplicacaoArt49}.", 
     incisosArt49LC123: "",
     incisosArt9Decreto45140: "",
     justificativaNaoAplicacaoArt49: "",
-    texto_cota_exclusiva_nao_art_4_lei_14133: "4.3.1 Uma vez que o(s) preço(s) anual(is) estimado(s) do(s) item(ns) OU lote(s) {itensLotesNaoAplicacaoArt4} deste processo super(am) individualmente o valor da receita bruta máxima admitida para fins de enquadramento como empresa de pequeno porte (art. 3º, inciso II, da Lei Complementar nº 123/2006), não serão aplicados a tal(is)item(ns) OU lote(s) os benefícios presentes nos arts. 42 a 49 da Lei Complementar nº 123/2006 e arts. 5º ao 7º do Decreto nº 45.140/2017, por disposição expressa no inciso I, do § 1º, do art. 4º, da lei nº 14.133/2021.", // (Baseado no DOCX )
+    texto_cota_exclusiva_nao_art_4_lei_14133: "4.3.1 Uma vez que o(s) preço(s) anual(is) estimado(s) do(s) item(ns) OU lote(s) {itensLotesNaoAplicacaoArt4} deste processo super(am) individualmente o valor da receita bruta máxima admitida para fins de enquadramento como empresa de pequeno porte (art. 3º, inciso II, da Lei Complementar nº 123/2006), não serão aplicados a tal(is)item(ns) OU lote(s) os benefícios presentes nos arts. 42 a 49 da Lei Complementar nº 123/2006 e arts. 5º ao 7º do Decreto nº 45.140/2017, por disposição expressa no inciso I, do § 1º, do art. 4º, da lei nº 14.133/2021.", 
     itensLotesNaoAplicacaoArt4: "",
     nao_aplicar_art_4_lei_14133: "",
     nao_aplicar_art_49: "",
@@ -213,12 +213,15 @@ import type {
     texto_prazo_validade_proposta: "5.2.1.1 As propostas deverão ter validade de, no mínimo, {prazoValidadePropostaDias} ({prazoValidadePropostaDiasExtenso}) dias, contados da data de abertura da sessão pública, independente de declaração da licitante.", 
     requerDocumentoAdicionalProposta: "nao",
     documentosAdicionaisProposta: "",
-    texto_condicoes_proposta: "5.2.2.1 Para o(s) item(ns) ou lote(s) _________,(especificar os item(ns) ou lote(s), se for o caso) a(s) proposta(s)enviada(s) deverá(ão) ser acompanhada(s) do(s) seguinte(s) documento(s): {documentosAdicionaisProposta}",
+    requerCondicaoProposta: "nao",
+    requerCondicaoPropostaParaos: "",
+    requerCondicaoPropostaAcompanhadaDoSeguinteDocumento: "",
+    texto_condicoes_proposta: "5.2.2.1 Para o(s) item(ns) ou lote(s) {requerCondicaoPropostaParaos}, a(s) proposta(s)enviada(s) deverá(ão) ser acompanhada(s) do(s) seguinte(s) documento(s): {requerCondicaoPropostaAcompanhadaDoSeguinteDocumento}",
     requeGarantiaProposta: "nao",
+    texto_garantia_proposta_p1: "5.2.3.1 Será exigida, no ato da apresentação da proposta, a prestação de garantia, no percentual de {percentualGarantiaProposta}% ({percentualGarantiaPropostaExtenso}) por cento do valor estimado da contratação...",
+    texto_garantia_proposta_p2: "5.2.3.2 A solicitação da garantia de proposta se justifica no presente caso, uma vez que {justificativaGarantiaProposta}",
     percentualGarantiaProposta: "",
     justificativaGarantiaProposta: "",
-    texto_garantia_proposta_p1: "5.2.3.1 Será exigida, no ato da apresentação da proposta, a prestação de garantia, no percentual de {percentualGarantiaProposta}% ({percentualGarantiaPropostaExtenso}) por cento do valor estimado da contratação...", 
-    texto_garantia_proposta_p2: "5.2.3.2 A solicitação da garantia de proposta se justifica no presente caso, uma vez que {justificativaGarantiaProposta}",
 
     requeAmostra: "nao",
     tipoAmostra: "",
@@ -235,7 +238,7 @@ import type {
     setorResponsavelAmostra: "",
     prazoAnaliseAmostraDiasUteis: "",
     prazoRetiradaAmostraDiasUteis: "",
-    texto_amostra_fase_julgamento: "5.2.7 Havendo o aceite da proposta (...), o licitante classificado provisoriamente em primeiro lugar deverá (...), no prazo de {prazoAmostraDiasUteis} ({prazoAmostraDiasUteisExtenso}) dias úteis, contados a partir do primeiro dia útil subsequente à convocação (...), sob pena de desclassificação.",
+    texto_amostra_fase_julgamento: "5.2.4.3 Havendo o aceite da proposta, o licitante classificado provisoriamente em primeiro lugar deverá passar por uma avaliação prática, no prazo de {prazoAmostraDiasUteis} ({prazoAmostraDiasUteisExtenso}) dias úteis, contados a partir do primeiro dia útil subsequente à convocação realizada pelo agente de contratação, sem hipótese de prorrogação, sob pena de desclassificação.",
     texto_amostra_fase_contratual: "5.2.4.3 No prazo de {prazoAmostraDiasUteis} ({prazoAmostraDiasUteisExtenso}) 5.2.4.3dias contados da assinatura do CONTRATO e antes da emissão da primeira ordem de serviço (OU contados da assinatura da ata de registro de preços), a contratada OU detentora da ata deverá fornecer amostra para fins de verificação das especificações contidas no Termo de Referência. (Especificar o prazo)", 
     texto_amostra_fase_condicao_assinatura: "5.2.4.3 No prazo de {prazoAmostraDiasUteis} ({prazoAmostraDiasUteisExtenso}) dias contados da homologação do certame (OU convocação pela Administração Pública), como condição para a assinatura do contrato, a adjudicatária deverá fornecer amostra para fins de verificação das especificações contidas no Termo de Referência.",
     
@@ -293,10 +296,10 @@ import type {
     texto_habilitacao_economica_indices_p2: "5.3.13 A adoção dos índices acima se mostra suficiente ao cumprimento das obrigações decorrentes da presente licitação, uma vez que {justificativaIndicesContabeis}.", 
     justificativaIndicesContabeis: "",
     texto_habilitacao_economica_indices_p3: "5.3.14 Ademais, os seus valores iguais ou superiores a {valorIndicesContabeis} foram adotados para o presente certame, pois {justificativaValorIndicesContabeis}.", 
-    valorIndicesContabeis: "1", // Padrão do doc
+    valorIndicesContabeis: "1",
     justificativaValorIndicesContabeis: "são os valores usuais de mercado",
 
-    texto_justificativa_srp: "6.1.1 A opção pelo sistema de registro de preços ... tem fundamentação no art. 3º, caput E/OU inciso {incisoDecreto54700} do Decreto nº 54.700/2023, visto que {justificativaUsoSrp}.",
+    texto_justificativa_srp: "6.1.1 A opção pelo sistema de registro de preços para a contratação do objeto constante deste Termo de Referência tem fundamentação no art. 3º, caput E/OU inciso {incisoDecreto54700} do Decreto nº 54.700/2023, visto que {justificativaUsoSrp}.",
     incisoDecreto54700: "", 
     justificativaUsoSrp: "", 
     texto_orgao_gerenciador: "6.2.1 {orgaoGerenciador} é o(a) órgão OU entidade gerenciador(a)deste Registro de Preços;",
@@ -310,7 +313,9 @@ import type {
     texto_prazo_assinatura_arp: "6.4.1 Após a homologação do resultado desta licitação, a adjudicatária será convocada para assinar a Ata de Registro de Preços, no prazo de {prazoAssinaturaArpDiasUteis} ({prazoAssinaturaArpDiasUteisExtenso}) dias úteis, contados da convocação, sob pena de decair o direito à contratação.",
     prazoAssinaturaArpDiasUteis: "5", 
     permiteContratacaoIndividualItemLote: "nao", 
-    texto_contratacao_individual_item_lote: "6.6.1 Os Participantes poderão fazer a contratação individual de itens registrados de forma aglutinada, ficando dispensada a comprovação da vantajosidade (...), conforme § 3º, do art. 13, do Decreto nº 54.700/2023. A previsão acima se justifica técnica, econômica e/ou gerencialmente, uma vez que {justificativaContratacaoIndividualItemLote}.",
+    textoexistePrazoDeVigenciaAta: "6.5.1.O prazo de vigência da ata será de 1 (um) ano, contado da data de sua assinatura, podendo ser prorrogado por igual período, facultada a renovação dos quantitativos previstos, inclusive para fins de adesão por não participantes, desde que seja comprovada a vantajosidade dos preços registrados.",
+    texto_contratacao_individual_item_lote: "6.6.1 Os Participantes poderão fazer a contratação individual de itens registrados de forma aglutinada, ficando dispensada a comprovação da vantajosidade mediante pesquisa de preço ou de demonstração de que o deságio obtido no valor do item é igual ou superior ao do lote globalmente considerado, conforme § 3º, do art. 13, do Decreto nº 54.700/2023.",
+    texto_contratacao_individual_item_lote_dois: "6.6.2 A previsão acima se justifica técnica, econômica e/ou gerencialmente, uma vez que {justificativaContratacaoIndividualItemLote}.",
     justificativaContratacaoIndividualItemLote: "", 
     permiteAdesaoOrgaosNaoParticipantes: "sim", 
     texto_adesao_sim_p1: "6.7.2 As possíveis solicitações de adesão deverão ser encaminhadas à gerenciadora da ata de registro de preços, por meio do telefone: (81) {telefoneAdesao}, e-mail: {emailAdesao}, para autorização.",
@@ -328,16 +333,14 @@ import type {
     obrigacoesGerenciadoraIncluirExtras: "nao", 
     texto_obrigacoes_gerenciadora_padrao: "6.9.1 As obrigações do órgão OU entidade gerenciador(a) da ata de registro de preços serão dispostas em item específico da minuta da ata de registro de preços do presente processo.",
     texto_obrigacoes_gerenciadora_extras: "6.9.1 Além das obrigações que serão dispostas na minuta da ata de registro de preços, são requeridas as seguintes obrigações específicas da gerenciadora da ata na presente contratação:",
-    obrigacoesGerenciadoraExtras: [] as string[], 
+    obrigacoesGerenciadoraExtras: "", 
     obrigacoesDetentoraUsarPadrao: "sim", 
     obrigacoesDetentoraIncluirExtras: "nao", 
     texto_obrigacoes_detentora_padrao: "6.10.1 As obrigações da detentora da ata de registro de preços serão dispostas em item específico da minuta da ata de registro de preços do presente processo.",
     texto_obrigacoes_detentora_extras: "6.10.1 Além das obrigações que serão dispostas na minuta da ata de registro de preços, são requeridas as seguintes obrigações específicas da gerenciadora da ata na presente contratação:",
     obrigacoesDetentoraExtras: [] as string[], 
     
-    // ==================================================================
     // ADIÇÃO - SEÇÃO 7
-    // ==================================================================
     tipoContratoPrazo: "", 
     prazoVigenciaEscopoDefinido: "", 
     texto_prazo_vigencia_escopo_definido: "7.1.1 O prazo de vigência do contrato será de {prazoVigenciaEscopoDefinido}, contados a partir da data de sua assinatura, na forma do art. 105 da Lei nº 14.133, de 2021.",
@@ -390,7 +393,7 @@ import type {
     setorGestaoContrato: "", 
     setorFiscalizacaoContrato: "", 
     texto_gestao_contrato_p1: "7.8.1 As obrigações dos agentes responsáveis pela gestão e fiscalização da presente contratação estão detalhadas no Decreto Estadual nº 51.651/2021, bem como, serão dispostas na minuta do contrato, anexo ao Edital deste certame.",
-    texto_gestao_contrato_p2: "7.8.2 (Atores da Gestão/Fiscalização - ver tabela)", // Placeholder para a tabela
+    texto_gestao_contrato_p2: "7.8.2 (Atores da Gestão/Fiscalização - ver tabela)",
     texto_gestao_contrato_p3: "7.8.3 A comunicação entre a Contratante e a Contratada se dará por meio de {meioComunicacaoOficial}, sem prejuízo de outros meios disponíveis.",
     texto_gestao_contrato_p4: "7.8.4 A contratada deverá apresentar a Nota Fiscal ou fatura para atesto da Administração no seguinte endereço: {enderecoEntregaNotaFiscal}.",
     texto_gestao_contrato_p5: "7.8.5 A Gestão da presente contratação ficará a cargo do(a) {setorGestaoContrato}. A Fiscalização da presente contratação ficará a cargo do(a) {setorFiscalizacaoContrato}.",
