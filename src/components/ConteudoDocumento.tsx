@@ -18,7 +18,7 @@ function substituirPlaceholders(texto: string, valores: Record<string, string>):
     const valor = valores[key];
     return valor !== undefined ? `<strong>${valor}</strong>` : match;
   });
-  return textoSubstituido.replace(/\s\s+/g, ' ').trim()
+  return textoSubstituido.replace(/[ \t]{2,}/g, ' ').trim()
 }
 
 export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: GerarTextoProps) {
@@ -2185,9 +2185,13 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
     emailAdesao: formData.emailAdesao || "____",
     telefoneAdesao: formData.telefoneAdesao || "____",
     limiteAdesaoCadaOrgao: formData.limiteAdesaoCadaOrgao || "__",
+    limiteAdesaoCadaOrgaoExtenso: numeroPorExtenso(formData.limiteAdesaoCadaOrgao),
     limiteAdesaoTotal: formData.limiteAdesaoTotal || "__",
     justificativaNaoAdesao: formData.justificativaNaoAdesao || "____",
-    textoexistePrazoDeVigenciaAta: formData.textoexistePrazoDeVigenciaAta || "______"
+    textoexistePrazoDeVigenciaAta: formData.textoexistePrazoDeVigenciaAta || "______",
+    texto_adesao_sim: formData.texto_adesao_sim || "______",
+    texto_adesao_sim_letra_a: formData.texto_adesao_sim_letra_a || "______",
+    texto_adesao_sim_letra_b: formData.texto_adesao_sim_letra_b || "______"
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -2203,7 +2207,7 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
     }
     return (
       <p
-        className="text-lg p-2 rounded-md"
+        className="text-lg p-2 rounded-md whitespace-pre-wrap"
         dangerouslySetInnerHTML={{ __html: substituirPlaceholders(template, valores) }}
       />
     );
@@ -2257,19 +2261,29 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
         </>
       )}
 
-      <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.7 Previsão e justificativa da possibilidade de adesão por não participantes</h3>
-      {formData.permiteAdesaoOrgaosNaoParticipantes === 'nao' ? (
-        renderTexto(formData.texto_adesao_nao, 'texto_adesao_nao')
+      <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.7. PREVISÃO E JUSTIFICATIVA DA POSSIBILIDADE DE ADESÃO POR ÓRGÃOS E ENTIDADES NÃO PARTICIPANTES E CONDIÇÕES DE ADESÃO</h3>
+      {formData.permiteAdesaoOrgaosNaoParticipantes === 'sim' ? (
+        <>
+          {renderTexto(formData.texto_adesao_sim, 'texto_adesao_sim')}
+          {renderTexto(formData.texto_adesao_sim_p1, 'texto_adesao_sim_p1')}
+          {renderTexto(formData.texto_adesao_sim_limites_nao_padronizados_p1, 'texto_adesao_sim_limites_nao_padronizados_p1')}
+          {renderTexto(formData.texto_adesao_sim_letra_a, 'texto_adesao_sim_letra_a')}
+          {renderTexto(formData.texto_adesao_sim_letra_b, 'texto_adesao_sim_letra_b')}
+        </>
       ) : (
         <>
-          {renderTexto(formData.texto_adesao_sim_p1, 'texto_adesao_sim_p1')}
-          {formData.usarLimitesAdesaoPadronizados === 'nao' && renderTexto(formData.texto_adesao_sim_limites_nao_padronizados_p1, 'texto_adesao_sim_limites_nao_padronizados_p1')}
+        {renderTexto(formData.texto_adesao_nao, 'texto_adesao_nao')}
+        {renderTexto(formData.texto_adesao_nao_texto_dois, 'texto_adesao_nao_texto_dois')}
         </>
       )}
       
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.9 Obrigações e responsabilidades da gerenciadora da ATA</h3>
-      {renderTexto(formData.texto_obrigacoes_gerenciadora_padrao, 'texto_obrigacoes_gerenciadora_padrao')}
-      {formData.obrigacoesGerenciadoraIncluirExtras === 'sim' && (
+      
+      {formData.obrigacoesGerenciadoraIncluirExtras === 'sim' ? (
+        <>
+          {renderTexto(formData.texto_obrigacoes_gerenciadora_padrao, 'texto_obrigacoes_gerenciadora_padrao')}
+        </>
+      ): (
         <>
           {renderTexto(formData.texto_obrigacoes_gerenciadora_extras, 'texto_obrigacoes_gerenciadora_extras')}
           {renderLista(formData.obrigacoesGerenciadoraExtras)}
@@ -2318,6 +2332,8 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
     enderecoEntregaNotaFiscal: formData.enderecoEntregaNotaFiscal || "____",
     setorGestaoContrato: formData.setorGestaoContrato || "____",
     setorFiscalizacaoContrato: formData.setorFiscalizacaoContrato || "____",
+    texto_garantia_contratual_sim_2: formData.texto_garantia_contratual_sim_2 || "____",
+    percentualLimiteSubcontratacaoAcessoriasEntenso: numeroPorExtenso(formData.percentualLimiteSubcontratacaoAcessorias),
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -2368,8 +2384,26 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
       }
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.3 Requisitos da Contratação</h3>
-      {formData.requerCartaSolidariedade === 'sim' && renderTexto(formData.texto_carta_solidariedade, 'texto_carta_solidariedade')}
-      {formData.requerRequisitosSustentabilidade === 'sim' && renderTexto(formData.texto_requisitos_sustentabilidade, 'texto_requisitos_sustentabilidade')}
+{formData.requerCartaSolidariedade === 'sim' &&
+  renderTexto(formData.texto_carta_solidariedade, 'texto_carta_solidariedade')}
+{formData.requerRequisitosSustentabilidade === 'sim' &&
+  renderTexto(formData.texto_requisitos_sustentabilidade, 'texto_requisitos_sustentabilidade')}
+{formData.requerClausula73_3 === 'sim' && (
+  <>
+    <h3 className="text-lg font-bold pt-4 pb-2 text-justify">
+      7.3.3. DA EXIGÊNCIA DE CARTA DE SOLIDARIEDADE
+    </h3>
+    {renderTexto(formData.texto_73_3, 'texto_73_3')}
+  </>
+)}
+{formData.requerClausula73_4 === 'sim' && (
+  <>
+    <h3 className="text-lg font-bold pt-4 pb-2 text-justify">
+      7.3.4. REQUISITOS DE SUSTENTABILIDADE
+    </h3>
+    {renderTexto(formData.texto_73_4, 'texto_73_4')}
+  </>
+)}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.4 Obrigações da Contratante</h3>
       {renderTexto(formData.texto_obrigacoes_contratante_padrao, 'texto_obrigacoes_contratante_padrao')}
@@ -2390,10 +2424,22 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
       )}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.6 Previsão e condições de prestação da garantia contratual</h3>
-      {formData.preveGarantiaContratual === 'nao' ? 
-        renderTexto(formData.texto_garantia_contratual_nao, 'texto_garantia_contratual_nao') :
-        renderTexto(formData.texto_garantia_contratual_sim, 'texto_garantia_contratual_sim')
+      {formData.preveGarantiaContratual === 'nao' && formData.eEstudosTecnicosPreliminares === 'nao' && (
+        renderTexto(formData.texto_garantia_contratual_nao_2, 'texto_garantia_contratual_nao_2') 
+
+      ) 
       }
+
+      {formData.preveGarantiaContratual === 'nao' && formData.eEstudosTecnicosPreliminares === 'sim' &&(
+        renderTexto(formData.texto_garantia_contratual_nao, 'texto_garantia_contratual_nao')
+      )}
+
+      {formData.preveGarantiaContratual === 'sim' && (
+        <>
+          {renderTexto(formData.texto_garantia_contratual_sim, 'texto_garantia_contratual_sim')}
+          {renderTexto(formData.texto_garantia_contratual_sim_2, 'texto_garantia_contratual_sim_2')}
+        </>
+      )}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.7 Da permissão ou vedação da subcontratação</h3>
       {formData.permiteSubcontratacao === 'nao' && renderTexto(formData.texto_subcontratacao_nao, 'texto_subcontratacao_nao')}
@@ -2446,13 +2492,17 @@ function GerarTabelaAtoresGestao({ atores }: { atores: AtorGestaoContrato[] }) {
 
 // --- SEÇÃO 8: PAGAMENTO ---
 function GerarTextoPagamento({formData, setFormData, isEditing}: GerarTextoProps) {
-  const { preverAntecipacaoPagamento } = formData;
+
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
     setFormData((prev) => ({ ...prev, [campo]: novoValor }));
   };
 
   const valores = {
+    quaisRespectivosItens: formData.quaisRespectivosItens || "____",
+    itensAntecipacaoParcial: formData.itensAntecipacaoParcial || "____",
+    valorAntecipacaoPagamento: formData.valorAntecipacaoPagamento || "____",
+    contadosDoRecebimento: formData.contadosDoRecebimento || "____",
     justificativaAntecipacaoPagamento: formData.justificativaAntecipacaoPagamento || "____",
     prazoAntecipacaoPagamento: formData.prazoAntecipacaoPagamento || "__",
     percentualGarantiaAdicionalAntecipacao: formData.percentualGarantiaAdicionalAntecipacao || "__",
@@ -2469,16 +2519,26 @@ function GerarTextoPagamento({formData, setFormData, isEditing}: GerarTextoProps
   return (
     <div>
       {/* Seção 8.1 Padrão (se escolhido) ou Antecipação */}
-      {formData.pagamentoUsarPadrao === 'sim' && renderTexto(formData.texto_pagamento_padrao, 'texto_pagamento_padrao')}
-      
-      {preverAntecipacaoPagamento !== 'nao' && (
+
+      {formData.preverAntecipacaoPagamento === 'nao' && (
+        renderTexto(formData.texto_pagamento_padrao, 'texto_pagamento_padrao')
+      )}
+
+      {formData.preverAntecipacaoPagamento === 'sim' && (
         <>
           {renderTexto(formData.texto_antecipacao_pagamento_p1, 'texto_antecipacao_pagamento_p1')}
           {renderTexto(formData.texto_antecipacao_pagamento_p2, 'texto_antecipacao_pagamento_p2')}
-          {formData.requerGarantiaAdicionalAntecipacao === 'sim' && renderTexto(formData.texto_antecipacao_pagamento_p3, 'texto_antecipacao_pagamento_p3')}
-          {preverAntecipacaoPagamento === 'sim_parcial' && renderTexto(formData.texto_antecipacao_pagamento_parcial_p1, 'texto_antecipacao_pagamento_parcial_p1')}
         </>
       )}
+
+      {formData.requerGarantiaAdicionalAntecipacao === 'sim' && (
+        renderTexto(formData.texto_antecipacao_pagamento_p3, 'texto_antecipacao_pagamento_p3')
+      )}
+
+      {formData.antecipacaoParcialDePagamento === 'sim' && (
+        renderTexto(formData.texto_antecipacao_pagamento_parcial_p1, 'texto_antecipacao_pagamento_parcial_p1')
+      )}
+
     </div>
   );
 }

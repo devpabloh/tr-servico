@@ -412,7 +412,11 @@ export type FormDataCompleto = {
   limiteAdesaoCadaOrgao: string; 
   limiteAdesaoTotal: string; 
   
+  texto_adesao_sim: string;
+  texto_adesao_sim_letra_a: string;
+  texto_adesao_sim_letra_b: string;
   texto_adesao_nao: string;
+  texto_adesao_nao_texto_dois: string;
   justificativaNaoAdesao: string; 
   
   obrigacoesGerenciadoraUsarPadrao: string; 
@@ -454,6 +458,11 @@ export type FormDataCompleto = {
   texto_requisitos_sustentabilidade: string;
   requisitosSustentabilidade: string; 
 
+  requerClausula73_3: string;
+  texto_73_3: string;
+  requerClausula73_4: string;
+  texto_73_4: string;
+
   obrigacoesContratanteUsarPadrao: string; 
   obrigacoesContratanteIncluirExtras: string; 
   texto_obrigacoes_contratante_padrao: string;
@@ -469,9 +478,11 @@ export type FormDataCompleto = {
   preveGarantiaContratual: string; 
   
   texto_garantia_contratual_nao: string;
+  texto_garantia_contratual_nao_2: string;
   justificativaNaoGarantia: string; 
   
   texto_garantia_contratual_sim: string;
+  texto_garantia_contratual_sim_2: string;
   percentualGarantiaContratual: string; 
 
   permiteSubcontratacao: string; 
@@ -511,8 +522,13 @@ export type FormDataCompleto = {
   
   texto_antecipacao_pagamento_p1: string;
   justificativaAntecipacaoPagamento: string; 
+  antecipacaoParcialDePagamento: string;
+  quaisRespectivosItens: string;
+  contadosDoRecebimento: string;
+  valorAntecipacaoPagamento: string;
   texto_antecipacao_pagamento_p2: string;
   prazoAntecipacaoPagamento: string; 
+  itensAntecipacaoParcial: string;
   
   requerGarantiaAdicionalAntecipacao: string; 
   texto_antecipacao_pagamento_p3: string;

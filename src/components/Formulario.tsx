@@ -1601,7 +1601,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               <option value="nao">Não (Definir limites manualmente)</option>
             </SelectComponent>
             
-            {formData.usarLimitesAdesaoPadronizados === 'nao' && (
+            {formData.usarLimitesAdesaoPadronizados === 'sim' && (
               <div className="pl-4 border-l-4">
                 <InputComponent
                   label="Limite por órgão (% dos quantitativos)"
@@ -1649,7 +1649,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           <option value="nao">Não</option>
           <option value="sim">Sim</option>
         </SelectComponent>
-        {formData.obrigacoesGerenciadoraIncluirExtras === 'sim' && (
+        {formData.obrigacoesGerenciadoraIncluirExtras === 'nao' && (
            <TextAreaComBotao
               label="Obrigações Extras da Contratante"
               valorInicial={formData.obrigacoesGerenciadoraExtras}
@@ -1770,42 +1770,98 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
   </FieldsetContainer>
 
   <FieldsetContainer titleLegend="7.3 Requisitos da Contratação">
-    <SelectComponent
-      label="Exigir Carta de Solidariedade?"
-      id="requerCartaSolidariedade"
-      value={formData.requerCartaSolidariedade}
-      onChange={(e) => setFormData({...formData, requerCartaSolidariedade: e.target.value})}
-    >
-      <option value="nao">Não</option>
-      <option value="sim">Sim (Excepcional)</option>
-    </SelectComponent>
+  <div className="space-y-2">
+    {/* 7.3.1 */}
+    <label className="flex items-center gap-2">
+      <input
+        type="checkbox"
+        checked={formData.requerCartaSolidariedade === 'sim'}
+        onChange={() =>
+          setFormData({
+            ...formData,
+            requerCartaSolidariedade: formData.requerCartaSolidariedade === 'sim' ? 'nao' : 'sim'
+          })
+        }
+      />
+      <span>Incluir 7.3 Requisitos da contratação</span>
+    </label>
     {formData.requerCartaSolidariedade === 'sim' && (
-      <InputComponent
-        label="Justificativa (motivos técnicos)"
-        id="justificativaCartaSolidariedade"
-        value={formData.justificativaCartaSolidariedade}
-        onChange={(e) => setFormData({...formData, justificativaCartaSolidariedade: e.target.value})}
+      <>
+        <TextAreaComBotao
+        label="Texto da cláusula 7.3.1"
+        valorInicial={formData.texto_carta_solidariedade}
+        onSalvar={(v) => setFormData({ ...formData, texto_carta_solidariedade: v })}
+      />
+    
+      </>
+    )}
+    <label className="flex items-center gap-2">
+    <input
+      type="checkbox"
+      checked={formData.requerRequisitosSustentabilidade === 'sim'}
+      onChange={() =>
+        setFormData({
+          ...formData,
+          requerRequisitosSustentabilidade:
+            formData.requerRequisitosSustentabilidade === 'sim' ? 'nao' : 'sim'
+        })
+      }
+    />
+    <span>Incluir 7.3.2</span>
+  </label>
+  {formData.requerRequisitosSustentabilidade === 'sim' && (
+      <TextAreaComBotao
+        label="Texto da cláusula 7.3.2"
+        valorInicial={formData.texto_requisitos_sustentabilidade}
+        onSalvar={(v) => setFormData({ ...formData, texto_requisitos_sustentabilidade: v })}
+      />  
+  )}
+
+    {/* 7.3.3 */}
+    <label className="flex items-center gap-2">
+      <input
+        type="checkbox"
+        checked={formData.requerClausula73_3 === 'sim'}
+        onChange={() =>
+          setFormData({
+            ...formData,
+            requerClausula73_3: formData.requerClausula73_3 === 'sim' ? 'nao' : 'sim'
+          })
+        }
+      />
+      <span>Incluir 7.3.3 Da exigência de Carta de Solidariedade</span>
+    </label>
+    {formData.requerClausula73_3 === 'sim' && (
+      <TextAreaComBotao
+        label="Texto da cláusula 7.3.3"
+        valorInicial={formData.texto_73_3}
+        onSalvar={(v) => setFormData({ ...formData, texto_73_3: v })}
       />
     )}
 
-    <SelectComponent
-      label="Exigir Requisitos de Sustentabilidade?"
-      id="requerRequisitosSustentabilidade"
-      value={formData.requerRequisitosSustentabilidade}
-      onChange={(e) => setFormData({...formData, requerRequisitosSustentabilidade: e.target.value})}
-    >
-      <option value="nao">Não</option>
-      <option value="sim">Sim</option>
-    </SelectComponent>
-    {formData.requerRequisitosSustentabilidade === 'sim' && (
-      <InputComponent
-        label="Requisitos adicionais e fontes legais"
-        id="requisitosSustentabilidade"
-        value={formData.requisitosSustentabilidade}
-        onChange={(e) => setFormData({...formData, requisitosSustentabilidade: e.target.value})}
+    {/* 7.3.4 */}
+    <label className="flex items-center gap-2">
+      <input
+        type="checkbox"
+        checked={formData.requerClausula73_4 === 'sim'}
+        onChange={() =>
+          setFormData({
+            ...formData,
+            requerClausula73_4: formData.requerClausula73_4 === 'sim' ? 'nao' : 'sim'
+          })
+        }
+      />
+      <span>Incluir 7.3.4 Requisitos de sustentabilidade</span>
+    </label>
+    {formData.requerClausula73_4 === 'sim' && (
+      <TextAreaComBotao
+        label="Texto da cláusula 7.3.4"
+        valorInicial={formData.texto_73_4}
+        onSalvar={(v) => setFormData({ ...formData, texto_73_4: v })}
       />
     )}
-  </FieldsetContainer>
+  </div>
+</FieldsetContainer>
 
   <FieldsetContainer titleLegend="7.4 Obrigações da Contratante">
     
@@ -1861,14 +1917,16 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
       <option value="nao">Não</option>
       <option value="sim">Sim</option>
     </SelectComponent>
-    {formData.preveGarantiaContratual === 'nao' ? (
+    {formData.preveGarantiaContratual === 'nao' && formData.eEstudosTecnicosPreliminares === 'nao' && (
       <InputComponent
         label="Justificativa da não-exigência"
         id="justificativaNaoGarantia"
         value={formData.justificativaNaoGarantia}
         onChange={(e) => setFormData({...formData, justificativaNaoGarantia: e.target.value})}
       />
-    ) : (
+    ) 
+    }
+    {formData.preveGarantiaContratual === 'sim' &&(
       <InputComponent
         label="Percentual de Garantia (1 a 10%)"
         id="percentualGarantiaContratual"
@@ -1877,7 +1935,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
         value={formData.percentualGarantiaContratual}
         onChange={(e) => setFormData({...formData, percentualGarantiaContratual: e.target.value})}
       />
-    )}
+    )
+    }
   </FieldsetContainer>
 
   <FieldsetContainer titleLegend="7.7 Subcontratação">
@@ -1935,8 +1994,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
         />
       </div>
     )}
-    {formData.permiteSubcontratacao !== 'nao' && (
-      <div className="mt-2">
+     <div className="mt-2">
         <InputComponent
           label="Fundamentação (viabilidade técnica/econômica)"
           id="fundamentoSubcontratacao"
@@ -1951,7 +2009,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           orientacoes="Se houver condições adicionais."
         />
       </div>
-    )}
   </FieldsetContainer>
   
       <FieldsetContainer titleLegend="7.8 Modelo de Gestão do Contrato">
@@ -1994,12 +2051,17 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             onChange={(e) => setFormData({...formData, preverAntecipacaoPagamento: e.target.value})}
           >
             <option value="nao">Não (Padrão)</option>
-            <option value="sim_total">Sim, total</option>
-            <option value="sim_parcial">Sim, parcial</option>
+            <option value="sim">Sim</option>
           </SelectComponent>
 
-          {formData.preverAntecipacaoPagamento !== 'nao' && (
-            <div className="pl-4 border-l-4">
+          {formData.preverAntecipacaoPagamento === 'sim' && (
+            <div>
+              <InputComponent
+                label="Valor total antecipado"
+                id="valorAntecipacaoPagamento"
+                value={formData.valorAntecipacaoPagamento}
+                onChange={(e) => setFormData({...formData, valorAntecipacaoPagamento: e.target.value})}
+              />
               <InputComponent
                 label="Justificativa da Antecipação"
                 id="justificativaAntecipacaoPagamento"
@@ -2014,6 +2076,13 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 value={formData.prazoAntecipacaoPagamento}
                 onChange={(e) => setFormData({...formData, prazoAntecipacaoPagamento: e.target.value})}
               />
+              <InputComponent
+                label="Contados do recebimento do?"
+                id="contadosDoRecebimento"
+                type="text"
+                value={formData.contadosDoRecebimento}
+                onChange={(e) => setFormData({...formData, contadosDoRecebimento: e.target.value})}
+              />
               <SelectComponent
                 label="Exigir Garantia Adicional?"
                 id="requerGarantiaAdicionalAntecipacao"
@@ -2024,7 +2093,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 <option value="nao">Não</option>
               </SelectComponent>
               {formData.requerGarantiaAdicionalAntecipacao === 'sim' && (
-                 <InputComponent
+                <InputComponent
                   label="Percentual da Garantia Adicional (%)"
                   id="percentualGarantiaAdicionalAntecipacao"
                   type="number"
@@ -2032,16 +2101,36 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   onChange={(e) => setFormData({...formData, percentualGarantiaAdicionalAntecipacao: e.target.value})}
                 />
               )}
-              {formData.preverAntecipacaoPagamento === 'sim_parcial' && (
-                 <InputComponent
+              
+                <SelectComponent
+                label="Prever antecipação parcial de pagamento?"
+                id="antecipacaoParcialDePagamento"
+                value={formData.antecipacaoParcialDePagamento}
+                onChange={(e) => setFormData({...formData, antecipacaoParcialDePagamento: e.target.value})}
+                        >
+                <option value="nao">Não (Padrão)</option>
+                <option value="sim">Sim</option>
+              </SelectComponent>
+              
+              {formData.antecipacaoParcialDePagamento === 'sim' && (
+                <div>
+                  <InputComponent
                   label="Etapa(s) ou Item(ns) para antecipação"
                   id="etapasItensAntecipacaoParcial"
                   value={formData.etapasItensAntecipacaoParcial}
                   onChange={(e) => setFormData({...formData, etapasItensAntecipacaoParcial: e.target.value})}
                 />
+                <InputComponent
+                  label="Quais os respectivos itens?"
+                  id="quaisRespectivosItens"
+                  value={formData.quaisRespectivosItens}
+                  onChange={(e) => setFormData({...formData, quaisRespectivosItens: e.target.value})}
+                />
+                </div>
               )}
             </div>
           )}
+
         </FieldsetContainer>
         <FieldsetContainer titleLegend="9. DOS INSTRUMENTOS DE MEDIÇÃO DE RESULTADOS (IMR)">
           <SelectComponent
