@@ -41,8 +41,8 @@ export function LocaisEHorarios({locaisEHorarios, setFormData}:LocaisEHorariosPr
   }
 
   return (
-    <div className="p-4 bg-gray-50 rounded-lg shadow-inner my-4">
-      <h3 className="text-lg font-semibold text-gray-800 mb-3">Locais e Horários de execução</h3>
+    <fieldset className="p-4 bg-gray-50 rounded-lg shadow-inner my-4">
+      <legend className="text-lg font-semibold text-gray-800 mb-3">3.2.1 Os serviços serão prestados em locais e horários</legend>
       <div className="flex gap-4">
         <textarea name="" id=""
           value={localAtual}
@@ -86,6 +86,6 @@ export function LocaisEHorarios({locaisEHorarios, setFormData}:LocaisEHorariosPr
           ))}
         </div>
       )}
-    </div>
+    </fieldset>
   )
 }

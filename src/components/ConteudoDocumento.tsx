@@ -331,7 +331,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
       </div>
       <div>
           <p className="pt-4 pb-2 text-justify">
-            3.2.7 O objeto será recebido (deve ser incluído, se cabível):
+            3.2.7 O objeto será recebido:
           </p>
           <GerarTextoRecebimentoObjeto
             formData={formData}
@@ -759,13 +759,7 @@ function GerarPrazoDeExecucao({formData, setFormData, isEditing}: GerarTextoProp
     );
   }
 
-  if(!prazoExecucaoDoContrato){
-    return (
-      <p className="text-gray-500 italic">
-        [Prazo de início da execução não especificado]
-      </p>
-    )
-  }
+ 
 
   return(
      <p
@@ -805,7 +799,7 @@ function CronogramaRealizacaoDosServicos({formData, setFormData, isEditing}: Ger
   if(!cronogramaRealizacaoDosServicos){
     return (
       <p className="text-gray-500 italic">
-        [Cronograma de realização dos serviços não especificado]
+    
       </p>
     )
   }
@@ -973,7 +967,7 @@ function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTe
     <div className="space-y-2">
       {(objetoSeraRecebido === 'provisoriamente' || objetoSeraRecebido === 'ProvisorioEDefinitivo') && renderProvisorio()}
       {(objetoSeraRecebido === 'definitivamente' || objetoSeraRecebido === 'ProvisorioEDefinitivo') && renderDefinitivo()}
-      {!objetoSeraRecebido && <p className="text-gray-400 italic">Opção de recebimento não selecionada.</p>}
+      {!objetoSeraRecebido && <p className="text-gray-400 italic"></p>}
     </div>
   );
 }
@@ -1007,20 +1001,12 @@ function RecebimentoDefinitivoPoderaSerExcepcionalmente({formData, setFormData, 
           />
         ) : (
           <p
-            className="text-lg p-2 rounded-md"
-            dangerouslySetInnerHTML={{ __html: textoComValores }}
+            
           />
         )
       );
     }
-    case 'nao': {
-       return (
-        <>
-        </>
-      );
-    }
-    default:
-      return <p className="text-gray-400 italic">Opção de recebimento não selecionada.</p>;
+    
   }
 }
 
@@ -1329,7 +1315,8 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
   const { 
     eEstudosTecnicosPreliminares,
     texto_sim_existEtpOuInformacaoPresenteExtratoSigiloso,
-    texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso
+    texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso,
+    visandoAtenderNecessidades
   } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1347,7 +1334,8 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
     umaVezQueAtribuicoesFuncionais: formData.umaVezQueAtribuicoesFuncionais || "____",
     deverLegalExposto: formData.deverLegalExposto || "____",
     queDeterminaDispositivoLegalCitado: formData.queDeterminaDispositivoLegalCitado || "____",
-    eEstudosTecnicosPreliminares: formData.eEstudosTecnicosPreliminares || "____"
+    eEstudosTecnicosPreliminares: formData.eEstudosTecnicosPreliminares || "____",
+    visandoAtenderNecessidades: formData.visandoAtenderNecessidades || "______",
   };
 
   switch (eEstudosTecnicosPreliminares) {

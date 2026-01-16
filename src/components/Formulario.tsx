@@ -135,7 +135,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                       </select>
                     </div>
                   </div>
-                  {formData.qualTipoContratacao === 'corporativo' ? (
+                  {/* {formData.qualTipoContratacao === 'corporativo' ? (
                     <div className="flex flex-col mt-4">
                       <label htmlFor="justificaCasoConcretoUmaVezQue">E se justifica no caso concreto, uma vez que?</label>
                       <textarea 
@@ -146,7 +146,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                         onChange={(e) => setFormData({...formData, justificaCasoConcretoUmaVezQue: e.target.value})}
                       />
                     </div>
-                  ) : null}
+                  ) : null} */}
                   <div className="mt-4">
                     <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
                     <div>
@@ -220,18 +220,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               </SelectComponent> */}
               {formData.eEstudosTecnicosPreliminares === 'nao' && (
                 <div>
-                  <div className="mt-4">
-                    <label htmlFor="presenteContratacaoNecessidadeServicos" className="font-semibold">A presente contratação se dará em função da necessidade dos serviços?</label>
-                    <input type="text" id='presenteContratacaoNecessidadeServicos' className='border rounded-sm p-2 w-full' value={formData.presenteContratacaoNecessidadeServicos} onChange={(e)=>setFormData({...formData, presenteContratacaoNecessidadeServicos: e.target.value})} />
-                  </div>
-                  <div className="my-4">
-                    <label htmlFor="desempenhoAtribuicoesFuncionais" className="font-semibold">Os quais são essenciais para o desempenho das atribuições funcionais da?</label>
-                    <p className="orientacoes mb-2" >Especificar órgão ou entidade.</p>
-                    <input type="text" id='desempenhoAtribuicoesFuncionais' className='border rounded-sm p-2 w-full' value={formData.desempenhoAtribuicoesFuncionais} onChange={(e)=>setFormData({...formData, desempenhoAtribuicoesFuncionais: e.target.value})} />
-                  </div>
-                  <InputComponent label="Expor a finalidade da contratação" orientacoes="Expor a finalidade da contratação." id="umaVezQueAtribuicoesFuncionais" value={formData.umaVezQueAtribuicoesFuncionais} onChange={(e)=> setFormData({...formData,umaVezQueAtribuicoesFuncionais: e.target.value })}/>
-                  <InputComponent label="Que tal objeto atenderá o dever legal exposto no?" orientacoes="Citar legislação, se existente, que fundamente o dever do estado de contratar o objeto." value={formData.deverLegalExposto} onChange={(e)=> setFormData({...formData, deverLegalExposto: e.target.value})}/>
-                  <InputComponent label="Que determina?" orientacoes="Transcrever ou explicitar o conteúdo do que preconizar o dispositivo legal citado, se for o caso." value={formData.queDeterminaDispositivoLegalCitado} onChange={(e)=> setFormData({...formData, queDeterminaDispositivoLegalCitado: e.target.value})}/>
+            
+                  <InputComponent label="Expor a finalidade da contratação" id="umaVezQueAtribuicoesFuncionais" value={formData.umaVezQueAtribuicoesFuncionais} onChange={(e)=> setFormData({...formData,umaVezQueAtribuicoesFuncionais: e.target.value })}/>
                 </div>
               )}
           </FieldsetContainer>
@@ -263,18 +253,19 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div>
                 <InputComponent
-                  label="informar os critérios utilizados para definição dos quantitativos a serem contratados, conforme os cálculos apresentados abaixo: apresentar os cálculos realizados ou apontar os documentos que comprovem esses cálculos, se for o caso"
+                  label="Os quantitativos foram definidos em qual documento?"
+                  placeholder="Ex: foram definidos no próprio termo de referência ou em outro documento (citar)"
                   onChange={(e)=> setFormData({...formData, osQuantitativosPrecistoDefinidosNoDocumento: e.target.value})}
                   value={formData.osQuantitativosPrecistoDefinidosNoDocumento}
                   
                 />
           
-                {/* <InputComponent
-                  label="Fundamentado em?"
-                  orientacoes="informar os critérios utilizados para definição dos quantitativos a serem contratados"
+                <InputComponent
+                  label="Informar os critérios utilizados para definição dos quantitativos a serem contratados"
                   onChange={(e)=> setFormData({...formData, fundamentadoEm: e.target.value})}
                   value={formData.fundamentadoEm}
-                /> */}
+                  
+                />
               </div>
             )}
           </FieldsetContainer>
@@ -289,28 +280,21 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               <option value="sim">Sim</option>
               <option value="nao">Não</option>
             </SelectComponent> */}
-            {formData.eEstudosTecnicosPreliminares === "sim" ? (
-              <InputComponent
-                label="Item do ETP"
-                orientacoes="Informe o item do ETP (ex: 3.4)"
-                id="itemEtpJustificativaSolucao"
-                value={formData.itemEtpJustificativaSolucao}
-                onChange={(e) => setFormData({...formData, itemEtpJustificativaSolucao: e.target.value})}
-              />
-            ): null}
+            
           
             {formData.eEstudosTecnicosPreliminares === "nao" ? (
               <div className="my-4">
                 <label htmlFor="justificativaEscolhaSolucaoNaoEtp" className="font-semibold">
-                  Justificativa da escolha (uma vez que...)
+                  Justificar a razão para escolha desse tipo de serviço frente às demais alternativas para a satisfação da necessidade pública 
                 </label>
-                <p className="orientacoes mb-2">Justificar a razão para escolha desse tipo de serviço frente às demais alternativas.</p>
+                <p className="orientacoes mb-2"></p>
                 <textarea 
                   id="justificativaEscolhaSolucaoNaoEtp" 
                   className='border rounded-sm p-2 w-full'
                   rows={4}
                   value={formData.justificativaEscolhaSolucaoNaoEtp}
                   onChange={(e) => setFormData({...formData, justificativaEscolhaSolucaoNaoEtp: e.target.value})}
+                  placeholder="Ex: Quando houver a possibilidade de opção entre aquisição ou locação de bens móveis duráveis."
                 />
               </div>
             ): null}
@@ -327,15 +311,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             </SelectComponent> */}
 
             {/* Caso ETP = SIM */}
-            {formData.eEstudosTecnicosPreliminares === 'sim' && (
-              <InputComponent
-                label="Item do ETP"
-                orientacoes="Informe o item do ETP referente ao parcelamento (ex: 4.1)"
-                id="itemEtpJustificativaParcelamento"
-                value={formData.itemEtpJustificativaParcelamento}
-                onChange={(e) => setFormData({...formData, itemEtpJustificativaParcelamento: e.target.value})}
-              />
-            )}
+            
 
             {/* Caso ETP = NÃO */}
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
@@ -346,23 +322,23 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   onChange={(e) => setFormData({...formData, tipoParcelamentoNaoEtp: e.target.value})}
                 >
                   <option value="">Selecione uma opção</option>
-                  <option value="item">Parcelamento por Item(ns)</option>
-                  <option value="lote">Agrupado em Lote(s)</option>
+                  <option value="item">Item(ns)</option>
+                  <option value="lote">Grupo(s)</option>
                 </SelectComponent>
 
                 {/* Sub-opção "item" */}
                 {formData.tipoParcelamentoNaoEtp === 'item' && (
                   <div className="my-4">
                     <label htmlFor="razoesParcelamentoItem" className="font-semibold">
-                      Razões técnicas/econômicas para o parcelamento por item (2.4.3)
+                      Expor os motivos das razões técnicas/econômicas para o parcelamento por item
                     </label>
-                    <p className="orientacoes mb-2">Expor os motivos (ex: elevados percentuais de exigência, especialização, etc.)</p>
                     <textarea 
                       id="razoesParcelamentoItem" 
                       className='border rounded-sm p-2 w-full'
                       rows={4}
                       value={formData.razoesParcelamentoItem}
                       onChange={(e) => setFormData({...formData, razoesParcelamentoItem: e.target.value})}
+                      placeholder="Ex: Elevados percentuais de exigência, especialização, etc."
                     />
                   </div>
                 )}
@@ -371,15 +347,15 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 {formData.tipoParcelamentoNaoEtp === 'lote' && (
                    <div className="my-4">
                     <label htmlFor="justificativaAgrupamentoLote" className="font-semibold">
-                      Justificativa para agrupamento em lote(s) (2.4.1)
+                      Expor os motivos das razões técnicas/econômicas para o parcelamento por grupo(s) 
                     </label>
-                    <p className="orientacoes mb-2">Apresentar justificativa técnica e/ou econômica (ex: prejuízo com pulverização, regionalização, economia de escala, etc.)</p>
                     <textarea 
                       id="justificativaAgrupamentoLote" 
                       className='border rounded-sm p-2 w-full'
                       rows={4}
                       value={formData.justificativaAgrupamentoLote}
                       onChange={(e) => setFormData({...formData, justificativaAgrupamentoLote: e.target.value})}
+                      placeholder="Ex: Prejuízo com pulverização, regionalização, economia de escala, etc."
                     />
                   </div>
                 )}
@@ -387,7 +363,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 {/* Opção Adicional "Lotes Espelhados" (aparece se ETP=NÃO) */}
                 <hr className="my-4"/>
                 <SelectComponent
-                  label="Haverá lotes espelhados / idênticos? (Add-on)"
+                  label="Haverá Grupo(s) espelhados?"
                   value={formData.usaLotesEspelhados}
                   onChange={(e) => setFormData({...formData, usaLotesEspelhados: e.target.value})}
                 >
@@ -399,15 +375,15 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 {formData.usaLotesEspelhados === 'sim' && (
                   <div className="my-4">
                     <label htmlFor="argumentosLotesEspelhados" className="font-semibold">
-                      Argumentos adicionais para o espelhamento (2.4.4)
+                      Argumentos adicionais para o espelhamento
                     </label>
-                    <p className="orientacoes mb-2">Acrescentar argumentos (ex: aproveitamento do mercado local, ampliação da competição, etc.)</p>
                     <textarea 
                       id="argumentosLotesEspelhados" 
                       className='border rounded-sm p-2 w-full'
                       rows={3}
                       value={formData.argumentosLotesEspelhados}
                       onChange={(e) => setFormData({...formData, argumentosLotesEspelhados: e.target.value})}
+                      placeholder="Ex: Aproveitamento do mercado local, ampliação da competição, etc."
                     />
                   </div>
                 )}
@@ -434,7 +410,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 </select>
               </div>
             </div>
-            {/* {formData.descricao === 'sim_com_numero_limitado_de_fornecedores' && (
+            {formData.descricao === 'sim_com_numero_limitado_de_fornecedores' && (
               <div className='flex flex-col space-y-1'>
                 <label htmlFor="quantas_empresas_serao_admitidas_consorcio" className="font-semibold">Quantas empresas serão admitidas em cada consórcio ?</label>
                 <input type="number" id='quantas_empresas_serao_admitidas_consorcio' className='border rounded-sm p-2 w-full' value={formData.numeroConsorciadas} onChange={(e)=>setFormData({...formData, numeroConsorciadas: e.target.value})} />
@@ -444,13 +420,10 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </p>
                 )}
               </div>
-            ) } */}
+            ) }
             {formData.descricao === 'sim_com_numero_limitado_de_fornecedores' && (
               <div className='flex flex-col space-y-1'>
-                <label htmlFor="justificativa" className="font-semibold">Justificativa</label>
-                <div>
-                  <span className="orientacoes">(expor justificativa técnica aprovada pela autoridade competente que viabilize a limitação de participantes no consórcio)</span>
-                </div>
+                <label htmlFor="justificativa" className="font-semibold">Expor justificativa técnica aprovada pela autoridade competente que viabilize a limitação de participantes no consórcio</label>
                 <input type="text" id='justificativa' className='border rounded-sm p-2' value={formData.justificativa} onChange={(e)=>setFormData({...formData, justificativa: e.target.value})} />
               </div>
             ) }
@@ -458,10 +431,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               <div className='flex flex-col space-y-1'>
                 <label htmlFor="nao_havendo_complexidade_objeto" className='font-semibold'>Justificar ausência de complexidade</label>
                 <div>
-                  <span className="orientacoes">Adaptar a redação caso haja apenas um dos critérios – vulto ou complexidade</span>
-                </div>
-                <div>
-                  <input type="text" id='nao_havendo_complexidade_objeto' className='border rounded-sm p-2 w-full' value={formData.nao_havendo_complexidade_objeto} onChange={(e)=>setFormData({...formData, nao_havendo_complexidade_objeto: e.target.value})} />
+                  <input type="text" id='nao_havendo_complexidade_objeto' className='border rounded-sm p-2 w-full' value={formData.nao_havendo_complexidade_objeto} onChange={(e)=>setFormData({...formData, nao_havendo_complexidade_objeto: e.target.value})} 
+                  placeholder="Ex: Baixa complexidade técnica ou operacional"/>
                 </div>
               </div>
             )}
@@ -470,9 +441,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 <label htmlFor="nao_havendo_grande_vulto_da_contratacao" className='font-semibold'>Justificar ausência de grande vulto</label>
                 <div>
                   <input type="text" id='nao_havendo_grande_vulto_da_contratacao' className='border rounded-sm p-2 w-full' value={formData.nao_havendo_grande_vulto_da_contratacao} onChange={(e)=>setFormData({...formData, nao_havendo_grande_vulto_da_contratacao: e.target.value})} />
-                </div>
-                <div>
-                  <span className="orientacoes">Caso haja outra justificativa cabível, acrescentar, como exemplo: baixa complexidade técnica ou operacional ou ausência de riscos financeiros consideráveis</span>
                 </div>
               </div>
             )}
@@ -496,7 +464,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           </div>
           {formData.vedacaoOuParticipacaoCooperativa === 'nao' && (
              <div className='mt-4'>
-                <label htmlFor="nao_havendo_grande_vulto_da_contratacao" className='font-semibold'>apresentar justificativa para a vedação de Cooperativa.</label>
+                <label htmlFor="nao_havendo_grande_vulto_da_contratacao" className='font-semibold'>Apresentar justificativa para a vedação de coperativa</label>
                 <div>
                   <input type="text" id='justificativa_vedacao' className='border rounded-sm p-2 w-full' value={formData.justificativa_vedacao} onChange={(e)=>setFormData({...formData,justificativa_vedacao: e.target.value})} />
                 </div>
@@ -526,9 +494,11 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           </div>
           {formData.vedacaoOuParticipacaoPessoasFisicas === 'nao' && (
              <div className='mt-4'>
-                <label htmlFor="justificativa_vedacao_pessoafisica" className='font-semibold'>apresentar justificativa para a vedação Pessoa Fisica.</label>
+                <label htmlFor="justificativa_vedacao_pessoafisica" className='font-semibold'>Apresentar justificativa para a vedação de Pessoa Fisica</label>
                 <div>
-                  <input type="text" id='justificativa_vedacao_pessoafisica' className='border rounded-sm p-2 w-full' value={formData.justificativa_vedacao_pessoafisica} onChange={(e)=>setFormData({...formData,justificativa_vedacao_pessoafisica: e.target.value})} />
+                  <input type="text" id='justificativa_vedacao_pessoafisica' className='border rounded-sm p-2 w-full' value={formData.justificativa_vedacao_pessoafisica} onChange={(e)=>setFormData({...formData,justificativa_vedacao_pessoafisica: e.target.value})} 
+
+                  />
                 </div>
               </div>
           )}
@@ -640,14 +610,14 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   <textarea id='perfeitaExecucaoservicos' className='border rounded-sm p-2 w-full' value={formData.perfeitaExecucaoservicos} onChange={(e)=>setFormData({...formData, perfeitaExecucaoservicos: e.target.value})} />
                 </div>
             </FieldsetContainer>
-            <FieldsetContainer titleLegend="3.2.7 O objeto será recebido">
+            <FieldsetContainer titleLegend="3.2.7 O objeto será recebido (deve ser incluído, se cabível)">
               <CollapsibleText title="Orientações para preenchimento">
                     <p className="orientacoes">
                       (A Lei nº 14.133/21 não trouxe prazo máximo de recebimento provisório ou definitivo. Desse modo, recomenda-se que o prazo seja dimensionado para que corresponda ao período razoável à checagem necessária, sem que traga um ônus excessivo que venha a afastar potenciais interessados)
                     </p>
               </CollapsibleText>
                 <div className='flex flex-col'>
-                <label htmlFor="objetoSeraRecebido" className="font-semibold">O objeto será recebido?</label>
+                <label htmlFor="objetoSeraRecebido" className="font-semibold mb-1">Haverá topico específico para recebimento do objeto?</label>
                 <select name="objetoSeraRecebido" id="objetoSeraRecebido" value={formData.objetoSeraRecebido} onChange={(e)=>setFormData({...formData,objetoSeraRecebido: e.target.value})} className="border rounded-sm p-2 flex-grow w-1/5">
                   <option value="">Selecione uma opção</option>
                   <option value="nao">Não</option>
