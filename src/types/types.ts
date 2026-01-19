@@ -78,6 +78,7 @@ export type FormDataCompleto = {
   texto_sim_existEtpOuInformacaoPresenteExtratoSigiloso: string;
   itemEtpEstudosTecnicos: string;
   texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso: string;
+  texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois: string;
   presenteContratacaoNecessidadeServicos: string;
   desempenhoAtribuicoesFuncionais: string;
   umaVezQueAtribuicoesFuncionais: string;
@@ -91,6 +92,7 @@ export type FormDataCompleto = {
   texto_sim_justificativa_quantitativo: string;
   itemEtpQuantitativo: string;
   texto_nao_justificativa_quantitativo: string;
+  texto_nao_justificativa_quantitativo_textoDois:string
   // 2.3.1
   existEtpOuInformacaoPresenteExtratoSigilosoItemDois_tres: string // Você já tinha este
   texto_sim_justificativa_solucao: string;

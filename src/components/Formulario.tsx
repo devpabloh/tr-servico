@@ -253,17 +253,16 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div>
                 <InputComponent
+                  label="Informar os critérios utilizados para definição dos quantitativos a serem contratados"
+                  onChange={(e)=> setFormData({...formData, fundamentadoEm: e.target.value})}
+                  value={formData.fundamentadoEm}
+                  
+                />
+                <InputComponent
                   label="Os quantitativos foram definidos em qual documento?"
                   placeholder="Ex: foram definidos no próprio termo de referência ou em outro documento (citar)"
                   onChange={(e)=> setFormData({...formData, osQuantitativosPrecistoDefinidosNoDocumento: e.target.value})}
                   value={formData.osQuantitativosPrecistoDefinidosNoDocumento}
-                  
-                />
-          
-                <InputComponent
-                  label="Informar os critérios utilizados para definição dos quantitativos a serem contratados"
-                  onChange={(e)=> setFormData({...formData, fundamentadoEm: e.target.value})}
-                  value={formData.fundamentadoEm}
                   
                 />
               </div>
@@ -723,38 +722,34 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 {formData.eEstudosTecnicosPreliminares === 'sim' ? (
                   <div>
                     <div className="flex flex-col mt-2">
-                      <label htmlFor="sera_admitida_indicacao" className="font-semibold">Na presente contratação, será admitida a indicão da(s) seguinte(s) marca(s), característica(s) ou modelo(s)?</label>
+                      <label htmlFor="sera_admitida_indicacao" className="font-semibold">Quais marca(s), característica(s) ou modelo(s) serão admitidas nessa contratação?</label>
                       <input type="text" id='sera_admitida_indicacao' className='border rounded-sm p-2 w-full' value={formData.sera_admitida_indicacao} onChange={(e)=>setFormData({...formData, sera_admitida_indicacao: e.target.value})} />
-                    </div>
-                    <div className="flex flex-col mt-2">
-                      <label htmlFor="numero_etp" className="font-semibold">Qual o tópico específico do Estudo Técnico Preliminar (ETP)?</label>
-                      <input type="number" id='numero_etp' className='border rounded-sm p-2 w-full' value={formData.numero_etp} onChange={(e)=>setFormData({...formData, numero_etp: e.target.value})} />
                     </div>
                   </div>
                 ):(
                   <div>
                     <div>
                       <div className="flex flex-col mt-2">
-                        <label htmlFor="marcas_ou_modelos_indicadas" className="font-semibold">Será admitida a indicação da(s) seguinte(s) narca(s) ou modelo(s)?</label>
+                        <label htmlFor="marcas_ou_modelos_indicadas" className="font-semibold">Quais marca(s) ou modelo(s) serão admitidos nessa contratação?</label>
                         <input type="text" id='marcas_ou_modelos_indicadas' className='border rounded-sm p-2 w-full' value={formData.marcas_ou_modelos_indicadas} onChange={(e)=>setFormData({...formData, marcas_ou_modelos_indicadas: e.target.value})} />
                       </div>
                       <div className="flex flex-col mt-2">
-                        <label htmlFor="devido_a" className="font-semibold">Devido a?</label>
-                        <p className="orientacoes py-1.5">Justificar com base no art. 41, inciso I, da Lei nº 14.133, de 2021. Por exemplo: necessidade de padronização do objeto, compatibilidade com plataformas e padrões já adotados pela Administração, marca ou modelo comercializados por mais de um fornecedor forem os únicos capazes de atender às necessidades do contratante, quando a descrição do objeto a ser licitado puder ser mais bem compreendida pela identificação de determinada marca ou determinado modelo aptos a servir apenas como referência.</p>
-                        <input type="text" id='devido_a' className='border rounded-sm p-2 w-full' value={formData.devido_a} onChange={(e)=>setFormData({...formData, devido_a: e.target.value})} />
+                        <label htmlFor="devido_a" className="font-semibold">Justificar com base no art. 41, inciso I, da Lei nº 14.133, de 2021</label>
+                        <input type="text" id='devido_a' className='border rounded-sm p-2 w-full' value={formData.devido_a} onChange={(e)=>setFormData({...formData, devido_a: e.target.value})} 
+                        placeholder="Ex: Necessidade de padronização do objeto, compatibilidade com plataformas e padrões já adotados pela Administração, marca ou modelo comercializados por mais de um fornecedor forem os únicos capazes de atender às necessidades do contratante, quando a descrição do objeto a ser licitado puder ser mais bem compreendida pela identificação de determinada marca ou determinado modelo aptos a servir apenas como referência."/>
                       </div>
                     </div>
                   </div>
                 )}
             </FieldsetContainer>
-            <FieldsetContainer titleLegend="3.4 Da vedação de utilização de marca / produto na execução do serviço" explicacao="(Se for o caso)">
+            <FieldsetContainer titleLegend="3.4 Vedação de utilização de marca / produto na execução do serviço" explicacao="(Se for o caso)">
             <CollapsibleText title="Orientações para preenchimento">
                 <p className="orientacoes">
                   Embora a contratação seja de serviços, é possível que a Administração vede o emprego de marca ou produto de bens empregados em sua execução, com base em experiência prévia, registrada em processo administrativo, quando restar comprovado que produtos adquiridos e utilizados anteriormente pela Administração não atendem a requisitos indispensáveis ao pleno adimplemento da obrigação contratual, conforme art. 41, III, da Lei nº 14.133, de 2021.
                 </p>
             </CollapsibleText>
                 <div className="flex flex-col mt-2">
-                  <label htmlFor="preveIndicacaoMarcasOuModelos" className="font-semibold">Prevê vedação a marcas ou modelos?</label>
+                  <label htmlFor="preveIndicacaoMarcasOuModelos" className="font-semibold">Prevê vedação de marca(s) ou modelo(s)?</label>
                   <select 
                     name="preveIndicacaoMarcasOuModelos"
                     id="preveIndicacaoMarcasOuModelos"  
@@ -863,12 +858,14 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
           <FieldsetContainer titleLegend="4.2 Classificação Orçamentária da Despesa">
             <CollapsibleText title="Orientações">
-              <p className="orientacoes">
-                No caso de Registro de Preços, apenas o elemento de despesa é necessário para a classificação.
-              </p>
+
+              <ul className="orientacoes">
+                <li>No caso de Registro de Preços, apenas o elemento de despesa é necessário para a classificação.</li>
+                <li>Se não for registro de preços, informar: Fonte,Unidade, Programa, Ação, Elemento de Despesa e Categoria Econômica</li>
+              </ul>
             </CollapsibleText>
             <TextAreaComBotao
-              label="Elemento de despesa"
+              label="Informar a classificação orçamentária da despesa no quadro abaixo"
               valorInicial={formData.elemento_de_despesa}
               onSalvar={(novoValor)=>{
                 setFormData({...formData, elemento_de_despesa: novoValor})
@@ -881,7 +878,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
           <FieldsetContainer titleLegend="4.3 Justificativa para aplicação ou não do benefício (LC Nº 123/2006)">
             <SelectComponent
-              label="justificativa para aplicação ou não do benefício previsto na Lei Complementar Nº 123/2006? (Quando for o caso)"
+              label="Haverá aplicação do benefício previsto na Lei Complementar Nº 123/2006?"
               onChange={(e)=> setFormData({...formData, aplicarCotaExclusiva: e.target.value})}
               value={formData.aplicarCotaExclusiva}
             >
@@ -912,7 +909,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 checked={formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_sem_enquadramento') || false}
                 onChange={()=> toggleOpcao("nao_aplicar_sem_enquadramento")} 
               />
-              <label htmlFor="nao_aplicar_sem_enquadramento">Não aplicar (Não há itens/lotes de valor igual ou inferior)</label>
+              <label htmlFor="nao_aplicar_sem_enquadramento">Não aplicar (Não há itens/lotes até R$ 80.000,00)</label>
              </div>
               <div className="flex gap-2">
                   <input 
@@ -991,7 +988,14 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               Indicação da Portaria SAD nº   2.293/2025. O órgão demandante pode alterar o modo de disputa conforme o caso concreto
             </p>
           </CollapsibleText>
-          <FieldsetContainer titleLegend="5.1 Modalidade, Critério, Regime e Disputa">
+          <FieldsetContainer titleLegend="5.1 Modalidade, Critério de Julgamento, Regime de Execução e Modo de Disputa">
+            <CollapsibleText title="Orientações">
+              <ul className="orientacoes">
+                <li>Este termo de referência regulamenta o rito procedimental comum das licitações a serem processadas pelo critério de julgamento de menor preço ou maior desconto, nas modalidades pregão e concorrência. Deste modo, não se aplica às concorrências com critério de julgamento de melhor técnica ou conteúdo artístico, de técnica e preço ou de maior retorno econômico.</li>
+                <li>Os serviços especiais caracterizam-se por sua alta heterogeneidade ou complexidade e, por isso, não podem ser definidos objetivamente segundo especificações usuais de mercado (art. 6º, XIV, da Lei 14.133/2021). Nesse caso, a modalidade de licitação aplicável é a concorrência (art. 6º, XXXVIII, da Lei 14.133/2021) e, se o critério de julgamento escolhido na fase preparatória for o menor preço ou maior desconto, o rito procedimental segue a minuta padrão ora apresentada. </li>
+                <li>Os serviços comuns, cujos padrões de desempenho e qualidade podem ser objetivamente definidos no edital por meio de especificações usuais de mercado (art. 6º,XIII, da Lei 14.133/2021), devem ser licitados obrigatoriamente mediante pregão, com os critérios de julgamento por menor preço ou maior desconto (art. 6º, XLI, da Lei 14.133/2021), seguindo o rito procedimental constante da minuta padrão ora  apresentada.</li>
+              </ul>
+            </CollapsibleText>
             <SelectComponent
               label="Modalidade de Licitação"
               id="modalidadeLicitacao"
@@ -1051,11 +1055,11 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             </SelectComponent>
 
             <InputComponent
-              label="Motivação para escolha dos parâmetros"
+              label="Apresentar motivação para escolha do modo de disputae forma de combinação dos parâmetros, conforme exigência do art. 18, inciso VIII, da Lei nº 14.133/21 c/c art. 17, inciso XIII, do Decreto Estadual nº 53.384/2022"
               id="motivacaoParametrosLicitacao"
               value={formData.motivacaoParametrosLicitacao}
               onChange={(e) => setFormData({...formData, motivacaoParametrosLicitacao: e.target.value})}
-              orientacoes="Motivação para escolha do modo de disputa e combinação dos parâmetros (Art. 18, VIII, Lei 14.133)"
+              
             />
 
             <SelectComponent
@@ -1080,6 +1084,14 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           </FieldsetContainer>
 
           <FieldsetContainer titleLegend="5.2 Proposta">
+            <CollapsibleText title="Orientações">
+              <ul className="orientacoes">
+                <li>O Decreto Estadual nº 53.384/2022 dispõe que a Administração Pública poderá prever, excepcionalmente, a apresentação de amostra, exame de conformidade ou prova de conceito, entre outros testes de interesse da Administração, de modo a comprovar a aderência do objeto ofertado pelos licitantes às especificações definidas no termo de referência.Assim, em caso de necessidade justificada da exigência de algum desses testes, a redação exposta neste item deve ser adaptada para contemplar as suas especificidades do caso concreto, garantindo sempre os requisitos básicos contidos no § 2º, do art. 20, do Decreto Estadual nº 53.384/2022. </li>
+                <li>
+                  Quanto ao momento da análise das amostras/exame de conformidade/prova de conceito/outros testes, o Decreto nº 53.384/2022 disciplina que poderá ser realizada durante o processamento da licitação, quando do julgamento das propostas; após a homologação, como condição para a assinatura do contrato; ou no período de vigência contratual ou da ata de registro de preços.
+                </li>
+              </ul>
+            </CollapsibleText>
             <InputComponent
               label="Prazo de Validade da Proposta (em dias)"
               id="prazoValidadePropostaDias"
@@ -1090,7 +1102,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             />
 
             <SelectComponent
-              label="Requer condição de proposta?"
+              label="Haverá algum documento adicional a ser apresentado junto com a proposta?"
               id="requerCondicaoProposta"
               value={formData.requerCondicaoProposta}
               onChange={(e) => setFormData({...formData, requerCondicaoProposta: e.target.value})}
@@ -1102,7 +1114,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             {formData.requerCondicaoProposta === 'sim' && (
               <>
                 <InputComponent
-                  label="Condições da proposta para os item(ns) ou lote(s)"
+                  label="Informar quais os item(ns) ou lote(s)"
                   id="condicoesProposta"
                   value={formData.requerCondicaoPropostaParaos}
                   onChange={(e) => setFormData({...formData, requerCondicaoPropostaParaos: e.target.value})}
@@ -1117,7 +1129,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             )}
 
             <SelectComponent
-              label="Requer garantia de proposta?"
+              label="Haverá garantia de proposta?"
               id="requeGarantiaProposta"
               value={formData.requeGarantiaProposta}
               onChange={(e) => setFormData({...formData, requeGarantiaProposta: e.target.value})}
@@ -1148,7 +1160,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             )}
 
             <SelectComponent
-              label="Requer amostra, teste de conformidade ou prova de conceito?"
+              label="Requer prova de conceito ou outros testes de interesse da Administração?"
               id="requeAmostra"
               value={formData.requeAmostra}
               onChange={(e) => setFormData({...formData, requeAmostra: e.target.value})}
@@ -1240,6 +1252,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           </FieldsetContainer>
 
           <FieldsetContainer titleLegend="5.3 Requisitos específicos de habilitação">
+          
             <FieldsetContainer titleLegend="Habilitação Jurídica" classNameFieldset="border-gray-400">
               <SelectComponent
                 label="Requer atendimento de lei especial?"
@@ -1254,19 +1267,19 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               {formData.habilitacaoJuridicaLeiEspecial === 'sim' && (
                 <div className="pl-4 border-l-4">
                    <InputComponent
-                    label="Atividade sujeita à autorização"
+                    label="Qual atividade sujeita à autorização?"
                     id="atividadeAutorizacaoJuridica"
                     value={formData.atividadeAutorizacaoJuridica}
                     onChange={(e) => setFormData({...formData, atividadeAutorizacaoJuridica: e.target.value})}
                   />
                    <InputComponent
-                    label="Órgão competente"
+                    label="Citar o órgão competente"
                     id="orgaoAutorizacaoJuridica"
                     value={formData.orgaoAutorizacaoJuridica}
                     onChange={(e) => setFormData({...formData, orgaoAutorizacaoJuridica: e.target.value})}
                   />
                    <InputComponent
-                    label="Nº da Lei/Decreto"
+                    label="Informar a legislação (Lei, Decreto, etc e os respectivos artigos)"
                     id="numeroLeiAutorizacaoJuridica"
                     value={formData.numeroLeiAutorizacaoJuridica}
                     onChange={(e) => setFormData({...formData, numeroLeiAutorizacaoJuridica: e.target.value})}
@@ -1276,6 +1289,15 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             </FieldsetContainer>
 
             <FieldsetContainer titleLegend="Qualificação Técnica" classNameFieldset="border-gray-400 mt-4">
+              <CollapsibleText title="Orientações para preenchimento">
+                <ul className="orientacoes list-disc list-inside">
+                  <li>De acordo com a natureza ou o vulto da contratação, o órgão licitante, mediante justificativa prévia neste TR, indicará o rol de documentos a serem apresentados dentre os previstos no art. 67 da Lei federal nº 14.133/2021. </li>
+                  <li>Não obstante, serão fornecidas no Edital padrão as redações mais comuns para os requisitos de qualificação técnica corriqueiros. A conveniência e oportunidade de solicitá-los devem ser analisadas pelo demandante no caso concreto, considerando, inclusive, a natureza do objeto contratual. </li>
+                  <li>
+                    Se for o caso de exigir a experiência prévia, limitá-la ao estritamente necessário, atentando, ainda, para a impossibilidade de requerer a comprovação de fornecimento prévio de objeto idêntico ao licitado.
+                  </li>
+                </ul>
+              </CollapsibleText>
               <SelectComponent
                 label="Requer registro em entidade profissional?"
                 id="requerRegistroEntidadeProfissional"
@@ -1289,6 +1311,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               {formData.requerRegistroEntidadeProfissional === 'sim' && (
                 <InputComponent
                   label="Nome completo da entidade profissional"
+                  orientacoes="Tal exigência só deve ser formulada quando, por determinação legal, o exercício de determinada atividade afeta ao objeto contratual esteja sujeita à fiscalização da entidade profissional competente, a ser indicada expressamente no dispositivo. Quando não existir determinação legal atrelando o exercício de determinada atividade ao correspondente conselho de fiscalização profissional, a exigência de registro ou inscrição, para fim de habilitação, torna-se inaplicável. Nessas situações, o referido subitem deve ser excluído."
                   id="nomeEntidadeProfissional"
                   value={formData.nomeEntidadeProfissional}
                   onChange={(e) => setFormData({...formData, nomeEntidadeProfissional: e.target.value})}
@@ -1375,12 +1398,12 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
             <FieldsetContainer titleLegend="Qualificação Econômico-Financeira" classNameFieldset="border-gray-400 mt-4">
               <SelectComponent
-                label="Exigir comprovação por:"
+                label="Haverá comprovação atraves do capital social ou patrimônio líquido?"
                 id="habilitacaoEconomicaPor"
                 value={formData.habilitacaoEconomicaPor}
                 onChange={(e) => setFormData({...formData, habilitacaoEconomicaPor: e.target.value})}
               >
-                <option value="">Nenhum</option>
+                <option value="">Não</option>
                 <option value="patrimonio_liquido">Patrimônio Líquido Mínimo</option>
                 <option value="capital_social">Capital Social Mínimo</option>
               </SelectComponent>
@@ -1449,18 +1472,18 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
       <FieldsetContainer titleLegend="6.1 Justificativa para utilização do SRP">
         <InputComponent
-          label="Inciso(s) do Decreto nº 54.700/2023"
+          label="Iinformar os inciso(s) do Decreto nº 54.700/2023"
           id="incisoDecreto54700"
           value={formData.incisoDecreto54700}
           onChange={(e) => setFormData({...formData, incisoDecreto54700: e.target.value})}
-          orientacoes="Ex: I, II"
+          orientacoes="Com o advento do Decreto nº 54.700/2023, as hipóteses de uso do registro de preços foram ampliadas, podendo encontrar seu fundamento em um ou mais incisos ou no próprio caput do art. 3º do citado diploma"
         />
         <InputComponent
-          label="Justificativa (visto que...)"
+          label="Apresentar argumentos que justifiquem a aplicação das disposições legais ao caso concreto"
           id="justificativaUsoSrp"
           value={formData.justificativaUsoSrp}
           onChange={(e) => setFormData({...formData, justificativaUsoSrp: e.target.value})}
-          orientacoes="Apresentar argumentos que justifiquem a aplicação."
+
         />
       </FieldsetContainer>
 
@@ -1475,12 +1498,12 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
       <FieldsetContainer titleLegend="6.3 Órgãos ou entidades participantes">
         <SelectComponent
-          label="Tipo de Participação"
+          label=""
           id="texto_orgaos_participantes_tipo"
           value={formData.texto_orgaos_participantes_tipo}
           onChange={(e) => setFormData({...formData, texto_orgaos_participantes_tipo: e.target.value})}
         >
-          <option value="">Selecione...</option>
+          <option value="">Selecione uma opção</option>
           <option value="unico">Órgão Único</option>
           <option value="multiplos">Múltiplos Órgãos</option>
           <option value="corporativa">Ata Corporativa (Padrão)</option>
@@ -1515,19 +1538,27 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
         />
       </FieldsetContainer>
       
-      <FieldsetContainer titleLegend="6.6 Contratação individual de itens em lotes">
+      <FieldsetContainer titleLegend="6.6 Contratação individual de itens registrados em grupo(s)">
+        <CollapsibleText title="Orientações">
+        <ul className="orientacoes list-disc ml-2">
+          <li>A possibilidade decontratação de itens individuais registrados em lotes é assegurada para qualquer ata de registro de preços conforme § 2º, do art. 13, do Decreto nº 54.700/2023, desde que, no momento do consumo/adesão/contratação, seja comprovada a sua vantajosidade, mediante prévia pesquisa de mercado ou demonstração de que o deságio obtido no valor do item é igual ou superior ao do lote globalmente considerado. </li>
+          <li>
+            Conforme § 3º do citado dispositivo legal, nos caso de atas de registro de preços corporativas e nas atas que centralizem demandas de unidades administrativas diversas vinculadas a mesma unidade gestora, a contratação de itens individuais registrados em lotes pode ser realizada dispensando a citada pesquisa de preço ou a demonstração de deságio de que trata o § 2º mencionado acima, desde que o edital preveja tal possibilidade com base em justificativas técnicas, econômicas ou gerenciais explicitadas no termo de referência. 
+          </li>
+        </ul>
+        </CollapsibleText>
         <SelectComponent
-          label="Permitir contratação individual de itens de lote?"
+          label="Permitir contratação individual de itens dentro do grupo?"
           id="permiteContratacaoIndividualItemLote"
           value={formData.permiteContratacaoIndividualItemLote}
           onChange={(e) => setFormData({...formData, permiteContratacaoIndividualItemLote: e.target.value})}
         >
-          <option value="nao">Não (Regra Padrão)</option>
-          <option value="sim">Sim (Dispensando vantajosidade)</option>
+          <option value="nao">Não </option>
+          <option value="sim">Sim </option>
         </SelectComponent>
         {formData.permiteContratacaoIndividualItemLote === 'sim' && (
           <InputComponent
-            label="Justificativa (técnica, econômica ou gerencial)"
+            label="Expor argumentos para a justificativa (técnica, econômica e/ou gerencial)"
             id="justificativaContratacaoIndividualItemLote"
             value={formData.justificativaContratacaoIndividualItemLote}
             onChange={(e) => setFormData({...formData, justificativaContratacaoIndividualItemLote: e.target.value})}
@@ -1537,7 +1568,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
       <FieldsetContainer titleLegend="6.7. PREVISÃO E JUSTIFICATIVA DA POSSIBILIDADE DE ADESÃO POR ÓRGÃOS E ENTIDADES NÃO PARTICIPANTES E CONDIÇÕES DE ADESÃO">
         <SelectComponent
-          label="Permite adesão de órgãos não participantes?"
+          label="Permite adesão de órgão(s) / entidade(s) não participantes?"
           id="permiteAdesaoOrgaosNaoParticipantes"
           value={formData.permiteAdesaoOrgaosNaoParticipantes}
           onChange={(e) => setFormData({...formData, permiteAdesaoOrgaosNaoParticipantes: e.target.value})}
@@ -1571,19 +1602,21 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               <option value="nao">Não (Definir limites manualmente)</option>
             </SelectComponent>
             
-            {formData.usarLimitesAdesaoPadronizados === 'sim' && (
+            {formData.usarLimitesAdesaoPadronizados === 'nao' && (
               <div className="pl-4 border-l-4">
                 <InputComponent
                   label="Limite por órgão (% dos quantitativos)"
+                  orientacoes="Observar o máximo legal permitido"
                   id="limiteAdesaoCadaOrgao"
                   type="number"
                   value={formData.limiteAdesaoCadaOrgao}
                   onChange={(e) => setFormData({...formData, limiteAdesaoCadaOrgao: e.target.value})}
                 />
                 <InputComponent
-                  label="Limite total (% dos quantitativos)"
+                  label="A soma de todas as adesões"
+                  orientacoes="Observar o máximo legal permitido"
                   id="limiteAdesaoTotal"
-                  type="number"
+                  type="text"
                   value={formData.limiteAdesaoTotal}
                   onChange={(e) => setFormData({...formData, limiteAdesaoTotal: e.target.value})}
                 />
@@ -1611,7 +1644,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           <option value="nao">Não (Usar texto personalizado)</option>
         </SelectComponent> */}
         <SelectComponent
-          label="Obrigações específicas da gerenciadora da ata na presente contratação?"
+          label="Há obrigações especificas além das padronizadas na minuta da ata de registro de preços(PGE)?"
           id="obrigacoesGerenciadoraIncluirExtras"
           value={formData.obrigacoesGerenciadoraIncluirExtras}
           onChange={(e) => setFormData({...formData, obrigacoesGerenciadoraIncluirExtras: e.target.value})}
@@ -1619,9 +1652,9 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           <option value="nao">Não</option>
           <option value="sim">Sim</option>
         </SelectComponent>
-        {formData.obrigacoesGerenciadoraIncluirExtras === 'nao' && (
+        {formData.obrigacoesGerenciadoraIncluirExtras === 'sim' && (
            <TextAreaComBotao
-              label="Obrigações Extras da Contratante"
+              label="Citar as obrigações"
               valorInicial={formData.obrigacoesGerenciadoraExtras}
               onSalvar={(novoValor)=>{
                 setFormData({...formData, obrigacoesGerenciadoraExtras: novoValor})
@@ -1631,7 +1664,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
       </FieldsetContainer>
 
       <FieldsetContainer titleLegend="6.10 Obrigações da Detentora da ATA">
-        <SelectComponent
+        {/* <SelectComponent
           label="Usar redação padronizada (PGE)?"
           id="obrigacoesDetentoraUsarPadrao"
           value={formData.obrigacoesDetentoraUsarPadrao}
@@ -1639,9 +1672,9 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
         >
           <option value="sim">Sim</option>
           <option value="nao">Não (Usar texto personalizado)</option>
-        </SelectComponent>
+        </SelectComponent> */}
         <SelectComponent
-          label="Incluir obrigações além das padronizadas?"
+          label="Há outras obrigações além das padronizadas na minuta da ata de registro de preços(PGE) ?"
           id="obrigacoesDetentoraIncluirExtras"
           value={formData.obrigacoesDetentoraIncluirExtras}
           onChange={(e) => setFormData({...formData, obrigacoesDetentoraIncluirExtras: e.target.value})}
@@ -1651,7 +1684,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
         </SelectComponent>
         {formData.obrigacoesDetentoraIncluirExtras === 'sim' && (
            <ListaDeStringsEditavel
-            titulo="Obrigações Extras da Detentora"
+            titulo="Citar as obrigações"
             placeholder="Descreva a obrigação"
             labelBotao="Adicionar Obrigação"
             itens={formData.obrigacoesDetentoraExtras}

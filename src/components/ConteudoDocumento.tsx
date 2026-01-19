@@ -191,7 +191,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
         
         {/* Este bloco 2.2 estava faltando */}
         <div className="mt-4">
-          <h3 className="text-lg font-bold pb-2 text-justify">2.2 Justificativa do quantitativo estimado</h3>
+          <h3 className="text-lg font-bold pb-2 text-justify">2.2 Justificativa do quantitativo estimado</h3>3.2.1 Os serviços descritos neste termo de referência serão prestados nos locais e horários indicados pela contratante
           <JustificativaQuantitativo
             formData={formData}
             isEditing={isEditing}
@@ -1329,7 +1329,7 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
     eEstudosTecnicosPreliminares,
     texto_sim_existEtpOuInformacaoPresenteExtratoSigiloso,
     texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso,
-    visandoAtenderNecessidades
+    texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois,
   } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1349,6 +1349,8 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
     queDeterminaDispositivoLegalCitado: formData.queDeterminaDispositivoLegalCitado || "____",
     eEstudosTecnicosPreliminares: formData.eEstudosTecnicosPreliminares || "____",
     visandoAtenderNecessidades: formData.visandoAtenderNecessidades || "______",
+    texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois: formData.texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois || "____",
+    texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso: formData.texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso || "____",
   };
 
   switch (eEstudosTecnicosPreliminares) {
@@ -1375,26 +1377,40 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
     }
       
     case 'nao': {
-      // 2. CORREÇÃO: Aplicar os placeholders para o modo "leitura"
-      const textoComValores = substituirPlaceholders(texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso, valores);
+      const textoUmComValores = substituirPlaceholders(texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso, valores);
+      const textoDoisComValores = substituirPlaceholders(texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois, valores);
 
       // 3. CORREÇÃO: Adicionar a lógica "if (isEditing)"
       if (isEditing) {
         return (
-          <EditableTextarea
+         <>
+             <EditableTextarea
             initialValue={texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso}
             onSave={(novoValor: string) => handleSave('texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso', novoValor)}
             className="text-lg"
             isEditing={isEditing}
           />
+          <EditableTextarea
+              initialValue={texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois}
+              onSave={(novoValor: string) => handleSave('texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois', novoValor)}
+              className="text-lg"
+              isEditing={isEditing}
+            />
+         </>
         );
       }
 
       return (
-        <p
-          className="text-lg p-2 rounded-md"
-          dangerouslySetInnerHTML={{ __html: textoComValores }}
-        />
+        <>
+          <p
+            className="text-lg p-2 rounded-md"
+            dangerouslySetInnerHTML={{ __html: textoUmComValores }}
+          />
+          <p
+            className="text-lg p-2 rounded-md text-blue-700"
+            dangerouslySetInnerHTML={{ __html: textoDoisComValores }}
+          />
+        </>
       );
     }
       
@@ -1585,7 +1601,8 @@ function JustificativaQuantitativo({ formData, setFormData, isEditing }: GerarTe
   const { 
     eEstudosTecnicosPreliminares,
     texto_sim_justificativa_quantitativo,
-    texto_nao_justificativa_quantitativo
+    texto_nao_justificativa_quantitativo,
+    texto_nao_justificativa_quantitativo_textoDois
   } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1601,6 +1618,7 @@ function JustificativaQuantitativo({ formData, setFormData, isEditing }: GerarTe
     // Para 'nao'
     osQuantitativosPrecistoDefinidosNoDocumento: formData.osQuantitativosPrecistoDefinidosNoDocumento || "________",
     fundamentadoEm: formData.fundamentadoEm || "________",
+    texto_nao_justificativa_quantitativo_textoDois: formData.texto_nao_justificativa_quantitativo_textoDois || "________",
   };
 
   switch (eEstudosTecnicosPreliminares) {
@@ -1624,19 +1642,34 @@ function JustificativaQuantitativo({ formData, setFormData, isEditing }: GerarTe
     }
     case 'nao': {
       const textoComValores = substituirPlaceholders(texto_nao_justificativa_quantitativo, valores);
+      const textoComValoresDois = substituirPlaceholders(texto_nao_justificativa_quantitativo_textoDois, valores);
       return (
         isEditing ? (
-          <EditableTextarea
-            initialValue={texto_nao_justificativa_quantitativo}
-            onSave={(novoValor: string) => handleSave('texto_nao_justificativa_quantitativo', novoValor)}
-            className="text-lg"
-            isEditing={isEditing}
-          />
+          <>
+            <EditableTextarea
+              initialValue={texto_nao_justificativa_quantitativo}
+              onSave={(novoValor: string) => handleSave('texto_nao_justificativa_quantitativo', novoValor)}
+              className="text-lg"
+              isEditing={isEditing}
+            />
+            <EditableTextarea
+              initialValue={texto_nao_justificativa_quantitativo_textoDois}
+              onSave={(novoValor: string) => handleSave('texto_nao_justificativa_quantitativo_textoDois', novoValor)}
+              className="text-lg"
+              isEditing={isEditing}
+            />
+          </>
         ) : (
-          <p
+          <>
+            <p
             className="text-lg p-2 rounded-md"
             dangerouslySetInnerHTML={{ __html: textoComValores }}
           />
+          <p
+            className="text-lg p-2 rounded-md text-blue-700"
+            dangerouslySetInnerHTML={{ __html: textoComValoresDois }}
+          />
+          </>
         )
       );
     }
@@ -1708,7 +1741,7 @@ function GerarTextoValorEstimado({formData, setFormData, isEditing}: GerarTextoP
 }
 
 function GerarTextoClassificacaoOrcamentaria({formData, setFormData, isEditing}: GerarTextoProps) {
-    const { classificacoesOrcamentarias, eRegistroPreco } = formData;
+    const { classificacoesOrcamentarias, eRegistroPreco, elemento_de_despesa } = formData;
     const isRP = eRegistroPreco === 'sim';
 
     const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1723,6 +1756,14 @@ function GerarTextoClassificacaoOrcamentaria({formData, setFormData, isEditing}:
               isEditing={isEditing}
               className="text-lg"
             />
+
+            {/* EXIBE O ELEMENTO DE DESPESA QUE VOCÊ DIGITOU NO FORMULÁRIO */}
+            {elemento_de_despesa && (
+              <p className="text-lg mt-2 whitespace-pre-wrap">
+                {elemento_de_despesa}
+              </p>
+            )}
+
             {classificacoesOrcamentarias.length > 0 ? (
                 <ul className="list-disc pl-8 mt-2 space-y-2 text-lg">
                     {classificacoesOrcamentarias.map(item => (
