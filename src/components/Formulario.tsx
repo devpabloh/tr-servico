@@ -129,9 +129,9 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                         onChange={(e) => setFormData({...formData, qualTipoContratacao: e.target.value})}
                       >
                         <option value="">Selecione uma opção</option>
-                        <option value="corporativo">Corporativo</option>
-                        <option value="simples">Simples</option>
-                        <option value="unificadoSaude">Unificado Saúde</option>
+                        <option value="corporativo">corporativo</option>
+                        <option value="simples">simples</option>
+                        <option value="unificadoSaude">unificado Saúde</option>
                       </select>
                     </div>
                   </div>

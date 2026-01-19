@@ -149,7 +149,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
             setFormData={setFormData}
           />
           {formData.qualTipoContratacao === 'corporativo' && (
-            <div className="mt-2 space-y-4">
+            <div className="mt-2 space-y-4 text-blue-500">
                 <GerarTextoItem1_2
                   formData={formData} 
                   setFormData={setFormData} 
@@ -1203,7 +1203,10 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
     nao_texto_e_registro_preco,
     paraContratacaoEventualPrestacaoServico,
     visandoAtenderNecessidades,
-    qualTipoContratacao
+    qualTipoContratacao,
+    sim_texto_registro_preco_simples,
+    sim_texto_registro_preco_unificado_saude,
+    sim_texto_registro_preco_corporativo,
   } = formData;
 
   const mapTipoContratacao: Record<string, string> = {
@@ -1216,13 +1219,23 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
   let templateKey: keyof FormDataCompleto;
 
   if (eRegistroPreco === 'sim') {
-    template = sim_texto_e_registro_preco;
-    templateKey = 'sim_texto_e_registro_preco';
+    if (qualTipoContratacao === 'simples') {
+      template = sim_texto_registro_preco_simples;
+      templateKey = 'sim_texto_registro_preco_simples';
+    } else if (qualTipoContratacao === 'unificadoSaude') {
+      template = sim_texto_registro_preco_unificado_saude;
+      templateKey = 'sim_texto_registro_preco_unificado_saude';
+    } else if (qualTipoContratacao === 'corporativo') {
+      template = sim_texto_registro_preco_corporativo;
+      templateKey = 'sim_texto_registro_preco_corporativo';
+    } else {
+      template = sim_texto_e_registro_preco;
+      templateKey = 'sim_texto_e_registro_preco';
+    }
   } else if (eRegistroPreco === 'nao') {
     template = nao_texto_e_registro_preco;
     templateKey = 'nao_texto_e_registro_preco';
   } else {
-    
     return <p className="text-gray-400 italic">Selecione se é Registro de Preços.</p>;
   }
 
