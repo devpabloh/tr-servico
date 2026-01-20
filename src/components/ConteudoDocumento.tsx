@@ -2643,6 +2643,8 @@ function GerarTextoIMR({formData, setFormData, isEditing}: GerarTextoProps) {
   const valores = {
     quadroIndicadoresImr: formData.quadroIndicadoresImr || "____",
     prazoAtesteMedicao: formData.prazoAtesteMedicao || "__",
+    prazoAtesteMedicaoExtenso: numeroPorExtenso(formData.prazoAtesteMedicao)
+    
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -2656,7 +2658,6 @@ function GerarTextoIMR({formData, setFormData, isEditing}: GerarTextoProps) {
     <div>
       {renderTexto(formData.texto_imr_p1, 'texto_imr_p1')}
       {renderTexto(formData.texto_imr_p2, 'texto_imr_p2')}
-      {renderTexto(formData.texto_imr_p3, 'texto_imr_p3')}
       {renderTexto(formData.texto_imr_p4, 'texto_imr_p4')}
     </div>
   );
