@@ -403,6 +403,7 @@ export type FormDataCompleto = {
   textoexistePrazoDeVigenciaAta: string;
 
   permiteContratacaoIndividualItemLote: string; 
+  permiteContratacaoIndividualItemLoteNao: string; 
   texto_contratacao_individual_item_lote: string;
   texto_contratacao_individual_item_lote_dois: string;
   justificativaContratacaoIndividualItemLote: string; 
@@ -453,7 +454,8 @@ export type FormDataCompleto = {
   
   prazoAssinaturaContratoDiasUteis: string; 
   texto_prazo_assinatura_contrato: string; 
-  texto_prazo_assinatura_contrato_srp: string; 
+  texto_prazo_assinatura_contrato_srp: string;
+  texto_prazo_assinatura_contrato_srp_textodois: string; 
 
   requerCartaSolidariedade: string; 
   texto_carta_solidariedade: string;
@@ -472,18 +474,19 @@ export type FormDataCompleto = {
   obrigacoesContratanteIncluirExtras: string; 
   texto_obrigacoes_contratante_padrao: string;
   texto_obrigacoes_contratante_extras: string;
-  obrigacoesContratanteExtras: string[]; 
+  obrigacoesContratanteExtras: string; 
   
   obrigacoesContratadaUsarPadrao: string; 
   obrigacoesContratadaIncluirExtras: string; 
   texto_obrigacoes_contratada_padrao: string;
   texto_obrigacoes_contratada_extras: string;
-  obrigacoesContratadaExtras: string[]; 
+  obrigacoesContratadaExtras: string; 
 
   preveGarantiaContratual: string; 
   
   texto_garantia_contratual_nao: string;
   texto_garantia_contratual_nao_2: string;
+  qualsubcontratacao: string;
   justificativaNaoGarantia: string; 
   
   texto_garantia_contratual_sim: string;
@@ -504,7 +507,9 @@ export type FormDataCompleto = {
   percentualLimiteSubcontratacaoTecnicos: string; 
 
   texto_subcontratacao_sim_fundamento: string;
+  texto_subcontratacao_sim_fundamento_texto_dois: string;
   fundamentoSubcontratacao: string; 
+  fundamentoSubcontratacaoTextoDois: string;
   condicoesSubcontratacao: string; 
   
   atoresGestaoContrato: AtorGestaoContrato[];
@@ -569,7 +574,8 @@ export type FormDataCompleto = {
   sancoesContratoExtras: string[]; 
 
   // 11. Demais Condições
-  demaisCondicoes: string; 
+  demaisCondicoes: string;
+  demaisCondicoesIncluir: string 
 
   // Anexos
   outrosAnexos: OutroAnexo[];

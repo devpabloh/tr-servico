@@ -15,12 +15,10 @@ interface EditableTextareaProps {
     setValue(initialValue)
   },[initialValue])
 
-  const handleBlur = () => {
-    onSave(value);
-  };
-
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
+    const newValue = e.target.value;
+    setValue(newValue);
+    onSave(newValue);
   };
 
   if (isEditing) {
@@ -28,7 +26,6 @@ interface EditableTextareaProps {
       <textarea
         value={value}
         onChange={handleChange}
-        onBlur={handleBlur}
         autoFocus
         className="w-full h-auto p-2 border border-blue-400 rounded-md font-serif text-lg"
         rows={4}

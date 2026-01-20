@@ -2233,7 +2233,9 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
     textoexistePrazoDeVigenciaAta: formData.textoexistePrazoDeVigenciaAta || "______",
     texto_adesao_sim: formData.texto_adesao_sim || "______",
     texto_adesao_sim_letra_a: formData.texto_adesao_sim_letra_a || "______",
-    texto_adesao_sim_letra_b: formData.texto_adesao_sim_letra_b || "______"
+    texto_adesao_sim_letra_b: formData.texto_adesao_sim_letra_b || "______",
+    permiteContratacaoIndividualItemLoteNao: formData.permiteContratacaoIndividualItemLote,
+    texto_prazo_assinatura_contrato_srp_textodois: formData.texto_prazo_assinatura_contrato_srp_textodois
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -2296,6 +2298,13 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
       {renderTexto(formData.textoexistePrazoDeVigenciaAta, 'textoexistePrazoDeVigenciaAta')}
       
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.6 Possibilidade de contratação individual de itens registrados em lotes</h3>
+
+      {formData.permiteContratacaoIndividualItemLote === 'nao' && (
+        <>
+        {renderTexto(formData.permiteContratacaoIndividualItemLoteNao, 'permiteContratacaoIndividualItemLoteNao')}
+        </>
+      )}
+
       {formData.permiteContratacaoIndividualItemLote === 'sim' && (
         <>
         {renderTexto(formData.texto_contratacao_individual_item_lote, 'texto_contratacao_individual_item_lote')}
@@ -2368,7 +2377,7 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
     parcelasAcessoriasSubcontratacao: formData.parcelasAcessoriasSubcontratacao || "____",
     percentualLimiteSubcontratacaoAcessorias: formData.percentualLimiteSubcontratacaoAcessorias || "__",
     aspectosTecnicosSubcontratacao: formData.aspectosTecnicosSubcontratacao || "____",
-    percentualLimiteSubcontratacaoTecnicos: formData.percentualLimiteSubcontratacaoTecnicos || "__",
+    percentualLimiteSubcontratacaoTecnicos: numeroPorExtenso(formData.percentualLimiteSubcontratacaoTecnicos )|| "__",
     fundamentoSubcontratacao: formData.fundamentoSubcontratacao || "____",
     meioComunicacaoOficial: formData.meioComunicacaoOficial || "____",
     enderecoEntregaNotaFiscal: formData.enderecoEntregaNotaFiscal || "____",
@@ -2376,6 +2385,10 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
     setorFiscalizacaoContrato: formData.setorFiscalizacaoContrato || "____",
     texto_garantia_contratual_sim_2: formData.texto_garantia_contratual_sim_2 || "____",
     percentualLimiteSubcontratacaoAcessoriasEntenso: numeroPorExtenso(formData.percentualLimiteSubcontratacaoAcessorias),
+    texto_prazo_assinatura_contrato: formData.texto_prazo_assinatura_contrato,
+    obrigacoesContratanteIncluirExtras: formData.obrigacoesContratanteIncluirExtras,
+    texto_subcontratacao_sim_fundamento_texto_dois: formData.texto_subcontratacao_sim_fundamento_texto_dois,
+    condicoesSubcontratacao: formData.condicoesSubcontratacao
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -2397,13 +2410,17 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
     );
   };
 
-  const renderLista = (itens: string[]) => (
-    <ol type="a" className="list-outside list-[upper-alpha] pl-8 text-lg space-y-2">
-      {itens.map((item, index) => (
-        <li key={index} className="text-gray-800 text-justify">{item}</li>
-      ))}
-    </ol>
-  );
+  const renderLista = (itens: string[] | string) => {
+    const texto = Array.isArray(itens) ? itens.join('\n') : itens;
+
+    if (!texto) return null;
+
+    return (
+      <p className="text-lg p-2 whitespace-pre-wrap text-justify text-gray-800">
+        {texto}
+      </p>
+    );
+  };
 
   return (
     <div>
@@ -2420,9 +2437,11 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
       )}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.2 Prazo para Assinatura do Contrato</h3>
-      {formData.eRegistroPreco === 'sim' ? 
-        renderTexto(formData.texto_prazo_assinatura_contrato_srp, 'texto_prazo_assinatura_contrato_srp') :
-        renderTexto(formData.texto_prazo_assinatura_contrato, 'texto_prazo_assinatura_contrato')
+      {formData.eRegistroPreco === 'sim' && 
+        <>
+          {renderTexto(formData.texto_prazo_assinatura_contrato_srp, 'texto_prazo_assinatura_contrato_srp')} 
+          {renderTexto(formData.texto_prazo_assinatura_contrato_srp_textodois, 'texto_prazo_assinatura_contrato_srp_textodois')}
+        </>
       }
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.3 Requisitos da Contratação</h3>
@@ -2448,17 +2467,23 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
 )}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.4 Obrigações da Contratante</h3>
-      {renderTexto(formData.texto_obrigacoes_contratante_padrao, 'texto_obrigacoes_contratante_padrao')}
-      {formData.obrigacoesContratanteIncluirExtras === 'sim' && (
+      
+      {formData.obrigacoesContratanteUsarPadrao === 'nao' && (
         <>
           {renderTexto(formData.texto_obrigacoes_contratante_extras, 'texto_obrigacoes_contratante_extras')}
-          {renderLista(formData.obrigacoesContratanteExtras)}
+          {renderLista(formData.obrigacoesContratanteIncluirExtras)}
         </>
       )}
 
+      {formData.obrigacoesContratanteUsarPadrao === 'sim' && (
+        renderTexto(formData.texto_obrigacoes_contratante_padrao, 'texto_obrigacoes_contratante_padrao')
+      )}
+
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.5 Obrigações da Contratada</h3>
-      {renderTexto(formData.texto_obrigacoes_contratada_padrao, 'texto_obrigacoes_contratada_padrao')}
-      {formData.obrigacoesContratadaIncluirExtras === 'sim' && (
+      
+      {formData.obrigacoesContratadaIncluirExtras === 'sim' ? (
+        renderTexto(formData.texto_obrigacoes_contratada_padrao, 'texto_obrigacoes_contratada_padrao')
+      ):(
         <>
           {renderTexto(formData.texto_obrigacoes_contratada_extras, 'texto_obrigacoes_contratada_extras')}
           {renderLista(formData.obrigacoesContratadaExtras)}
@@ -2484,10 +2509,30 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
       )}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.7 Da permissão ou vedação da subcontratação</h3>
+
       {formData.permiteSubcontratacao === 'nao' && renderTexto(formData.texto_subcontratacao_nao, 'texto_subcontratacao_nao')}
-      {formData.permiteSubcontratacao === 'sim_acessorias' && renderTexto(formData.texto_subcontratacao_sim_acessorias, 'texto_subcontratacao_sim_acessorias')}
-      {formData.permiteSubcontratacao === 'sim_tecnicos' && renderTexto(formData.texto_subcontratacao_sim_tecnicos, 'texto_subcontratacao_sim_tecnicos')}
-      {formData.permiteSubcontratacao !== 'nao' && renderTexto(formData.texto_subcontratacao_sim_fundamento, 'texto_subcontratacao_sim_fundamento')}
+
+      {formData.qualsubcontratacao === 'sim_acessorias' && renderTexto(formData.texto_subcontratacao_sim_acessorias, 'texto_subcontratacao_sim_acessorias')}
+      
+      {formData.qualsubcontratacao === 'sim_tecnicos' && renderTexto(formData.texto_subcontratacao_sim_tecnicos, 'texto_subcontratacao_sim_tecnicos')}
+      
+      {formData.qualsubcontratacao === 'ambas_tecnicos_e_acessorias' && (
+        <>
+          {renderTexto(formData.texto_subcontratacao_sim_acessorias, 'texto_subcontratacao_sim_acessorias')}
+          {renderTexto(formData.texto_subcontratacao_sim_tecnicos, 'texto_subcontratacao_sim_tecnicos')}
+        </>
+      )}
+
+      {formData.permiteSubcontratacao === 'sim' && (
+        <>
+          {renderTexto(formData.texto_subcontratacao_sim_fundamento, 'texto_subcontratacao_sim_fundamento')}
+          {renderTexto(formData.texto_subcontratacao_sim_fundamento_texto_dois, 'texto_subcontratacao_sim_fundamento_texto_dois')}
+        </>
+      )}
+
+
+      {/* {formData.permiteSubcontratacao !== 'nao' && renderTexto(formData.texto_subcontratacao_sim_fundamento, 'texto_subcontratacao_sim_fundamento')} */}
+      
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.8 Modelo de Gestão do Contrato</h3>
       {renderTexto(formData.texto_gestao_contrato_p1, 'texto_gestao_contrato_p1')}
@@ -2668,7 +2713,7 @@ function GerarTextoSancoes({formData, setFormData, isEditing}: GerarTextoProps) 
 
 // --- SEÇÃO 11: DEMAIS CONDIÇÕES E ANEXOS ---
 function GerarTextoDemaisCondicoes({formData, setFormData, isEditing}: GerarTextoProps) {
-  const { demaisCondicoes, outrosAnexos } = formData;
+  const { demaisCondicoes,demaisCondicoesIncluir, outrosAnexos } = formData;
 
   const handleSave = (novoValor: string) => {
     setFormData((prev) => ({ ...prev, demaisCondicoes: novoValor }));
@@ -2676,15 +2721,14 @@ function GerarTextoDemaisCondicoes({formData, setFormData, isEditing}: GerarText
 
   return (
     <div>
-       <h3 className="text-lg font-bold pb-2 text-justify">11.1 Condições Gerais</h3>
        {isEditing ? (
          <EditableTextarea initialValue={demaisCondicoes} onSave={handleSave} isEditing={isEditing} className="text-lg" />
        ) : (
-         demaisCondicoes ? <p className="text-lg p-2 rounded-md whitespace-pre-wrap">{demaisCondicoes}</p> : <p className="text-gray-400 italic">Nenhuma condição adicional informada.</p>
+         demaisCondicoesIncluir === 'sim' && <p className="text-lg p-2 rounded-md whitespace-pre-wrap">{demaisCondicoes}</p>
        )}
 
-       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">11.2 Anexos</h3>
-       {outrosAnexos.length > 0 ? (
+       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">12 Anexos</h3>
+       {outrosAnexos.length > 0 && (
          <ul className="list-disc pl-8 text-lg space-y-2">
            {outrosAnexos.map(anexo => (
              <li key={anexo.id}>
@@ -2692,8 +2736,6 @@ function GerarTextoDemaisCondicoes({formData, setFormData, isEditing}: GerarText
              </li>
            ))}
          </ul>
-       ) : (
-         <p className="text-gray-400 italic">Nenhum anexo adicional.</p>
        )}
     </div>
   );

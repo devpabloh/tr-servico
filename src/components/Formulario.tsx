@@ -31,6 +31,11 @@ function TextAreaComBotao({ valorInicial, onSalvar, label, placeholder }: TextAr
     setTexto(valorInicial ?? "");
   }, [valorInicial]);
 
+  const handleChange = (val: string) => {
+    setTexto(val);
+    onSalvar(val);
+  };
+
   return (
     <div className="flex flex-col mt-2">
       <label className="font-semibold mb-2">{label}</label>
@@ -39,15 +44,8 @@ function TextAreaComBotao({ valorInicial, onSalvar, label, placeholder }: TextAr
         rows={8}
         placeholder={placeholder}
         value={texto}
-        onChange={(e) => setTexto(e.target.value)}
+        onChange={(e) => handleChange(e.target.value)}
       />
-      <button
-        type="button"
-        onClick={() => onSalvar(texto)}
-        className="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 w-fit"
-      >
-        Atualizar Especificações no Documento
-      </button>
     </div>
   );
 }
@@ -1867,44 +1865,49 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 </FieldsetContainer>
 
   <FieldsetContainer titleLegend="7.4 Obrigações da Contratante">
-    
-     <TextAreaComBotao
-        label="Obrigações Extras da Contratante"
-        valorInicial={formData.obrigacoesContratanteUsarPadrao}
-        onSalvar={(novoValor)=>{
-          setFormData({...formData, obrigacoesContratanteUsarPadrao: novoValor})
-        }}
-      />
-  </FieldsetContainer>
-
-  <FieldsetContainer titleLegend="7.5 Obrigações da Contratada">
     <SelectComponent
       label="Usar redação padronizada?"
-      id="obrigacoesContratadaUsarPadrao"
-      value={formData.obrigacoesContratadaUsarPadrao}
-      onChange={(e) => setFormData({...formData, obrigacoesContratadaUsarPadrao: e.target.value})}
+      id="obrigacoesContratantedaUsarPadrao"
+      value={formData.obrigacoesContratanteUsarPadrao}
+      onChange={(e) => setFormData({...formData, obrigacoesContratanteUsarPadrao: e.target.value})}
     >
+      <option value="">Selecione uma opção</option>
       <option value="sim">Sim</option>
       <option value="nao">Não (Usar texto personalizado)</option>
     </SelectComponent>
+    
+    {formData.obrigacoesContratanteUsarPadrao === 'nao' && (
+      <TextAreaComBotao
+        label="Obrigações Extras da Contratante"
+        valorInicial={formData.obrigacoesContratanteIncluirExtras}
+        onSalvar={(novoValor)=>{
+          setFormData({...formData, obrigacoesContratanteIncluirExtras: novoValor})
+        }}
+      />
+    )}
+  </FieldsetContainer>
+
+  <FieldsetContainer titleLegend="7.5 Obrigações da Contratada">
 
     <SelectComponent
-      label="Incluir obrigações extras (além das padronizadas)?"
+      label="Usar redação padronizada?"
       id="obrigacoesContratadaIncluirExtras"
       value={formData.obrigacoesContratadaIncluirExtras}
       onChange={(e) => setFormData({...formData, obrigacoesContratadaIncluirExtras: e.target.value})}
     >
+      <option value="">Selecone uma opção</option>
       <option value="nao">Não</option>
       <option value="sim">Sim</option>
     </SelectComponent>
 
-    {formData.obrigacoesContratadaIncluirExtras === 'sim' && (
-       <ListaDeStringsEditavel
-        titulo="Obrigações Extras da Contratada"
+    {formData.obrigacoesContratadaIncluirExtras === 'nao' && (
+      <TextAreaComBotao
+        label="Obrigações Extras da Contratada"
+        valorInicial={formData.obrigacoesContratadaExtras}
+        onSalvar={(novoValor)=>{
+          setFormData({...formData, obrigacoesContratadaExtras: novoValor})
+        }}
         placeholder="Descreva a obrigação"
-        labelBotao="Adicionar Obrigação"
-        itens={formData.obrigacoesContratadaExtras}
-        onItensChange={(novosItens) => setFormData(prev => ({ ...prev, obrigacoesContratadaExtras: novosItens }))}
       />
     )}
 
@@ -1949,10 +1952,24 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
       value={formData.permiteSubcontratacao}
       onChange={(e) => setFormData({...formData, permiteSubcontratacao: e.target.value})}
     >
+      <option value="">Selecione uma opção</option>
       <option value="nao">Não</option>
-      <option value="sim_acessorias">Sim, parcelas acessórias</option>
-      <option value="sim_tecnicos">Sim, de aspectos técnicos específicos</option>
+      <option value="sim">Sim</option>
     </SelectComponent>
+
+    {formData.permiteSubcontratacao === 'sim' && (
+      <SelectComponent
+        label="Qual será a subcontratação?"
+        id="qualsubcontratacao"
+        value={formData.qualsubcontratacao}
+        onChange={(e) => setFormData({...formData, qualsubcontratacao: e.target.value})}
+      >
+        <option value="">Selecione uma opção</option>
+        <option value="sim_acessorias">Parcelas acessórias</option>
+        <option value="sim_tecnicos">Aspectos técnicos específicos</option>
+        <option value="ambas_tecnicos_e_acessorias">Ambas opções</option>
+      </SelectComponent>
+    )}
 
     {formData.permiteSubcontratacao === 'nao' && (
        <InputComponent
@@ -1962,7 +1979,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
         onChange={(e) => setFormData({...formData, justificativaNaoSubcontratacao: e.target.value})}
       />
     )}
-    {formData.permiteSubcontratacao === 'sim_acessorias' && (
+    {formData.qualsubcontratacao === 'sim_acessorias' && (
       <div className="pl-4 border-l-4">
         <InputComponent
           label="Parcelas Acessórias (atividades)"
@@ -1979,7 +1996,39 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
         />
       </div>
     )}
-    {formData.permiteSubcontratacao === 'sim_tecnicos' && (
+    {formData.qualsubcontratacao === 'ambas_tecnicos_e_acessorias' && (
+      <div>
+        <InputComponent
+          label="Aspectos Técnicos Específicos"
+          id="aspectosTecnicosSubcontratacao"
+          value={formData.aspectosTecnicosSubcontratacao}
+          onChange={(e) => setFormData({...formData, aspectosTecnicosSubcontratacao: e.target.value})}
+        />
+        <InputComponent
+          label="Percentual Limite (Máx 25%)"
+          id="percentualLimiteSubcontratacaoTecnicos"
+          type="number"
+          max="25"
+          value={formData.percentualLimiteSubcontratacaoTecnicos}
+          onChange={(e) => setFormData({...formData, percentualLimiteSubcontratacaoTecnicos: e.target.value})}
+        />
+         <InputComponent
+          label="Parcelas Acessórias (atividades)"
+          id="parcelasAcessoriasSubcontratacao"
+          value={formData.parcelasAcessoriasSubcontratacao}
+          onChange={(e) => setFormData({...formData, parcelasAcessoriasSubcontratacao: e.target.value})}
+        />
+        <InputComponent
+          label="Percentual Limite (Ex: 30%)"
+          id="percentualLimiteSubcontratacaoAcessorias"
+          type="number"
+          value={formData.percentualLimiteSubcontratacaoAcessorias}
+          onChange={(e) => setFormData({...formData, percentualLimiteSubcontratacaoAcessorias: e.target.value})}
+        />
+      </div>
+    )}
+
+    {formData.qualsubcontratacao === 'sim_tecnicos' && (
       <div className="pl-4 border-l-4">
         <InputComponent
           label="Aspectos Técnicos Específicos"
@@ -2194,15 +2243,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           )}
 
           <FieldsetContainer titleLegend="10.3 Sanções (Execução do Contrato)" classNameFieldset="border-gray-400 mt-4">
-            <SelectComponent
-              label="Incluir sanções extras (além das padronizadas)?"
-              id="sancoesContratoIncluirExtras"
-              value={formData.sancoesContratoIncluirExtras}
-              onChange={(e) => setFormData({...formData, sancoesContratoIncluirExtras: e.target.value})}
-            >
-              <option value="nao">Não</option>
-              <option value="sim">Sim</option>
-            </SelectComponent>
             {formData.sancoesContratoIncluirExtras === 'sim' && (
               <ListaDeStringsEditavel
                 titulo="Sanções Específicas do Contrato"
@@ -2215,14 +2255,29 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           </FieldsetContainer>
         </FieldsetContainer>
         <FieldsetContainer titleLegend="11. DAS DEMAIS CONDIÇÕES E ANEXOS">
-          <InputComponent
+          <SelectComponent
+            label="Haverá demais condições necessárias para à Execução do serviço?"
+            id="demaisCondicoesIncluir"
+            value={formData.demaisCondicoesIncluir}
+            onChange={(e) => setFormData({...formData, demaisCondicoesIncluir: e.target.value})}
+          >
+            <option value="">Selecione uma opção</option>
+            <option value="sim">sim</option>
+            <option value="nao">não</option>
+          </SelectComponent>
+          {formData.demaisCondicoesIncluir === 'sim' && (
+            <InputComponent
             label="Demais condições necessárias"
             id="demaisCondicoes"
             value={formData.demaisCondicoes}
             onChange={(e) => setFormData({...formData, demaisCondicoes: e.target.value})}
             orientacoes="Incluir cláusulas sobre direitos autorais, sigilo, segurança de dados, etc."
           />
-          
+          )}
+        </FieldsetContainer>
+        <FieldsetContainer
+          titleLegend="Anexos Adicionais"
+        >
           <GestaoOutrosAnexos
             anexos={formData.outrosAnexos}
             setFormData={setFormData}
