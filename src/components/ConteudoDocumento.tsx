@@ -1941,7 +1941,27 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
     horarioApresentacaoAmostra: formData.horarioApresentacaoAmostra || "____",
     setorResponsavelAmostra: formData.setorResponsavelAmostra || "____",
     texto_dois_amostra_fase_julgamento: formData.texto_dois_amostra_fase_julgamento || "____",
-    texto_tres_amostra_fase_julgamento: formData.texto_tres_amostra_fase_julgamento || "____"
+    texto_tres_amostra_fase_julgamento: formData.texto_tres_amostra_fase_julgamento || "____",
+    prova_conceito_redacao_para_todos_os_casos_texto: formData.prova_conceito_redacao_para_todos_os_casos_texto,
+    prova_conceito_redacao_para_todos_os_casos_texto_dois: formData.prova_conceito_redacao_para_todos_os_casos_texto_dois,
+    prova_conceito_redacao_para_todos_os_casos_texto_tres: formData.prova_conceito_redacao_para_todos_os_casos_texto_tres,
+    prova_conceito_redacao_para_todos_os_casos_texto_quatro: formData.prova_conceito_redacao_para_todos_os_casos_texto_quatro,
+    prova_conceito_redacao_para_todos_os_casos_texto_quinto: formData.prova_conceito_redacao_para_todos_os_casos_texto_quinto,
+    prova_conceito_redacao_para_todos_os_casos_texto_seis: formData.prova_conceito_redacao_para_todos_os_casos_texto_seis,
+    prova_conceito_redacao_para_todos_os_casos_texto_sete: formData.prova_conceito_redacao_para_todos_os_casos_texto_sete,
+    prova_conceito_redacao_para_todos_os_casos_texto_oito: formData.prova_conceito_redacao_para_todos_os_casos_texto_oito,
+    prova_conceito_redacao_para_todos_os_casos_texto_nove: formData.prova_conceito_redacao_para_todos_os_casos_texto_nove,
+    prova_conceito_redacao_para_todos_os_casos_texto_dez: formData.prova_conceito_redacao_para_todos_os_casos_texto_dez,
+    prova_conceito_redacao_para_todos_os_casos_texto_onze: formData.prova_conceito_redacao_para_todos_os_casos_texto_onze,
+    prova_conceito_redacao_para_todos_os_casos_texto_doze: formData.prova_conceito_redacao_para_todos_os_casos_texto_doze,
+    prova_conceito_redacao_para_todos_os_casos_texto_treze: formData.prova_conceito_redacao_para_todos_os_casos_texto_treze,
+horarioTerminoApresentacaoAmostra: formData.horarioTerminoApresentacaoAmostra,
+  telefoneParaAgendamento: formData.telefoneParaAgendamento,
+  emailParaAgendamento: formData.emailParaAgendamento,
+  aProvaDeConceito: formData.aProvaDeConceito,
+  duracaoProvaConceitoDiasUteis: formData.duracaoProvaConceitoDiasUteis,
+  duracaoProvaConceitoDiasUteisExtenso: numeroPorExtenso(formData.duracaoProvaConceitoDiasUteis || ''),
+  
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -2014,11 +2034,29 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
 
           {formData.faseApresentacaoAmostra === 'vigencia_contratual' && (
             <>
-            
-              
-            
+            {renderTexto(formData.texto_amostra_fase_contratual, 'texto_amostra_fase_contratual')}
             </>
           )}
+
+          {formData.faseApresentacaoAmostra === 'apos_homologacao' && (
+            <>
+            {renderTexto(formData.texto_amostra_fase_condicao_assinatura, 'texto_amostra_fase_condicao_assinatura')}
+            </>
+          )}
+
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto, 'prova_conceito_redacao_para_todos_os_casos_texto')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_dois, 'prova_conceito_redacao_para_todos_os_casos_texto_dois')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_tres, 'prova_conceito_redacao_para_todos_os_casos_texto_tres')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_quatro, 'prova_conceito_redacao_para_todos_os_casos_texto_quatro')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_quinto, 'prova_conceito_redacao_para_todos_os_casos_texto_quinto')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_seis, 'prova_conceito_redacao_para_todos_os_casos_texto_seis')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_sete, 'prova_conceito_redacao_para_todos_os_casos_texto_sete')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_oito, 'prova_conceito_redacao_para_todos_os_casos_texto_oito')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_nove, 'prova_conceito_redacao_para_todos_os_casos_texto_nove')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_dez, 'prova_conceito_redacao_para_todos_os_casos_texto_dez')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_onze, 'prova_conceito_redacao_para_todos_os_casos_texto_onze')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_doze, 'prova_conceito_redacao_para_todos_os_casos_texto_doze')}
+          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_treze, 'prova_conceito_redacao_para_todos_os_casos_texto_treze')}
 
           {/* Renderiza a lista de critérios */}
           {formData.descricaoTesteAmostra.length > 0 ? (

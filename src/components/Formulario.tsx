@@ -1195,18 +1195,28 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   )
                 }
 
-                {formData.tipoAmostra === 'outro' && (
-                  <InputComponent
-                    label="Especifique o tipo de teste"
-                    id="outroTipoAmostra"
-                    value={formData.outroTipoAmostra}
-                    onChange={(e) => setFormData({...formData, outroTipoAmostra: e.target.value})}
+                {
+                  formData.faseApresentacaoAmostra === 'vigencia_contratual' && (
+                    <InputComponent
+                      label="Prazo para apresentação das amostras (dias úteis)"
+                      id="prazoAmostraDiasUteis"
+                      value={formData.prazoAmostraDiasUteis}
+                      onChange={(e) => setFormData({...formData, prazoAmostraDiasUteis: e.target.value})}
                   />
-                )}
+                  )
+                }
 
-                
-
-                
+                {
+                  formData.faseApresentacaoAmostra === 'apos_homologacao' && (
+                    <InputComponent
+                      label="Prazo para apresentação das amostras (dias úteis)"
+                      id="prazoAmostraDiasUteis"
+                      type="number"
+                      value={formData.prazoAmostraDiasUteis}
+                      onChange={(e) => setFormData({...formData, prazoAmostraDiasUteis: e.target.value})}
+                    />
+                  )
+                }
 
                 <InputComponent
                   label="Endereço para apresentação"
@@ -1215,25 +1225,58 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   onChange={(e) => setFormData({...formData, enderecoApresentacaoAmostra: e.target.value})}
                 />
                  <InputComponent
-                  label="Horário para apresentação"
+                  label="Horário início da apresentação"
                   id="horarioApresentacaoAmostra"
+                  type="time"
                   value={formData.horarioApresentacaoAmostra}
                   onChange={(e) => setFormData({...formData, horarioApresentacaoAmostra: e.target.value})}
                 />
                 <InputComponent
-                  label="Setor responsável pela análise"
-                  id="setorResponsavelAmostra"
-                  value={formData.setorResponsavelAmostra}
-                  onChange={(e) => setFormData({...formData, setorResponsavelAmostra: e.target.value})}
+                  label="Horário termino da apresentação"
+                  id="horarioTerminoApresentacaoAmostra"
+                  type="time"
+                  value={formData.horarioTerminoApresentacaoAmostra}
+                  onChange={(e) => setFormData({...formData, horarioTerminoApresentacaoAmostra: e.target.value})}
                 />
 
-                <ListaDeStringsEditavel
-                  titulo="Critérios / Descrição dos Testes"
-                  placeholder="Descreva um critério ou etapa do teste"
-                  labelBotao="Adicionar Critério"
-                  itens={formData.descricaoTesteAmostra}
-                  onItensChange={(novosItens) => setFormData(prev => ({ ...prev, descricaoTesteAmostra: novosItens }))}
+                <InputComponent
+                  label="Telefone para agendamento"
+                  id="telefoneParaAgendamento"
+                  type="tel"
+                  value={formData.telefoneParaAgendamento}
+                  onChange={(e) => setFormData({...formData, telefoneParaAgendamento: e.target.value})}
                 />
+
+                <InputComponent
+                  label="Email para agendamento"
+                  id="emailParaAgendamento"
+                  type="email"
+                  value={formData.emailParaAgendamento}
+                  onChange={(e) => setFormData({...formData, emailParaAgendamento: e.target.value})}
+                />
+
+                <InputComponent
+                  label="A prova de conceito (especificar)"
+                  id="aProvaDeConceito"
+                  value={formData.aProvaDeConceito}
+                  onChange={(e) => setFormData({...formData, aProvaDeConceito: e.target.value})}
+                />
+
+                <InputComponent
+                  label="Duração da prova de conceito"
+                  id="duracaoProvaConceitoDiasUteis"
+                  type="number"
+                  value={formData.duracaoProvaConceitoDiasUteis}
+                  onChange={(e) => setFormData({...formData, duracaoProvaConceitoDiasUteis: e.target.value})}
+                />
+
+                <TextAreaComBotao
+                  label="A Prova de conceito consistira em"
+                  valorInicial={formData.provaDeConceitoConsistiraEm}
+                  onSalvar={(valor) => setFormData({...formData, provaDeConceitoConsistiraEm: valor})}
+                />
+
+      
               </div>   
             </FieldsetContainer>           
           </FieldsetContainer>

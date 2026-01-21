@@ -328,6 +328,30 @@ export type FormDataCompleto = {
   texto_tres_amostra_fase_julgamento: string;
   texto_amostra_fase_contratual: string;
   texto_amostra_fase_condicao_assinatura: string;
+  prova_conceito_redacao_para_todos_os_casos_texto: string;
+  horarioTerminoApresentacaoAmostra: string;
+  telefoneParaAgendamento: string;
+  emailParaAgendamento: string;
+  aProvaDeConceito: string;
+  duracaoProvaConceitoDiasUteis: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_dois: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_tres: string;
+  provaDeConceitoConsistiraEm: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_quatro: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_quinto: string;
+  comprovacaoAtendimentoPercentual: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_seis: string;
+  setorExaminadoreAvaliadorProvaConceito: string;
+  orgaoEntidadeProvaConceito: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_sete: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_oito: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_nove: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_dez: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_onze: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_doze: string;
+  prova_conceito_redacao_para_todos_os_casos_texto_treze: string;
+
+  
   
   // 5.3 Habilitação
   habilitacaoJuridicaLeiEspecial: string; 
