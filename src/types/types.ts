@@ -324,6 +324,8 @@ export type FormDataCompleto = {
   texto_vistoria_previa_p2: string;
 
   texto_amostra_fase_julgamento: string;
+  texto_dois_amostra_fase_julgamento: string;
+  texto_tres_amostra_fase_julgamento: string;
   texto_amostra_fase_contratual: string;
   texto_amostra_fase_condicao_assinatura: string;
   

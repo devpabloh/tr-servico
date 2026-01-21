@@ -1157,30 +1157,43 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               </div>
             )}
 
-            <SelectComponent
-              label="Requer prova de conceito ou outros testes de interesse da Administração?"
-              id="requeAmostra"
-              value={formData.requeAmostra}
-              onChange={(e) => setFormData({...formData, requeAmostra: e.target.value})}
+            <FieldsetContainer
+              titleLegend="5.2.4 DA PROVA DE CONCEITO"
             >
-              <option value="nao">Não</option>
-              <option value="sim">Sim (Excepcional)</option>
-            </SelectComponent>
+              <div>
 
-            {formData.requeAmostra === 'sim' && (
-              <div className="pl-4 border-l-4">
+                <InputComponent
+                  label="Justificativa para o teste"
+                  id="justificativaAmostra"
+                  value={formData.justificativaAmostra}
+                  onChange={(e) => setFormData({...formData, justificativaAmostra: e.target.value})}
+                  orientacoes="Explicitar as razões pelas quais as especificações técnicas não são suficientes."
+                />
+
                 <SelectComponent
-                  label="Tipo de Teste"
-                  id="tipoAmostra"
-                  value={formData.tipoAmostra}
-                  onChange={(e) => setFormData({...formData, tipoAmostra: e.target.value})}
+                  label="Fase de Apresentação"
+                  id="faseApresentacaoAmostra"
+                  value={formData.faseApresentacaoAmostra}
+                  onChange={(e) => setFormData({...formData, faseApresentacaoAmostra: e.target.value})}
                 >
-                  <option value="">Selecione...</option>
-                  <option value="amostra">Amostra</option>
-                  <option value="exame_conformidade">Exame de Conformidade</option>
-                  <option value="prova_conceito">Prova de Conceito</option>
-                  <option value="outro">Outro</option>
+                  <option value="julgamento_proposta">Julgamento da Proposta</option>
+                  <option value="apos_homologacao">Condição p/ Assinatura do contrato</option>
+                  <option value="vigencia_contratual">Fase contratual</option>
                 </SelectComponent>
+
+                {
+                  formData.faseApresentacaoAmostra === 'julgamento_proposta' && (
+                    <>
+                      <InputComponent
+                        label="Prazo para apresentação (dias úteis)"
+                        id="prazoAmostraDiasUteis"
+                        type="number"
+                        value={formData.prazoAmostraDiasUteis}
+                        onChange={(e) => setFormData({...formData, prazoAmostraDiasUteis: e.target.value})}
+                      />
+                    </>
+                  )
+                }
 
                 {formData.tipoAmostra === 'outro' && (
                   <InputComponent
@@ -1191,32 +1204,9 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   />
                 )}
 
-                <InputComponent
-                  label="Justificativa para o teste"
-                  id="justificativaAmostra"
-                  value={formData.justificativaAmostra}
-                  onChange={(e) => setFormData({...formData, justificativaAmostra: e.target.value})}
-                  orientacoes="Explicitar as razões pelas quais as especificações técnicas não são suficientes."
-                />
+                
 
-                <InputComponent
-                  label="Prazo para apresentação (dias úteis)"
-                  id="prazoAmostraDiasUteis"
-                  type="number"
-                  value={formData.prazoAmostraDiasUteis}
-                  onChange={(e) => setFormData({...formData, prazoAmostraDiasUteis: e.target.value})}
-                />
-
-                <SelectComponent
-                  label="Fase de Apresentação"
-                  id="faseApresentacaoAmostra"
-                  value={formData.faseApresentacaoAmostra}
-                  onChange={(e) => setFormData({...formData, faseApresentacaoAmostra: e.target.value})}
-                >
-                  <option value="julgamento_proposta">Julgamento da Proposta</option>
-                  <option value="apos_homologacao">Após Homologação (Condição p/ Assinatura)</option>
-                  <option value="vigencia_contratual">Vigência Contratual</option>
-                </SelectComponent>
+                
 
                 <InputComponent
                   label="Endereço para apresentação"
@@ -1244,9 +1234,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   itens={formData.descricaoTesteAmostra}
                   onItensChange={(novosItens) => setFormData(prev => ({ ...prev, descricaoTesteAmostra: novosItens }))}
                 />
-              </div>
-            )}
-            
+              </div>   
+            </FieldsetContainer>           
           </FieldsetContainer>
 
           <FieldsetContainer titleLegend="5.3 Requisitos específicos de habilitação">

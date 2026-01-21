@@ -982,15 +982,15 @@ function RecebimentoDefinitivoPoderaSerExcepcionalmente({formData, setFormData, 
     }));
   };
 
-  const valores = {
+  /* const valores = {
     ObjetoRecebidoProvisoriamente: formData.ObjetoRecebidoProvisoriamente || "___",
     ObjetoRecebidoDefinitivamente: formData.ObjetoRecebidoDefinitivamente || "___",
     
-  };
+  }; */
 
   switch (recebimentoDefinitivoPoderaSerExcepcionalmente) {
     case 'sim': {
-      const textoComValores = substituirPlaceholders(formData.texto_recebimento_definitivo_podera_ser_excepcionalmente, valores);
+      // const textoComValores = substituirPlaceholders(formData.texto_recebimento_definitivo_podera_ser_excepcionalmente, valores);
       return (
         isEditing ? (
           <EditableTextarea
@@ -1940,6 +1940,8 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
     enderecoApresentacaoAmostra: formData.enderecoApresentacaoAmostra || "____",
     horarioApresentacaoAmostra: formData.horarioApresentacaoAmostra || "____",
     setorResponsavelAmostra: formData.setorResponsavelAmostra || "____",
+    texto_dois_amostra_fase_julgamento: formData.texto_dois_amostra_fase_julgamento || "____",
+    texto_tres_amostra_fase_julgamento: formData.texto_tres_amostra_fase_julgamento || "____"
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -1961,7 +1963,7 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
     );
   };
 
-  const renderFaseAmostra = () => {
+/*   const renderFaseAmostra = () => {
     const { faseApresentacaoAmostra } = formData;
     switch (faseApresentacaoAmostra) {
       case 'julgamento_proposta':
@@ -1973,7 +1975,7 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
       default:
         return null;
     }
-  };
+  }; */
 
   return (
     <>
@@ -1996,19 +1998,28 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
         </>
       )}
 
-      {/* Amostra / Teste */}
-      {formData.requeAmostra === 'sim' && (
-        <>
+      <>
           <p className="font-semibold">5.2.4 DA AMOSTRA OU EXAME DE CONFORMIDADE OU PROVA DE CONCEITOOU OUTROS TESTES DE INTERESSE DA ADMINISTRAÇÃO (QUANDO FOR O CASO)</p>
-          {formData.tipoAmostra === 'amostra' ? 
-            renderTexto(formData.texto_amostra_requisicao_p2, 'texto_amostra_requisicao_p2') :
-            renderTexto(formData.texto_amostra_requisicao_p1, 'texto_amostra_requisicao_p1')
-          }
           
+          {renderTexto(formData.texto_amostra_requisicao_p1, 'texto_amostra_requisicao_p1')}
           {renderTexto(formData.texto_amostra_prazo_p1, 'texto_amostra_prazo_p1')}
-          {renderFaseAmostra()}
-          {renderTexto(formData.texto_amostra_comum_p1, 'texto_amostra_comum_p1')}
-          {renderTexto(formData.texto_amostra_comum_p2, 'texto_amostra_comum_p2')}
+          
+          {formData.faseApresentacaoAmostra === 'julgamento_proposta' && (
+            <>
+              {renderTexto(formData.texto_amostra_fase_julgamento, 'texto_amostra_fase_julgamento')}
+              {renderTexto(formData.texto_dois_amostra_fase_julgamento, 'texto_dois_amostra_fase_julgamento')}
+              {renderTexto(formData.texto_tres_amostra_fase_julgamento, 'texto_tres_amostra_fase_julgamento')}
+            </>
+          )}
+
+          {formData.faseApresentacaoAmostra === 'vigencia_contratual' && (
+            <>
+            
+              
+            
+            </>
+          )}
+
           {/* Renderiza a lista de critérios */}
           {formData.descricaoTesteAmostra.length > 0 ? (
             <ol type="a" className="list-outside list-[upper-alpha] pl-8 text-lg space-y-2">
@@ -2020,7 +2031,6 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
           
           {renderTexto(formData.texto_amostra_comum_p3, 'texto_amostra_comum_p3')}
         </>
-      )}
     </>
   );
 }
