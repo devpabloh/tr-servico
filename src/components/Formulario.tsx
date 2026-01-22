@@ -1176,34 +1176,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 />
 
                 <InputComponent
-                  label="Critérios para comprovação de atendimento"
-                  id="comprovacaoAtendimentoPercentual"
-                  value={formData.comprovacaoAtendimentoPercentual}
-                  onChange={(e)=> setFormData({...formData, comprovacaoAtendimentoPercentual: e.target.value})}
-                />
-
-                <InputComponent
-                  label="O setor responsável por examinar e avaliar a prova de conceito"
-                  id="setorExaminadoreAvaliadorProvaConceito"
-                  value={formData.setorExaminadoreAvaliadorProvaConceito}
-                  onChange={(e)=> setFormData({...formData, setorExaminadoreAvaliadorProvaConceito: e.target.value})}
-                />
-
-                <InputComponent
-                  label="Prazo para análise da prova de conceito (dias úteis)"
-                  id="prazoAnaliseProvaConceitoDiasUteis"
-                  value={formData.prazoAnaliseProvaConceitoDiasUteis}
-                  onChange={(e) => setFormData({...formData, prazoAnaliseProvaConceitoDiasUteis: e.target.value})}
-                />
-
-                <InputComponent
-                  label="Órgão/Entidade responsável pela prova de conceito"
-                  id="orgaoEntidadeProvaConceito"
-                  value={formData.orgaoEntidadeProvaConceito}
-                  onChange={(e) => setFormData({...formData, orgaoEntidadeProvaConceito: e.target.value})}
-                />
-
-                <InputComponent
                   label="Telefone para agendamento"
                   id="telefoneParaAgendamento"
                   type="tel"
@@ -1239,6 +1211,38 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   valorInicial={formData.provaDeConceitoConsistiraEm}
                   onSalvar={(valor) => setFormData({...formData, provaDeConceitoConsistiraEm: valor})}
                 />
+
+                <InputComponent
+                  label="Critérios para comprovação de atendimento"
+                  id="comprovacaoAtendimentoPercentual"
+                  value={formData.comprovacaoAtendimentoPercentual}
+                  onChange={(e)=> setFormData({...formData, comprovacaoAtendimentoPercentual: e.target.value})}
+                />
+
+                <InputComponent
+                  label="O setor responsável por examinar e avaliar a prova de conceito"
+                  id="setorExaminadoreAvaliadorProvaConceito"
+                  value={formData.setorExaminadoreAvaliadorProvaConceito}
+                  onChange={(e)=> setFormData({...formData, setorExaminadoreAvaliadorProvaConceito: e.target.value})}
+                />
+
+                <InputComponent
+                  label="Prazo para análise da prova de conceito (dias úteis)"
+                  id="prazoAnaliseProvaConceitoDiasUteis"
+                  value={formData.prazoAnaliseProvaConceitoDiasUteis}
+                  onChange={(e) => setFormData({...formData, prazoAnaliseProvaConceitoDiasUteis: e.target.value})}
+                />
+
+                <InputComponent
+                  label="Órgão/Entidade responsável pela prova de conceito"
+                  id="orgaoEntidadeProvaConceito"
+                  value={formData.orgaoEntidadeProvaConceito}
+                  onChange={(e) => setFormData({...formData, orgaoEntidadeProvaConceito: e.target.value})}
+                />
+
+                
+
+                
 
                 <InputComponent
                   label="Percentual de comprovação de atendimento (%)"
