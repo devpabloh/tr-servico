@@ -329,6 +329,7 @@ export type FormDataCompleto = {
   texto_amostra_fase_contratual: string;
   texto_amostra_fase_condicao_assinatura: string;
   prova_conceito_redacao_para_todos_os_casos_texto: string;
+  comprovacaoAtendimentoPercentualPorExtenso: string;
   horarioTerminoApresentacaoAmostra: string;
   telefoneParaAgendamento: string;
   emailParaAgendamento: string;
@@ -343,6 +344,7 @@ export type FormDataCompleto = {
   prova_conceito_redacao_para_todos_os_casos_texto_seis: string;
   setorExaminadoreAvaliadorProvaConceito: string;
   orgaoEntidadeProvaConceito: string;
+  prazoAnaliseProvaConceitoDiasUteis: string;
   prova_conceito_redacao_para_todos_os_casos_texto_sete: string;
   prova_conceito_redacao_para_todos_os_casos_texto_oito: string;
   prova_conceito_redacao_para_todos_os_casos_texto_nove: string;

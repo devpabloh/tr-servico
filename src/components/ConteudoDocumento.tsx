@@ -1946,7 +1946,7 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
     prova_conceito_redacao_para_todos_os_casos_texto_dois: formData.prova_conceito_redacao_para_todos_os_casos_texto_dois,
     prova_conceito_redacao_para_todos_os_casos_texto_tres: formData.prova_conceito_redacao_para_todos_os_casos_texto_tres,
     prova_conceito_redacao_para_todos_os_casos_texto_quatro: formData.prova_conceito_redacao_para_todos_os_casos_texto_quatro,
-    prova_conceito_redacao_para_todos_os_casos_texto_quinto: formData.prova_conceito_redacao_para_todos_os_casos_texto_quinto,
+    prova_conceito_redacao_para_todos_os_casos_texto_quinto: formData.prova_conceito_redacao_para_todos_os_casos_texto_quinto || "____",
     prova_conceito_redacao_para_todos_os_casos_texto_seis: formData.prova_conceito_redacao_para_todos_os_casos_texto_seis,
     prova_conceito_redacao_para_todos_os_casos_texto_sete: formData.prova_conceito_redacao_para_todos_os_casos_texto_sete,
     prova_conceito_redacao_para_todos_os_casos_texto_oito: formData.prova_conceito_redacao_para_todos_os_casos_texto_oito,
@@ -1960,7 +1960,14 @@ horarioTerminoApresentacaoAmostra: formData.horarioTerminoApresentacaoAmostra,
   emailParaAgendamento: formData.emailParaAgendamento,
   aProvaDeConceito: formData.aProvaDeConceito,
   duracaoProvaConceitoDiasUteis: formData.duracaoProvaConceitoDiasUteis,
-  duracaoProvaConceitoDiasUteisExtenso: numeroPorExtenso(formData.duracaoProvaConceitoDiasUteis || ''),
+  duracaoProvaConceitoDiasUteisPorExtenso: numeroPorExtenso(formData.duracaoProvaConceitoDiasUteis || '___'),
+  provaDeConceitoConsistiraEm: formData.provaDeConceitoConsistiraEm,
+  comprovacaoAtendimentoPercentualPorExtenso: numeroPorExtenso(formData.comprovacaoAtendimentoPercentual || '___'),
+  comprovacaoAtendimentoPercentual: formData.comprovacaoAtendimentoPercentual,
+  setorExaminadoreAvaliadorProvaConceito: formData.setorExaminadoreAvaliadorProvaConceito || "____",
+  orgaoEntidadeProvaConceito: formData.orgaoEntidadeProvaConceito || "____",
+  prazoAnaliseProvaConceitoDiasUteis: formData.prazoAnaliseProvaConceitoDiasUteis || "__",
+  prazoAnaliseProvaConceitoDiasUteisExtenso: numeroPorExtenso(formData.prazoAnaliseProvaConceitoDiasUteis || '___'),
   
   };
 
@@ -1982,20 +1989,6 @@ horarioTerminoApresentacaoAmostra: formData.horarioTerminoApresentacaoAmostra,
       />
     );
   };
-
-/*   const renderFaseAmostra = () => {
-    const { faseApresentacaoAmostra } = formData;
-    switch (faseApresentacaoAmostra) {
-      case 'julgamento_proposta':
-        return renderTexto(formData.texto_amostra_fase_julgamento, 'texto_amostra_fase_julgamento');
-      case 'vigencia_contratual':
-        return renderTexto(formData.texto_amostra_fase_contratual, 'texto_amostra_fase_contratual');
-      case 'apos_homologacao':
-        return renderTexto(formData.texto_amostra_fase_condicao_assinatura, 'texto_amostra_fase_condicao_assinatura');
-      default:
-        return null;
-    }
-  }; */
 
   return (
     <>

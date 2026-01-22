@@ -133,18 +133,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                       </select>
                     </div>
                   </div>
-                  {/* {formData.qualTipoContratacao === 'corporativo' ? (
-                    <div className="flex flex-col mt-4">
-                      <label htmlFor="justificaCasoConcretoUmaVezQue">E se justifica no caso concreto, uma vez que?</label>
-                      <textarea 
-                        name="justificaCasoConcretoUmaVezQue" 
-                        id="justificaCasoConcretoUmaVezQue"
-                        className='border rounded-sm p-2 w-full'
-                        value={formData.justificaCasoConcretoUmaVezQue}
-                        onChange={(e) => setFormData({...formData, justificaCasoConcretoUmaVezQue: e.target.value})}
-                      />
-                    </div>
-                  ) : null} */}
                   <div className="mt-4">
                     <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
                     <div>
@@ -208,14 +196,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </li>
                 </ul>
               </CollapsibleText>
-             {/*  <SelectComponent label="Existe ETP ou à informação do presente tópico pode ser obtida no extrato sigiloso?"
-              value={formData.existEtpOuInformacaoPresenteExtratoSigiloso}
-              onChange={(e)=> setFormData({...formData, existEtpOuInformacaoPresenteExtratoSigiloso: e.target.value})}
-              >
-                <option value="">Selecione uma opção</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-              </SelectComponent> */}
+          
               {formData.eEstudosTecnicosPreliminares === 'nao' && (
                 <div>
             
@@ -224,29 +205,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               )}
           </FieldsetContainer>
           <FieldsetContainer titleLegend="2.2 Justificativa do quantitativo estimado">
-            {/* <CollapsibleText title="Orientações para preenchimento">
-              <p className="orientacoes">
-                Redação a ser utilizada na hipótese de Existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual nº 53.384/2022)
-              </p>
-            </CollapsibleText> */}
-            {/* <SelectComponent
-              label="Existe ETP ou à informação do presente tópico pode ser obtida no extrato sigiloso? (referente ao item 2.2.1)"
-              value={formData.existEtpOuInformacaoPresenteExtratoSigilosoItemDois}
-              onChange={(e)=> setFormData({...formData, existEtpOuInformacaoPresenteExtratoSigilosoItemDois: e.target.value})}
-            >
-              <option value="">Selecione uma opção</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-            </SelectComponent> */}
-              {/* {formData.eEstudosTecnicosPreliminares === 'sim' && (
-              <InputComponent
-                label="Item do ETP (Quantitativo)"
-                orientacoes="Informe o item do ETP referente ao quantitativo (ex: 2.5)"
-                id="itemEtpQuantitativo"
-                value={formData.itemEtpQuantitativo}
-                onChange={(e) => setFormData({...formData, itemEtpQuantitativo: e.target.value})}
-              />
-            )} */}
 
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div>
@@ -272,12 +230,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 Redação a ser utilizada na hipótese de Existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual nº 53.384/2022)
               </p>
             </CollapsibleText>
-            {/* <SelectComponent label="" value={formData.existEtpOuInformacaoPresenteExtratoSigilosoItemDois_tres} onChange={(e)=> setFormData({...formData, existEtpOuInformacaoPresenteExtratoSigilosoItemDois_tres: e.target.value})}>
-              <option value="">Selecione uma opção</option>
-              <option value="sim">Sim</option>
-              <option value="nao">Não</option>
-            </SelectComponent> */}
-            
           
             {formData.eEstudosTecnicosPreliminares === "nao" ? (
               <div className="my-4">
@@ -297,20 +249,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             ): null}
           </FieldsetContainer>
           <FieldsetContainer titleLegend="2.4 Justificativa para o parcelamento ou não da contratação">
-            {/* <SelectComponent
-              label="Existe ETP ou à informação pode ser obtida no extrato sigiloso? (2.4.1)"
-              value={formData.justificativaParcelamentoEtp}
-              onChange={(e) => setFormData({...formData, justificativaParcelamentoEtp: e.target.value})}
-            >
-              <option value="">Selecione uma opção</option>
-              <option value="sim">Sim (ETP)</option>
-              <option value="nao">Não (Manual)</option>
-            </SelectComponent> */}
-
-            {/* Caso ETP = SIM */}
-            
-
-            {/* Caso ETP = NÃO */}
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div className="mt-4 p-4 border-t-2">
                 <SelectComponent
@@ -1183,15 +1121,13 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
                 {
                   formData.faseApresentacaoAmostra === 'julgamento_proposta' && (
-                    <>
-                      <InputComponent
+                     <InputComponent
                         label="Prazo para apresentação (dias úteis)"
                         id="prazoAmostraDiasUteis"
                         type="number"
                         value={formData.prazoAmostraDiasUteis}
                         onChange={(e) => setFormData({...formData, prazoAmostraDiasUteis: e.target.value})}
                       />
-                    </>
                   )
                 }
 
@@ -1240,6 +1176,34 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 />
 
                 <InputComponent
+                  label="Critérios para comprovação de atendimento"
+                  id="comprovacaoAtendimentoPercentual"
+                  value={formData.comprovacaoAtendimentoPercentual}
+                  onChange={(e)=> setFormData({...formData, comprovacaoAtendimentoPercentual: e.target.value})}
+                />
+
+                <InputComponent
+                  label="O setor responsável por examinar e avaliar a prova de conceito"
+                  id="setorExaminadoreAvaliadorProvaConceito"
+                  value={formData.setorExaminadoreAvaliadorProvaConceito}
+                  onChange={(e)=> setFormData({...formData, setorExaminadoreAvaliadorProvaConceito: e.target.value})}
+                />
+
+                <InputComponent
+                  label="Prazo para análise da prova de conceito (dias úteis)"
+                  id="prazoAnaliseProvaConceitoDiasUteis"
+                  value={formData.prazoAnaliseProvaConceitoDiasUteis}
+                  onChange={(e) => setFormData({...formData, prazoAnaliseProvaConceitoDiasUteis: e.target.value})}
+                />
+
+                <InputComponent
+                  label="Órgão/Entidade responsável pela prova de conceito"
+                  id="orgaoEntidadeProvaConceito"
+                  value={formData.orgaoEntidadeProvaConceito}
+                  onChange={(e) => setFormData({...formData, orgaoEntidadeProvaConceito: e.target.value})}
+                />
+
+                <InputComponent
                   label="Telefone para agendamento"
                   id="telefoneParaAgendamento"
                   type="tel"
@@ -1274,6 +1238,36 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   label="A Prova de conceito consistira em"
                   valorInicial={formData.provaDeConceitoConsistiraEm}
                   onSalvar={(valor) => setFormData({...formData, provaDeConceitoConsistiraEm: valor})}
+                />
+
+                <InputComponent
+                  label="Percentual de comprovação de atendimento (%)"
+                  id="comprovacaoAtendimentoPercentual"
+                  type="number"
+                  value={formData.comprovacaoAtendimentoPercentual}
+                  onChange={(e) => setFormData({...formData, comprovacaoAtendimentoPercentual: e.target.value})}
+                />
+
+                <InputComponent
+                  label="Setor responsável pela avaliação"
+                  id="setorExaminadoreAvaliadorProvaConceito"
+                  value={formData.setorExaminadoreAvaliadorProvaConceito}
+                  onChange={(e) => setFormData({...formData, setorExaminadoreAvaliadorProvaConceito: e.target.value})}
+                />
+
+                <InputComponent
+                  label="Órgão/Entidade responsável pela avaliação"
+                  id="orgaoEntidadeProvaConceito"
+                  value={formData.orgaoEntidadeProvaConceito}
+                  onChange={(e) => setFormData({...formData, orgaoEntidadeProvaConceito: e.target.value})}
+                />
+
+                <InputComponent
+                  label="Prazo para análise da prova de conceito (dias úteis)"
+                  id="prazoAnaliseProvaConceitoDiasUteis"
+                  type="number"
+                  value={formData.prazoAnaliseProvaConceitoDiasUteis}
+                  onChange={(e) => setFormData({...formData, prazoAnaliseProvaConceitoDiasUteis: e.target.value})}
                 />
 
       
