@@ -353,6 +353,7 @@ export type FormDataCompleto = {
   prova_conceito_redacao_para_todos_os_casos_texto_doze: string;
   prova_conceito_redacao_para_todos_os_casos_texto_treze: string;
   deInteresseDas: string;
+  texto_sancoes_licitacao_nao_e_registro_preco: string;
 
   
   

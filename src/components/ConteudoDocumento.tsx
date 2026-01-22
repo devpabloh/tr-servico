@@ -1722,7 +1722,7 @@ function GerarTextoValorEstimado({formData, setFormData, isEditing}: GerarTextoP
     {orcamentoSigiloso === 'nao' ? (
       <>
         {renderTexto(formData.texto_valor_estimado_nao_sigiloso, 'texto_valor_estimado_nao_sigiloso')}
-        {/* {renderTexto(formData.texto_maior_desconto, 'texto_maior_desconto')} */}
+        
         {!tipoValorEstimado && !isEditing && (
           <p className="text-gray-400 italic">Selecione o tipo de valor.</p>
         )}
@@ -2728,7 +2728,11 @@ function GerarTextoSancoes({formData, setFormData, isEditing}: GerarTextoProps) 
   return (
     <div>
       <h3 className="text-lg font-bold pb-2 text-justify">10.1 Sanções aplicáveis à fase de licitação</h3>
-      {renderTexto(formData.texto_sancoes_licitacao_padrao, 'texto_sancoes_licitacao_padrao')}
+      {formData.eRegistroPreco === 'sim' ? (
+        renderTexto(formData.texto_sancoes_licitacao_padrao, 'texto_sancoes_licitacao_padrao')
+      ) : (
+        renderTexto(formData.texto_sancoes_licitacao_nao_e_registro_preco, 'texto_sancoes_licitacao_nao_e_registro_preco')
+      )}
 
       {formData.eRegistroPreco === 'sim' && (
         <>

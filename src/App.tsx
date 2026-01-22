@@ -13,6 +13,7 @@ import type {
   FormDataCompleto 
 } from './types/types';
 
+
   const defaultFormData = {
     // 1.1 Formação de registro de preço
     eRegistroPreco: "",
@@ -473,10 +474,11 @@ import type {
     prazoAtesteMedicao: "",
     sancoesLicitacaoUsarPadrao: "sim",
     sancoesLicitacaoIncluirExtras: "nao",
-    texto_sancoes_licitacao_padrao: "10.1.1 As disposições sobre sanções administrativas aplicáveis durante a licitação (...) serão previstas no Edital do presente certame.",
+    texto_sancoes_licitacao_padrao: "10.1.1 As disposições sobre sanções administrativas aplicáveis durante a licitação e aquelas praticadas no período situado entre a adjudicação e a assinatura da ata serão previstas no Edital do presente certame.",
+    texto_sancoes_licitacao_nao_e_registro_preco: "10.1.1 As disposições sobre sanções administrativas aplicáveis durante a licitação e aquelas praticadas no período situado entre a adjudicação e a assinatura da instrumento contratual serão previstas no Edital do presente certame.",
     sancoesAtaUsarPadrao: "sim",
     sancoesAtaIncluirExtras: "nao",
-    texto_sancoes_ata_padrao: "10.2.1 As disposições sobre sanções administrativas aplicáveis em relação à detentora da ata (...) estarão previstas na Minuta da Ata, anexo do Edital do presente certame.",
+    texto_sancoes_ata_padrao: "10.2.1 As disposições sobre sanções administrativas aplicáveis em relação à detentora da ata de registro de preços estarão previstas na Minuta da Ata, anexo do Edital do presente certame.",
     texto_sancoes_ata_extras: "10.2.1 Além das sanções que serão dispostas na minuta da ata (...), são requeridas as seguintes sanções específicas:",
     sancoesAtaExtras: [] as string[],
     sancoesContratoUsarPadrao: "sim",

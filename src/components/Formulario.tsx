@@ -1253,10 +1253,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   onChange={(e) => setFormData({...formData, orgaoEntidadeProvaConceito: e.target.value})}
                 />
 
-                
-
-                
-
                 <InputComponent
                   label="Percentual de comprovação de atendimento (%)"
                   id="comprovacaoAtendimentoPercentual"
@@ -1286,8 +1282,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   value={formData.prazoAnaliseProvaConceitoDiasUteis}
                   onChange={(e) => setFormData({...formData, prazoAnaliseProvaConceitoDiasUteis: e.target.value})}
                 />
-
-      
               </div>   
             </FieldsetContainer>           
           </FieldsetContainer>
@@ -1675,15 +1669,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
       </FieldsetContainer>
 
       <FieldsetContainer titleLegend="6.9 Obrigações da Gerenciadora da ATA">
-        {/* <SelectComponent
-          label="Usar redação padronizada (PGE)?"
-          id="obrigacoesGerenciadoraUsarPadrao"
-          value={formData.obrigacoesGerenciadoraUsarPadrao}
-          onChange={(e) => setFormData({...formData, obrigacoesGerenciadoraUsarPadrao: e.target.value})}
-        >
-          <option value="sim">Sim</option>
-          <option value="nao">Não (Usar texto personalizado)</option>
-        </SelectComponent> */}
+        
         <SelectComponent
           label="Há obrigações especificas além das padronizadas na minuta da ata de registro de preços(PGE)?"
           id="obrigacoesGerenciadoraIncluirExtras"
@@ -1705,15 +1691,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
       </FieldsetContainer>
 
       <FieldsetContainer titleLegend="6.10 Obrigações da Detentora da ATA">
-        {/* <SelectComponent
-          label="Usar redação padronizada (PGE)?"
-          id="obrigacoesDetentoraUsarPadrao"
-          value={formData.obrigacoesDetentoraUsarPadrao}
-          onChange={(e) => setFormData({...formData, obrigacoesDetentoraUsarPadrao: e.target.value})}
-        >
-          <option value="sim">Sim</option>
-          <option value="nao">Não (Usar texto personalizado)</option>
-        </SelectComponent> */}
         <SelectComponent
           label="Há outras obrigações além das padronizadas na minuta da ata de registro de preços(PGE) ?"
           id="obrigacoesDetentoraIncluirExtras"
@@ -1830,14 +1807,11 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
       <span>Incluir 7.3 Requisitos da contratação</span>
     </label>
     {formData.requerCartaSolidariedade === 'sim' && (
-      <>
-        <TextAreaComBotao
+      <TextAreaComBotao
         label="Texto da cláusula 7.3.1"
         valorInicial={formData.texto_carta_solidariedade}
         onSalvar={(v) => setFormData({ ...formData, texto_carta_solidariedade: v })}
       />
-    
-      </>
     )}
     <label className="flex items-center gap-2">
     <input
