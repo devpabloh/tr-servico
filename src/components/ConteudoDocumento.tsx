@@ -1968,6 +1968,8 @@ horarioTerminoApresentacaoAmostra: formData.horarioTerminoApresentacaoAmostra,
   orgaoEntidadeProvaConceito: formData.orgaoEntidadeProvaConceito || "____",
   prazoAnaliseProvaConceitoDiasUteis: formData.prazoAnaliseProvaConceitoDiasUteis || "__",
   prazoAnaliseProvaConceitoDiasUteisExtenso: numeroPorExtenso(formData.prazoAnaliseProvaConceitoDiasUteis || '___'),
+  deInteresseDas: formData.deInteresseDas || "____",
+
   
   };
 
