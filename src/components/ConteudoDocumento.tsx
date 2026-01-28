@@ -157,12 +157,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
                 />
             </div>
           )}
-          {/* Item 1.3 */}
-          {/* <ObjetoDestaLicitacaoEstaoDivididos
-            formData={formData}
-            isEditing={isEditing}
-            setFormData={setFormData}
-          /> */}
+
           <p>
             1.3 As especificações e os quantitativos do objeto desta licitação estão divididos e descritos conforme quadro(s) constante no anexo E.
           </p>
@@ -191,7 +186,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
         
         {/* Este bloco 2.2 estava faltando */}
         <div className="mt-4">
-          <h3 className="text-lg font-bold pb-2 text-justify">2.2 Justificativa do quantitativo estimado</h3>3.2.1 Os serviços descritos neste termo de referência serão prestados nos locais e horários indicados pela contratante
+          <h3 className="text-lg font-bold pb-2 text-justify">2.2 Justificativa do quantitativo estimado</h3>
           <JustificativaQuantitativo
             formData={formData}
             isEditing={isEditing}
@@ -1282,22 +1277,9 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
 
 function GerarTextoItem1_2({ formData, setFormData, isEditing }: GerarTextoProps) {
   
-  // 1. Pegamos a chave do texto do item 1.2 do defaultFormData
-  //    (Em App.tsx, ela se chama 'seCoperativa', apesar do nome)
   const templateKey: keyof FormDataCompleto = 'seCoperativa'; 
   const template = formData[templateKey];
 
-  // 2. Pegamos o valor do placeholder
-  const { justificaCasoConcretoUmaVezQue } = formData;
-  
-  // 3. Montamos os valores para substituição
-  const valores = {
-    justificaCasoConcretoUmaVezQue: justificaCasoConcretoUmaVezQue || "______",
-  };
-
-  const textoFinalComValores = substituirPlaceholders(template, valores);
-
-  // 4. Lógica de salvar
   const handleSave = (novoValor: string) => {
     setFormData((prev) => ({
       ...prev,
@@ -1319,8 +1301,9 @@ function GerarTextoItem1_2({ formData, setFormData, isEditing }: GerarTextoProps
   return (
     <p
       className="text-lg p-2 rounded-md"
-      dangerouslySetInnerHTML={{ __html: textoFinalComValores }}
-    />
+    >
+      {template}
+    </p>
   );
 }
 
@@ -1339,7 +1322,6 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
     }));
   };
 
-  // 1. CORREÇÃO: Definir TODOS os placeholders que os textos usam
   const valores = {
     itemEtpEstudosTécnicos: formData.itemEtpEstudosTecnicos || "____",
     presenteContratacaoNecessidadeServicos: formData.presenteContratacaoNecessidadeServicos || "____",

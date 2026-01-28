@@ -29,7 +29,7 @@ import type {
     paraContratacaoEventualPrestacaoServico: "",
     visandoAtenderNecessidades: "",
     eEstudosTecnicosPreliminares:"",
-    seCoperativa:"1.2 O escopo de participantes da Ata Corporativa proveniente da presente contratação teve por base o permissivo legal do art. 45, do Decreto Estadual nº 54.700/2023 e se justifica no caso concreto, uma vez que {justificaCasoConcretoUmaVezQue}.",
+    seCoperativa:"1.2 O escopo de participantes da Ata Corporativa proveniente da presente contratação teve por base o permissivo legal do art. 45, do Decreto Estadual nº 54.700/2023 e se justifica no caso concreto, uma vez que ______.",
     justificaCasoConcretoUmaVezQue: "",
     qualTipoContratacao: "",
     objetoDestaLicitacaoEstaoDivididos: "",

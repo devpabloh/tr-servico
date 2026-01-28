@@ -100,7 +100,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           </CollapsibleText>
           <FieldsetContainer titleLegend="1.1 Formação de registro de preços para contratação eventual de prestação de serviços">
             <div>
-              <label htmlFor="eRegistroPreco">É Registro de Preços?</label>
+              <label htmlFor="eRegistroPreco">1.1. É Registro de Preços?</label>
               <div>
                 <select 
                   name="eRegistroPreco" 
@@ -117,7 +117,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               {formData.eRegistroPreco === 'sim' ? (
                 <div className="mt-4">
                   <div>
-                    <label htmlFor="qualTipoContratacao">Qual o tipo de Registro de Preços?</label>
+                    <label htmlFor="qualTipoContratacao">1.1. Qual o tipo de Registro de Preços?</label>
                     <div>
                       <select 
                         name="qualTipoContratacao" 
@@ -132,9 +132,38 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                         <option value="unificadoSaude">unificado Saúde</option>
                       </select>
                     </div>
+                    {
+                formData.qualTipoContratacao === 'simples' && (
+                  <div className="mt-4">
+                <label htmlFor="visandoAtenderNecessidades">1.1 Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
+                <div>
+                    <textarea 
+                      name="visandoAtenderNecessidades" 
+                      id="visandoAtenderNecessidades"
+                      className='border rounded-sm p-2 w-full'
+                      value={formData.visandoAtenderNecessidades}
+                      onChange={(e)=> setFormData({...formData, visandoAtenderNecessidades: e.target.value})}
+                    />
+                </div>
+              </div>
+                )
+              }
+              {
+              formData.qualTipoContratacao === 'corporativo' && (
+                    <div className="flex flex-col mt-4">
+                      <label htmlFor="seCoperativa">1.2 E se justifica no caso concreto, uma vez que ?</label>
+                      <textarea 
+                        name="seCoperativa" 
+                        id="seCoperativa"
+                        className='border rounded-sm p-2 w-full'
+                        value={formData.seCoperativa}
+                        onChange={(e) => setFormData({...formData, seCoperativa: e.target.value})}
+                      />
+                    </div>)
+              }
                   </div>
                   <div className="mt-4">
-                    <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
+                    <label htmlFor="eEstudosTecnicosPreliminares">1.1 Existe ETP?</label>
                     <div>
                       <select 
                         name="eEstudosTecnicosPreliminares" 
@@ -152,7 +181,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 </div>
               ) : (
                 <div className="mt-4">
-                  <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
+                  <label htmlFor="eEstudosTecnicosPreliminares">1.1 Existe ETP?</label>
                   <div>
                     <select 
                       name="eEstudosTecnicosPreliminares" 
@@ -168,18 +197,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </div>
                 </div>
               )}
-              <div className="mt-4">
-                <label htmlFor="visandoAtenderNecessidades">Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
-                <div>
-                    <textarea 
-                      name="visandoAtenderNecessidades" 
-                      id="visandoAtenderNecessidades"
-                      className='border rounded-sm p-2 w-full'
-                      value={formData.visandoAtenderNecessidades}
-                      onChange={(e)=> setFormData({...formData, visandoAtenderNecessidades: e.target.value})}
-                    />
-                </div>
-              </div>
+              
               
             </div>
           </FieldsetContainer>
@@ -231,7 +249,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               </p>
             </CollapsibleText>
           
-            {formData.eEstudosTecnicosPreliminares === "nao" ? (
+            {formData.eEstudosTecnicosPreliminares === "nao" && (
               <div className="my-4">
                 <label htmlFor="justificativaEscolhaSolucaoNaoEtp" className="font-semibold">
                   Justificar a razão para escolha desse tipo de serviço frente às demais alternativas para a satisfação da necessidade pública 
@@ -246,7 +264,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   placeholder="Ex: Quando houver a possibilidade de opção entre aquisição ou locação de bens móveis duráveis."
                 />
               </div>
-            ): null}
+            )}
           </FieldsetContainer>
           <FieldsetContainer titleLegend="2.4 Justificativa para o parcelamento ou não da contratação">
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
@@ -1507,7 +1525,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
       <FieldsetContainer titleLegend="6.1 Justificativa para utilização do SRP">
         <InputComponent
-          label="Iinformar os inciso(s) do Decreto nº 54.700/2023"
+          label="informar os inciso(s) do Decreto nº 54.700/2023"
           id="incisoDecreto54700"
           value={formData.incisoDecreto54700}
           onChange={(e) => setFormData({...formData, incisoDecreto54700: e.target.value})}
