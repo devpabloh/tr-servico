@@ -1313,6 +1313,7 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
     texto_sim_existEtpOuInformacaoPresenteExtratoSigiloso,
     texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso,
     texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois,
+    atenderaDeverLegalExposto
   } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1333,6 +1334,7 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
     visandoAtenderNecessidades: formData.visandoAtenderNecessidades || "______",
     texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois: formData.texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois || "____",
     texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso: formData.texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso || "____",
+    atenderaDeverLegalExposto: formData.atenderaDeverLegalExposto || "____",
   };
 
   switch (eEstudosTecnicosPreliminares) {
@@ -1372,12 +1374,14 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
             className="text-lg"
             isEditing={isEditing}
           />
-          <EditableTextarea
+          {formData.atenderaDeverLegalExposto === 'sim' && (
+            <EditableTextarea
               initialValue={texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois}
               onSave={(novoValor: string) => handleSave('texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois', novoValor)}
               className="text-lg"
               isEditing={isEditing}
             />
+          )}
          </>
         );
       }
@@ -1388,10 +1392,12 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
             className="text-lg p-2 rounded-md"
             dangerouslySetInnerHTML={{ __html: textoUmComValores }}
           />
-          <p
-            className="text-lg p-2 rounded-md text-blue-700"
-            dangerouslySetInnerHTML={{ __html: textoDoisComValores }}
-          />
+          {formData.atenderaDeverLegalExposto === 'sim' && (
+            <p
+              className="text-lg p-2 rounded-md text-blue-700"
+              dangerouslySetInnerHTML={{ __html: textoDoisComValores }}
+            />
+          )}
         </>
       );
     }
