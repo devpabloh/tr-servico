@@ -1313,7 +1313,6 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
     texto_sim_existEtpOuInformacaoPresenteExtratoSigiloso,
     texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso,
     texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois,
-    atenderaDeverLegalExposto
   } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
