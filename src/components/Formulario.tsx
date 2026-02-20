@@ -584,7 +584,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             <FieldsetContainer titleLegend="3.2.4 Horário da prestação de serviço">
                 <div className='flex flex-col space-y-1'>
                   <p>3.2.4. Qual o horário da prestação do serviço?</p>
-                  <input type="text" id='horario_prestaca_servico' className='border rounded-sm p-2 w-full' value={formData.horarioPrestacaoServico} onChange={(e)=>setFormData({...formData, horarioPrestacaoServico: e.target.value})} />
+                  <textarea id='horario_prestaca_servico' className='border rounded-sm p-2 w-full' value={formData.horarioPrestacaoServico} onChange={(e)=>setFormData({...formData, horarioPrestacaoServico: e.target.value})} />
                 </div>
             </FieldsetContainer>
             <FieldsetContainer titleLegend="3.2.5 Cronograma de realização dos serviços">
