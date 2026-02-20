@@ -114,6 +114,20 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   <option value="nao">Não</option>
                 </select>
               </div>
+              {formData.eRegistroPreco === 'nao' && (
+                <div className="mt-4">
+                    <label htmlFor="visandoAtenderNecessidades">1.1 Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
+                    <div>
+                        <textarea 
+                          name="visandoAtenderNecessidades" 
+                          id="visandoAtenderNecessidades"
+                          className='border rounded-sm p-2 w-full'
+                          value={formData.visandoAtenderNecessidades}
+                          onChange={(e)=> setFormData({...formData, visandoAtenderNecessidades: e.target.value})}
+                        />
+                    </div>
+                  </div>
+              )}
               {formData.eRegistroPreco === 'sim' ? (
                 <div className="mt-4">
                   <div>
@@ -135,17 +149,17 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                     {
                 formData.qualTipoContratacao === 'simples' && (
                   <div className="mt-4">
-                <label htmlFor="visandoAtenderNecessidades">1.1 Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
-                <div>
-                    <textarea 
-                      name="visandoAtenderNecessidades" 
-                      id="visandoAtenderNecessidades"
-                      className='border rounded-sm p-2 w-full'
-                      value={formData.visandoAtenderNecessidades}
-                      onChange={(e)=> setFormData({...formData, visandoAtenderNecessidades: e.target.value})}
-                    />
-                </div>
-              </div>
+                    <label htmlFor="visandoAtenderNecessidades">1.1 Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
+                    <div>
+                        <textarea 
+                          name="visandoAtenderNecessidades" 
+                          id="visandoAtenderNecessidades"
+                          className='border rounded-sm p-2 w-full'
+                          value={formData.visandoAtenderNecessidades}
+                          onChange={(e)=> setFormData({...formData, visandoAtenderNecessidades: e.target.value})}
+                        />
+                    </div>
+                  </div>
                 )
               }
               {
