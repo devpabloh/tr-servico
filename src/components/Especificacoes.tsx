@@ -42,7 +42,7 @@ export function Especificacoes({especificacoes, setFormData}: EspecificacoesProp
 
   return (
     <div className="p-4 bg-gray-50 rounded-lg shadow-inner mb-6">
-      <h3 className="text-xl font-semibold text-gray-800 mb-3">Especificações Detalhadas</h3>
+      <h3 className="text-xl font-semibold text-gray-800 mb-3">3.1.1. Especificações Detalhadas</h3>
       <div className="flex flex-col gap-3">
         <textarea
           value={textoAtual}
