@@ -17,9 +17,9 @@ import type {
   const defaultFormData = {
     // 1.1 Formação de registro de preço
     eRegistroPreco: "",
-    sim_texto_e_registro_preco: "1.1 Formação de registro de preços {qualTipoContratacao} para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades do(a) {visandoAtenderNecessidades},conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} e neste Termo de Referência.",
+    sim_texto_e_registro_preco: "1.1 Formação de registro de preços {qualTipoContratacao} para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades do(a) (VEM DO HOME, NOME DO ORGÃO OU ENTIDADE SOLICITANTE),conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} e neste Termo de Referência.",
 
-    sim_texto_registro_preco_simples: "1.1 Formação de registro de preços para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades do(a) {visandoAtenderNecessidades},conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} e neste Termo de Referência.",
+    sim_texto_registro_preco_simples: "1.1 Formação de registro de preços para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades do(a) (VEM DO HOME, NOME DO ORGÃO OU ENTIDADE SOLICITANTE),conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} e neste Termo de Referência.",
 
     sim_texto_registro_preco_unificado_saude: "1.1 Formação de registro de preços {qualTipoContratacao} para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades de todas as unidades vinculadas à pasta integrantes do Poder Executivo do Estado de Pernambuco, conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} e neste Termo de Referência.",
 
@@ -38,8 +38,9 @@ import type {
     existEtpOuInformacaoPresenteExtratoSigiloso: "",
     itemEtpEstudosTecnicos: "",
     texto_sim_existEtpOuInformacaoPresenteExtratoSigiloso: "2.1.1 A Justificativa e objetivo da contratação encontram-se pormenorizadas em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",
-    texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso: "2.1.1 A presente contratação se dará em função da necessidade dos serviços de (A INFORMAÇÃO VEM DO HOME), os quais são essenciais para o desempenho das atribuições funcionais do(a) {visandoAtenderNecessidades}, uma vez que {umaVezQueAtribuicoesFuncionais}, de acordo com as especificações e quantidades constantes neste Termo de Referência.",
+    texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso: "2.1.1 A presente contratação se dará em função da necessidade dos serviços de (A INFORMAÇÃO VEM DO HOME), os quais são essenciais para o desempenho das atribuições funcionais do(a) (VEM DO HOME, NOME DO ORGÃO OU ENTIDADE SOLICITANTE), uma vez que {umaVezQueAtribuicoesFuncionais}, de acordo com as especificações e quantidades constantes neste Termo de Referência.",
     texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois: "Informe-se, por oportuno, que tal objeto atenderá o dever legal exposto no __________________________, que determina _______________________________________________________________.",
+    atenderaDeverLegalExposto: "",
     presenteContratacaoNecessidadeServicos: "",
     desempenhoAtribuicoesFuncionais: "",
     umaVezQueAtribuicoesFuncionais: "",
@@ -51,7 +52,7 @@ import type {
     texto_sim_justificativa_quantitativo: "2.2.1 A Justificativa para o quantitativo necessário ao atendimento da necessidade pública encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",
     itemEtpQuantitativo: "",
     texto_nao_justificativa_quantitativo: "2.2.1 Os quantitativos previstos no presente Termo de Referência está fundamentado em {fundamentadoEm}, conforme os cálculos apresentados a seguir:",
-    texto_nao_justificativa_quantitativo_textoDois: "2.2.2 Os quantitativos previstos no presente Termo de Referência foram definidos no documento {osQuantitativosPrecistoDefinidosNoDocumento}.",
+    texto_nao_justificativa_quantitativo_textoDois: "2.2.2 Os quantitativos previstos no presente Termo de Referência foram definidos no documento _______.",
     // 2.3.1
     existEtpOuInformacaoPresenteExtratoSigilosoItemDois_tres: "",
     texto_sim_justificativa_solucao: "2.3.1 A Justificativa da escolha da solução a ser licitada encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",

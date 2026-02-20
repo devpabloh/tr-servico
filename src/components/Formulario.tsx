@@ -151,7 +151,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               {
               formData.qualTipoContratacao === 'corporativo' && (
                     <div className="flex flex-col mt-4">
-                      <label htmlFor="seCoperativa">1.2 E se justifica no caso concreto, uma vez que ?</label>
+                      <label htmlFor="seCoperativa">1.2. E se justifica no caso concreto, uma vez que ?</label>
                       <textarea 
                         name="seCoperativa" 
                         id="seCoperativa"
@@ -163,7 +163,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               }
                   </div>
                   <div className="mt-4">
-                    <label htmlFor="eEstudosTecnicosPreliminares">1.1 Existe ETP?</label>
+                    <label htmlFor="eEstudosTecnicosPreliminares">1.1. Existe ETP?</label>
                     <div>
                       <select 
                         name="eEstudosTecnicosPreliminares" 
@@ -217,8 +217,29 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           
               {formData.eEstudosTecnicosPreliminares === 'nao' && (
                 <div>
-            
-                  <InputComponent label="Expor a finalidade da contratação" id="umaVezQueAtribuicoesFuncionais" value={formData.umaVezQueAtribuicoesFuncionais} onChange={(e)=> setFormData({...formData,umaVezQueAtribuicoesFuncionais: e.target.value })}/>
+                  <InputComponent label="2.1.1. Expor a finalidade da contratação" id="umaVezQueAtribuicoesFuncionais" value={formData.umaVezQueAtribuicoesFuncionais} onChange={(e)=> setFormData({...formData,umaVezQueAtribuicoesFuncionais: e.target.value })}/>
+                  <SelectComponent
+                    label="O objeto atenderá o dever legal exposto?"
+                    orientacoes="Se o sim for selecionado,será necessário citar legislação, se existente, que fundamente o dever do estado de contratar o objeto"
+                    id="atenderaDeverLegalExposto"
+                    value={formData.atenderaDeverLegalExposto}
+                    onChange={(e) => setFormData({...formData, atenderaDeverLegalExposto: e.target.value})}
+                  >
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                  </SelectComponent>
+                  {formData.atenderaDeverLegalExposto === 'sim' && (
+                    <div>
+                    <label htmlFor="textoAdicional">Texto adicional</label>
+                    <textarea 
+                      id="textoAdicional" 
+                      className='border rounded-sm p-2 w-full'
+                      rows={4}
+                      value={formData.texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois}
+                      onChange={(e) => setFormData({...formData, texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois: e.target.value})}
+                    />
+                  </div>
+                  )}
                 </div>
               )}
           </FieldsetContainer>
@@ -232,13 +253,23 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   value={formData.fundamentadoEm}
                   
                 />
-                <InputComponent
-                  label="Os quantitativos foram definidos em qual documento?"
+                <div>
+                    <label htmlFor="texto_nao_justificativa_quantitativo_textoDois">Os quantitativos foram definidos em qual documento?</label>
+                    <textarea 
+                      id="texto_nao_justificativa_quantitativo_textoDois" 
+                      className='border rounded-sm p-2 w-full'
+                      rows={4}
+                      value={formData.texto_nao_justificativa_quantitativo_textoDois}
+                      onChange={(e) => setFormData({...formData, texto_nao_justificativa_quantitativo_textoDois: e.target.value})}
+                    />
+                  </div>
+               {/*  <InputComponent
+                  label=""
                   placeholder="Ex: foram definidos no próprio termo de referência ou em outro documento (citar)"
-                  onChange={(e)=> setFormData({...formData, osQuantitativosPrecistoDefinidosNoDocumento: e.target.value})}
-                  value={formData.osQuantitativosPrecistoDefinidosNoDocumento}
+                  onChange={(e)=> setFormData({...formData, texto_nao_justificativa_quantitativo_textoDois: e.target.value})}
+                  value={formData.texto_nao_justificativa_quantitativo_textoDois}
                   
-                />
+                /> */}
               </div>
             )}
           </FieldsetContainer>
@@ -581,18 +612,18 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               formData.objetoSeraRecebido === "ProvisorioEDefinitivo" && (
                 <>
                   <InputComponent
-                    label="qual o prazo para o recebimento definitivo?"
-                    id="prazoRecebimentoDefinitivo"
-                    type="number"
-                    value={formData.prazoRecebimentoDefinitivo}
-                    onChange={(e) => setFormData({...formData, prazoRecebimentoDefinitivo: e.target.value})}
-                  />
-                  <InputComponent
                     label="qual o prazo para o recebimento Provisorio?"
                     id="prazoRecebimentoDefinitivo"
                     type="number"
                     value={formData.prazoRecebimentoProvisorio}
                     onChange={(e) => setFormData({...formData, prazoRecebimentoProvisorio: e.target.value})}
+                  />
+                  <InputComponent
+                    label="qual o prazo para o recebimento definitivo?"
+                    id="prazoRecebimentoDefinitivo"
+                    type="number"
+                    value={formData.prazoRecebimentoDefinitivo}
+                    onChange={(e) => setFormData({...formData, prazoRecebimentoDefinitivo: e.target.value})}
                   />
                   <div className="flex flex-col mt-2">
                   <label htmlFor="recebimentoDefinitivoPoderaSerExcepcionalmente" className="font-semibold">Recebimento Definitivo Poderá Ser Excepcionalmente Prorrogado ?</label>
@@ -632,7 +663,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </select>
                 </div>
             </FieldsetContainer>
-            <FieldsetContainer titleLegend="3.2.10 Condições gerais e específicas para a prestação do serviço?">
+            {/* <FieldsetContainer titleLegend="3.2.10 Condições gerais e específicas para a prestação do serviço?">
               <CollapsibleText title="Orientações para preenchimento">
                 <p  className="orientacoes">
                   deve ser incluído, se cabível, condições adicionais de execução do objeto
@@ -664,7 +695,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                     }}
                   />
                 )}
-            </FieldsetContainer>
+            </FieldsetContainer> */}
 
             <FieldsetContainer titleLegend="3.3 Indicação de marcas ou modelos">
               <CollapsibleText title="Orientações para preenchimento">

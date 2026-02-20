@@ -150,6 +150,7 @@ export type FormDataCompleto = {
 
   itensPorUnidade: Item[];
   grupos: Grupo[];
+  atenderaDeverLegalExposto: string;
 
   especificacoes: string;
 

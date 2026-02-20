@@ -268,7 +268,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
             <div>
               <p className="pt-4 text-justify font-semibold">3.2 DA EXECUÇÃO DOS SERVIÇOS</p>
               <p className="pt-4 pb-2 text-justify">
-                3.2.1 Os serviços serão prestados nos seguintes locais <span className="text-blue-600">e horários:</span>
+                3.2.1 Os serviços serão prestados nos seguintes locais e horário(s):
               </p>
               <GerarLocaisEHorarios formData={formData} />
             </div>
