@@ -52,7 +52,7 @@ import type {
     texto_sim_justificativa_quantitativo: "2.2.1 A Justificativa para o quantitativo necessário ao atendimento da necessidade pública encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",
     itemEtpQuantitativo: "",
     texto_nao_justificativa_quantitativo: "2.2.1 Os quantitativos previstos no presente Termo de Referência está fundamentado em {fundamentadoEm}, conforme os cálculos apresentados a seguir:",
-    texto_nao_justificativa_quantitativo_textoDois: "2.2.2 Os quantitativos previstos no presente Termo de Referência foram definidos no documento _______.",
+    texto_nao_justificativa_quantitativo_textoDois: " Os quantitativos previstos no presente Termo de Referência foram definidos no documento _______.",
     // 2.3.1
     existEtpOuInformacaoPresenteExtratoSigilosoItemDois_tres: "",
     texto_sim_justificativa_solucao: "2.3.1 A Justificativa da escolha da solução a ser licitada encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",

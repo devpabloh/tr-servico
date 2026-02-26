@@ -211,8 +211,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </div>
                 </div>
               )}
-              
-              
             </div>
           </FieldsetContainer>
         </FieldsetContainer>
@@ -233,8 +231,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 <div>
                   <InputComponent label="2.1.1. Expor a finalidade da contratação" id="umaVezQueAtribuicoesFuncionais" value={formData.umaVezQueAtribuicoesFuncionais} onChange={(e)=> setFormData({...formData,umaVezQueAtribuicoesFuncionais: e.target.value })}/>
                   <SelectComponent
-                    label="O objeto atenderá o dever legal exposto?"
-                    orientacoes="Se o sim for selecionado,será necessário citar legislação, se existente, que fundamente o dever do estado de contratar o objeto"
+                    label="Existe algum dispositivo legal que fundamente o dever do Estado de contratar o objeto?"
                     id="atenderaDeverLegalExposto"
                     value={formData.atenderaDeverLegalExposto}
                     onChange={(e) => setFormData({...formData, atenderaDeverLegalExposto: e.target.value})}
@@ -244,7 +241,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </SelectComponent>
                   {formData.atenderaDeverLegalExposto === 'sim' && (
                     <div>
-                    <label htmlFor="textoAdicional">Texto adicional</label>
+                    <label htmlFor="textoAdicional" className="orientacoes">Citar legislação que fundamente o dever do estado de contratar o objeto e transcrever ou explicitar o conteúdo do que preconiza o dispositivo legal citado, se for o caso,</label>
                     <textarea 
                       id="textoAdicional" 
                       className='border rounded-sm p-2 w-full'
@@ -262,13 +259,13 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div>
                 <InputComponent
-                  label="2.2.1. Informar os critérios utilizados para definição dos quantitativos a serem contratados"
+                  label="2.2.1. Informar os critérios utilizados para definição dos quantitativos a serem contratados conforme os cálculos apresentados neste item ao apontar os documentos que comprovem esse cálculo, se for o caso."
                   onChange={(e)=> setFormData({...formData, fundamentadoEm: e.target.value})}
                   value={formData.fundamentadoEm}
                   
                 />
                 <div>
-                    <label htmlFor="texto_nao_justificativa_quantitativo_textoDois" className="font-semibold">2.2.2. Os quantitativos foram definidos em qual documento?</label>
+                    <label htmlFor="texto_nao_justificativa_quantitativo_textoDois" className="font-semibold">   Os quantitativos foram definidos em qual documento?</label>
                     <textarea 
                       id="texto_nao_justificativa_quantitativo_textoDois" 
                       className='border rounded-sm p-2 w-full'
