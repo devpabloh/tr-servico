@@ -25,7 +25,7 @@ import type {
 
     sim_texto_registro_preco_corporativo: "1.1 Formação de registro de preços corporativo para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades dos órgãos da Administração Direta, Fundos Especiais, Autarquias e Fundações Públicas integrantes do Poder Executivo do Estado de Pernambuco.",
 
-    nao_texto_e_registro_preco: "1.1 Contratação de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades do(a) {visandoAtenderNecessidades} conforme as condições, especificações, quantidades e exigências contidas{eEstudosTecnicosPreliminares} neste Termo de Referência.",
+    nao_texto_e_registro_preco: "1.1 Contratação de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades do(a) {visandoAtenderNecessidades} conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} neste Termo de Referência.",
     paraContratacaoEventualPrestacaoServico: "",
     visandoAtenderNecessidades: "",
     eEstudosTecnicosPreliminares:"",

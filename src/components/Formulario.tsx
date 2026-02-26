@@ -98,9 +98,9 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 </li>
               </ul>
           </CollapsibleText>
-          <FieldsetContainer titleLegend="1.1 Formação de registro de preços para contratação eventual de prestação de serviços">
+          <FieldsetContainer titleLegend="Objeto">
             <div>
-              <label htmlFor="eRegistroPreco">1.1. É Registro de Preços?</label>
+              <label htmlFor="eRegistroPreco">É Registro de Preços?</label>
               <div>
                 <select 
                   name="eRegistroPreco" 
@@ -116,7 +116,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               </div>
               {formData.eRegistroPreco === 'nao' && (
                 <div className="mt-4">
-                    <label htmlFor="visandoAtenderNecessidades">1.1 Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
+                    <label htmlFor="visandoAtenderNecessidades">Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
                     <div>
                         <textarea 
                           name="visandoAtenderNecessidades" 
@@ -131,7 +131,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               {formData.eRegistroPreco === 'sim' ? (
                 <div className="mt-4">
                   <div>
-                    <label htmlFor="qualTipoContratacao">1.1. Qual o tipo de Registro de Preços?</label>
+                    <label htmlFor="qualTipoContratacao">Qual o tipo de Registro de Preços?</label>
                     <div>
                       <select 
                         name="qualTipoContratacao" 
@@ -149,7 +149,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                     {
                 formData.qualTipoContratacao === 'simples' && (
                   <div className="mt-4">
-                    <label htmlFor="visandoAtenderNecessidades">1.1 Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
+                    <label htmlFor="visandoAtenderNecessidades">Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
                     <div>
                         <textarea 
                           name="visandoAtenderNecessidades" 
@@ -165,7 +165,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               {
               formData.qualTipoContratacao === 'corporativo' && (
                     <div className="flex flex-col mt-4">
-                      <label htmlFor="seCoperativa">1.2. E se justifica no caso concreto, uma vez que ?</label>
+                      <label htmlFor="seCoperativa">E se justifica no caso concreto, uma vez que ?</label>
                       <textarea 
                         name="seCoperativa" 
                         id="seCoperativa"
@@ -177,7 +177,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               }
                   </div>
                   <div className="mt-4">
-                    <label htmlFor="eEstudosTecnicosPreliminares">1.1. Existe ETP?</label>
+                    <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
                     <div>
                       <select 
                         name="eEstudosTecnicosPreliminares" 
@@ -195,7 +195,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 </div>
               ) : (
                 <div className="mt-4">
-                  <label htmlFor="eEstudosTecnicosPreliminares">1.1 Existe ETP?</label>
+                  <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
                   <div>
                     <select 
                       name="eEstudosTecnicosPreliminares" 
