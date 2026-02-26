@@ -296,7 +296,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 <label htmlFor="justificativaEscolhaSolucaoNaoEtp" className="font-semibold">
                   2.3.1. Justificar a razão para escolha desse tipo de serviço frente às demais alternativas para a satisfação da necessidade pública 
                 </label>
-                <p className="orientacoes mb-2"></p>
+                <p className="orientacoes mb-2">No caso de contratações que envolvam soluções de TIC informar o alinhamento com as necessidades tecnológicas e de negócio</p>
                 <textarea 
                   id="justificativaEscolhaSolucaoNaoEtp" 
                   className='border rounded-sm p-2 w-full'
