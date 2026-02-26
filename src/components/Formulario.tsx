@@ -258,13 +258,22 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div>
-                <InputComponent
+                <label htmlFor="fundamentadsEm">2.2.1. Informar os critérios utilizados para definição dos quantitativos a serem contratados conforme os cálculos apresentados neste item ao apontar os documentos que comprovem esse cálculo, se for o caso.</label>
+                <textarea 
+                  name="fundamentadoEm" 
+                  id="fundamentadoEm"
+                  onChange={(e)=>setFormData({...formData, fundamentadoEm: e.target.value})}
+                  value={formData.fundamentadoEm}
+                  className='border rounded-sm p-2 w-full'
+                  rows={4}
+                />
+                {/* <InputComponent
                   label="2.2.1. Informar os critérios utilizados para definição dos quantitativos a serem contratados conforme os cálculos apresentados neste item ao apontar os documentos que comprovem esse cálculo, se for o caso."
                   onChange={(e)=> setFormData({...formData, fundamentadoEm: e.target.value})}
                   value={formData.fundamentadoEm}
                   
-                />
-                <div>
+                /> */}
+                {/* <div>
                     <label htmlFor="texto_nao_justificativa_quantitativo_textoDois" className="font-semibold">   Os quantitativos foram definidos em qual documento?</label>
                     <textarea 
                       id="texto_nao_justificativa_quantitativo_textoDois" 
@@ -273,7 +282,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                       value={formData.texto_nao_justificativa_quantitativo_textoDois}
                       onChange={(e) => setFormData({...formData, texto_nao_justificativa_quantitativo_textoDois: e.target.value})}
                     />
-                  </div>
+                  </div> */}
                {/*  <InputComponent
                   label=""
                   placeholder="Ex: foram definidos no próprio termo de referência ou em outro documento (citar)"
