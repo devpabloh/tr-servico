@@ -114,13 +114,16 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
               className="text-lg"
               isEditing={isEditing}
             />
-            
           ) : (
-            <p
-              className="text-lg p-2 rounded-md"
-              title="Clique para editar"
-              dangerouslySetInnerHTML={{ __html: p3_com_valores }}
-            />
+            /* renderiza se um dos dois campos estiver preenchido */
+            (formData.nao_havendo_grande_vulto_da_contratacao ||
+              formData.nao_havendo_complexidade_objeto) && (
+              <p
+                className="text-lg p-2 rounded-md"
+                title="Clique para editar"
+                dangerouslySetInnerHTML={{ __html: p3_com_valores }}
+              />
+            )
           )}
 
            <EditableTextarea

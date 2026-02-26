@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import type { FormDataCompleto } from "../types/types"
 import {CollapsibleText} from './CollapsibleText'
 import {numeroPorExtenso} from '../lib/utils'
@@ -10,6 +10,7 @@ import { SelectComponent } from "./SelectComponent";
 import { InputComponent } from "./InputComponent";
 import { GestaoAtoresContrato } from "./GestaoAtoresContrato";
 import { GestaoOutrosAnexos } from "./GestaoOutrosAnexos";
+import React from "react";
 
 interface FormularioProps{
   formData: FormDataCompleto;
@@ -380,7 +381,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 {/* Opção Adicional "Lotes Espelhados" (aparece se ETP=NÃO) */}
                 <hr className="my-4"/>
                 <SelectComponent
-                  label="Haverá Grupo(s) espelhados?"
+                  label={`Haverá ${formData.tipoParcelamentoNaoEtp === "item" ? "item(s)" : "Grupo(s)"} espelhados e/ou regionalizados e/ou divididos por outro critério?
+`}
                   value={formData.usaLotesEspelhados}
                   onChange={(e) => setFormData({...formData, usaLotesEspelhados: e.target.value})}
                 >
@@ -916,7 +918,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 checked={formData.justificativaBeneficioLC123Opcao?.includes('aplicar') || false}
                 onChange={()=> toggleOpcao("aplicar")}
               />
-              <label htmlFor="aplicarCotaExclusica">Aplicar cota exclusiva (Itens/lotes até R$ 80.000,00)</label>
+              <label htmlFor="aplicarCotaExclusica">Aplicar cota exclusiva (Itens/grupos até R$ 80.000,00)</label>
              </div>
               <div className="flex gap-2">
               <input 
@@ -927,7 +929,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 checked={formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_sem_enquadramento') || false}
                 onChange={()=> toggleOpcao("nao_aplicar_sem_enquadramento")} 
               />
-              <label htmlFor="nao_aplicar_sem_enquadramento">Não aplicar (Não há itens/lotes até R$ 80.000,00)</label>
+              <label htmlFor="nao_aplicar_sem_enquadramento">Não aplicar (Não há itens/grupos até R$ 80.000,00)</label>
              </div>
               <div className="flex gap-2">
                   <input 

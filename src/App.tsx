@@ -75,13 +75,13 @@ import type {
     texto_nao_parcelamento_item_p4: "2.4.4 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado tanto técnica quanto economicamente, sem restringir ou prejudicar a competitividade do certame e, consequentemente, o mais adequado para promover a maior vantajosidade para o Estado.",
     
     // Textos para 'nao' ETP -> 'lote'
-    texto_nao_parcelamento_lote_p1: "2.4.1 Neste caso em concreto, em virtude da natureza do serviço a ser contratado, a opção pelo agrupamento dos itens em lote(s) é a mais vantajosa para a Administração, uma vez que {justificativaAgrupamentoLote}.",
+    texto_nao_parcelamento_lote_p1: "2.4.1 Neste caso em concreto, em virtude da natureza do serviço a ser contratado, a opção pelo agrupamento dos itens em grupo(s) é a mais vantajosa para a Administração, uma vez que {justificativaAgrupamentoLote}.",
     justificativaAgrupamentoLote: "",
     texto_nao_parcelamento_lote_p2: "2.4.2 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado tanto técnica, quanto economicamente, sem restringir ou prejudicar a competitividade do certame e, consequentemente, o mais propício para promover maior vantajosidade para o Estado.",
 
     // Textos para 'lotes espelhados' (add-on)
     usaLotesEspelhados: "", // 'sim' ou 'nao'
-    texto_lotes_espelhados_p1: "2.4.3 Por fim, o objeto da licitação está disposto em itens/lotes idênticos, diante do vulto da contratação, a fim de ampliar ainda mais a competitividade do certame.",
+    texto_lotes_espelhados_p1: "2.4.3 Por fim, o objeto da licitação está disposto em itens/grupos idênticos, diante do vulto da contratação, a fim de ampliar ainda mais a competitividade do certame.",
     texto_lotes_espelhados_p2: "2.4.4 Ressalte-se que {argumentosLotesEspelhados}",
     argumentosLotesEspelhados: "",
     texto_lotes_espelhados_p3: "2.4.5 Dessa forma, entende-se que a licitação está disposta com vistas ao melhor aproveitamento dos recursos disponíveis no mercado e à ampliação da competitividade, sem perda da economia de escala.",
