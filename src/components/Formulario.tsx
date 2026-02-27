@@ -330,13 +330,13 @@ formData.qualTipoContratacao === 'corporativo' && (
             <CollapsibleText title="Orientações para preenchimento">
                       <p className="orientacoes">
                         Os serviços, como regra, devem atender ao princípio do parcelamento quando no caso concreto a divisão for tecnicamente viável e economicamente vantajosa. Para tanto, a Administração Pública deve motivar a sua escolha quanto ao desenho da contratação atentando para as regras do artigo 47, § 1º, da Lei nº 14.133, de 2021, que trata de aspectos a serem considerados na aplicação do mencionado princípio.
-
-                        Os textos descritos neste documento são apenas sugestões de redação para os casos mais comuns. Caso a situação prática não se enquadre em nenhuma das hipóteses elencadas, o responsável pela confecção do Termo de Referência deve elaborar redação apresentando a justificativa que retrate melhor a sua realidade.     
-
-                        Atentar que, sempre que possível, a divisão do objeto para adjudicação por item deve ser priorizada.
-
-                        O agrupamento dos itens em grupos deve ser feito com segurança e em plena consonância com a prática de mercado de forma a assegurar ampla competitividade ao certame.
                       </p>
+                      <p className="orientacoes">
+                        Os textos descritos neste documento são apenas sugestões de redação para os casos mais comuns. Caso a situação prática não se enquadre em nenhuma das hipóteses elencadas, o responsável pela confecção do Termo de Referência deve elaborar redação apresentando a justificativa que retrate melhor a sua realidade. 
+                      </p>
+                      <p className="orientacoes">Atentar que, sempre que possível, a divisão do objeto para adjudicação por item deve ser priorizada.</p>
+                      <p className="orientacoes">No caso de grupo, pode-se discorrer sobre o fato de que os itens foram agrupados para não trazer risco ao conjunto do objeto pretendido.</p>
+                      <p className="orientacoes">O agrupamento dos itens em grupos deve ser feito com segurança e em plena consonância com a prática de mercado de forma a assegurar ampla competitividade ao certame.</p>
             </CollapsibleText>
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div className="mt-4 p-4 border-t-2">
