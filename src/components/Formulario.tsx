@@ -402,15 +402,15 @@ formData.qualTipoContratacao === 'corporativo' && (
                 {formData.usaLotesEspelhados === 'sim' && (
                   <div className="my-4">
                     <label htmlFor="argumentosLotesEspelhados" className="font-semibold">
-                      2.4.4. Argumentos adicionais para o espelhamento
+                      2.4.4. Citar ainda outros argumentos que possam forçar o espelhamento
                     </label>
+                    <p className="orientacoes">Ex: Aproveitamento das peculiaridades do mercado local, a busca pela ampliação da competição, evitar a concentração de mercado etc.</p>
                     <textarea 
                       id="argumentosLotesEspelhados" 
                       className='border rounded-sm p-2 w-full'
                       rows={3}
                       value={formData.argumentosLotesEspelhados}
                       onChange={(e) => setFormData({...formData, argumentosLotesEspelhados: e.target.value})}
-                      placeholder="Ex: Aproveitamento do mercado local, ampliação da competição, etc."
                     />
                   </div>
                 )}
