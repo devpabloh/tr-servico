@@ -404,7 +404,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                     <label htmlFor="argumentosLotesEspelhados" className="font-semibold">
                       2.4.4. Citar ainda outros argumentos que possam forçar o espelhamento
                     </label>
-                    <p className="orientacoes">Ex: Aproveitamento das peculiaridades do mercado local, a busca pela ampliação da competição, evitar a concentração de mercado etc.</p>
+                    <p className="orientacoes">Exemplos: Aproveitamento das peculiaridades do mercado local, a busca pela ampliação da competição, evitar a concentração de mercado, etc.</p>
                     <textarea 
                       id="argumentosLotesEspelhados" 
                       className='border rounded-sm p-2 w-full'
