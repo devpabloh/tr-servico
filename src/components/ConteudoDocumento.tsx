@@ -151,8 +151,8 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
             isEditing={isEditing}
             setFormData={setFormData}
           />
-          {formData.qualTipoContratacao === 'corporativo' && (
-            <div className="mt-2 space-y-4 text-blue-500">
+          {formData.qualTipoContratacao === 'corporativo' && formData.reducaoEscopo === 'sim' && (
+            <div className="mt-2 space-y-4">
                 <GerarTextoItem1_2
                   formData={formData} 
                   setFormData={setFormData} 
@@ -1289,6 +1289,12 @@ function GerarTextoItem1_2({ formData, setFormData, isEditing }: GerarTextoProps
       [templateKey]: novoValor
     }));
   };
+
+  const valores = {
+    quaisOrgaosOuEntidades: formData.quaisOrgaosOuEntidades || "________________________________"
+  };
+
+  const textoComValores = substituirPlaceholders(template, valores);
   
   if (isEditing) {
     return (
@@ -1304,9 +1310,8 @@ function GerarTextoItem1_2({ formData, setFormData, isEditing }: GerarTextoProps
   return (
     <p
       className="text-lg p-2 rounded-md"
-    >
-      {template}
-    </p>
+      dangerouslySetInnerHTML={{ __html: textoComValores }}
+    />
   );
 }
 

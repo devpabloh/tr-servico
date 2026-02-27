@@ -153,19 +153,36 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </div>
                 )
               }
-              {
-              formData.qualTipoContratacao === 'corporativo' && (
-                    <div className="flex flex-col mt-4">
-                      <label htmlFor="seCoperativa">E se justifica no caso concreto, uma vez que ?</label>
-                      <textarea 
-                        name="seCoperativa" 
-                        id="seCoperativa"
-                        className='border rounded-sm p-2 w-full'
-                        value={formData.seCoperativa}
-                        onChange={(e) => setFormData({...formData, seCoperativa: e.target.value})}
-                      />
-                    </div>)
-              }
+{
+formData.qualTipoContratacao === 'corporativo' && (
+    <>
+    <SelectComponent
+      label="Haverá redução de escopo (Conforme art. 45, do Decreto Estadual nº 54.700/2023)?"
+      id="reducaoEscopo"
+      value={formData.reducaoEscopo}
+      onChange={(e) => setFormData({...formData, reducaoEscopo: e.target.value})}
+      className="font-normal"
+    >
+      <option value="">Selecione uma opção</option>
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </SelectComponent>
+    {formData.reducaoEscopo === 'sim' && (
+      <div className="flex flex-col mt-4">
+        <label htmlFor="quaisOrgaosOuEntidades">Quais são os órgão/entidades que serão atendidos nesta contratação? 
+</label>
+        <textarea 
+          name="quaisOrgaosOuEntidades" 
+          id="quaisOrgaosOuEntidades"
+          className='border rounded-sm p-2 w-full'
+          value={formData.quaisOrgaosOuEntidades}
+          onChange={(e) => setFormData({...formData, quaisOrgaosOuEntidades: e.target.value})}
+        />
+      </div>
+    )}
+    </>
+  )
+}
                   </div>
                   <div className="mt-4">
                     <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>

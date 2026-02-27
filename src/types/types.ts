@@ -125,6 +125,7 @@ export type FormDataCompleto = {
   texto_lotes_espelhados_p2: string;
   argumentosLotesEspelhados: string;
   texto_lotes_espelhados_p3: string;
+  reducaoEscopo: string;
 
 
   descricao: string;
@@ -422,6 +423,7 @@ export type FormDataCompleto = {
   orgaoGerenciador: string; 
   
   texto_orgaos_participantes_tipo: string; 
+  quaisOrgaosOuEntidades: string;
   texto_orgaos_participantes_p1: string; 
   orgaosParticipantes: string[]; 
   texto_orgaos_participantes_unico: string; 
