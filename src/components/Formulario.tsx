@@ -79,7 +79,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           </CollapsibleText>
         </FieldsetContainer>
         <FieldsetContainer titleLegend="1. Do objeto da licitação">
-          <CollapsibleText title="Orientações para preenchimento" >
+          {/* <CollapsibleText title="Orientações para preenchimento" >
               <ul className="list-disc list-inside orientacoes">
                 <li>
                   Suprimir o trecho “Formação de Registro de Preços para o eventual”, caso não se trate de registro de preços. Em caso de Registro de preços corporativo, realizar a devida
@@ -94,7 +94,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   Para uso em processos que gerem Atas de Registro de Preços Corporativas com escopo reduzido, conforme art. 45, do Decreto Estadual nº 54.700/2023
                 </li>
               </ul>
-          </CollapsibleText>
+          </CollapsibleText> */}
           <FieldsetContainer titleLegend="Objeto">
             <div>
               <label htmlFor="eRegistroPreco">É Registro de Preços?</label>
