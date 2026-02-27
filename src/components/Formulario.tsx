@@ -79,22 +79,16 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           </CollapsibleText>
         </FieldsetContainer>
         <FieldsetContainer titleLegend="1. Do objeto da licitação">
-          {/* <CollapsibleText title="Orientações para preenchimento" >
-              <ul className="list-disc list-inside orientacoes">
-                <li>
-                  Suprimir o trecho “Formação de Registro de Preços para o eventual”, caso não se trate de registro de preços. Em caso de Registro de preços corporativo, realizar a devida
-                </li>
-                <li>
-                  Citar órgão/entidade demandante. Em caso de Registro de preços corporativo incluir a abrangência. Ex.: dos órgãos da Administração Direta, Fundos Especiais, Autarquias e Fundações Públicas integrantes do Poder Executivo do Estado de Pernambuco OU outro escopo devidamente justificado, conforme art. 45, do Decreto Estadual nº 54.700/2023
-                </li>
-                <li>
-                  Conforme as condições, especificações, quantidades e exigências contidas no Estudo Técnico Preliminar(se for o caso) OU no Extrato dos Estudo Técnico Preliminar (caso seja uma das hipóteses de uso do ETP e este for classificado como sigiloso, conforme art. 9º, do Decreto Estadual nº 53.384/2022
-                </li>
-                <li>
-                  Para uso em processos que gerem Atas de Registro de Preços Corporativas com escopo reduzido, conforme art. 45, do Decreto Estadual nº 54.700/2023
-                </li>
-              </ul>
-          </CollapsibleText> */}
+          <CollapsibleText title="Orientações para preenchimento">
+                <ul className="orientacoes">
+                  <li>
+                    Sim: Na hipótese de existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
+                  </li>
+                  <li>
+                    Não: Na hipótese de NÂO existir ETP ou quando informação do presente tópico não puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
+                  </li>
+                </ul>
+            </CollapsibleText>
           <FieldsetContainer titleLegend="Objeto">
             <div>
               <label htmlFor="eRegistroPreco">É Registro de Preços?</label>
@@ -213,17 +207,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
         </FieldsetContainer>
         <FieldsetContainer titleLegend="2. Das Justificativas">
           <FieldsetContainer titleLegend="2.1 Justificativa da necessidade da contratação">
-              <CollapsibleText title="Orientações para preenchimento">
-                <ul className="orientacoes">
-                  <li>
-                    Sim: Na hipótese de existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
-                  </li>
-                  <li>
-                    Não: Na hipótese de NÂO existir ETP ou quando informação do presente tópico não puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
-                  </li>
-                </ul>
-              </CollapsibleText>
-          
               {formData.eEstudosTecnicosPreliminares === 'nao' && (
                 <div>
                   <InputComponent label="2.1.1. Expor a finalidade da contratação" id="umaVezQueAtribuicoesFuncionais" value={formData.umaVezQueAtribuicoesFuncionais} onChange={(e)=> setFormData({...formData,umaVezQueAtribuicoesFuncionais: e.target.value })}/>
