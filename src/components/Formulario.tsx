@@ -456,7 +456,7 @@ formData.qualTipoContratacao === 'corporativo' && (
             ) }
             {formData.descricao === 'nao' && (
               <div className='flex flex-col space-y-1'>
-                <label htmlFor="nao_havendo_complexidade_objeto" className='font-semibold'>2.5.3. Justificar ausência de complexidade</label>
+                <label htmlFor="nao_havendo_complexidade_objeto" className='font-semibold'>2.5.3. Justificar ausência de complexidade (se houver)</label>
                 <div>
                   <input type="text" id='nao_havendo_complexidade_objeto' className='border rounded-sm p-2 w-full' value={formData.nao_havendo_complexidade_objeto} onChange={(e)=>setFormData({...formData, nao_havendo_complexidade_objeto: e.target.value})} 
                   placeholder="Ex: Baixa complexidade técnica ou operacional"/>
@@ -465,7 +465,7 @@ formData.qualTipoContratacao === 'corporativo' && (
             )}
             {formData.descricao === 'nao' && (
               <div className='flex flex-col space-y-1'>
-                <label htmlFor="nao_havendo_grande_vulto_da_contratacao" className='font-semibold'>2.5.3. Justificar ausência de grande vulto</label>
+                <label htmlFor="nao_havendo_grande_vulto_da_contratacao" className='font-semibold'>2.5.3. Justificar ausência de grande vulto (se houver)</label>
                 <div>
                   <input type="text" id='nao_havendo_grande_vulto_da_contratacao' className='border rounded-sm p-2 w-full' value={formData.nao_havendo_grande_vulto_da_contratacao} onChange={(e)=>setFormData({...formData, nao_havendo_grande_vulto_da_contratacao: e.target.value})} />
                 </div>
