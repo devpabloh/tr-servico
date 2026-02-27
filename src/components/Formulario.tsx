@@ -76,31 +76,22 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               http://www.pge.pe.gov.br/ProcConsultivaInstrumentoLei14133.aspx
               </a>), a fim de facilitar a consulta sobre o seus termos, uma vez que são feitas remissões aos citados instrumentos durante o decorrer do texto deste documento.
           </p>
-          <p className="orientacoes font-bold">
-            REFORÇAMOS que as notas explicativas com letras vermelhas servem ao propósito de orientação e fundamentação e devem ser EXCLUÍDAS da versão definitiva do documento.
-          </p>
           </CollapsibleText>
         </FieldsetContainer>
         <FieldsetContainer titleLegend="1. Do objeto da licitação">
-          <CollapsibleText title="Orientações para preenchimento" >
-              <ul className="list-disc list-inside orientacoes">
-                <li>
-                  Suprimir o trecho “Formação de Registro de Preços para o eventual”, caso não se trate de registro de preços. Em caso de Registro de preços corporativo, realizar a devida
-                </li>
-                <li>
-                  Citar órgão/entidade demandante. Em caso de Registro de preços corporativo incluir a abrangência. Ex.: dos órgãos da Administração Direta, Fundos Especiais, Autarquias e Fundações Públicas integrantes do Poder Executivo do Estado de Pernambuco OU outro escopo devidamente justificado, conforme art. 45, do Decreto Estadual nº 54.700/2023
-                </li>
-                <li>
-                  Conforme as condições, especificações, quantidades e exigências contidas no Estudo Técnico Preliminar(se for o caso) OU no Extrato dos Estudo Técnico Preliminar (caso seja uma das hipóteses de uso do ETP e este for classificado como sigiloso, conforme art. 9º, do Decreto Estadual nº 53.384/2022
-                </li>
-                <li>
-                  Para uso em processos que gerem Atas de Registro de Preços Corporativas com escopo reduzido, conforme art. 45, do Decreto Estadual nº 54.700/2023
-                </li>
-              </ul>
-          </CollapsibleText>
-          <FieldsetContainer titleLegend="1.1 Formação de registro de preços para contratação eventual de prestação de serviços">
+          <CollapsibleText title="Orientações para preenchimento">
+                <ul className="orientacoes">
+                  <li>
+                    Sim: Na hipótese de existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
+                  </li>
+                  <li>
+                    Não: Na hipótese de NÂO existir ETP ou quando informação do presente tópico não puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
+                  </li>
+                </ul>
+            </CollapsibleText>
+          <FieldsetContainer titleLegend="Objeto">
             <div>
-              <label htmlFor="eRegistroPreco">1.1. É Registro de Preços?</label>
+              <label htmlFor="eRegistroPreco">É Registro de Preços?</label>
               <div>
                 <select 
                   name="eRegistroPreco" 
@@ -116,7 +107,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               </div>
               {formData.eRegistroPreco === 'nao' && (
                 <div className="mt-4">
-                    <label htmlFor="visandoAtenderNecessidades">1.1 Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
+                    <label htmlFor="visandoAtenderNecessidades">Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
                     <div>
                         <textarea 
                           name="visandoAtenderNecessidades" 
@@ -131,7 +122,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               {formData.eRegistroPreco === 'sim' ? (
                 <div className="mt-4">
                   <div>
-                    <label htmlFor="qualTipoContratacao">1.1. Qual o tipo de Registro de Preços?</label>
+                    <label htmlFor="qualTipoContratacao">Qual o tipo de Registro de Preços?</label>
                     <div>
                       <select 
                         name="qualTipoContratacao" 
@@ -149,7 +140,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                     {
                 formData.qualTipoContratacao === 'simples' && (
                   <div className="mt-4">
-                    <label htmlFor="visandoAtenderNecessidades">1.1 Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
+                    <label htmlFor="visandoAtenderNecessidades">Especificar os orgão(s) ou entidade(s) que serão atendidas nessa contratação</label>
                     <div>
                         <textarea 
                           name="visandoAtenderNecessidades" 
@@ -162,22 +153,51 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </div>
                 )
               }
-              {
-              formData.qualTipoContratacao === 'corporativo' && (
-                    <div className="flex flex-col mt-4">
-                      <label htmlFor="seCoperativa">1.2. E se justifica no caso concreto, uma vez que ?</label>
-                      <textarea 
-                        name="seCoperativa" 
-                        id="seCoperativa"
-                        className='border rounded-sm p-2 w-full'
-                        value={formData.seCoperativa}
-                        onChange={(e) => setFormData({...formData, seCoperativa: e.target.value})}
-                      />
-                    </div>)
-              }
+{
+formData.qualTipoContratacao === 'corporativo' && (
+    <>
+    <SelectComponent
+      label="Haverá redução de escopo (Conforme art. 45, do Decreto Estadual nº 54.700/2023)?"
+      id="reducaoEscopo"
+      value={formData.reducaoEscopo}
+      onChange={(e) => setFormData({...formData, reducaoEscopo: e.target.value})}
+      className="font-normal"
+    >
+      <option value="">Selecione uma opção</option>
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </SelectComponent>
+    {formData.reducaoEscopo === 'sim' && (
+      <>
+        <div className="flex flex-col mt-4">
+        <label htmlFor="quaisOrgaosOuEntidades">Quais são os órgão/entidades que serão atendidos nesta contratação? 
+        </label>
+        <textarea 
+          name="quaisOrgaosOuEntidades" 
+          id="quaisOrgaosOuEntidades"
+          className='border rounded-sm p-2 w-full'
+          value={formData.quaisOrgaosOuEntidades}
+          onChange={(e) => setFormData({...formData, quaisOrgaosOuEntidades: e.target.value})}
+        />
+      </div>
+      <div>
+        <label htmlFor="justificaCasoConcretoUmaVezQue">E se justifica no caso concreto, uma vez que?</label>
+        <textarea
+          name="justificaCasoConcretoUmaVezQue"
+          id="justificaCasoConcretoUmaVezQue"
+          className="border rounded-sm p-2 w-full"
+          value={formData.justificaCasoConcretoUmaVezQue}
+          onChange={(e) => setFormData({...formData, justificaCasoConcretoUmaVezQue: e.target.value})}
+        />
+      </div>
+      </>
+    )}
+    </>
+  )
+}
                   </div>
                   <div className="mt-4">
-                    <label htmlFor="eEstudosTecnicosPreliminares">1.1. Existe ETP?</label>
+                    <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
                     <div>
                       <select 
                         name="eEstudosTecnicosPreliminares" 
@@ -195,7 +215,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 </div>
               ) : (
                 <div className="mt-4">
-                  <label htmlFor="eEstudosTecnicosPreliminares">1.1 Existe ETP?</label>
+                  <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
                   <div>
                     <select 
                       name="eEstudosTecnicosPreliminares" 
@@ -211,30 +231,16 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </div>
                 </div>
               )}
-              
-              
             </div>
           </FieldsetContainer>
         </FieldsetContainer>
         <FieldsetContainer titleLegend="2. Das Justificativas">
           <FieldsetContainer titleLegend="2.1 Justificativa da necessidade da contratação">
-              <CollapsibleText title="Orientações para preenchimento">
-                <ul className="orientacoes">
-                  <li>
-                    Sim: Na hipótese de existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
-                  </li>
-                  <li>
-                    Não: Na hipótese de NÂO existir ETP ou quando informação do presente tópico não puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
-                  </li>
-                </ul>
-              </CollapsibleText>
-          
               {formData.eEstudosTecnicosPreliminares === 'nao' && (
                 <div>
                   <InputComponent label="2.1.1. Expor a finalidade da contratação" id="umaVezQueAtribuicoesFuncionais" value={formData.umaVezQueAtribuicoesFuncionais} onChange={(e)=> setFormData({...formData,umaVezQueAtribuicoesFuncionais: e.target.value })}/>
                   <SelectComponent
-                    label="O objeto atenderá o dever legal exposto?"
-                    orientacoes="Se o sim for selecionado,será necessário citar legislação, se existente, que fundamente o dever do estado de contratar o objeto"
+                    label="Existe algum dispositivo legal que fundamente o dever do Estado de contratar o objeto?"
                     id="atenderaDeverLegalExposto"
                     value={formData.atenderaDeverLegalExposto}
                     onChange={(e) => setFormData({...formData, atenderaDeverLegalExposto: e.target.value})}
@@ -244,7 +250,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                   </SelectComponent>
                   {formData.atenderaDeverLegalExposto === 'sim' && (
                     <div>
-                    <label htmlFor="textoAdicional">Texto adicional</label>
+                    <label htmlFor="textoAdicional" className="orientacoes">Citar legislação que fundamente o dever do estado de contratar o objeto e transcrever ou explicitar o conteúdo do que preconiza o dispositivo legal citado, se for o caso,</label>
                     <textarea 
                       id="textoAdicional" 
                       className='border rounded-sm p-2 w-full'
@@ -261,14 +267,23 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
 
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div>
-                <InputComponent
-                  label="2.2.1. Informar os critérios utilizados para definição dos quantitativos a serem contratados"
+                <label htmlFor="fundamentadsEm">2.2.1. Informar os critérios utilizados para definição dos quantitativos a serem contratados conforme os cálculos apresentados neste item ou apontar os documentos que comprovem esse cálculo, se for o caso.</label>
+                <textarea 
+                  name="fundamentadoEm" 
+                  id="fundamentadoEm"
+                  onChange={(e)=>setFormData({...formData, fundamentadoEm: e.target.value})}
+                  value={formData.fundamentadoEm}
+                  className='border rounded-sm p-2 w-full'
+                  rows={4}
+                />
+                {/* <InputComponent
+                  label="2.2.1. Informar os critérios utilizados para definição dos quantitativos a serem contratados conforme os cálculos apresentados neste item ao apontar os documentos que comprovem esse cálculo, se for o caso."
                   onChange={(e)=> setFormData({...formData, fundamentadoEm: e.target.value})}
                   value={formData.fundamentadoEm}
                   
-                />
-                <div>
-                    <label htmlFor="texto_nao_justificativa_quantitativo_textoDois" className="font-semibold">2.2.2. Os quantitativos foram definidos em qual documento?</label>
+                /> */}
+                {/* <div>
+                    <label htmlFor="texto_nao_justificativa_quantitativo_textoDois" className="font-semibold">   Os quantitativos foram definidos em qual documento?</label>
                     <textarea 
                       id="texto_nao_justificativa_quantitativo_textoDois" 
                       className='border rounded-sm p-2 w-full'
@@ -276,7 +291,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                       value={formData.texto_nao_justificativa_quantitativo_textoDois}
                       onChange={(e) => setFormData({...formData, texto_nao_justificativa_quantitativo_textoDois: e.target.value})}
                     />
-                  </div>
+                  </div> */}
                {/*  <InputComponent
                   label=""
                   placeholder="Ex: foram definidos no próprio termo de referência ou em outro documento (citar)"
@@ -288,18 +303,18 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             )}
           </FieldsetContainer>
           <FieldsetContainer titleLegend="2.3 Justificativa da escolha da solução">
-            <CollapsibleText title="Orientações para preenchimento">
+            {/* <CollapsibleText title="Orientações para preenchimento">
               <p className="orientacoes">
                 Redação a ser utilizada na hipótese de Existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual nº 53.384/2022)
               </p>
-            </CollapsibleText>
+            </CollapsibleText> */}
           
             {formData.eEstudosTecnicosPreliminares === "nao" && (
               <div className="my-4">
                 <label htmlFor="justificativaEscolhaSolucaoNaoEtp" className="font-semibold">
                   2.3.1. Justificar a razão para escolha desse tipo de serviço frente às demais alternativas para a satisfação da necessidade pública 
                 </label>
-                <p className="orientacoes mb-2"></p>
+                <p className="orientacoes mb-2">No caso de contratações que envolvam soluções de TIC informar o alinhamento com as necessidades tecnológicas e de negócio</p>
                 <textarea 
                   id="justificativaEscolhaSolucaoNaoEtp" 
                   className='border rounded-sm p-2 w-full'
@@ -312,6 +327,17 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             )}
           </FieldsetContainer>
           <FieldsetContainer titleLegend="2.4 Justificativa para o parcelamento ou não da contratação">
+            <CollapsibleText title="Orientações para preenchimento">
+                      <p className="orientacoes">
+                        Os serviços, como regra, devem atender ao princípio do parcelamento quando no caso concreto a divisão for tecnicamente viável e economicamente vantajosa. Para tanto, a Administração Pública deve motivar a sua escolha quanto ao desenho da contratação atentando para as regras do artigo 47, § 1º, da Lei nº 14.133, de 2021, que trata de aspectos a serem considerados na aplicação do mencionado princípio.
+                      </p>
+                      <p className="orientacoes">
+                        Os textos descritos neste documento são apenas sugestões de redação para os casos mais comuns. Caso a situação prática não se enquadre em nenhuma das hipóteses elencadas, o responsável pela confecção do Termo de Referência deve elaborar redação apresentando a justificativa que retrate melhor a sua realidade. 
+                      </p>
+                      <p className="orientacoes">Atentar que, sempre que possível, a divisão do objeto para adjudicação por item deve ser priorizada.</p>
+                      <p className="orientacoes">No caso de grupo, pode-se discorrer sobre o fato de que os itens foram agrupados para não trazer risco ao conjunto do objeto pretendido.</p>
+                      <p className="orientacoes">O agrupamento dos itens em grupos deve ser feito com segurança e em plena consonância com a prática de mercado de forma a assegurar ampla competitividade ao certame.</p>
+            </CollapsibleText>
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div className="mt-4 p-4 border-t-2">
                 <SelectComponent
@@ -327,8 +353,9 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 {/* Sub-opção "item" */}
                 {formData.tipoParcelamentoNaoEtp === 'item' && (
                   <div className="my-4">
+                    
                     <label htmlFor="razoesParcelamentoItem" className="font-semibold">
-                      Expor os motivos das razões técnicas/econômicas para o parcelamento por item
+                      Expor os motivos pelos quais a Administração Pública opta pelo parcelamento por item(ns), apresentando argumentos técnicos e/ou econômicos para o parcelamento do objeto em questão. 
                     </label>
                     <textarea 
                       id="razoesParcelamentoItem" 
@@ -336,7 +363,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                       rows={4}
                       value={formData.razoesParcelamentoItem}
                       onChange={(e) => setFormData({...formData, razoesParcelamentoItem: e.target.value})}
-                      placeholder="Ex: Elevados percentuais de exigência, especialização, etc."
+                      placeholder="Exemplo: Quando os percentuais de exigências de qualificação técnica e econômico-financeira forem elevados ou resultarem em quantias vultosas, especialização, etc
+"
                     />
                   </div>
                 )}
@@ -361,7 +389,8 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 {/* Opção Adicional "Lotes Espelhados" (aparece se ETP=NÃO) */}
                 <hr className="my-4"/>
                 <SelectComponent
-                  label="Haverá Grupo(s) espelhados?"
+                  label={`Haverá ${formData.tipoParcelamentoNaoEtp === "item" ? "item(s)" : "Grupo(s)"} espelhados e/ou regionalizados e/ou divididos por outro critério?
+`}
                   value={formData.usaLotesEspelhados}
                   onChange={(e) => setFormData({...formData, usaLotesEspelhados: e.target.value})}
                 >
@@ -373,15 +402,15 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 {formData.usaLotesEspelhados === 'sim' && (
                   <div className="my-4">
                     <label htmlFor="argumentosLotesEspelhados" className="font-semibold">
-                      2.4.4. Argumentos adicionais para o espelhamento
+                      2.4.4. Citar ainda outros argumentos que possam forçar o espelhamento
                     </label>
+                    <p className="orientacoes">Exemplos: Aproveitamento das peculiaridades do mercado local, a busca pela ampliação da competição, evitar a concentração de mercado, etc.</p>
                     <textarea 
                       id="argumentosLotesEspelhados" 
                       className='border rounded-sm p-2 w-full'
                       rows={3}
                       value={formData.argumentosLotesEspelhados}
                       onChange={(e) => setFormData({...formData, argumentosLotesEspelhados: e.target.value})}
-                      placeholder="Ex: Aproveitamento do mercado local, ampliação da competição, etc."
                     />
                   </div>
                 )}
@@ -427,7 +456,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             ) }
             {formData.descricao === 'nao' && (
               <div className='flex flex-col space-y-1'>
-                <label htmlFor="nao_havendo_complexidade_objeto" className='font-semibold'>2.5.3. Justificar ausência de complexidade</label>
+                <label htmlFor="nao_havendo_complexidade_objeto" className='font-semibold'>2.5.3. Justificar ausência de complexidade (se houver)</label>
                 <div>
                   <input type="text" id='nao_havendo_complexidade_objeto' className='border rounded-sm p-2 w-full' value={formData.nao_havendo_complexidade_objeto} onChange={(e)=>setFormData({...formData, nao_havendo_complexidade_objeto: e.target.value})} 
                   placeholder="Ex: Baixa complexidade técnica ou operacional"/>
@@ -436,7 +465,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
             )}
             {formData.descricao === 'nao' && (
               <div className='flex flex-col space-y-1'>
-                <label htmlFor="nao_havendo_grande_vulto_da_contratacao" className='font-semibold'>2.5.3. Justificar ausência de grande vulto</label>
+                <label htmlFor="nao_havendo_grande_vulto_da_contratacao" className='font-semibold'>2.5.3. Justificar ausência de grande vulto (se houver)</label>
                 <div>
                   <input type="text" id='nao_havendo_grande_vulto_da_contratacao' className='border rounded-sm p-2 w-full' value={formData.nao_havendo_grande_vulto_da_contratacao} onChange={(e)=>setFormData({...formData, nao_havendo_grande_vulto_da_contratacao: e.target.value})} />
                 </div>
@@ -897,7 +926,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 checked={formData.justificativaBeneficioLC123Opcao?.includes('aplicar') || false}
                 onChange={()=> toggleOpcao("aplicar")}
               />
-              <label htmlFor="aplicarCotaExclusica">Aplicar cota exclusiva (Itens/lotes até R$ 80.000,00)</label>
+              <label htmlFor="aplicarCotaExclusica">Aplicar cota exclusiva (Itens/grupos até R$ 80.000,00)</label>
              </div>
               <div className="flex gap-2">
               <input 
@@ -908,7 +937,7 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
                 checked={formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_sem_enquadramento') || false}
                 onChange={()=> toggleOpcao("nao_aplicar_sem_enquadramento")} 
               />
-              <label htmlFor="nao_aplicar_sem_enquadramento">Não aplicar (Não há itens/lotes até R$ 80.000,00)</label>
+              <label htmlFor="nao_aplicar_sem_enquadramento">Não aplicar (Não há itens/grupos até R$ 80.000,00)</label>
              </div>
               <div className="flex gap-2">
                   <input 

@@ -23,13 +23,14 @@ import type {
 
     sim_texto_registro_preco_unificado_saude: "1.1 Formação de registro de preços {qualTipoContratacao} para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades de todas as unidades vinculadas à pasta integrantes do Poder Executivo do Estado de Pernambuco, conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} e neste Termo de Referência.",
 
-    sim_texto_registro_preco_corporativo: "1.1 Formação de registro de preços corporativo para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades dos órgãos da Administração Direta, Fundos Especiais, Autarquias e Fundações Públicas integrantes do Poder Executivo do Estado de Pernambuco.",
+    sim_texto_registro_preco_corporativo: "1.1 Formação de registro de preços corporativo para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades dos órgãos da Administração Direta, Fundos Especiais, Autarquias e Fundações Públicas integrantes do Poder Executivo do Estado de Pernambuco, conforme as condições, especificações, quantidades e exigências contidas no Estudo Técnico Prelimina e neste Termo de Referência.",
+    sim_texto_registro_preco_corporativo_e_havera_reducao_escopo: "1.1 Formação de registro de preços corporativo para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades dos {quaisOrgaosOuEntidades}, conforme as condições, especificações, quantidades e exigências contidas no Estudo Técnico Prelimina e neste Termo de Referência.",
 
-    nao_texto_e_registro_preco: "1.1 Contratação de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades do(a) {visandoAtenderNecessidades} conforme as condições, especificações, quantidades e exigências contidas{eEstudosTecnicosPreliminares} neste Termo de Referência.",
+    nao_texto_e_registro_preco: "1.1 Contratação de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades do(a) {visandoAtenderNecessidades} conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} neste Termo de Referência.",
     paraContratacaoEventualPrestacaoServico: "",
     visandoAtenderNecessidades: "",
     eEstudosTecnicosPreliminares:"",
-    seCoperativa:"1.2 O escopo de participantes da Ata Corporativa proveniente da presente contratação teve por base o permissivo legal do art. 45, do Decreto Estadual nº 54.700/2023 e se justifica no caso concreto, uma vez que ______.",
+    seCoperativa:"1.2 O escopo de participantes da Ata Corporativa proveniente da presente contratação teve por base o permissivo legal do art. 45, do Decreto Estadual nº 54.700/2023 e se justifica no caso concreto, uma vez que {justificaCasoConcretoUmaVezQue}.",
     justificaCasoConcretoUmaVezQue: "",
     qualTipoContratacao: "",
     objetoDestaLicitacaoEstaoDivididos: "",
@@ -52,7 +53,7 @@ import type {
     texto_sim_justificativa_quantitativo: "2.2.1 A Justificativa para o quantitativo necessário ao atendimento da necessidade pública encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",
     itemEtpQuantitativo: "",
     texto_nao_justificativa_quantitativo: "2.2.1 Os quantitativos previstos no presente Termo de Referência está fundamentado em {fundamentadoEm}, conforme os cálculos apresentados a seguir:",
-    texto_nao_justificativa_quantitativo_textoDois: "2.2.2 Os quantitativos previstos no presente Termo de Referência foram definidos no documento _______.",
+    texto_nao_justificativa_quantitativo_textoDois: " Os quantitativos previstos no presente Termo de Referência foram definidos no documento _______.",
     // 2.3.1
     existEtpOuInformacaoPresenteExtratoSigilosoItemDois_tres: "",
     texto_sim_justificativa_solucao: "2.3.1 A Justificativa da escolha da solução a ser licitada encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",
@@ -69,22 +70,23 @@ import type {
     
     // Textos para 'nao' ETP -> 'item'
     texto_nao_parcelamento_item_p1: "2.4.1 A regra a ser observada pela Administração nas licitações é a do parcelamento do objeto quando, no caso concreto, a divisão for tecnicamente viável e economicamente vantajosa, de modo a ampliar a competição e evitar a concentração de mercado. (Art. 47, inciso II combinado com §1º do mesmo artigo, da Lei 14.1333/2021).",
-    texto_nao_parcelamento_item_p2: "2.4.2 Na presente contratação, resta demonstrado que o parcelamento por item(ns)buscou permitir a participação de maior número de interessados, fomentando, assim, o princípio da ampla concorrência.",
+    texto_nao_parcelamento_item_p2: "2.4.2 Na presente contratação, resta demonstrado que o parcelamento por item(ns) buscou permitir a participação de maior número de interessados, fomentando, assim, o princípio da ampla concorrência.",
     texto_nao_parcelamento_item_p3: "2.4.3 A(s) razão(ões) técnica(s) e/ou econômica(s) para a preservação do objeto parcelado por item(ns) foram {razoesParcelamentoItem}.",
     razoesParcelamentoItem: "",
     texto_nao_parcelamento_item_p4: "2.4.4 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado tanto técnica quanto economicamente, sem restringir ou prejudicar a competitividade do certame e, consequentemente, o mais adequado para promover a maior vantajosidade para o Estado.",
     
     // Textos para 'nao' ETP -> 'lote'
-    texto_nao_parcelamento_lote_p1: "2.4.1 Neste caso em concreto, em virtude da natureza do serviço a ser contratado, a opção pelo agrupamento dos itens em lote(s) é a mais vantajosa para a Administração, uma vez que {justificativaAgrupamentoLote}.",
+    texto_nao_parcelamento_lote_p1: "2.4.1 Neste caso em concreto, em virtude da natureza do serviço a ser contratado, a opção pelo agrupamento dos itens em grupo(s) é a mais vantajosa para a Administração, uma vez que {justificativaAgrupamentoLote}.",
     justificativaAgrupamentoLote: "",
     texto_nao_parcelamento_lote_p2: "2.4.2 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado tanto técnica, quanto economicamente, sem restringir ou prejudicar a competitividade do certame e, consequentemente, o mais propício para promover maior vantajosidade para o Estado.",
 
     // Textos para 'lotes espelhados' (add-on)
     usaLotesEspelhados: "", // 'sim' ou 'nao'
-    texto_lotes_espelhados_p1: "2.4.3 Por fim, o objeto da licitação está disposto em itens/lotes idênticos, diante do vulto da contratação, a fim de ampliar ainda mais a competitividade do certame.",
+    texto_lotes_espelhados_p1: "2.4.3 Por fim, o objeto da licitação está disposto em itens/grupos idênticos, diante do vulto da contratação, a fim de ampliar ainda mais a competitividade do certame.",
     texto_lotes_espelhados_p2: "2.4.4 Ressalte-se que {argumentosLotesEspelhados}",
     argumentosLotesEspelhados: "",
     texto_lotes_espelhados_p3: "2.4.5 Dessa forma, entende-se que a licitação está disposta com vistas ao melhor aproveitamento dos recursos disponíveis no mercado e à ampliação da competitividade, sem perda da economia de escala.",
+    reducaoEscopo: "",
 
     descricao: 'sim',
     numeroConsorciadas: '',
@@ -96,7 +98,7 @@ import type {
     texto_sim_limitado_p2: "2.5.2 O número máximo de empresas admitidas em cada consórcio será de {numStr} ({extensoStr}), uma vez que {justificativa}.",
     texto_nao_p1: "2.5.1. De acordo com o art. 15 da Lei nº 14.133/2021, a participação de empresas reunidas em consórcio poderá ser vedada, segundo discricionariedade da Administração, com base em justificativa técnica que leve em consideração as peculiaridades do caso concreto.",
     texto_nao_p2: "2.5.2 Assim, não poderá participar desta licitação consórcio de empresa, qualquer que seja sua forma de constituição, visto que não se faz necessária a conjugação de esforços para a prestação do presente serviço.",
-    texto_nao_p3: "2.5.3. Além disso, no caso vertente, não se faz presente a premissa da complexidade do objeto, uma vez que {nao_havendo_complexidade_objeto}. Também não está presente o grande vulto da contratação, pois {nao_havendo_grande_vulto_da_contratacao}.",
+    texto_nao_p3: "2.5.3. Além disso, no caso vertente, não se faz presente a premissa da complexidade do objeto, uma vez que {nao_havendo_complexidade_objeto}. E ainda não está presente o grande vulto da contratação, pois {nao_havendo_grande_vulto_da_contratacao}.",
     texto_nao_p4: "2.5.4.Por todo o exposto, conclui-se que a vedação da participação de empresas sob a forma de consórcio é a medida que melhor atende o interesse público, por prestigiar os princípios da competitividade, economicidade e moralidade. ",
     vedacaoOuParticipacaoCooperativa: "sim",
     vedacaoParticipacaoCooperativaNao: "2.6.1 É vedada a participação de profissionais organizados em cooperativas na presente licitação, uma vez que {justificativa_vedacao}.",
@@ -347,6 +349,7 @@ import type {
     orgaoParticipanteUnico: "", 
     texto_orgaos_participantes_corporativa: "6.3.1 Figuram como PARTICIPANTES da presente Ata de Registro de Preços Corporativa todos os órgãos da Administração Direta, fundos especiais, Autarquias e Fundações Públicas integrantes do Poder Executivo do Estado de Pernambuco .", 
     texto_prazo_assinatura_arp: "6.4.1 Após a homologação do resultado desta licitação, a adjudicatária será convocada para assinar a Ata de Registro de Preços, no prazo de {prazoAssinaturaArpDiasUteis} ({prazoAssinaturaArpDiasUteisExtenso}) dias úteis, contados da convocação, sob pena de decair o direito à contratação.",
+    quaisOrgaosOuEntidades: "",
     prazoAssinaturaArpDiasUteis: "5", 
     permiteContratacaoIndividualItemLote: "nao", 
     permiteContratacaoIndividualItemLoteNao: "6.6.1 Não haverá a possibilidade de contratação individual de itens dentro do lote.",

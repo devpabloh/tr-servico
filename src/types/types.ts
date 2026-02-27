@@ -125,6 +125,7 @@ export type FormDataCompleto = {
   texto_lotes_espelhados_p2: string;
   argumentosLotesEspelhados: string;
   texto_lotes_espelhados_p3: string;
+  reducaoEscopo: string;
 
 
   descricao: string;
@@ -422,11 +423,13 @@ export type FormDataCompleto = {
   orgaoGerenciador: string; 
   
   texto_orgaos_participantes_tipo: string; 
+  quaisOrgaosOuEntidades: string;
   texto_orgaos_participantes_p1: string; 
   orgaosParticipantes: string[]; 
   texto_orgaos_participantes_unico: string; 
   orgaoParticipanteUnico: string; 
   texto_orgaos_participantes_corporativa: string; 
+  sim_texto_registro_preco_corporativo_e_havera_reducao_escopo: string;
 
   texto_prazo_assinatura_arp: string;
   prazoAssinaturaArpDiasUteis: string;
