@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import type { FormDataCompleto } from "../types/types"
 import {CollapsibleText} from './CollapsibleText'
 import {numeroPorExtenso} from '../lib/utils'
@@ -10,7 +10,6 @@ import { SelectComponent } from "./SelectComponent";
 import { InputComponent } from "./InputComponent";
 import { GestaoAtoresContrato } from "./GestaoAtoresContrato";
 import { GestaoOutrosAnexos } from "./GestaoOutrosAnexos";
-import React from "react";
 
 interface FormularioProps{
   formData: FormDataCompleto;
