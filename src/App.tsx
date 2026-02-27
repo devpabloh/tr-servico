@@ -24,12 +24,13 @@ import type {
     sim_texto_registro_preco_unificado_saude: "1.1 Formação de registro de preços {qualTipoContratacao} para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades de todas as unidades vinculadas à pasta integrantes do Poder Executivo do Estado de Pernambuco, conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} e neste Termo de Referência.",
 
     sim_texto_registro_preco_corporativo: "1.1 Formação de registro de preços corporativo para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades dos órgãos da Administração Direta, Fundos Especiais, Autarquias e Fundações Públicas integrantes do Poder Executivo do Estado de Pernambuco, conforme as condições, especificações, quantidades e exigências contidas no Estudo Técnico Prelimina e neste Termo de Referência.",
+    sim_texto_registro_preco_corporativo_e_havera_reducao_escopo: "1.1 Formação de registro de preços corporativo para contratação eventual de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades dos {quaisOrgaosOuEntidades}, conforme as condições, especificações, quantidades e exigências contidas no Estudo Técnico Prelimina e neste Termo de Referência.",
 
     nao_texto_e_registro_preco: "1.1 Contratação de prestação de serviços de (TIPO DE SERVIÇO VAI VIR DO HOME), visando atender as necessidades do(a) {visandoAtenderNecessidades} conforme as condições, especificações, quantidades e exigências contidas {eEstudosTecnicosPreliminares} neste Termo de Referência.",
     paraContratacaoEventualPrestacaoServico: "",
     visandoAtenderNecessidades: "",
     eEstudosTecnicosPreliminares:"",
-    seCoperativa:"1.2 O escopo de participantes da Ata Corporativa proveniente da presente contratação teve por base o permissivo legal do art. 45, do Decreto Estadual nº 54.700/2023 e se justifica no caso concreto, uma vez que {quaisOrgaosOuEntidades}.",
+    seCoperativa:"1.2 O escopo de participantes da Ata Corporativa proveniente da presente contratação teve por base o permissivo legal do art. 45, do Decreto Estadual nº 54.700/2023 e se justifica no caso concreto, uma vez que {justificaCasoConcretoUmaVezQue}.",
     justificaCasoConcretoUmaVezQue: "",
     qualTipoContratacao: "",
     objetoDestaLicitacaoEstaoDivididos: "",

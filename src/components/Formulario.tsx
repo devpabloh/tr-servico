@@ -168,9 +168,10 @@ formData.qualTipoContratacao === 'corporativo' && (
       <option value="nao">Não</option>
     </SelectComponent>
     {formData.reducaoEscopo === 'sim' && (
-      <div className="flex flex-col mt-4">
+      <>
+        <div className="flex flex-col mt-4">
         <label htmlFor="quaisOrgaosOuEntidades">Quais são os órgão/entidades que serão atendidos nesta contratação? 
-</label>
+        </label>
         <textarea 
           name="quaisOrgaosOuEntidades" 
           id="quaisOrgaosOuEntidades"
@@ -179,6 +180,17 @@ formData.qualTipoContratacao === 'corporativo' && (
           onChange={(e) => setFormData({...formData, quaisOrgaosOuEntidades: e.target.value})}
         />
       </div>
+      <div>
+        <label htmlFor="justificaCasoConcretoUmaVezQue">E se justifica no caso concreto, uma vez que?</label>
+        <textarea
+          name="justificaCasoConcretoUmaVezQue"
+          id="justificaCasoConcretoUmaVezQue"
+          className="border rounded-sm p-2 w-full"
+          value={formData.justificaCasoConcretoUmaVezQue}
+          onChange={(e) => setFormData({...formData, justificaCasoConcretoUmaVezQue: e.target.value})}
+        />
+      </div>
+      </>
     )}
     </>
   )

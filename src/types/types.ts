@@ -429,6 +429,7 @@ export type FormDataCompleto = {
   texto_orgaos_participantes_unico: string; 
   orgaoParticipanteUnico: string; 
   texto_orgaos_participantes_corporativa: string; 
+  sim_texto_registro_preco_corporativo_e_havera_reducao_escopo: string;
 
   texto_prazo_assinatura_arp: string;
   prazoAssinaturaArpDiasUteis: string;

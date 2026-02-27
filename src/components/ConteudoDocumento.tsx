@@ -1202,9 +1202,11 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
     paraContratacaoEventualPrestacaoServico,
     visandoAtenderNecessidades,
     qualTipoContratacao,
+    reducaoEscopo,
     sim_texto_registro_preco_simples,
     sim_texto_registro_preco_unificado_saude,
     sim_texto_registro_preco_corporativo,
+    sim_texto_registro_preco_corporativo_e_havera_reducao_escopo,
   } = formData;
 
   const mapTipoContratacao: Record<string, string> = {
@@ -1224,8 +1226,13 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
       template = sim_texto_registro_preco_unificado_saude;
       templateKey = 'sim_texto_registro_preco_unificado_saude';
     } else if (qualTipoContratacao === 'corporativo') {
-      template = sim_texto_registro_preco_corporativo;
-      templateKey = 'sim_texto_registro_preco_corporativo';
+      if (reducaoEscopo === 'sim') {
+        template = sim_texto_registro_preco_corporativo_e_havera_reducao_escopo;
+        templateKey = 'sim_texto_registro_preco_corporativo_e_havera_reducao_escopo';
+      } else {
+        template = sim_texto_registro_preco_corporativo;
+        templateKey = 'sim_texto_registro_preco_corporativo';
+      }
     } else {
       template = sim_texto_e_registro_preco;
       templateKey = 'sim_texto_e_registro_preco';
@@ -1247,7 +1254,8 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
     paraContratacaoEventualPrestacaoServico: paraContratacaoEventualPrestacaoServico || "______",
     visandoAtenderNecessidades: visandoAtenderNecessidades || "______",
     eEstudosTecnicosPreliminares: textoEstudo || "", 
-    qualTipoContratacao: mapTipoContratacao[qualTipoContratacao] || "______"
+    qualTipoContratacao: mapTipoContratacao[qualTipoContratacao] || "______",
+    quaisOrgaosOuEntidades: formData.quaisOrgaosOuEntidades || "______"
   };
 
   const textoFinalComValores = substituirPlaceholders(template, valores);
@@ -1291,7 +1299,8 @@ function GerarTextoItem1_2({ formData, setFormData, isEditing }: GerarTextoProps
   };
 
   const valores = {
-    quaisOrgaosOuEntidades: formData.quaisOrgaosOuEntidades || "________________________________"
+    quaisOrgaosOuEntidades: formData.quaisOrgaosOuEntidades || "________________________________",
+    justificaCasoConcretoUmaVezQue: formData.justificaCasoConcretoUmaVezQue || "________________________________"
   };
 
   const textoComValores = substituirPlaceholders(template, valores);
