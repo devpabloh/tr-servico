@@ -76,9 +76,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
               http://www.pge.pe.gov.br/ProcConsultivaInstrumentoLei14133.aspx
               </a>), a fim de facilitar a consulta sobre o seus termos, uma vez que são feitas remissões aos citados instrumentos durante o decorrer do texto deste documento.
           </p>
-          <p className="orientacoes font-bold">
-            REFORÇAMOS que as notas explicativas com letras vermelhas servem ao propósito de orientação e fundamentação e devem ser EXCLUÍDAS da versão definitiva do documento.
-          </p>
           </CollapsibleText>
         </FieldsetContainer>
         <FieldsetContainer titleLegend="1. Do objeto da licitação">
