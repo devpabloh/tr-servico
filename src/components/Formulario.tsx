@@ -267,7 +267,7 @@ formData.qualTipoContratacao === 'corporativo' && (
 
             {formData.eEstudosTecnicosPreliminares === 'nao' && (
               <div>
-                <label htmlFor="fundamentadsEm">2.2.1. Informar os critérios utilizados para definição dos quantitativos a serem contratados conforme os cálculos apresentados neste item ao apontar os documentos que comprovem esse cálculo, se for o caso.</label>
+                <label htmlFor="fundamentadsEm">2.2.1. Informar os critérios utilizados para definição dos quantitativos a serem contratados conforme os cálculos apresentados neste item ou apontar os documentos que comprovem esse cálculo, se for o caso.</label>
                 <textarea 
                   name="fundamentadoEm" 
                   id="fundamentadoEm"
