@@ -303,11 +303,11 @@ formData.qualTipoContratacao === 'corporativo' && (
             )}
           </FieldsetContainer>
           <FieldsetContainer titleLegend="2.3 Justificativa da escolha da solução">
-            <CollapsibleText title="Orientações para preenchimento">
+            {/* <CollapsibleText title="Orientações para preenchimento">
               <p className="orientacoes">
                 Redação a ser utilizada na hipótese de Existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual nº 53.384/2022)
               </p>
-            </CollapsibleText>
+            </CollapsibleText> */}
           
             {formData.eEstudosTecnicosPreliminares === "nao" && (
               <div className="my-4">
