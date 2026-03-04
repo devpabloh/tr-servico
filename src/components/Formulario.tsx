@@ -886,7 +886,14 @@ formData.qualTipoContratacao === 'corporativo' && (
 
               <ul className="orientacoes">
                 <li>No caso de Registro de Preços, apenas o elemento de despesa é necessário para a classificação.</li>
-                <li>Se não for registro de preços, informar: Fonte,Unidade, Programa, Ação, Elemento de Despesa e Categoria Econômica</li>
+                <li>Se não for registro de preços, informar: </li>
+                <li>Fonte: </li>
+                <li>Unidade:</li>
+                <li>Programa:</li> 
+                <li>Ação:</li>
+                <li>Elemento de Despesa:</li> 
+                <li>Categoria Econômica:</li>
+      
               </ul>
             </CollapsibleText>
             <TextAreaComBotao
