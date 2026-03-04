@@ -156,7 +156,7 @@ export type FormDataCompleto = {
   especificacoes: string;
 
   osServicosSeraoPrestadosNosSeguintesLocaisEHorarios: string;
-  locaisEHorarios: LocalHorario[];
+  locaisEHorarios: string;
   texto_locais_e_horarios_contratante: string;
   prazoExecucaoDoContrato: string;
   

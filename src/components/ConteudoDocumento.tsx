@@ -266,21 +266,13 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
           <GerarEspecificacoes formData={formData} setFormData={setFormData} isEditing={isEditing} />
         </div>
         <div>
-        
-          {formData.osServicosSeraoPrestadosNosSeguintesLocaisEHorarios === 'sim' ? (
-            <div>
-              <p className="pt-4 text-justify font-semibold">3.2 DA EXECUÇÃO DOS SERVIÇOS</p>
-              <p className="pt-4 pb-2 text-justify">
-                3.2.1 Os serviços serão prestados nos seguintes locais e horário(s):
-              </p>
-              <GerarLocaisEHorarios formData={formData} />
-            </div>
-          ):(
-            <div>
-              <p className="pt-4 text-justify font-semibold">3.2 DA EXECUÇÃO DOS SERVIÇOS</p>
+          <p className="pt-4 text-justify font-semibold">3.2 DA EXECUÇÃO DOS SERVIÇOS</p>
+          {formData.qualTipoContratacao !== 'corporativo' && (
+            <div className="mt-2">
+              <p className="pb-2 text-justify">3.2.1 Os serviços serão prestados em locais e horários fixos?</p>
               <EditableTextarea
-                initialValue={formData.texto_locais_e_horarios_contratante}
-                onSave={(novoValor) => setFormData(prev => ({ ...prev, texto_locais_e_horarios_contratante: novoValor }))}
+                initialValue={formData.locaisEHorarios}
+                onSave={(novoValor) => setFormData(prev => ({ ...prev, locaisEHorarios: novoValor }))}
                 isEditing={isEditing}
                 className="text-lg"
               />
@@ -698,7 +690,7 @@ function GerarEspecificacoes({ formData, setFormData, isEditing }: { formData: F
 }
 
 
-function GerarLocaisEHorarios({formData}: {formData: FormDataCompleto}){
+/* function GerarLocaisEHorarios({formData}: {formData: FormDataCompleto}){
   const {osServicosSeraoPrestadosNosSeguintesLocaisEHorarios,locaisEHorarios} = formData
 
   if(osServicosSeraoPrestadosNosSeguintesLocaisEHorarios === 'nao'){
@@ -727,7 +719,7 @@ function GerarLocaisEHorarios({formData}: {formData: FormDataCompleto}){
       ))}
     </div>
   );
-}
+} */
 
 function GerarPrazoDeExecucao({formData, setFormData, isEditing}: GerarTextoProps){
   const {prazoExecucaoDoContrato, texto_prazo_execucao} = formData

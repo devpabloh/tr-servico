@@ -4,7 +4,6 @@ import {CollapsibleText} from './CollapsibleText'
 import {numeroPorExtenso} from '../lib/utils'
 import { FieldsetContainer } from "./FieldsetContainer";
 import GestaoDeItens from "./GestaoDeItens";
-import { LocaisEHorarios } from "./LocaisEHorarios";
 import { ListaDeStringsEditavel } from "./ListaDeStringsEditavel";
 import { SelectComponent } from "./SelectComponent";
 import { InputComponent } from "./InputComponent";
@@ -560,30 +559,13 @@ formData.qualTipoContratacao === 'corporativo' && (
                   <li>Na licitação de serviços de manutenção e assistência técnica, deverá ser definido o local de realização dos serviços, admitida a exigência de deslocamento de técnico ao local da repartição ou a exigência de que o contratado tenha unidade de prestação de serviços em distância compatível com as necessidades da Administração  - Art. 47, §2º, Lei nº 14.133/2021</li>
                 </ol>
               </CollapsibleText>
-              <div className='flex flex-col'>
-                <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em locais e horários fixos?</label>
-                <select name="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" id="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" value={formData.osServicosSeraoPrestadosNosSeguintesLocaisEHorarios} onChange={(e)=>setFormData({...formData,osServicosSeraoPrestadosNosSeguintesLocaisEHorarios: e.target.value})} className="border rounded-sm p-2 flex-grow w-1/5">
-                  <option value="">Selecione uma opção</option>
-                  <option value="sim">Sim</option>
-                  <option value="nao" >Não, serão prestados nos locais e horários indicados pela contratante</option>
-                </select>
-              </div>
-              <div>
-                { formData.osServicosSeraoPrestadosNosSeguintesLocaisEHorarios === 'sim' ? (
-                
-                < LocaisEHorarios
-                  locaisEHorarios={formData.locaisEHorarios}
-                  setFormData={setFormData}
-                />
-              ) : (
-                
-                <div className="mt-4">
-                  <p>
-                    3.2.1 Os serviços descritos neste termo de referência serão prestados nos locais e horários indicados pela contratante <span className="orientacoes">(Redação do caso de Ata Corporativa)</span>
-                  </p>
+              {formData.qualTipoContratacao !== 'corporativo' && (
+                <div className='flex flex-col'>
+                  <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em locais e horários fixos?</label>
+                  <textarea id='osServicosSeraoPrestadosNosSeguintesLocaisEHorarios' className='border rounded-sm p-2 w-full' value={formData.locaisEHorarios} onChange={(e)=>setFormData({...formData, locaisEHorarios: e.target.value})} />
+                 
                 </div>
               )}
-              </div>
               <FieldsetContainer titleLegend="3.2.2 O início da execução contratual">
                 <CollapsibleText title="Orientações para preenchimento">
                   <p className="orientacoes">

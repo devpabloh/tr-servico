@@ -6,7 +6,6 @@ import { Formulario } from './components/Formulario';
 import type { 
   Item, 
   Grupo, 
-  LocalHorario, 
   ClassificacaoOrcamentaria, 
   AtorGestaoContrato, 
   OutroAnexo, 
@@ -112,7 +111,7 @@ import type {
     grupos: [] as Grupo[],
     especificacoes: "",
     osServicosSeraoPrestadosNosSeguintesLocaisEHorarios: "sim",
-    locaisEHorarios: [] as LocalHorario[],
+    locaisEHorarios: "",
     texto_locais_e_horarios_contratante: "3.2.1 Os serviços serão prestados nos locais e horários indicados pela contratante, conforme demanda.",
     
     prazoExecucaoDoContrato: "",
