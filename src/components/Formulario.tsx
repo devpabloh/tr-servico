@@ -553,12 +553,6 @@ formData.qualTipoContratacao === 'corporativo' && (
               />
             </FieldsetContainer>
             <FieldsetContainer titleLegend="3.2 Da execução dos serviços">
-              <CollapsibleText title="Orientações para preenchimento">
-                <ol>
-                  <li>Caso haja mais de um endereço, deve-se especificar. Do mesmo modo, se os endereços se modificarem conforme cada etapa/fase do serviço. Ademais, se houver a necessidade de previamente se acordar a data ou hora de prestação do serviço com o contratado, deve-se especificar essa obrigação.</li>
-                  <li>Na licitação de serviços de manutenção e assistência técnica, deverá ser definido o local de realização dos serviços, admitida a exigência de deslocamento de técnico ao local da repartição ou a exigência de que o contratado tenha unidade de prestação de serviços em distância compatível com as necessidades da Administração  - Art. 47, §2º, Lei nº 14.133/2021</li>
-                </ol>
-              </CollapsibleText>
               {formData.qualTipoContratacao !== 'corporativo' && (
                 <div className='flex flex-col'>
                   <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em locais e horários fixos?</label>
@@ -637,21 +631,21 @@ formData.qualTipoContratacao === 'corporativo' && (
               formData.objetoSeraRecebido === "ProvisorioEDefinitivo" && (
                 <>
                   <InputComponent
-                    label="qual o prazo para o recebimento Provisorio?"
-                    id="prazoRecebimentoDefinitivo"
+                    label="Qual o prazo para o recebimento provisório?"
+                    id="prazoRecebimentoDefinitivo" 
                     type="number"
                     value={formData.prazoRecebimentoProvisorio}
                     onChange={(e) => setFormData({...formData, prazoRecebimentoProvisorio: e.target.value})}
                   />
                   <InputComponent
-                    label="qual o prazo para o recebimento definitivo?"
+                    label=" Qual o prazo para o recebimento definitivo?"
                     id="prazoRecebimentoDefinitivo"
                     type="number"
                     value={formData.prazoRecebimentoDefinitivo}
                     onChange={(e) => setFormData({...formData, prazoRecebimentoDefinitivo: e.target.value})}
                   />
                   <div className="flex flex-col mt-2">
-                  <label htmlFor="recebimentoDefinitivoPoderaSerExcepcionalmente" className="font-semibold">Recebimento Definitivo Poderá Ser Excepcionalmente Prorrogado ?</label>
+                  <label htmlFor="recebimentoDefinitivoPoderaSerExcepcionalmente" className="font-semibold">Haverá possibilidade de prorrogação do recebimento definitivo?</label>
                   <span className="orientacoes my-1">(Utilizar, se for o caso)</span>
                   <select 
                     name="vedacaoOuParticipacaoPessoasFisicas"
