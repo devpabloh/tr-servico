@@ -97,7 +97,8 @@ import type {
     texto_sim_limitado_p2: "2.5.2 O número máximo de empresas admitidas em cada consórcio será de {numStr} ({extensoStr}), uma vez que {justificativa}.",
     texto_nao_p1: "2.5.1. De acordo com o art. 15 da Lei nº 14.133/2021, a participação de empresas reunidas em consórcio poderá ser vedada, segundo discricionariedade da Administração, com base em justificativa técnica que leve em consideração as peculiaridades do caso concreto.",
     texto_nao_p2: "2.5.2 Assim, não poderá participar desta licitação consórcio de empresa, qualquer que seja sua forma de constituição, visto que não se faz necessária a conjugação de esforços para a prestação do presente serviço.",
-    texto_nao_p3: "2.5.3. Além disso, no caso vertente, não se faz presente a premissa da complexidade do objeto, uma vez que {nao_havendo_complexidade_objeto}. E ainda não está presente o grande vulto da contratação, pois {nao_havendo_grande_vulto_da_contratacao}.",
+    texto_nao_p3: "2.5.3. Além disso, no caso vertente, não se faz presente a premissa da complexidade do objeto, uma vez que {nao_havendo_complexidade_objeto}.",
+    texto_nao_p3_complemento: "E ainda não está presente o grande vulto da contratação, pois {nao_havendo_grande_vulto_da_contratacao}.",
     texto_nao_p4: "2.5.4.Por todo o exposto, conclui-se que a vedação da participação de empresas sob a forma de consórcio é a medida que melhor atende o interesse público, por prestigiar os princípios da competitividade, economicidade e moralidade. ",
     vedacaoOuParticipacaoCooperativa: "sim",
     vedacaoParticipacaoCooperativaNao: "2.6.1 É vedada a participação de profissionais organizados em cooperativas na presente licitação, uma vez que {justificativa_vedacao}.",
@@ -134,7 +135,7 @@ import type {
     ObjetoRecebidoProvisoriamente: "",
     ObjetoRecebidoDefinitivamente: "",
     texto_recebimento_provisorio: "A. Provisoriamente, pelo fiscal do CONTRATO no prazo de {ObjetoRecebidoProvisoriamente} ({prazoPorExtenso}) dias, mediante termo detalhado que ateste o cumprimento das exigências de caráter técnico e administrativo e a comprovação da prestação dos serviços;",
-    texto_recebimento_definitivo: "B. Definitivamente, por servidor ou comissão designada pela autoridade competente, no prazo de {ObjetoRecebidoDefinitivamente} ({definitivoPorExtenso}) dias úteis, contados...",
+    texto_recebimento_definitivo: "B. Definitivamente, por servidor ou comissão designada pela autoridade competente, no prazo de {ObjetoRecebidoDefinitivamente} ({definitivoPorExtenso}) dias úteis, contados  do recebimento provisório.",
 
     texto_recebimento_definitivo_podera_ser_excepcionalmente: "b.1.) O prazo para recebimento definitivo poderá ser excepcionalmente prorrogado, de forma justificada, por igual período, quando houver necessidade de diligências para a aferição do atendimento das exigências contratuais. (Utilizar, se for o caso)",
     recebimentoDefinitivoPoderaSerExcepcionalmente:"",
@@ -158,7 +159,7 @@ import type {
     texto_condicoes_adicionais: '3.2.10 Condições gerais e específicas para a prestação do serviço: (deve ser incluído, se cabível, condições adicionais de execução do objeto)',
     //3.3 Indocação de marcas ou modelos
     preveIndicacaoMarcasOuModelos: "nao",
-    sim_texto_preve_indicacao_marcas_ou_modelos: "3.3.1 Na presente contratação será admitida a indicação da(s) seguinte(s) marca(s) ou modelo(s): {sera_admitida_indicacao}.",
+    sim_texto_preve_indicacao_marcas_ou_modelos: "3.3.1 Na presente contratação será admitida a indicação da(s) seguinte(s) marca(s) ou modelo(s): {sera_admitida_indicacao} de acordo com as justificativas contidas no Estudo Técnico Preliminar.",
     sera_admitida_indicacao: "",
     sim_texto_dois_presente_contratacao_sera_admitida: "3.3.2 A Justificativa para a indicação de marca(s) ou modelo(s) encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, apêndice deste Termo de Referência.",
     numero_etp: "",

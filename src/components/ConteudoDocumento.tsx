@@ -90,6 +90,7 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
     }
     case 'nao': {
       const p3_com_valores = substituirPlaceholders(formData.texto_nao_p3, valores);
+      const p3_complemento_com_valores = substituirPlaceholders(formData.texto_nao_p3_complemento, valores);
       return (
         <>
           <EditableTextarea
@@ -106,23 +107,39 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
           />
 
           {isEditing ? (
-            <EditableTextarea
-              initialValue={formData.texto_nao_p3}
-              onSave={(novoValor: string) => {
-                handleSave('texto_nao_p3', novoValor);
-              }}
-              className="text-lg"
-              isEditing={isEditing}
-            />
+            <>
+                <EditableTextarea
+                initialValue={formData.texto_nao_p3}
+                onSave={(novoValor: string) => {
+                  handleSave('texto_nao_p3', novoValor);
+                }}
+                className="text-lg"
+                isEditing={isEditing}
+              />
+
+              <EditableTextarea
+                initialValue={formData.texto_nao_p3_complemento}
+                onSave={(novoValor: string) => {
+                  handleSave('texto_nao_p3_complemento', novoValor);
+                }}
+                className="text-lg"
+                isEditing={isEditing}
+              />  
+            </>
           ) : (
             /* renderiza se um dos dois campos estiver preenchido */
             (formData.nao_havendo_grande_vulto_da_contratacao ||
               formData.nao_havendo_complexidade_objeto) && (
-              <p
-                className="text-lg p-2 rounded-md"
-                title="Clique para editar"
-                dangerouslySetInnerHTML={{ __html: p3_com_valores }}
-              />
+              <>
+                    <p
+                    className="text-lg p-2 rounded-md"
+                    title="Clique para editar"
+                    dangerouslySetInnerHTML={{ __html: p3_com_valores }}
+                  />
+                  <p>
+                    <span className="text-lg p-2 rounded-md" dangerouslySetInnerHTML={{ __html: p3_complemento_com_valores }} />
+                  </p>
+              </>
             )
           )}
 
@@ -135,8 +152,6 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
         </>
       );
     }
-    default:
-      return <p className="text-gray-400 italic">Opção de consórcio não selecionada.</p>;
   }
 }
 
@@ -319,7 +334,8 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
           />
         </div>
       </div>
-      <div>
+      {formData.objetoSeraRecebido !== 'nao' && (
+        <div>
           <p className="pt-4 pb-2 text-justify">
             3.2.7 O objeto será recebido:
           </p>
@@ -334,6 +350,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
             isEditing={isEditing}
           />
         </div>
+      )}
          <div>
           <GerarTextoTermoDetalhado
             formData={formData}
@@ -828,15 +845,6 @@ function PerfeitaExecucaoDosServicos({formData, setFormData, isEditing}: GerarTe
         />
     );
   }
-
-  if(!perfeitaExecucaoservicos){
-    return (
-      <p className="text-gray-500 italic">
-        [Informações sobre a perfeita execução não especificadas]
-      </p>
-    )
-  }
-
   return(
       <p
       className="text-lg p-2 rounded-md"
@@ -972,15 +980,18 @@ function RecebimentoDefinitivoPoderaSerExcepcionalmente({formData, setFormData, 
     }));
   };
 
-  /* const valores = {
-    ObjetoRecebidoProvisoriamente: formData.ObjetoRecebidoProvisoriamente || "___",
-    ObjetoRecebidoDefinitivamente: formData.ObjetoRecebidoDefinitivamente || "___",
-    
-  }; */
+  // prepara valores para placeholders
+  const valores = {
+    ObjetoRecebidoDefinitivamente: formData.prazoRecebimentoDefinitivo || "___",
+    definitivoPorExtenso: numeroPorExtenso(formData.prazoRecebimentoDefinitivo || '') || "____"
+  };
 
   switch (recebimentoDefinitivoPoderaSerExcepcionalmente) {
     case 'sim': {
-      // const textoComValores = substituirPlaceholders(formData.texto_recebimento_definitivo_podera_ser_excepcionalmente, valores);
+      const textoComValores = substituirPlaceholders(
+        formData.texto_recebimento_definitivo_podera_ser_excepcionalmente,
+        valores
+      );
       return (
         isEditing ? (
           <EditableTextarea
@@ -991,12 +1002,14 @@ function RecebimentoDefinitivoPoderaSerExcepcionalmente({formData, setFormData, 
           />
         ) : (
           <p
-            
+            className="text-lg p-2 rounded-md"
+            dangerouslySetInnerHTML={{ __html: textoComValores }}
           />
         )
       );
     }
-    
+    default:
+      return null;
   }
 }
 
@@ -1069,7 +1082,6 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
   switch (eEstudosTecnicosPreliminares) {
     case 'sim': {
       const primeiroTextoComValores = substituirPlaceholders(formData.sim_texto_preve_indicacao_marcas_ou_modelos, valores);
-      const segundoTextoComValores = substituirPlaceholders(formData.sim_texto_dois_presente_contratacao_sera_admitida, valores)
       return (
         <>
           {isEditing ? (
@@ -1087,25 +1099,20 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
           )}
 
           {/* Você esqueceu de renderizar o segundo parágrafo do "sim" */}
-          {isEditing ? (
+          {isEditing && (
             <EditableTextarea
               initialValue={formData.sim_texto_dois_presente_contratacao_sera_admitida}
               onSave={(novoValor: string) => handleSave('sim_texto_dois_presente_contratacao_sera_admitida', novoValor)}
               className="text-lg"
               isEditing={isEditing}
             />
-          ) : (
-            <p
-              className="text-lg p-2 rounded-md"
-              dangerouslySetInnerHTML={{ __html: segundoTextoComValores }}
-            />
           )}
         </>
       );
     }
     case 'nao': {
-       const textoComValores = substituirPlaceholders(formData.nao_texto_preve_indicacao_marcas_ou_modelos, valores);
-       return (
+      const textoComValores = substituirPlaceholders(formData.nao_texto_preve_indicacao_marcas_ou_modelos, valores);
+      return (
         isEditing ? (
           <EditableTextarea
             initialValue={formData.nao_texto_preve_indicacao_marcas_ou_modelos}

@@ -139,6 +139,7 @@ export type FormDataCompleto = {
   texto_nao_p2: string;
   texto_nao_p1: string;
   texto_nao_p3: string;
+  texto_nao_p3_complemento: string;
   texto_nao_p4: string;
   vedacaoOuParticipacaoCooperativa: string;
   vedacaoParticipacaoCooperativaNao: string;

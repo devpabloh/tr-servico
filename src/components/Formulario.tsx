@@ -570,8 +570,18 @@ formData.qualTipoContratacao === 'corporativo' && (
                   </p>
                 </CollapsibleText>
                 <div className="flex flex-col">
-                    <label htmlFor="quantas_empresas_serao_admitidas_consorcio" className="font-semibold">3.2.2. deve se dar no prazo máximo de ?</label>
-                    <input type="number" id='quantas_empresas_serao_admitidas_consorcio' className='border rounded-sm p-2 w-full' value={formData.prazoExecucaoDoContrato} onChange={(e)=>setFormData({...formData, prazoExecucaoDoContrato: e.target.value})} />
+                    <label htmlFor="quantas_empresas_serao_admitidas_consorcio" className="font-semibold">Qual é o prazo máximo para início da execução contratual?</label>
+                    <input 
+                      type="number" 
+                      min={0}  
+                      id='quantas_empresas_serao_admitidas_consorcio' 
+                      className='border rounded-sm p-2 w-full' 
+                      value={formData.prazoExecucaoDoContrato} 
+                      onChange={(e) => {
+                        const valor = e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value) || 0).toString();
+                        setFormData({...formData, prazoExecucaoDoContrato: valor})
+                      }} 
+                    />
                       {formData.prazoExecucaoDoContrato  && (
                       <p className="text-sm text-gray-500 italic">
                         {numeroPorExtenso(formData.prazoExecucaoDoContrato)}
@@ -634,15 +644,23 @@ formData.qualTipoContratacao === 'corporativo' && (
                     label="Qual o prazo para o recebimento provisório?"
                     id="prazoRecebimentoDefinitivo" 
                     type="number"
+                    min="0"
                     value={formData.prazoRecebimentoProvisorio}
-                    onChange={(e) => setFormData({...formData, prazoRecebimentoProvisorio: e.target.value})}
+                    onChange={(e) => {
+                      const valor = e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value) || 0).toString();
+                      setFormData({...formData, prazoRecebimentoProvisorio: valor})
+                    }}
                   />
                   <InputComponent
                     label=" Qual o prazo para o recebimento definitivo?"
                     id="prazoRecebimentoDefinitivo"
                     type="number"
+                    min="0"
                     value={formData.prazoRecebimentoDefinitivo}
-                    onChange={(e) => setFormData({...formData, prazoRecebimentoDefinitivo: e.target.value})}
+                    onChange={(e) => {
+                      const valor = e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value) || 0).toString();
+                      setFormData({...formData, prazoRecebimentoDefinitivo: valor})
+                    }}
                   />
                   <div className="flex flex-col mt-2">
                   <label htmlFor="recebimentoDefinitivoPoderaSerExcepcionalmente" className="font-semibold">Haverá possibilidade de prorrogação do recebimento definitivo?</label>
@@ -665,9 +683,9 @@ formData.qualTipoContratacao === 'corporativo' && (
             }
 
             </FieldsetContainer>
-            <FieldsetContainer titleLegend="3.2.8 O termo detalhado do recebimento provisório, com a análise das ocorrências registradas na execução do contrato serão encaminhados ao gestor para fins de apuração dos descontos e glosas cabíveis na fatura correspondente, em virtude de serviços total ou parcialmente não executados?">
+            <FieldsetContainer titleLegend="3.2.8 O termo detalhado do recebimento provisório">
                <div className="flex flex-col mt-2">
-                  <label htmlFor="TermoDetalhadoDeRecebimentoProvisorio" className="font-semibold">Foi elaborado o IMR?</label>
+                  <label htmlFor="TermoDetalhadoDeRecebimentoProvisorio" className="font-semibold">Foi elaborado o IMR (Instrumento de Medição de Resultado) para auxiliar o recebimento definitivo?</label>
                   <span className="orientacoes my-1">(Utilizar, se for o caso)</span>
                   <select 
                     name="TermoDetalhadoDeRecebimentoProvisorio"
@@ -716,10 +734,13 @@ formData.qualTipoContratacao === 'corporativo' && (
                 )}
             </FieldsetContainer> */}
 
-            <FieldsetContainer titleLegend="3.3 Indicação de marcas ou modelos">
+            <FieldsetContainer titleLegend="3.3 Indicação de marcas ou modelos (se for o caso)">
               <CollapsibleText title="Orientações para preenchimento">
                 <p className="orientacoes">
                   Embora a contratação seja de serviços, é possível que a Administração indique, de forma excepcional e devidamente justificada, marcas ou modelos de eventuais bens necessários à execução do objeto da contratação, observando as hipóteses previstas no art. 41, inciso I, da Lei nº 14.133/2021. 
+                </p>
+                <p className="orientacoes">
+                  Exemplos de justificativas para indicação de marcas e/ou modelos: necessidade de padronização do objeto, compatibilidade com plataformas e padrões já adotados pela Administração, marca ou modelo comercializados por mais de um fornecedor forem os únicos capazes de atender às necessidades do contratante, quando a descrição do objeto a ser licitado puder ser mais bem compreendida pela identificação de determinada marca ou determinado modelo aptos a servir apenas como referência.
                 </p>
               </CollapsibleText>
               
@@ -768,7 +789,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                 </div>
                 {formData.necessarioCondicoesAdicionaisParaExecucaoDoObjeto === 'sim' && (
                   <TextAreaComBotao
-                    label="Não será aceito os seguintes produtos/marcas"
+                    label="Citar as marca(s)/ produto(s) que serão vedados para esta contratação)"
                     placeholder="Digite os produtos/marcas..."
                     valorInicial={formData.condicoesAdicionaisExecucao}
                     onSalvar={(novoValor)=>{
@@ -851,7 +872,7 @@ formData.qualTipoContratacao === 'corporativo' && (
               </div>
             ) : (
               <InputComponent
-                      label="Justificar o orçamento sigiloso"
+                      label="Justificar a vantagem de manter o sigilo do valor do objeto"
                       id="JustificarOrcamentoSigiloso"
                       type="text"
                       value={formData.justificativaOrcamentoSigiloso}
@@ -1100,6 +1121,7 @@ formData.qualTipoContratacao === 'corporativo' && (
               label="Prazo de Validade da Proposta (em dias)"
               id="prazoValidadePropostaDias"
               type="number"
+              min={0}
               value={formData.prazoValidadePropostaDias}
               onChange={(e) => setFormData({...formData, prazoValidadePropostaDias: e.target.value})}
               orientacoes="Mínimo sugerido: 60 dias."
@@ -1148,6 +1170,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                   label="Percentual de Garantia (0.01 a 1.00%)"
                   id="percentualGarantiaProposta"
                   type="number"
+                  
                   step="0.01"
                   min="0.01"
                   max="1"
@@ -1206,6 +1229,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                         label="Prazo para apresentação (dias úteis)"
                         id="prazoAmostraDiasUteis"
                         type="number"
+                        min={0}
                         value={formData.prazoAmostraDiasUteis}
                         onChange={(e) => setFormData({...formData, prazoAmostraDiasUteis: e.target.value})}
                       />
@@ -1229,6 +1253,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                       label="Prazo para apresentação das amostras (dias úteis)"
                       id="prazoAmostraDiasUteis"
                       type="number"
+                      min={0}
                       value={formData.prazoAmostraDiasUteis}
                       onChange={(e) => setFormData({...formData, prazoAmostraDiasUteis: e.target.value})}
                     />
@@ -1283,6 +1308,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                   label="Duração da prova de conceito"
                   id="duracaoProvaConceitoDiasUteis"
                   type="number"
+                  min={0}
                   value={formData.duracaoProvaConceitoDiasUteis}
                   onChange={(e) => setFormData({...formData, duracaoProvaConceitoDiasUteis: e.target.value})}
                 />
@@ -1325,6 +1351,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                   label="Percentual de comprovação de atendimento (%)"
                   id="comprovacaoAtendimentoPercentual"
                   type="number"
+                  min={0}
                   value={formData.comprovacaoAtendimentoPercentual}
                   onChange={(e) => setFormData({...formData, comprovacaoAtendimentoPercentual: e.target.value})}
                 />
@@ -1347,6 +1374,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                   label="Prazo para análise da prova de conceito (dias úteis)"
                   id="prazoAnaliseProvaConceitoDiasUteis"
                   type="number"
+                  min={0}
                   value={formData.prazoAnaliseProvaConceitoDiasUteis}
                   onChange={(e) => setFormData({...formData, prazoAnaliseProvaConceitoDiasUteis: e.target.value})}
                 />
@@ -1636,6 +1664,7 @@ formData.qualTipoContratacao === 'corporativo' && (
           label="Prazo para Assinatura (dias úteis)"
           id="prazoAssinaturaArpDiasUteis"
           type="number"
+          min={0}
           value={formData.prazoAssinaturaArpDiasUteis}
           onChange={(e) => setFormData({...formData, prazoAssinaturaArpDiasUteis: e.target.value})}
         />
@@ -1712,6 +1741,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                   orientacoes="Observar o máximo legal permitido"
                   id="limiteAdesaoCadaOrgao"
                   type="number"
+                  min={0}
                   value={formData.limiteAdesaoCadaOrgao}
                   onChange={(e) => setFormData({...formData, limiteAdesaoCadaOrgao: e.target.value})}
                 />
@@ -1852,6 +1882,7 @@ formData.qualTipoContratacao === 'corporativo' && (
       label="Prazo para Assinatura (dias úteis)"
       id="prazoAssinaturaContratoDiasUteis"
       type="number"
+      min={0}
       value={formData.prazoAssinaturaContratoDiasUteis}
       onChange={(e) => setFormData({...formData, prazoAssinaturaContratoDiasUteis: e.target.value})}
       orientacoes="Prazo padrão: 5 dias úteis."
@@ -2076,6 +2107,7 @@ formData.qualTipoContratacao === 'corporativo' && (
           label="Percentual Limite (Ex: 30%)"
           id="percentualLimiteSubcontratacaoAcessorias"
           type="number"
+          min={0}
           value={formData.percentualLimiteSubcontratacaoAcessorias}
           onChange={(e) => setFormData({...formData, percentualLimiteSubcontratacaoAcessorias: e.target.value})}
         />
@@ -2094,6 +2126,7 @@ formData.qualTipoContratacao === 'corporativo' && (
           id="percentualLimiteSubcontratacaoTecnicos"
           type="number"
           max="25"
+          min={0}
           value={formData.percentualLimiteSubcontratacaoTecnicos}
           onChange={(e) => setFormData({...formData, percentualLimiteSubcontratacaoTecnicos: e.target.value})}
         />
@@ -2107,6 +2140,7 @@ formData.qualTipoContratacao === 'corporativo' && (
           label="Percentual Limite (Ex: 30%)"
           id="percentualLimiteSubcontratacaoAcessorias"
           type="number"
+          min={0}
           value={formData.percentualLimiteSubcontratacaoAcessorias}
           onChange={(e) => setFormData({...formData, percentualLimiteSubcontratacaoAcessorias: e.target.value})}
         />
@@ -2125,6 +2159,7 @@ formData.qualTipoContratacao === 'corporativo' && (
           label="Percentual Limite (Máx 25%)"
           id="percentualLimiteSubcontratacaoTecnicos"
           type="number"
+          min={0}
           max="25"
           value={formData.percentualLimiteSubcontratacaoTecnicos}
           onChange={(e) => setFormData({...formData, percentualLimiteSubcontratacaoTecnicos: e.target.value})}
@@ -2210,6 +2245,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                 label="Prazo para pagamento antecipado (dias)"
                 id="prazoAntecipacaoPagamento"
                 type="number"
+                min={0}
                 value={formData.prazoAntecipacaoPagamento}
                 onChange={(e) => setFormData({...formData, prazoAntecipacaoPagamento: e.target.value})}
               />
@@ -2234,6 +2270,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                   label="Percentual da Garantia Adicional (%)"
                   id="percentualGarantiaAdicionalAntecipacao"
                   type="number"
+                  min={0}
                   value={formData.percentualGarantiaAdicionalAntecipacao}
                   onChange={(e) => setFormData({...formData, percentualGarantiaAdicionalAntecipacao: e.target.value})}
                 />
@@ -2293,6 +2330,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                 label="Prazo para ateste da medição (dias úteis)"
                 id="prazoAtesteMedicao"
                 type="number"
+                min={0}
                 value={formData.prazoAtesteMedicao}
                 onChange={(e) => setFormData({...formData, prazoAtesteMedicao: e.target.value})}
               />
