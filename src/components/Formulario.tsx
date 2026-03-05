@@ -802,6 +802,13 @@ formData.qualTipoContratacao === 'corporativo' && (
           <FieldsetContainer titleLegend="4. DO VALOR ESTIMADO DA CONTRATAÇÃO">
           
           <FieldsetContainer titleLegend="4.1 Valor estimado da contratação">
+            {formData.orcamentoSigiloso === "sim" && (
+              <CollapsibleText title="Orientações para preenchimento">
+                <p className="orientacoes">
+                  O orçamento sigiloso, não poderá haver prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas. Além disso, o sigilo não prevalecerá para os órgãos de controle interno e externo. Por fim, atentar que nas hipótese de licitação em que for adotado o critério de julgamento por maior desconto, o preço estimado ou o máximo aceitável constará do edital da licitação.
+                </p>
+              </CollapsibleText>
+            )}
             <SelectComponent
               label="Orçamento sigiloso?"
               id="orcamentoSigiloso"
@@ -883,7 +890,6 @@ formData.qualTipoContratacao === 'corporativo' && (
 
           <FieldsetContainer titleLegend="4.2 Classificação Orçamentária da Despesa">
             <CollapsibleText title="Orientações">
-
               <ul className="orientacoes">
                 <li>No caso de Registro de Preços, apenas o elemento de despesa é necessário para a classificação.</li>
                 <li>Se não for registro de preços, informar: </li>
@@ -893,7 +899,6 @@ formData.qualTipoContratacao === 'corporativo' && (
                 <li>Ação:</li>
                 <li>Elemento de Despesa:</li> 
                 <li>Categoria Econômica:</li>
-      
               </ul>
             </CollapsibleText>
             <TextAreaComBotao

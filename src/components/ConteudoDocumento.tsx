@@ -1076,6 +1076,7 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
     // Valores do caso "Não"
     marcas_ou_modelos_indicadas: formData.marcas_ou_modelos_indicadas || "______",
     devido_a: formData.devido_a || "______",
+    nao_texto_preve_indicacao_marcas_ou_modelos: formData.nao_texto_preve_indicacao_marcas_ou_modelos || "_________"
     
   };
 
@@ -1098,7 +1099,6 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
             />
           )}
 
-          {/* Você esqueceu de renderizar o segundo parágrafo do "sim" */}
           {isEditing && (
             <EditableTextarea
               initialValue={formData.sim_texto_dois_presente_contratacao_sera_admitida}
@@ -1128,8 +1128,6 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
         )
       );
     }
-    default:
-      return <p className="text-gray-400 italic">Opção de indicação de marcas ou modelos não selecionada.</p>;
   }
   
 }
