@@ -914,7 +914,7 @@ formData.qualTipoContratacao === 'corporativo' && (
           
 
           <FieldsetContainer titleLegend="4.3 Justificativa para aplicação ou não do benefício (LC Nº 123/2006)">
-            <SelectComponent
+            {/* <SelectComponent
               label="Haverá aplicação do benefício previsto na Lei Complementar Nº 123/2006?"
               onChange={(e)=> setFormData({...formData, aplicarCotaExclusiva: e.target.value})}
               value={formData.aplicarCotaExclusiva}
@@ -922,11 +922,9 @@ formData.qualTipoContratacao === 'corporativo' && (
               <option value="">Selecione uma opção</option>
               <option value="sim">Sim</option>
               <option value="nao">Não</option>
-            </SelectComponent>
+            </SelectComponent> */}
              
-             {formData.aplicarCotaExclusiva === 'sim' && (
-              <>
-             <div className="flex gap-2">
+              <div className="flex gap-2">
               <input 
                 type="checkbox" 
                 id="aplicarCotaExclusica" 
@@ -937,6 +935,15 @@ formData.qualTipoContratacao === 'corporativo' && (
               />
               <label htmlFor="aplicarCotaExclusica">Aplicar cota exclusiva (Itens/grupos até R$ 80.000,00)</label>
              </div>
+             {formData.justificativaBeneficioLC123Opcao?.includes('aplicar') && (
+              <InputComponent
+                label=""
+                id="itensLotesCotaExclusiva"
+                value={formData.itensLotesCotaExclusiva}
+                onChange={(e) => setFormData({...formData, itensLotesCotaExclusiva: e.target.value})}
+                orientacoes="Citar quais itens ou lotes. Deixe em branco se forem todos."
+              />
+            )}
               <div className="flex gap-2">
               <input 
                 type="checkbox" 
@@ -948,6 +955,15 @@ formData.qualTipoContratacao === 'corporativo' && (
               />
               <label htmlFor="nao_aplicar_sem_enquadramento">Não aplicar (Não há itens/grupos até R$ 80.000,00)</label>
              </div>
+             {formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_sem_enquadramento') && (
+              <InputComponent
+                label=""
+                id="nao_aplicar_sem_enquadramento_texto"
+                value={formData.nao_aplicar_sem_enquadramento_texto}
+                onChange={(e) => setFormData({...formData, nao_aplicar_sem_enquadramento_texto: e.target.value})}
+                orientacoes="Citar quais itens ou lotes. Deixe em branco se forem todos."
+              />
+            )}
               <div className="flex gap-2">
                   <input 
                     type="checkbox" 
@@ -957,31 +973,9 @@ formData.qualTipoContratacao === 'corporativo' && (
                     checked={formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_49') || false}
                     onChange={()=> toggleOpcao("nao_aplicar_art_49")} 
                   />
-              <label htmlFor="nao_aplicar_art_49">Não aplicar (Exceção Art. 49 da LC 123/2006)</label>
+              <label htmlFor="nao_aplicar_art_49">Não aplicar (Exceção do art. 49 da LC 123/2006 e/ou  do art.9º do Decreto Estadual nº 45.140/2017)</label>
              </div>
-              <div className="flex gap-2">
-              <input 
-                type="checkbox" 
-                id="nao_aplicar_art_4_lei_14133" 
-                name="justificativaBeneficioLC123Opcao" 
-                value="nao_aplicar_art_4_lei_14133" 
-                checked={formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_4_lei_14133') || false }
-                onChange={()=> toggleOpcao("nao_aplicar_art_4_lei_14133")}
-              />
-              <label htmlFor="nao_aplicar_art_4_lei_14133">Não aplicar (Preço anual superior ao limite de EPP - Art. 4º, § 1º, I, Lei 14.133)</label>
-             </div>
-
-            {formData.justificativaBeneficioLC123Opcao?.includes('aplicar') && (
-              <InputComponent
-                label="Itens OU lotes com cota exclusiva"
-                id="itensLotesCotaExclusiva"
-                value={formData.itensLotesCotaExclusiva}
-                onChange={(e) => setFormData({...formData, itensLotesCotaExclusiva: e.target.value})}
-                orientacoes="Citar quais itens ou lotes. Deixe em branco se forem todos."
-              />
-            )}
-
-            {formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_49') && (
+              {formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_49') && (
               <div className="pl-4 border-l-4">
                  <InputComponent
                   label="Inciso(s) do art. 49 da LC nº 123/2006"
@@ -1003,6 +997,21 @@ formData.qualTipoContratacao === 'corporativo' && (
                 />
               </div>
             )}
+              <div className="flex gap-2">
+              <input 
+                type="checkbox" 
+                id="nao_aplicar_art_4_lei_14133" 
+                name="justificativaBeneficioLC123Opcao" 
+                value="nao_aplicar_art_4_lei_14133" 
+                checked={formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_4_lei_14133') || false }
+                onChange={()=> toggleOpcao("nao_aplicar_art_4_lei_14133")}
+              />
+              <label htmlFor="nao_aplicar_art_4_lei_14133">Não aplicar (Preço anual superior ao limite de EPP - art. 4º, § 1º, I, Lei nº 14.133/2021)</label>
+             </div>
+
+            
+
+           
 
             {formData.justificativaBeneficioLC123Opcao?.includes('nao_aplicar_art_4_lei_14133') && (
                <InputComponent
@@ -1013,8 +1022,6 @@ formData.qualTipoContratacao === 'corporativo' && (
                 />
             )}
               
-              </>
-             )}
 
           </FieldsetContainer>
 
@@ -1092,7 +1099,7 @@ formData.qualTipoContratacao === 'corporativo' && (
             </SelectComponent>
 
             <InputComponent
-              label="Apresentar motivação para escolha do modo de disputae forma de combinação dos parâmetros, conforme exigência do art. 18, inciso VIII, da Lei nº 14.133/21 c/c art. 17, inciso XIII, do Decreto Estadual nº 53.384/2022"
+              label="Apresentar motivação para escolha da forma de combinação dos parâmetros, conforme exigência do art. 18, inciso VIII, da Lei nº 14.133/21 c/c art. 17, inciso XIII, do Decreto Estadual nº 53.384/2022) "
               id="motivacaoParametrosLicitacao"
               value={formData.motivacaoParametrosLicitacao}
               onChange={(e) => setFormData({...formData, motivacaoParametrosLicitacao: e.target.value})}
@@ -1121,14 +1128,14 @@ formData.qualTipoContratacao === 'corporativo' && (
           </FieldsetContainer>
 
           <FieldsetContainer titleLegend="5.2 Proposta">
-            <CollapsibleText title="Orientações">
-              <ul className="orientacoes">
-                <li>O Decreto Estadual nº 53.384/2022 dispõe que a Administração Pública poderá prever, excepcionalmente, a apresentação de amostra, exame de conformidade ou prova de conceito, entre outros testes de interesse da Administração, de modo a comprovar a aderência do objeto ofertado pelos licitantes às especificações definidas no termo de referência.Assim, em caso de necessidade justificada da exigência de algum desses testes, a redação exposta neste item deve ser adaptada para contemplar as suas especificidades do caso concreto, garantindo sempre os requisitos básicos contidos no § 2º, do art. 20, do Decreto Estadual nº 53.384/2022. </li>
-                <li>
-                  Quanto ao momento da análise das amostras/exame de conformidade/prova de conceito/outros testes, o Decreto nº 53.384/2022 disciplina que poderá ser realizada durante o processamento da licitação, quando do julgamento das propostas; após a homologação, como condição para a assinatura do contrato; ou no período de vigência contratual ou da ata de registro de preços.
-                </li>
-              </ul>
-            </CollapsibleText>
+              {/* <CollapsibleText title="Orientações">
+                <ul className="orientacoes">
+                  <li>O Decreto Estadual nº 53.384/2022 dispõe que a Administração Pública poderá prever, excepcionalmente, a apresentação de amostra, exame de conformidade ou prova de conceito, entre outros testes de interesse da Administração, de modo a comprovar a aderência do objeto ofertado pelos licitantes às especificações definidas no termo de referência.Assim, em caso de necessidade justificada da exigência de algum desses testes, a redação exposta neste item deve ser adaptada para contemplar as suas especificidades do caso concreto, garantindo sempre os requisitos básicos contidos no § 2º, do art. 20, do Decreto Estadual nº 53.384/2022. </li>
+                  <li>
+                    Quanto ao momento da análise das amostras/exame de conformidade/prova de conceito/outros testes, o Decreto nº 53.384/2022 disciplina que poderá ser realizada durante o processamento da licitação, quando do julgamento das propostas; após a homologação, como condição para a assinatura do contrato; ou no período de vigência contratual ou da ata de registro de preços.
+                  </li>
+                </ul>
+              </CollapsibleText> */}
             <InputComponent
               label="Prazo de Validade da Proposta (em dias)"
               id="prazoValidadePropostaDias"
@@ -1136,7 +1143,7 @@ formData.qualTipoContratacao === 'corporativo' && (
               min={0}
               value={formData.prazoValidadePropostaDias}
               onChange={(e) => setFormData({...formData, prazoValidadePropostaDias: e.target.value})}
-              orientacoes="Mínimo sugerido: 60 dias."
+              orientacoes="A lei 14.133/21 não prescreve prazo mínimo, cabendo à Administração fixar esse prazo no termo de referência, de acordo com as peculiaridades da licitação."
             />
 
             <SelectComponent

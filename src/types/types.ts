@@ -149,6 +149,7 @@ export type FormDataCompleto = {
   justificativa_vedacao_pessoafisica: string;
   vedacaoParticipacaoPessoaFisicaNao: string;
   vedacaoParticipacaoPessoaFisicaSim: string;
+  nao_aplicar_sem_enquadramento_texto: string;
 
   itensPorUnidade: Item[];
   grupos: Grupo[];

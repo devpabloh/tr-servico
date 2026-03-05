@@ -192,9 +192,9 @@ import type {
     aplicarCotaExclusiva: "nao",
     cotaReservadaNaturezaDivisivel: "nao",
     justificativaBeneficioLC123Opcao: [] as string[],
-    texto_cota_exclusiva_sim: "4.3.2 Considerando que os itens OU lotes {itensLotesCotaExclusiva} desta licitação possuem valor igual ou inferior a R$ 80.000,00 (oitenta mil) reais, serão estes considerados de participação exclusiva de microempresa ou empresa de pequeno porte ou microempreendedor individual.", 
+    texto_cota_exclusiva_sim: "4.3.2 Considerando que os {tipoParcelamentoNaoEtp} {itensLotesCotaExclusiva} desta licitação possuem valor igual ou inferior a R$ 80.000,00 (oitenta mil) reais, serão estes considerados de participação exclusiva de microempresa ou empresa de pequeno porte ou microempreendedor individual.", 
     itensLotesCotaExclusiva: "",
-    texto_cota_exclusiva_nao_enquadra: "4.3.1 Considerando que não há itens ou lotes de valor igual ou inferior a R$ 80.000,00 (oitenta mil reais), a presente licitação não possui itens oulotes exclusivo à participação de microempresa, empresa de pequeno porte ou microempreendedor individual.", 
+    texto_cota_exclusiva_nao_enquadra: "4.3.2 Considerando que os {tipoParcelamentoNaoEtp} {nao_aplicar_sem_enquadramento_texto} desta licitação têm valor superior a R$ 80.0000,00  (oitenta mil reais), estes itens não poderão ser de exclusiva participação de microempresa, empresa de pequeno porte ou microempreendedor individual.", 
     texto_cota_exclusiva_nao_art_49: "4.3.1 O presente processo se enquadra no(s) inciso(s) {incisosArt49LC123} do art. 49 da Lei Complementar nº 123/2006 E/OU {incisosArt9Decreto45140} do art. 9º do Decreto nº 45.140/2017 citado(s) acima , uma vez que {justificativaNaoAplicacaoArt49}.", 
     incisosArt49LC123: "",
     incisosArt9Decreto45140: "",
@@ -205,6 +205,7 @@ import type {
     nao_aplicar_art_49: "",
     aplicarCotaExclusica: "",
     nao_aplicar_sem_enquadramento: "",
+    nao_aplicar_sem_enquadramento_texto: "",
 
     // 5.1 Modalidade
     modalidadeLicitacao: "",
@@ -231,7 +232,7 @@ import type {
     requerCondicaoPropostaAcompanhadaDoSeguinteDocumento: "",
     texto_condicoes_proposta: "5.2.2.1 Para o(s) item(ns) ou lote(s) {requerCondicaoPropostaParaos}, a(s) proposta(s)enviada(s) deverá(ão) ser acompanhada(s) do(s) seguinte(s) documento(s): {requerCondicaoPropostaAcompanhadaDoSeguinteDocumento}",
     requeGarantiaProposta: "nao",
-    texto_garantia_proposta_p1: "5.2.3.1 Será exigida, no ato da apresentação da proposta, a prestação de garantia, no percentual de {percentualGarantiaProposta}% ({percentualGarantiaPropostaExtenso}) por cento do valor estimado da contratação...",
+    texto_garantia_proposta_p1: "5.2.3.1 Será exigida, no ato da apresentação da proposta, a prestação de garantia, no percentual de {percentualGarantiaProposta}% ({percentualGarantiaPropostaExtenso}) por cento do valor estimado da contratação do valor estimado da contratação, nos termos do art. 58 da Lei nº 14.133/2021, podendo a licitante optar por uma das modalidades de garantia previstas no §1º do art. 96 do diploma legal citado.",
     texto_garantia_proposta_p2: "5.2.3.2 A solicitação da garantia de proposta se justifica no presente caso, uma vez que {justificativaGarantiaProposta}",
     percentualGarantiaProposta: "",
     justificativaGarantiaProposta: "",

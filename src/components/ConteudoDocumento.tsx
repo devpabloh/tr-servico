@@ -1816,10 +1816,15 @@ function GerarTextoJustificativaLC123({formData, setFormData, isEditing}: GerarT
       );
     }
     return (
-      <p
-        className="text-lg p-2 rounded-md"
-        dangerouslySetInnerHTML={{ __html: substituirPlaceholders(template, valores) }}
-      />
+      <>
+          <p className="text-lg p-2 rounded-md">
+            4.3.1.	Em  regra, contratação de serviços com itens ou lotes de valores estimados iguais ou inferiores a R$ 80.000,00 (oitenta) mil reais devem ser objeto de licitações exclusivas para ME, EPP e MEI (cota exclusiva), nos termos do art. 48, inciso I, da LC nº 123/2006.
+          </p>
+              <p
+                className="text-lg text-justify p-2 rounded-md"
+                dangerouslySetInnerHTML={{ __html: substituirPlaceholders(template, valores) }}
+              />
+      </>
     );
   };
 
@@ -1829,7 +1834,7 @@ function GerarTextoJustificativaLC123({formData, setFormData, isEditing}: GerarT
     nao_aplicar_art_49: { tpl: formData.texto_cota_exclusiva_nao_art_49, key: 'texto_cota_exclusiva_nao_art_49' },
     nao_aplicar_art_4_lei_14133: { tpl: formData.texto_cota_exclusiva_nao_art_4_lei_14133, key: 'texto_cota_exclusiva_nao_art_4_lei_14133' },
   };
-
+  
   if (!Array.isArray(justificativaBeneficioLC123Opcao) || justificativaBeneficioLC123Opcao.length === 0) {
     return <p className="text-gray-400 italic">Opção de aplicação do benefício (4.3) não selecionada.</p>;
   }
@@ -1882,6 +1887,8 @@ function GerarTextoModalidadeLicitacao({formData, setFormData, isEditing}: Gerar
     motivacaoParametrosLicitacao: formData.motivacaoParametrosLicitacao || "____",
     justificativaInversaoFases: formData.justificativaInversaoFases || "____",
   };
+
+  
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
     if (isEditing) {
