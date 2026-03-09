@@ -1863,7 +1863,7 @@ function GerarTextoModalidadeLicitacao({formData, setFormData, isEditing}: Gerar
     },
     criterioJulgamento: {
       'menor_preco_unitario': 'Menor Preço Unitário/Por Item',
-      'menor_preco_global': 'Menor Preço Global/Por Lote',
+      'menor_preco_global': 'Menor Preço Global/Por Grupo',
       'maior_desconto': 'Maior Desconto'
     },
     regimeExecucao: {

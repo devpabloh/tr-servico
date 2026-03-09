@@ -1027,11 +1027,6 @@ formData.qualTipoContratacao === 'corporativo' && (
 
         </FieldsetContainer>
         <FieldsetContainer titleLegend="5. DA LICITAÇÃO">
-          <CollapsibleText title="Orientações">
-            <p className="orientacoes">
-              Indicação da Portaria SAD nº   2.293/2025. O órgão demandante pode alterar o modo de disputa conforme o caso concreto
-            </p>
-          </CollapsibleText>
           <FieldsetContainer titleLegend="5.1 Modalidade, Critério de Julgamento, Regime de Execução e Modo de Disputa">
             <CollapsibleText title="Orientações">
               <ul className="orientacoes">
@@ -1159,7 +1154,7 @@ formData.qualTipoContratacao === 'corporativo' && (
             {formData.requerCondicaoProposta === 'sim' && (
               <>
                 <InputComponent
-                  label="Informar quais os item(ns) ou lote(s)"
+                  label={`Quais o(s) ${formData.tipoParcelamentoNaoEtp === 'item'? "Item(ns)": "Grupo(s)"} que precisarão de documento(s) adicional(is)`}
                   id="condicoesProposta"
                   value={formData.requerCondicaoPropostaParaos}
                   onChange={(e) => setFormData({...formData, requerCondicaoPropostaParaos: e.target.value})}
@@ -1186,7 +1181,7 @@ formData.qualTipoContratacao === 'corporativo' && (
             {formData.requeGarantiaProposta === 'sim' && (
               <div className="pl-4 border-l-4">
                 <InputComponent
-                  label="Percentual de Garantia (0.01 a 1.00%)"
+                  label="(Conforme disposto no artigo 58, 1º, da Lei Federal nº 14.133/2021, o percentual da garantia de proposta não poderá exceder 1% do valor estimado da licitação)"
                   id="percentualGarantiaProposta"
                   type="number"
                   
@@ -1208,14 +1203,27 @@ formData.qualTipoContratacao === 'corporativo' && (
             <FieldsetContainer
               titleLegend="5.2.4 DA PROVA DE CONCEITO"
             >
+              <CollapsibleText 
+                title="Orientações para preenchimento"
+              >
+                <p>
+                  O Decreto Estadual nº 53.384/2022 dispõe que a Administração Pública poderá prever, excepcionalmente, a apresentação de amostra, exame de conformidade ou prova de conceito, entre outros testes de interesse da Administração, de modo a comprovar a aderência do objeto ofertado pelos licitantes às especificações definidas no termo de referência.Assim, em caso de necessidade justificada da exigência de algum desses testes, a redação exposta neste item deve ser adaptada para contemplar as suas especificidades do caso concreto, garantindo sempre os requisitos básicos contidos no § 2º, do art. 20, do Decreto Estadual nº 53.384/2022. 
+                </p>
+                <p>
+                  Quanto ao momento da análise das amostras/exame de conformidade/prova de conceito/outros testes, o Decreto nº 53.384/2022 disciplina que poderá ser realizada durante o processamento da licitação, quando do julgamento das propostas; após a homologação, como condição para a assinatura do contrato; ou no período de vigência contratual ou da ata de registro de preços.
+                </p>
+                <p>
+                  O presente tópico deve ter sua redação adaptada nos casos de exame de conformidade, amostra ou outros testes de interesse da administração.
+                </p>
+              </CollapsibleText>
               <div>
 
                 <InputComponent
-                  label="Justificativa para o teste"
+                  label="Justificativa para a prova de conceito"
                   id="justificativaAmostra"
                   value={formData.justificativaAmostra}
                   onChange={(e) => setFormData({...formData, justificativaAmostra: e.target.value})}
-                  orientacoes="Explicitar as razões pelas quais as especificações técnicas não são suficientes."
+                  orientacoes="Explicitar as razões pelas quais as especificações técnicas não são suficientes para a compreensão do objeto."
                 />
 
                 <SelectComponent

@@ -22,8 +22,8 @@ export function CollapsibleText({title, children}: CollapsibleTextProps){
       </button>
 
       {isVisible && (
-        <div className="p-4 bg-white border-t border-blue-200">
-          <div className="text-slate-700 leading-relaxed">
+        <div className="p-4 bg-white border-t border-blue-200 orientacoes">
+          <div className=" leading-relaxed">
             {children}
           </div>
         </div>
