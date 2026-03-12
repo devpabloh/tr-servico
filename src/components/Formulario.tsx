@@ -905,6 +905,9 @@ formData.qualTipoContratacao === 'corporativo' && (
                 <li className="mb-1">Elemento de Despesa:</li> 
                 <li className="mb-1">Categoria Econômica:</li>
               </ul>
+              <p className="orientacoes">
+                (No caso de orçamento sigiloso, Programa e Ação são desnecessárias)
+              </p>
             </CollapsibleText>
             <TextAreaComBotao
               label="Informar a classificação orçamentária da despesa no quadro abaixo"
