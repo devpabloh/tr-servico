@@ -802,11 +802,17 @@ formData.qualTipoContratacao === 'corporativo' && (
           <FieldsetContainer titleLegend="4. DO VALOR ESTIMADO DA CONTRATAÇÃO">
           
           <FieldsetContainer titleLegend="4.1 Valor estimado da contratação">
-            {formData.orcamentoSigiloso === "sim" && (
+            {formData.orcamentoSigiloso === "sim" ? (
               <CollapsibleText title="Orientações para preenchimento">
                 <p className="orientacoes">
                   Na hipótese do orçamento sigiloso, não poderá haver prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas. Além disso, o sigilo não prevalecerá para os órgãos de controle interno e externo. Por fim, atentar que nas hipótese de licitação em que for adotado o critério de julgamento por maior desconto, o preço estimado ou o máximo aceitável constará do edital da licitação.
                 </p>
+              </CollapsibleText>
+            ): (
+              <CollapsibleText title="Orientações para preenchimento">
+                  <p className="orientacoes">
+                    Se a licitação for realizada para formação de Ata de Registro de Preços e, excepcionalmente, houver a indicação de unidades de contratação, sem expressão do quantitativo total do objeto a ser adquirido, conforme autoriza os arts. 82, § 3º, da Lei nº 14.133/2021, e art. 10, do Decreto Estadual nº 54.700/2023, mencionar obrigatoriamente neste item a indicação do valor máximo da despesa. Atentar que nesta situação é vedada a participação de outro órgão ou entidade na ata, conforme art. 82, §4º, da Lei nº 14.133 /2021.
+                  </p>
               </CollapsibleText>
             )}
             <SelectComponent
@@ -821,7 +827,6 @@ formData.qualTipoContratacao === 'corporativo' && (
 
             {formData.orcamentoSigiloso === 'nao' ? (
               <div className="mt-4">
-
                 <InputComponent
                       label="Valor estimado global"
                       id="valorEstimadoGlobal"
