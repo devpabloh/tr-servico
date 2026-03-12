@@ -1209,7 +1209,7 @@ formData.qualTipoContratacao === 'corporativo' && (
             )}
 
             <FieldsetContainer
-              titleLegend="5.2.4 DA PROVA DE CONCEITO"
+              titleLegend="5.2.4 DA PROVA DE CONCEITO(se for o caso)"
             >
               <CollapsibleText 
                 title="Orientações para preenchimento"
