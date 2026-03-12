@@ -894,16 +894,16 @@ formData.qualTipoContratacao === 'corporativo' && (
           </FieldsetContainer>
 
           <FieldsetContainer titleLegend="4.2 Classificação Orçamentária da Despesa">
-            <CollapsibleText title="Orientações">
+            <CollapsibleText title="Orientações para preenchimento">
               <ul className="orientacoes">
-                <li>No caso de Registro de Preços, apenas o elemento de despesa é necessário para a classificação.</li>
-                <li>Se não for registro de preços, informar: </li>
-                <li>Fonte: </li>
-                <li>Unidade:</li>
-                <li>Programa:</li> 
-                <li>Ação:</li>
-                <li>Elemento de Despesa:</li> 
-                <li>Categoria Econômica:</li>
+                <li className="mb-1">No caso de Registro de Preços, apenas o elemento de despesa é necessário para a classificação.</li>
+                <li className="mb-1">Se não for registro de preços, informar: </li>
+                <li className="mb-1">Fonte: </li>
+                <li className="mb-1">Unidade:</li>
+                <li className="mb-1">Programa:</li> 
+                <li className="mb-1">Ação:</li>
+                <li className="mb-1">Elemento de Despesa:</li> 
+                <li className="mb-1">Categoria Econômica:</li>
               </ul>
             </CollapsibleText>
             <TextAreaComBotao
