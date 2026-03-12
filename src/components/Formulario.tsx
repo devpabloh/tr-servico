@@ -1227,19 +1227,6 @@ formData.qualTipoContratacao === 'corporativo' && (
                 />
 
                 <SelectComponent
-                  label="É reputado razoável para as providências de realização da prova de conceito de interesse da?"
-                  id="deInteresseDas"
-                  value={formData.deInteresseDas}
-                  onChange={(e) => setFormData({...formData, deInteresseDas: e.target.value})}
-                >
-                  <option value="">Selecione uma opção</option>
-                  <option value="licitante">Licitante</option>
-                  <option value="adjudicataria">Adjudicatária</option>
-                  <option value="contratada">Contratada</option>
-                  <option value="detentoraDaAtaDeRegistroDePrecos">Detentora da ata de registro de preços</option>
-                </SelectComponent>
-
-                <SelectComponent
                   label="Fase de Apresentação"
                   id="faseApresentacaoAmostra"
                   value={formData.faseApresentacaoAmostra}
