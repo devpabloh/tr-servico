@@ -1242,7 +1242,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                 >
                   <option value="julgamento_proposta">Julgamento da Proposta</option>
                   <option value="apos_homologacao">Condição p/ Assinatura do contrato</option>
-                  <option value="vigencia_contratual">Fase contratual</option>
+                  <option value="vigencia_contratual">Fase contratual ou da Ata de Registro de preços</option>
                 </SelectComponent>
 
                 {
@@ -1463,7 +1463,7 @@ formData.qualTipoContratacao === 'corporativo' && (
               
               {formData.requerRegistroEntidadeProfissional === 'sim' && (
                 <InputComponent
-                  label="Nome completo da entidade profissional"
+                  label="Informar nome completo da entidade profissional"
                   orientacoes="Tal exigência só deve ser formulada quando, por determinação legal, o exercício de determinada atividade afeta ao objeto contratual esteja sujeita à fiscalização da entidade profissional competente, a ser indicada expressamente no dispositivo. Quando não existir determinação legal atrelando o exercício de determinada atividade ao correspondente conselho de fiscalização profissional, a exigência de registro ou inscrição, para fim de habilitação, torna-se inaplicável. Nessas situações, o referido subitem deve ser excluído."
                   id="nomeEntidadeProfissional"
                   value={formData.nomeEntidadeProfissional}
@@ -1490,13 +1490,13 @@ formData.qualTipoContratacao === 'corporativo' && (
                     onChange={(e) => setFormData({...formData, servicosComprovacaoAptidao: e.target.value})}
                   /> */}
                   <TextAreaComBotao
-                    label="Serviços a serem comprovados no atestado"
+                    label="Quais serviços devem ser comprovados no(s) atestados(s)/certidão(ões)? Descrever características mínimas do(s) serviço(s), se necessário"
                     valorInicial={formData.servicosComprovacaoAptidao}
                     onSalvar={(novoValor)=>{
                       setFormData({...formData, servicosComprovacaoAptidao: novoValor})}}
                   />
                   <InputComponent
-                    label="Percentual mínimo do atestado (1 a 50%)"
+                    label="Informar percentual mínimo"
                     id="percentualMinimoAtestadoTecnico"
                     type="number"
                     min="1"

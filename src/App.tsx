@@ -310,7 +310,7 @@ import type {
     texto_qualificacao_tecnica_aptidao_p2: "5.3.2.2.2 Será considerado compatível com a quantidade os atestados ou certidões que apresentarem, no mínimo, {percentualMinimoAtestadoTecnico}% ({percentualMinimoAtestadoTecnicoExtenso}) por cento das quantidades estimadas na licitação  para cada lote OU item", 
     percentualMinimoAtestadoTecnico: "",
     texto_qualificacao_tecnica_aptidao_p3: "5.3.2.2.3 Para fins de aferição do percentual mínimo de {percentualMinimoAtestadoTecnico}% ({percentualMinimoAtestadoTecnicoExtenso}) por centro relativo à qualificação técnica, em sendo obtido resultado cujo número possua casas decimais, deverá ser realizado arredondamento para o primeiro menor número inteiro.", 
-    texto_qualificacao_tecnica_aptidao_p4: "5.3.2.2.4 Justifica-se o percentual fixado para fins de qualificação técnica, no que se refere à comprovação das quantidades a serem indicadas em atestados/certidões, por {justificativaPercentualAtestadoTecnico}.", 
+    texto_qualificacao_tecnica_aptidao_p4: "5.3.2.2.4 Justifica-se o percentual fixado para fins de qualificação técnica, no que se refere à comprovação das quantidades a serem indicadas em atestados/certidões, uma vez que {justificativaPercentualAtestadoTecnico}.", 
     justificativaPercentualAtestadoTecnico: "",
     texto_qualificacao_tecnica_aptidao_p5: "5.3.2.2.5 Será admitida a apresentação de atestados relativos a potencial subcontratado em relação à parcela do serviço de {parcelaServicoSubcontratado}, cuja subcontratação foi expressamente autorizada no presente termo de referência.", 
     parcelaServicoSubcontratado: "",
