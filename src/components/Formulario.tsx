@@ -78,16 +78,6 @@ export function Formulario({formData, setFormData, className}:FormularioProps){
           </CollapsibleText>
         </FieldsetContainer>
         <FieldsetContainer titleLegend="1. Do objeto da licitação">
-          <CollapsibleText title="Orientações para preenchimento">
-                <ul className="orientacoes">
-                  <li>
-                    Sim: Na hipótese de existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
-                  </li>
-                  <li>
-                    Não: Na hipótese de NÂO existir ETP ou quando informação do presente tópico não puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).
-                  </li>
-                </ul>
-            </CollapsibleText>
           <FieldsetContainer titleLegend="Objeto">
             <div>
               <label htmlFor="eRegistroPreco">É Registro de Preços?</label>
@@ -180,7 +170,7 @@ formData.qualTipoContratacao === 'corporativo' && (
         />
       </div>
       <div>
-        <label htmlFor="justificaCasoConcretoUmaVezQue">E se justifica no caso concreto, uma vez que?</label>
+        <label htmlFor="justificaCasoConcretoUmaVezQue">Qual a justificativa para a escolha do espoco reduzido?</label>
         <textarea
           name="justificaCasoConcretoUmaVezQue"
           id="justificaCasoConcretoUmaVezQue"
@@ -197,6 +187,11 @@ formData.qualTipoContratacao === 'corporativo' && (
                   </div>
                   <div className="mt-4">
                     <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
+                    {formData.eEstudosTecnicosPreliminares === 'sim' ? (
+                      <p className="orientacoes">Na hipótese de existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).</p>
+                    ): (
+                      <p className="orientacoes">Na hipótese de não existir ETP ou quando informação do presente tópico não puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).</p>
+                    )}
                     <div>
                       <select 
                         name="eEstudosTecnicosPreliminares" 
@@ -249,7 +244,7 @@ formData.qualTipoContratacao === 'corporativo' && (
                   </SelectComponent>
                   {formData.atenderaDeverLegalExposto === 'sim' && (
                     <div>
-                    <label htmlFor="textoAdicional" className="orientacoes">Citar legislação que fundamente o dever do estado de contratar o objeto e transcrever ou explicitar o conteúdo do que preconiza o dispositivo legal citado, se for o caso,</label>
+                    <label htmlFor="textoAdicional">Citar legislação que fundamente o dever do estado de contratar o objeto e transcrever ou explicitar o conteúdo do que preconiza o dispositivo legal citado, se for o caso,</label>
                     <textarea 
                       id="textoAdicional" 
                       className='border rounded-sm p-2 w-full'

@@ -1,4 +1,4 @@
-﻿import { FolhaDocumento } from "./FolhaDocumento";
+import { FolhaDocumento } from "./FolhaDocumento";
 import { numeroPorExtenso } from "../lib/utils";
 import { EditableTextarea } from "./EditableTextarea";
 import type {FormDataCompleto, AtorGestaoContrato}from '../types/types'
@@ -177,7 +177,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
           )}
 
           <p>
-            1.3 As especificações e os quantitativos do objeto desta licitação estão divididos e descritos conforme quadro(s) constante no anexo E.
+            1.3 As especificações e os quantitativos do objeto desta licitação estão divididos e descritos conforme quadro(s) constante no anexo A.
           </p>
           {/* Item 1.4 */}
           <EditableTextarea
@@ -1243,14 +1243,14 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
 
   let textoEstudo: string = "";
   if (eEstudosTecnicosPreliminares === 'sim') {
-    textoEstudo = "no Estudo Técnico Preliminar";
+    textoEstudo = " no Estudo Técnico Preliminar e";
   } else if (eEstudosTecnicosPreliminares === 'nao') {
     textoEstudo = ""; 
   }
   const valores = {
     paraContratacaoEventualPrestacaoServico: paraContratacaoEventualPrestacaoServico || "______",
     visandoAtenderNecessidades: visandoAtenderNecessidades || "______",
-    eEstudosTecnicosPreliminares: textoEstudo || "", 
+    eEstudosTecnicosPreliminares: textoEstudo, 
     qualTipoContratacao: mapTipoContratacao[qualTipoContratacao] || "______",
     quaisOrgaosOuEntidades: formData.quaisOrgaosOuEntidades || "______"
   };
@@ -1377,7 +1377,6 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
       const textoUmComValores = substituirPlaceholders(texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso, valores);
       const textoDoisComValores = substituirPlaceholders(texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois, valores);
 
-      // 3. CORREÇÃO: Adicionar a lógica "if (isEditing)"
       if (isEditing) {
         return (
          <>
@@ -1407,7 +1406,7 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
           />
           {formData.atenderaDeverLegalExposto === 'sim' && (
             <p
-              className="text-lg p-2 rounded-md text-blue-700"
+              className="text-lg p-2 rounded-md"
               dangerouslySetInnerHTML={{ __html: textoDoisComValores }}
             />
           )}
@@ -1667,7 +1666,7 @@ function JustificativaQuantitativo({ formData, setFormData, isEditing }: GerarTe
             dangerouslySetInnerHTML={{ __html: textoComValores }}
           />
           <p
-            className="text-lg p-2 rounded-md text-blue-700"
+            className="text-lg p-2 rounded-md"
             dangerouslySetInnerHTML={{ __html: textoComValoresDois }}
           />
           </>
