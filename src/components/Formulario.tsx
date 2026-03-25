@@ -320,7 +320,6 @@ formData.qualTipoContratacao === 'corporativo' && (
                   rows={4}
                   value={formData.justificativaEscolhaSolucaoNaoEtp}
                   onChange={(e) => setFormData({...formData, justificativaEscolhaSolucaoNaoEtp: e.target.value})}
-                  placeholder="Ex: Quando houver a possibilidade de opção entre aquisição ou locação de bens móveis duráveis."
                 />
               </div>
             )}
@@ -356,14 +355,13 @@ formData.qualTipoContratacao === 'corporativo' && (
                     <label htmlFor="razoesParcelamentoItem" className="font-semibold">
                       Expor os motivos pelos quais a Administração Pública opta pelo parcelamento por item(ns), apresentando argumentos técnicos e/ou econômicos para o parcelamento do objeto em questão. 
                     </label>
+                    <p className="orientacoes">Exemplo: Quando os percentuais de exigências de qualificação técnica e econômico-financeira forem elevados ou resultarem em quantias vultosas, especialização, etc</p>
                     <textarea 
                       id="razoesParcelamentoItem" 
                       className='border rounded-sm p-2 w-full'
                       rows={4}
                       value={formData.razoesParcelamentoItem}
                       onChange={(e) => setFormData({...formData, razoesParcelamentoItem: e.target.value})}
-                      placeholder="Exemplo: Quando os percentuais de exigências de qualificação técnica e econômico-financeira forem elevados ou resultarem em quantias vultosas, especialização, etc
-"
                     />
                   </div>
                 )}
@@ -374,13 +372,13 @@ formData.qualTipoContratacao === 'corporativo' && (
                     <label htmlFor="justificativaAgrupamentoLote" className="font-semibold">
                      2.4.1. Expor os motivos das razões técnicas/econômicas para o parcelamento por grupo(s) 
                     </label>
+                    <p className="orientacoes">Exemplo: Prejuízo com pulverização, regionalização, economia de escala, etc.</p>
                     <textarea 
                       id="justificativaAgrupamentoLote" 
                       className='border rounded-sm p-2 w-full'
                       rows={4}
                       value={formData.justificativaAgrupamentoLote}
                       onChange={(e) => setFormData({...formData, justificativaAgrupamentoLote: e.target.value})}
-                      placeholder="Ex: Prejuízo com pulverização, regionalização, economia de escala, etc."
                     />
                   </div>
                 )}
@@ -456,9 +454,9 @@ formData.qualTipoContratacao === 'corporativo' && (
             {formData.descricao === 'nao' && (
               <div className='flex flex-col space-y-1'>
                 <label htmlFor="nao_havendo_complexidade_objeto" className='font-semibold'>2.5.3. Justificar ausência de complexidade (se houver)</label>
+                <p className="orientacoes">Exemplo: Baixa complexidade técnica ou operacional</p>
                 <div>
-                  <input type="text" id='nao_havendo_complexidade_objeto' className='border rounded-sm p-2 w-full' value={formData.nao_havendo_complexidade_objeto} onChange={(e)=>setFormData({...formData, nao_havendo_complexidade_objeto: e.target.value})} 
-                  placeholder="Ex: Baixa complexidade técnica ou operacional"/>
+                  <input type="text" id='nao_havendo_complexidade_objeto' className='border rounded-sm p-2 w-full' value={formData.nao_havendo_complexidade_objeto} onChange={(e)=>setFormData({...formData, nao_havendo_complexidade_objeto: e.target.value})}/>
                 </div>
               </div>
             )}
@@ -545,7 +543,6 @@ formData.qualTipoContratacao === 'corporativo' && (
             <FieldsetContainer titleLegend="3.1.1 Além da descrição apresentada na(s) tabela(s) do quadro resumo  deste Termo de Referência (Anexo xxx), para a prestação dos serviços, deve-se observar as seguintes especificações:">
               <TextAreaComBotao
                 label="Especificações Detalhadas"
-                placeholder="Digite as especificaçãoes detalhadas aqui..."
                 valorInicial={formData.especificacoes}
                 onSalvar={(novoValor)=>{
                   setFormData({...formData, especificacoes: novoValor})
@@ -760,8 +757,8 @@ formData.qualTipoContratacao === 'corporativo' && (
                       </div>
                       <div className="flex flex-col mt-2">
                         <label htmlFor="devido_a" className="font-semibold">Justificar com base no art. 41, inciso I, da Lei nº 14.133, de 2021</label>
-                        <input type="text" id='devido_a' className='border rounded-sm p-2 w-full' value={formData.devido_a} onChange={(e)=>setFormData({...formData, devido_a: e.target.value})} 
-                        placeholder="Ex: Necessidade de padronização do objeto, compatibilidade com plataformas e padrões já adotados pela Administração, marca ou modelo comercializados por mais de um fornecedor forem os únicos capazes de atender às necessidades do contratante, quando a descrição do objeto a ser licitado puder ser mais bem compreendida pela identificação de determinada marca ou determinado modelo aptos a servir apenas como referência."/>
+                        <p className="orientacoes">Exemplo: Necessidade de padronização do objeto, compatibilidade com plataformas e padrões já adotados pela Administração, marca ou modelo comercializados por mais de um fornecedor forem os únicos capazes de atender às necessidades do contratante, quando a descrição do objeto a ser licitado puder ser mais bem compreendida pela identificação de determinada marca ou determinado modelo aptos a servir apenas como referência.</p>
+                        <input type="text" id='devido_a' className='border rounded-sm p-2 w-full' value={formData.devido_a} onChange={(e)=>setFormData({...formData, devido_a: e.target.value})}/>
                       </div>
                     </div>
                   </div>
@@ -790,7 +787,6 @@ formData.qualTipoContratacao === 'corporativo' && (
                 {formData.necessarioCondicoesAdicionaisParaExecucaoDoObjeto === 'sim' && (
                   <TextAreaComBotao
                     label="Citar as marca(s)/ produto(s) que serão vedados para esta contratação)"
-                    placeholder="Digite os produtos/marcas..."
                     valorInicial={formData.condicoesAdicionaisExecucao}
                     onSalvar={(novoValor)=>{
                       setFormData({...formData, condicoesAdicionaisExecucao: novoValor})
@@ -2045,7 +2041,6 @@ formData.qualTipoContratacao === 'corporativo' && (
         onSalvar={(novoValor)=>{
           setFormData({...formData, obrigacoesContratadaExtras: novoValor})
         }}
-        placeholder="Descreva a obrigação"
       />
     )}
 

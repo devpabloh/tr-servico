@@ -47,7 +47,6 @@ export function Especificacoes({especificacoes, setFormData}: EspecificacoesProp
         <textarea
           value={textoAtual}
           onChange={(e)=> setTextoAtual(e.target.value)}
-          placeholder="digite a especificação"
           className="lex-grow border border-gray-300 rounded-md shadow-sm p-2"
           rows={3}
         />
