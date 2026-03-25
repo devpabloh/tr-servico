@@ -230,13 +230,6 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
                 </div>
               </div>
             )}
-            {formData.eEstudosTecnicosPreliminares === 'sim' && (
-              <SelectComponent label="Haverá parcelamento do objeto?" id="haveraParcelamentoDoObjeto" value={formData.haveraParcelamentoDoObjeto} onChange={(e) => setFormData({ ...formData, haveraParcelamentoDoObjeto: e.target.value })}>
-                <option value="">Selecionar uma opção</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-              </SelectComponent>
-            )}
           </div>
 
         </FieldsetContainer>
@@ -344,6 +337,14 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
             <p className="orientacoes">No caso de grupo, pode-se discorrer sobre o fato de que os itens foram agrupados para não trazer risco ao conjunto do objeto pretendido.</p>
             <p className="orientacoes">O agrupamento dos itens em grupos deve ser feito com segurança e em plena consonância com a prática de mercado de forma a assegurar ampla competitividade ao certame.</p>
           </CollapsibleText>
+          {formData.eEstudosTecnicosPreliminares !== '' && (
+            <SelectComponent label="Haverá parcelamento do objeto?" id="haveraParcelamentoDoObjeto" value={formData.haveraParcelamentoDoObjeto} onChange={(e) => setFormData({ ...formData, haveraParcelamentoDoObjeto: e.target.value })}>
+              <option value="">Selecionar uma opção</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </SelectComponent>
+          )}
+
           {formData.eEstudosTecnicosPreliminares === 'nao' && (
             <div className="mt-4 p-4 border-t-2">
               <SelectComponent
@@ -352,8 +353,8 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
                 onChange={(e) => setFormData({ ...formData, tipoParcelamentoNaoEtp: e.target.value })}
               >
                 <option value="">Selecione uma opção</option>
-                <option value="item">Item(ns)</option>
-                <option value="lote">Grupo(s)</option>
+                <option value="item">{formData.haveraParcelamentoDoObjeto === 'nao' ? 'Item único' : 'Item(ns)'}</option>
+                <option value="lote">{formData.haveraParcelamentoDoObjeto === 'nao' ? 'Grupo único' : 'Grupo(s)'}</option>
               </SelectComponent>
 
               {/* Sub-opção "item" */}
@@ -391,13 +392,14 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
                 </div>
               )}
 
-              {/* Opção Adicional "Lotes Espelhados" (aparece se ETP=NÃO) */}
+
               <hr className="my-4" />
               <SelectComponent
                 label={`Haverá ${formData.tipoParcelamentoNaoEtp === "item" ? "item(s)" : "Grupo(s)"} espelhados e/ou regionalizados e/ou divididos por outro critério?
 `}
                 value={formData.usaLotesEspelhados}
                 onChange={(e) => setFormData({ ...formData, usaLotesEspelhados: e.target.value })}
+                orientacoes="Espelhamento é a mera divisão do quantitativo total."
               >
                 <option value="">Selecione uma opção</option>
                 <option value="sim">Sim</option>
@@ -407,7 +409,7 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
               {formData.usaLotesEspelhados === 'sim' && (
                 <div className="my-4">
                   <label htmlFor="argumentosLotesEspelhados" className="font-semibold">
-                    2.4.4. Citar ainda outros argumentos que possam forçar o espelhamento
+                    2.4.4. Citar ainda outros argumentos que possam reforçar o espelhamento
                   </label>
                   <p className="orientacoes">Exemplos: Aproveitamento das peculiaridades do mercado local, a busca pela ampliação da competição, evitar a concentração de mercado, etc.</p>
                   <textarea

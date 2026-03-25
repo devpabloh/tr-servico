@@ -107,6 +107,7 @@ export type FormDataCompleto = {
   itemEtpJustificativaParcelamento: string;
   haveraParcelamentoDoObjeto_sim: string;
   haveraParcelamentoDoObjeto_nao: string;
+  texto_nao_p3_mais_complemento: string;
 
   tipoParcelamentoNaoEtp: string; // 'item', 'lote'
 

@@ -91,6 +91,7 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
     case 'nao': {
       const p3_com_valores = substituirPlaceholders(formData.texto_nao_p3, valores);
       const p3_complemento_com_valores = substituirPlaceholders(formData.texto_nao_p3_complemento, valores);
+      const p3_mais_complemento_com_valores = substituirPlaceholders(formData.texto_nao_p3_mais_complemento, valores);
       return (
         <>
           <EditableTextarea
@@ -127,20 +128,25 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
               />
             </>
           ) : (
-            /* renderiza se um dos dois campos estiver preenchido */
-            (formData.nao_havendo_grande_vulto_da_contratacao ||
-              formData.nao_havendo_complexidade_objeto) && (
-              <>
-                <p
-                  className="text-lg p-2 rounded-md"
-                  title="Clique para editar"
-                  dangerouslySetInnerHTML={{ __html: p3_com_valores }}
-                />
-                <p>
-                  <span className="text-lg p-2 rounded-md" dangerouslySetInnerHTML={{ __html: p3_complemento_com_valores }} />
-                </p>
-              </>
-            )
+            <>
+              {Boolean(formData.nao_havendo_complexidade_objeto) && !Boolean(formData.nao_havendo_grande_vulto_da_contratacao) && (
+                <p dangerouslySetInnerHTML={{ __html: p3_com_valores }}></p>
+              )}
+
+              {Boolean(formData.nao_havendo_grande_vulto_da_contratacao) && !Boolean(formData.nao_havendo_complexidade_objeto) && (
+                <p dangerouslySetInnerHTML={{ __html: p3_complemento_com_valores }}></p>
+              )}
+
+              {Boolean(formData.nao_havendo_grande_vulto_da_contratacao && formData.nao_havendo_complexidade_objeto) && (
+                <>
+                  <p
+                    className="text-lg p-2 rounded-md"
+                    title="Clique para editar"
+                    dangerouslySetInnerHTML={{ __html: p3_mais_complemento_com_valores }}
+                  />
+                </>
+              )}
+            </>
           )}
 
           <EditableTextarea
@@ -1516,15 +1522,15 @@ function JustificativaParcelamento({ formData, setFormData, isEditing }: GerarTe
     case 'sim': {
       const isSim = haveraParcelamentoDoObjeto === 'sim';
       const isNao = haveraParcelamentoDoObjeto === 'nao';
-      
+
       if (!isSim && !isNao) {
-         return <p className="text-gray-400 italic">Selecione se haverá parcelamento do objeto.</p>;
+        return <p className="text-gray-400 italic">Selecione se haverá parcelamento do objeto.</p>;
       }
 
       const templateKey = isSim ? 'haveraParcelamentoDoObjeto_sim' : 'haveraParcelamentoDoObjeto_nao';
       const template = isSim ? haveraParcelamentoDoObjeto_sim : haveraParcelamentoDoObjeto_nao;
       const textoComValores = substituirPlaceholders(template, valores);
-      
+
       return (
         isEditing ? (
           <EditableTextarea
