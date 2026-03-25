@@ -1,13 +1,13 @@
 import { FolhaDocumento } from "./FolhaDocumento";
 import { numeroPorExtenso } from "../lib/utils";
 import { EditableTextarea } from "./EditableTextarea";
-import type {FormDataCompleto, AtorGestaoContrato}from '../types/types'
+import type { FormDataCompleto, AtorGestaoContrato } from '../types/types'
 
 interface ConteudoDocumentoProps {
   readonly formData: FormDataCompleto;
   readonly setFormData: React.Dispatch<React.SetStateAction<FormDataCompleto>>;
   readonly isEditing: boolean;
-  readonly onToggleEdit: ()=> void;
+  readonly onToggleEdit: () => void;
   readonly className?: string;
 }
 
@@ -26,7 +26,7 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
   const { descricao } = formData;
 
   const numStr = formData.numeroConsorciadas || "______";
-  const extensoStr = numeroPorExtenso(formData.numeroConsorciadas || ''); 
+  const extensoStr = numeroPorExtenso(formData.numeroConsorciadas || '');
 
   const valores = {
     numStr,
@@ -58,7 +58,7 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
         />
       );
     case 'sim_com_numero_limitado_de_fornecedores': {
-      
+
       const p2_com_valores = substituirPlaceholders(formData.texto_sim_limitado_p2, valores);
       return (
         <>
@@ -70,7 +70,7 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
           />
 
           {isEditing ? (
-            
+
             <EditableTextarea
               initialValue={formData.texto_sim_limitado_p2}
               onSave={(novoValor: string) => {
@@ -78,7 +78,7 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
               }}
               className="text-lg"
               isEditing={isEditing}
-            /> 
+            />
           ) : (
             <p
               className="text-lg p-2 rounded-md transition-colors"
@@ -108,7 +108,7 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
 
           {isEditing ? (
             <>
-                <EditableTextarea
+              <EditableTextarea
                 initialValue={formData.texto_nao_p3}
                 onSave={(novoValor: string) => {
                   handleSave('texto_nao_p3', novoValor);
@@ -124,26 +124,26 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
                 }}
                 className="text-lg"
                 isEditing={isEditing}
-              />  
+              />
             </>
           ) : (
             /* renderiza se um dos dois campos estiver preenchido */
             (formData.nao_havendo_grande_vulto_da_contratacao ||
               formData.nao_havendo_complexidade_objeto) && (
               <>
-                    <p
-                    className="text-lg p-2 rounded-md"
-                    title="Clique para editar"
-                    dangerouslySetInnerHTML={{ __html: p3_com_valores }}
-                  />
-                  <p>
-                    <span className="text-lg p-2 rounded-md" dangerouslySetInnerHTML={{ __html: p3_complemento_com_valores }} />
-                  </p>
+                <p
+                  className="text-lg p-2 rounded-md"
+                  title="Clique para editar"
+                  dangerouslySetInnerHTML={{ __html: p3_com_valores }}
+                />
+                <p>
+                  <span className="text-lg p-2 rounded-md" dangerouslySetInnerHTML={{ __html: p3_complemento_com_valores }} />
+                </p>
               </>
             )
           )}
 
-           <EditableTextarea
+          <EditableTextarea
             initialValue={formData.texto_nao_p4}
             onSave={(novoValor: string) => handleSave('texto_nao_p4', novoValor)}
             className="text-lg"
@@ -160,38 +160,38 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
     <FolhaDocumento isEditing={isEditing} onToggleEdit={onToggleEdit} className={className}>
       {/* --- SEÇÃO 1 --- */}
       <div>
-          <h2 className="text-xl font-bold pb-2 text-justify">1. DO OBJETO DA LICITAÇÃO</h2>
-          <GerarTextoObjeto
-            formData={formData}
-            isEditing={isEditing}
-            setFormData={setFormData}
-          />
-          {formData.qualTipoContratacao === 'corporativo' && formData.reducaoEscopo === 'sim' && (
-            <div className="mt-2 space-y-4">
-                <GerarTextoItem1_2
-                  formData={formData} 
-                  setFormData={setFormData} 
-                  isEditing={isEditing} 
-                />
-            </div>
-          )}
+        <h2 className="text-xl font-bold pb-2 text-justify">1. DO OBJETO DA LICITAÇÃO</h2>
+        <GerarTextoObjeto
+          formData={formData}
+          isEditing={isEditing}
+          setFormData={setFormData}
+        />
+        {formData.qualTipoContratacao === 'corporativo' && formData.reducaoEscopo === 'sim' && (
+          <div className="mt-2 space-y-4">
+            <GerarTextoItem1_2
+              formData={formData}
+              setFormData={setFormData}
+              isEditing={isEditing}
+            />
+          </div>
+        )}
 
-          <p>
-            1.3 As especificações e os quantitativos do objeto desta licitação estão divididos e descritos conforme quadro(s) constante no anexo A.
-          </p>
-          {/* Item 1.4 */}
-          <EditableTextarea
-            initialValue={formData.emCasoDiscordanciaExistenteTermoECatser}
-            onSave={(novoValor) => setFormData(prev => ({ ...prev, emCasoDiscordanciaExistenteTermoECatser: novoValor }))}
-            isEditing={isEditing}
-            className="text-lg"
-          />
+        <p>
+          1.3 As especificações e os quantitativos do objeto desta licitação estão divididos e descritos conforme quadro(s) constante no anexo A.
+        </p>
+        {/* Item 1.4 */}
+        <EditableTextarea
+          initialValue={formData.emCasoDiscordanciaExistenteTermoECatser}
+          onSave={(novoValor) => setFormData(prev => ({ ...prev, emCasoDiscordanciaExistenteTermoECatser: novoValor }))}
+          isEditing={isEditing}
+          className="text-lg"
+        />
       </div>
 
       {/* --- SEÇÃO 2 --- */}
       <div>
         <h2 className="text-xl font-bold pb-2 text-justify">2. Das Justificativas</h2>
-        
+
         {/* 2.1 */}
         <div>
           <h3 className="text-lg font-bold pb-2 text-justify">2.1 Justificativa da necessidade da contratação</h3>
@@ -201,7 +201,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
             setFormData={setFormData}
           />
         </div>
-        
+
         {/* Este bloco 2.2 estava faltando */}
         <div className="mt-4">
           <h3 className="text-lg font-bold pb-2 text-justify">2.2 Justificativa do quantitativo estimado</h3>
@@ -221,17 +221,17 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
             setFormData={setFormData}
           />
         </div>
-        
+
         {/* 2.4 */}
         <div className="mt-4">
           <h3 className="text-lg font-bold pb-2 text-justify">2.4 Justificativa para o parcelamento ou não da contratação</h3>
-           <JustificativaParcelamento
+          <JustificativaParcelamento
             formData={formData}
             isEditing={isEditing}
             setFormData={setFormData}
           />
         </div>
-      </div> 
+      </div>
       {/* FIM DA SEÇÃO 2 */}
 
       {/* --- RESTANTE DO DOCUMENTO (A PARTIR DA SEÇÃO 2.5) --- */}
@@ -239,37 +239,37 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
         {/* 2.5 */}
         <h2 className="text-xl font-bold pb-2 text-justify">2.5 DA PREVISÃO DA VEDAÇÃO OU PARTICIPAÇÃO DE EMPRESAS SOB A FORMA DE CONSÓRCIO</h2>
         <div className="mt-2 space-y-4">
-          <GerarTextoDoConsorcio formData={formData} setFormData={setFormData} isEditing={isEditing}/>
+          <GerarTextoDoConsorcio formData={formData} setFormData={setFormData} isEditing={isEditing} />
         </div>
-        
+
         {/* 2.6 */}
-       {formData.vedacaoOuParticipacaoCooperativa === 'sim' ? (
-         <h2 className="text-xl font-bold pb-2 text-justify">2.6 DA PARTICIPAÇÃO DE PROFISSIONAIS ORGANIZADOS EM COOPERATIVA NA LICITAÇÃO</h2>
-       ):(
-         <h2 className="text-xl font-bold pb-2 text-justify">2.6 DA VEDAÇÃO DE PROFISSIONAIS ORGANIZADOS EM COOPERATIVA NA LICITAÇÃO</h2>
-       )}
+        {formData.vedacaoOuParticipacaoCooperativa === 'sim' ? (
+          <h2 className="text-xl font-bold pb-2 text-justify">2.6 DA PARTICIPAÇÃO DE PROFISSIONAIS ORGANIZADOS EM COOPERATIVA NA LICITAÇÃO</h2>
+        ) : (
+          <h2 className="text-xl font-bold pb-2 text-justify">2.6 DA VEDAÇÃO DE PROFISSIONAIS ORGANIZADOS EM COOPERATIVA NA LICITAÇÃO</h2>
+        )}
         <div className="mt-2 space-y-4">
-          <GerarTextoDaCooperativa 
-            formData={formData} 
-            setFormData={setFormData} 
+          <GerarTextoDaCooperativa
+            formData={formData}
+            setFormData={setFormData}
             isEditing={isEditing}
           />
         </div>
-        
+
         {/* 2.7 */}
         {formData.vedacaoOuParticipacaoPessoasFisicas === 'sim' ? (
-         <h2 className="text-xl font-bold pt-6 pb-2 text-justify">2.7 DA PARTICIPAÇÃO DE PESSOAS FÍSICAS NA LICITAÇÃO</h2>
-       ):(
-         <h2 className="text-xl font-bold pt-6 pb-2 text-justify">2.7 DA VEDAÇÃO DE PESSOAS FÍSICAS NA LICITAÇÃO</h2>
-       )}
+          <h2 className="text-xl font-bold pt-6 pb-2 text-justify">2.7 DA PARTICIPAÇÃO DE PESSOAS FÍSICAS NA LICITAÇÃO</h2>
+        ) : (
+          <h2 className="text-xl font-bold pt-6 pb-2 text-justify">2.7 DA VEDAÇÃO DE PESSOAS FÍSICAS NA LICITAÇÃO</h2>
+        )}
         <div className="mt-2 space-y-4">
-          <GerarTextoDaPessoaFisica 
-            formData={formData} 
-            setFormData={setFormData} 
+          <GerarTextoDaPessoaFisica
+            formData={formData}
+            setFormData={setFormData}
             isEditing={isEditing}
           />
         </div>
-        
+
         {/* --- SEÇÃO 3 --- */}
         <h2 className="text-xl font-bold pt-6 pb-2 text-justify">3. DAS ESPECIFICAÇÕES DO OBJETO</h2>
         <p className="pt-4 pb-2 text-justify font-semibold">3.1 DESCRIÇÃO DOS SERVIÇOS / DETALHAMENTO DO OBJETO'</p>
@@ -295,34 +295,34 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
           )}
         </div>
         <div>
-          <GerarPrazoDeExecucao formData={formData} setFormData={setFormData} isEditing={isEditing}/>
+          <GerarPrazoDeExecucao formData={formData} setFormData={setFormData} isEditing={isEditing} />
         </div>
         <div>
           <p className="pt-4 pb-2 text-justify">
-                3.2.3 Descrição detalhada dos métodos, rotinas, etapas, tecnologias procedimentos, frequência e periodicidade de execução do trabalho:
-              </p>
-              <EditableTextarea
-                initialValue={formData.descricaoDetalhadaMetodosExecucaoTrabalho}
-                onSave={(novoValor) => setFormData(prev => ({...prev, descricaoDetalhadaMetodosExecucaoTrabalho: novoValor}))}
-                isEditing={isEditing}
-                className="text-lg"
-              />
+            3.2.3 Descrição detalhada dos métodos, rotinas, etapas, tecnologias procedimentos, frequência e periodicidade de execução do trabalho:
+          </p>
+          <EditableTextarea
+            initialValue={formData.descricaoDetalhadaMetodosExecucaoTrabalho}
+            onSave={(novoValor) => setFormData(prev => ({ ...prev, descricaoDetalhadaMetodosExecucaoTrabalho: novoValor }))}
+            isEditing={isEditing}
+            className="text-lg"
+          />
         </div>
         <div>
           <p className="pt-4 pb-2 text-justify">
-                3.2.4 Horário da prestação de serviço:
-              </p>
-              <EditableTextarea
-                initialValue={formData.horarioPrestacaoServico}
-                onSave={(novoValor) => setFormData(prev => ({...prev, horarioPrestacaoServico: novoValor}))}
-                isEditing={isEditing}
-                className="text-lg"
-              />
+            3.2.4 Horário da prestação de serviço:
+          </p>
+          <EditableTextarea
+            initialValue={formData.horarioPrestacaoServico}
+            onSave={(novoValor) => setFormData(prev => ({ ...prev, horarioPrestacaoServico: novoValor }))}
+            isEditing={isEditing}
+            className="text-lg"
+          />
         </div>
         <div>
-          <CronogramaRealizacaoDosServicos 
-            formData={formData} 
-            setFormData={setFormData} 
+          <CronogramaRealizacaoDosServicos
+            formData={formData}
+            setFormData={setFormData}
             isEditing={isEditing}
           />
         </div>
@@ -344,43 +344,43 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
             setFormData={setFormData}
             isEditing={isEditing}
           />
-          <RecebimentoDefinitivoPoderaSerExcepcionalmente 
+          <RecebimentoDefinitivoPoderaSerExcepcionalmente
             formData={formData}
             setFormData={setFormData}
             isEditing={isEditing}
           />
         </div>
       )}
-         <div>
-          <GerarTextoTermoDetalhado
-            formData={formData}
-            isEditing={isEditing}
-            setFormData={setFormData}
-          />
-        </div>
-        <div>
-          <ResponsabilidadeEticoProfissional
-            formData={formData}
-            setFormData={setFormData}
-            isEditing={isEditing}
-          />
-        </div>
-        <div>
-          <p className="pt-4 text-justify font-semibold">3.3 INDICAÇÃO DE MARCAS OU MODELOS</p>
-          <IndicacaoMarcaouModelo
-            formData={formData}
-            setFormData={setFormData}
-            isEditing={isEditing}
-          />
-        </div>
-       
-        <div>
-          <GerarCondicoesAdicionaisExecucao
-            formData={formData}
-          />
-        </div>
-        <h2 className="text-xl font-bold pt-6 pb-2 text-justify">4. DO VALOR ESTIMADO DA CONTRATAÇÃO, CLASSIFICAÇÃO ORÇAMENTÁRIA DA DESPESA E DO BENEFÍCIO PREVISTO NA LEI COMPLEMENTAR Nº 123/2006</h2>
-      
+      <div>
+        <GerarTextoTermoDetalhado
+          formData={formData}
+          isEditing={isEditing}
+          setFormData={setFormData}
+        />
+      </div>
+      <div>
+        <ResponsabilidadeEticoProfissional
+          formData={formData}
+          setFormData={setFormData}
+          isEditing={isEditing}
+        />
+      </div>
+      <div>
+        <p className="pt-4 text-justify font-semibold">3.3 INDICAÇÃO DE MARCAS OU MODELOS</p>
+        <IndicacaoMarcaouModelo
+          formData={formData}
+          setFormData={setFormData}
+          isEditing={isEditing}
+        />
+      </div>
+
+      <div>
+        <GerarCondicoesAdicionaisExecucao
+          formData={formData}
+        />
+      </div>
+      <h2 className="text-xl font-bold pt-6 pb-2 text-justify">4. DO VALOR ESTIMADO DA CONTRATAÇÃO, CLASSIFICAÇÃO ORÇAMENTÁRIA DA DESPESA E DO BENEFÍCIO PREVISTO NA LEI COMPLEMENTAR Nº 123/2006</h2>
+
       <h3 className="text-lg font-bold pb-2 text-justify">4.1 Valor estimado da contratação</h3>
       <GerarTextoValorEstimado formData={formData} setFormData={setFormData} isEditing={isEditing} />
 
@@ -392,7 +392,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
 
       {/* --- SEÇÃO 5 --- */}
       <h2 className="text-xl font-bold pt-6 pb-2 text-justify">5. DA LICITAÇÃO</h2>
-      
+
       <h3 className="text-lg font-bold pb-2 text-justify">5.1 Modalidade de licitação, critério de julgamento, regime de execução e modo de disputa</h3>
       <GerarTextoModalidadeLicitacao formData={formData} setFormData={setFormData} isEditing={isEditing} />
 
@@ -403,7 +403,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
       <GerarTextoHabilitacao formData={formData} setFormData={setFormData} isEditing={isEditing} />
 
       <GerarTextoRegistroPrecos formData={formData} setFormData={setFormData} isEditing={isEditing} />
-      <GerarTextoContrato formData={formData} setFormData={setFormData} isEditing={isEditing} />        
+      <GerarTextoContrato formData={formData} setFormData={setFormData} isEditing={isEditing} />
 
       <h2 className="text-xl font-bold pt-6 pb-2 text-justify">8. DOS CRITÉRIOS E PRAZOS PARA PAGAMENTO</h2>
       <GerarTextoPagamento formData={formData} setFormData={setFormData} isEditing={isEditing} />
@@ -437,7 +437,7 @@ function GerarTextoDaCooperativa({ formData, setFormData, isEditing }: GerarText
   };
 
   switch (vedacaoOuParticipacaoCooperativa) {
-    case 'sim': 
+    case 'sim':
       return (
         <EditableTextarea
           initialValue={formData.permitidaParticipacaoCooperativaSim}
@@ -468,7 +468,7 @@ function GerarTextoDaCooperativa({ formData, setFormData, isEditing }: GerarText
       );
     }
 
-      
+
     default:
       return <p className="text-gray-400 italic">Opção de cooperativa não selecionada.</p>;
   }
@@ -534,7 +534,7 @@ function GerarTextoDaPessoaFisica({ formData, setFormData, isEditing }: GerarTex
   };
 
   switch (vedacaoOuParticipacaoPessoasFisicas) {
-    case 'sim': 
+    case 'sim':
       return (
         <EditableTextarea
           initialValue={formData.vedacaoParticipacaoPessoaFisicaSim}
@@ -565,7 +565,7 @@ function GerarTextoDaPessoaFisica({ formData, setFormData, isEditing }: GerarTex
       );
     }
 
-      
+
     default:
       return <p className="text-gray-400 italic">Opção de cooperativa não selecionada.</p>;
   }
@@ -579,7 +579,7 @@ function GerarTabelasDeItens({ formData }: { formData: FormDataCompleto }) {
   const { itensPorUnidade, grupos } = formData;
 
   const temItensUnidade = itensPorUnidade.length > 0;
-  
+
   const temGruposComItens = grupos.some(g => g.itens.length > 0);
   const temGruposSemItens = grupos.length > 0 && !temGruposComItens;
 
@@ -589,7 +589,7 @@ function GerarTabelasDeItens({ formData }: { formData: FormDataCompleto }) {
 
   return (
     <div className="space-y-6">
-      
+
       {/* Tabela de Itens por Unidade (Modo "Por Itens") */}
       {temItensUnidade && (
         <div>
@@ -664,7 +664,7 @@ function GerarTabelasDeItens({ formData }: { formData: FormDataCompleto }) {
           ))}
         </div>
       )}
-      
+
     </div>
   );
 }
@@ -697,8 +697,8 @@ function GerarEspecificacoes({ formData, setFormData, isEditing }: { formData: F
   }
 
   return (
-    <p 
-      className="text-lg text-justify whitespace-pre-wrap" 
+    <p
+      className="text-lg text-justify whitespace-pre-wrap"
       style={{ whiteSpace: 'pre-wrap' }}
     >
       {especificacoes}
@@ -738,8 +738,8 @@ function GerarEspecificacoes({ formData, setFormData, isEditing }: { formData: F
   );
 } */
 
-function GerarPrazoDeExecucao({formData, setFormData, isEditing}: GerarTextoProps){
-  const {prazoExecucaoDoContrato, texto_prazo_execucao} = formData
+function GerarPrazoDeExecucao({ formData, setFormData, isEditing }: GerarTextoProps) {
+  const { prazoExecucaoDoContrato, texto_prazo_execucao } = formData
 
   const handleSave = (novoValor: string) => {
     setFormData((prev) => ({
@@ -758,7 +758,7 @@ function GerarPrazoDeExecucao({formData, setFormData, isEditing}: GerarTextoProp
   if (isEditing) {
     return (
       <EditableTextarea
-        initialValue={texto_prazo_execucao} 
+        initialValue={texto_prazo_execucao}
         onSave={handleSave}
         className="text-lg"
         isEditing={isEditing}
@@ -766,23 +766,23 @@ function GerarPrazoDeExecucao({formData, setFormData, isEditing}: GerarTextoProp
     );
   }
 
- 
 
-  return(
-     <p
-    className="text-lg p-2 rounded-md"
-    dangerouslySetInnerHTML={{ __html: textoComValores }}
+
+  return (
+    <p
+      className="text-lg p-2 rounded-md"
+      dangerouslySetInnerHTML={{ __html: textoComValores }}
     />
   )
 }
 
-function CronogramaRealizacaoDosServicos({formData, setFormData, isEditing}: GerarTextoProps){
-  const {cronogramaRealizacaoDosServicos, texto_cronograma_realizacao_servicos} = formData
+function CronogramaRealizacaoDosServicos({ formData, setFormData, isEditing }: GerarTextoProps) {
+  const { cronogramaRealizacaoDosServicos, texto_cronograma_realizacao_servicos } = formData
 
   const handleSave = (novoValor: string) => {
     setFormData((prev) => ({
       ...prev,
-      texto_cronograma_realizacao_servicos: novoValor 
+      texto_cronograma_realizacao_servicos: novoValor
     }));
   };
 
@@ -795,37 +795,37 @@ function CronogramaRealizacaoDosServicos({formData, setFormData, isEditing}: Ger
   if (isEditing) {
     return (
       <EditableTextarea
-          initialValue={formData.texto_cronograma_realizacao_servicos}
-          onSave={handleSave}
-          className="text-lg"
-          isEditing={isEditing}
-        />
+        initialValue={formData.texto_cronograma_realizacao_servicos}
+        onSave={handleSave}
+        className="text-lg"
+        isEditing={isEditing}
+      />
     );
   }
 
-  if(!cronogramaRealizacaoDosServicos){
+  if (!cronogramaRealizacaoDosServicos) {
     return (
       <p className="text-gray-500 italic">
-    
+
       </p>
     )
   }
 
-  return(
-      <p
-    className="text-lg p-2 rounded-md"
-    dangerouslySetInnerHTML={{ __html: textoComValores }}
-  />
+  return (
+    <p
+      className="text-lg p-2 rounded-md"
+      dangerouslySetInnerHTML={{ __html: textoComValores }}
+    />
   )
 }
 
-function PerfeitaExecucaoDosServicos({formData, setFormData, isEditing}: GerarTextoProps){
-  const {perfeitaExecucaoservicos, texto_para_perfeita_execucao_servicos} = formData
+function PerfeitaExecucaoDosServicos({ formData, setFormData, isEditing }: GerarTextoProps) {
+  const { perfeitaExecucaoservicos, texto_para_perfeita_execucao_servicos } = formData
 
   const handleSave = (novoValor: string) => {
     setFormData((prev) => ({
       ...prev,
-      texto_para_perfeita_execucao_servicos: novoValor 
+      texto_para_perfeita_execucao_servicos: novoValor
     }));
   };
 
@@ -838,15 +838,15 @@ function PerfeitaExecucaoDosServicos({formData, setFormData, isEditing}: GerarTe
   if (isEditing) {
     return (
       <EditableTextarea
-          initialValue={formData.texto_para_perfeita_execucao_servicos}
-          onSave={handleSave}
-          className="text-lg"
-          isEditing={isEditing}
-        />
+        initialValue={formData.texto_para_perfeita_execucao_servicos}
+        onSave={handleSave}
+        className="text-lg"
+        isEditing={isEditing}
+      />
     );
   }
-  return(
-      <p
+  return (
+    <p
       className="text-lg p-2 rounded-md"
       dangerouslySetInnerHTML={{ __html: textoComValores }}
     />
@@ -913,7 +913,7 @@ function PerfeitaExecucaoDosServicos({formData, setFormData, isEditing}: GerarTe
   }
 } */
 
-function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTextoProps){
+function GerarTextoRecebimentoObjeto({ formData, setFormData, isEditing }: GerarTextoProps) {
   const { objetoSeraRecebido } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -925,7 +925,7 @@ function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTe
 
   // Prepara os valores para substituição
   const valores = {
-    ObjetoRecebidoProvisoriamente: formData.prazoRecebimentoProvisorio || "___", 
+    ObjetoRecebidoProvisoriamente: formData.prazoRecebimentoProvisorio || "___",
     prazoPorExtenso: numeroPorExtenso(formData.prazoRecebimentoProvisorio || '') || "____",
     ObjetoRecebidoDefinitivamente: formData.prazoRecebimentoDefinitivo || "___",
     definitivoPorExtenso: numeroPorExtenso(formData.prazoRecebimentoDefinitivo || '') || "____"
@@ -970,7 +970,7 @@ function GerarTextoRecebimentoObjeto({formData, setFormData, isEditing}: GerarTe
   );
 }
 
-function RecebimentoDefinitivoPoderaSerExcepcionalmente({formData, setFormData, isEditing}: GerarTextoProps){
+function RecebimentoDefinitivoPoderaSerExcepcionalmente({ formData, setFormData, isEditing }: GerarTextoProps) {
   const { recebimentoDefinitivoPoderaSerExcepcionalmente } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1013,8 +1013,8 @@ function RecebimentoDefinitivoPoderaSerExcepcionalmente({formData, setFormData, 
   }
 }
 
-function ResponsabilidadeEticoProfissional({formData, setFormData, isEditing}: GerarTextoProps){
-  const {responsabilidadeEticoProfissional} = formData
+function ResponsabilidadeEticoProfissional({ formData, setFormData, isEditing }: GerarTextoProps) {
+  const { responsabilidadeEticoProfissional } = formData
 
   const handleSave = (novoValor: string) => {
     setFormData((prev) => ({
@@ -1025,7 +1025,7 @@ function ResponsabilidadeEticoProfissional({formData, setFormData, isEditing}: G
 
   const valores = {
     responsabilidadeEticoProfissional: responsabilidadeEticoProfissional || "___",
-    
+
   };
 
   const textoComValores = substituirPlaceholders(responsabilidadeEticoProfissional, valores);
@@ -1033,7 +1033,7 @@ function ResponsabilidadeEticoProfissional({formData, setFormData, isEditing}: G
   if (isEditing) {
     return (
       <EditableTextarea
-        initialValue={responsabilidadeEticoProfissional} 
+        initialValue={responsabilidadeEticoProfissional}
         onSave={handleSave}
         className="text-lg"
         isEditing={isEditing}
@@ -1041,7 +1041,7 @@ function ResponsabilidadeEticoProfissional({formData, setFormData, isEditing}: G
     );
   }
 
-  if(!responsabilidadeEticoProfissional){
+  if (!responsabilidadeEticoProfissional) {
     return (
       <p className="text-gray-500 italic">
         [Prazo de início da execução não especificado]
@@ -1049,17 +1049,17 @@ function ResponsabilidadeEticoProfissional({formData, setFormData, isEditing}: G
     )
   }
 
-  return(
-     <p
-    className="text-lg p-2 rounded-md"
-    dangerouslySetInnerHTML={{ __html: textoComValores }}
+  return (
+    <p
+      className="text-lg p-2 rounded-md"
+      dangerouslySetInnerHTML={{ __html: textoComValores }}
     />
   )
 }
 
-function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoProps){
-  const {eEstudosTecnicosPreliminares, 
-    } = formData
+function IndicacaoMarcaouModelo({ formData, setFormData, isEditing }: GerarTextoProps) {
+  const { eEstudosTecnicosPreliminares,
+  } = formData
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
     setFormData((prev) => ({
@@ -1077,7 +1077,7 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
     marcas_ou_modelos_indicadas: formData.marcas_ou_modelos_indicadas || "______",
     devido_a: formData.devido_a || "______",
     nao_texto_preve_indicacao_marcas_ou_modelos: formData.nao_texto_preve_indicacao_marcas_ou_modelos || "_________"
-    
+
   };
 
   switch (eEstudosTecnicosPreliminares) {
@@ -1129,10 +1129,10 @@ function IndicacaoMarcaouModelo({formData, setFormData, isEditing}: GerarTextoPr
       );
     }
   }
-  
+
 }
 
-function GerarTextoTermoDetalhado({formData, setFormData, isEditing}: GerarTextoProps){
+function GerarTextoTermoDetalhado({ formData, setFormData, isEditing }: GerarTextoProps) {
   const { TermoDetalhadoDeRecebimentoProvisorio } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1143,7 +1143,7 @@ function GerarTextoTermoDetalhado({formData, setFormData, isEditing}: GerarTexto
   };
 
   switch (TermoDetalhadoDeRecebimentoProvisorio) {
-    case 'sim': 
+    case 'sim':
       return (
         <EditableTextarea
           initialValue={formData.texto_termo_detalhado_de_recebimento_provisorio_se_realizado_imr}
@@ -1152,7 +1152,7 @@ function GerarTextoTermoDetalhado({formData, setFormData, isEditing}: GerarTexto
           isEditing={isEditing}
         />
       );
-    case 'nao': 
+    case 'nao':
       return (
         <EditableTextarea
           initialValue={formData.texto_termo_detalhado_de_recebimento_provisorio_se_nao_realizado_imr}
@@ -1170,7 +1170,7 @@ function GerarCondicoesAdicionaisExecucao({ formData }: { formData: FormDataComp
   const { necessarioCondicoesAdicionaisParaExecucaoDoObjeto, condicoesAdicionaisExecucao } = formData;
 
   if (necessarioCondicoesAdicionaisParaExecucaoDoObjeto !== 'sim') {
-    return null; 
+    return null;
   }
 
   return (
@@ -1178,11 +1178,11 @@ function GerarCondicoesAdicionaisExecucao({ formData }: { formData: FormDataComp
       <p className="pt-4 pb-2 text-justify font-semibold">
         3.4 Da vedação de utilização de marca / produto na execução do serviço
       </p>
-      
+
       {condicoesAdicionaisExecucao ? (
         <p className="text-lg text-justify whitespace-pre-wrap">
-            {condicoesAdicionaisExecucao}
-         </p>
+          {condicoesAdicionaisExecucao}
+        </p>
       ) : (
         <p className="text-gray-500 italic">[Nenhuma condição de vedação foi adicionada]</p>
       )}
@@ -1191,8 +1191,8 @@ function GerarCondicoesAdicionaisExecucao({ formData }: { formData: FormDataComp
 }
 
 function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps) {
-  const { 
-    eRegistroPreco, 
+  const {
+    eRegistroPreco,
     eEstudosTecnicosPreliminares,
     sim_texto_e_registro_preco,
     nao_texto_e_registro_preco,
@@ -1245,12 +1245,12 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
   if (eEstudosTecnicosPreliminares === 'sim') {
     textoEstudo = " no Estudo Técnico Preliminar e";
   } else if (eEstudosTecnicosPreliminares === 'nao') {
-    textoEstudo = ""; 
+    textoEstudo = "";
   }
   const valores = {
     paraContratacaoEventualPrestacaoServico: paraContratacaoEventualPrestacaoServico || "______",
     visandoAtenderNecessidades: visandoAtenderNecessidades || "______",
-    eEstudosTecnicosPreliminares: textoEstudo, 
+    eEstudosTecnicosPreliminares: textoEstudo,
     qualTipoContratacao: mapTipoContratacao[qualTipoContratacao] || "______",
     quaisOrgaosOuEntidades: formData.quaisOrgaosOuEntidades || "______"
   };
@@ -1263,7 +1263,7 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
       [templateKey]: novoValor
     }));
   };
-  
+
   if (isEditing) {
     return (
       <EditableTextarea
@@ -1284,8 +1284,8 @@ function GerarTextoObjeto({ formData, setFormData, isEditing }: GerarTextoProps)
 }
 
 function GerarTextoItem1_2({ formData, setFormData, isEditing }: GerarTextoProps) {
-  
-  const templateKey: keyof FormDataCompleto = 'seCoperativa'; 
+
+  const templateKey: keyof FormDataCompleto = 'seCoperativa';
   const template = formData[templateKey];
 
   const handleSave = (novoValor: string) => {
@@ -1301,7 +1301,7 @@ function GerarTextoItem1_2({ formData, setFormData, isEditing }: GerarTextoProps
   };
 
   const textoComValores = substituirPlaceholders(template, valores);
-  
+
   if (isEditing) {
     return (
       <EditableTextarea
@@ -1322,7 +1322,7 @@ function GerarTextoItem1_2({ formData, setFormData, isEditing }: GerarTextoProps
 }
 
 function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing }: GerarTextoProps) {
-  const { 
+  const {
     eEstudosTecnicosPreliminares,
     texto_sim_existEtpOuInformacaoPresenteExtratoSigiloso,
     texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso,
@@ -1353,7 +1353,7 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
   switch (eEstudosTecnicosPreliminares) {
     case 'sim': {
       const textoComValores = substituirPlaceholders(texto_sim_existEtpOuInformacaoPresenteExtratoSigiloso, valores);
-      
+
       if (isEditing) {
         return (
           <EditableTextarea
@@ -1364,7 +1364,7 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
           />
         );
       }
-      
+
       return (
         <p
           className="text-lg p-2 rounded-md"
@@ -1372,29 +1372,29 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
         />
       );
     }
-      
+
     case 'nao': {
       const textoUmComValores = substituirPlaceholders(texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso, valores);
       const textoDoisComValores = substituirPlaceholders(texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois, valores);
 
       if (isEditing) {
         return (
-         <>
-             <EditableTextarea
-            initialValue={texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso}
-            onSave={(novoValor: string) => handleSave('texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso', novoValor)}
-            className="text-lg"
-            isEditing={isEditing}
-          />
-          {formData.atenderaDeverLegalExposto === 'sim' && (
+          <>
             <EditableTextarea
-              initialValue={texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois}
-              onSave={(novoValor: string) => handleSave('texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois', novoValor)}
+              initialValue={texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso}
+              onSave={(novoValor: string) => handleSave('texto_nao_existEtpOuInformacaoPresenteExtratoSigiloso', novoValor)}
               className="text-lg"
               isEditing={isEditing}
             />
-          )}
-         </>
+            {formData.atenderaDeverLegalExposto === 'sim' && (
+              <EditableTextarea
+                initialValue={texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois}
+                onSave={(novoValor: string) => handleSave('texto_nao_existEtpOuInformacaoPresenteExtratoSigilosoItemDois', novoValor)}
+                className="text-lg"
+                isEditing={isEditing}
+              />
+            )}
+          </>
         );
       }
 
@@ -1413,7 +1413,7 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
         </>
       );
     }
-      
+
     default:
       // 4. CORREÇÃO: Mensagem de fallback mais clara
       return <p className="text-gray-400 italic">Opção de ETP (2.1) não selecionada.</p>;
@@ -1421,7 +1421,7 @@ function JustificativaNecessidadeContratacao({ formData, setFormData, isEditing 
 }
 
 function JustificativaEscolhaSolucao({ formData, setFormData, isEditing }: GerarTextoProps) {
-  const { 
+  const {
     eEstudosTecnicosPreliminares,
     texto_sim_justificativa_solucao,
     texto_nao_justificativa_solucao
@@ -1482,10 +1482,13 @@ function JustificativaEscolhaSolucao({ formData, setFormData, isEditing }: Gerar
 }
 
 function JustificativaParcelamento({ formData, setFormData, isEditing }: GerarTextoProps) {
-  const { 
+  const {
     eEstudosTecnicosPreliminares,
     tipoParcelamentoNaoEtp,
-    usaLotesEspelhados
+    usaLotesEspelhados,
+    haveraParcelamentoDoObjeto_nao,
+    haveraParcelamentoDoObjeto_sim,
+    haveraParcelamentoDoObjeto
   } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1498,10 +1501,10 @@ function JustificativaParcelamento({ formData, setFormData, isEditing }: GerarTe
   const valores = {
     // Caso ETP = Sim
     itemEtpJustificativaParcelamento: formData.itemEtpJustificativaParcelamento || "_____",
-    
+
     // Caso ETP = Não (Item)
     razoesParcelamentoItem: formData.razoesParcelamentoItem || "_________________",
-    
+
     // Caso ETP = Não (Lote)
     justificativaAgrupamentoLote: formData.justificativaAgrupamentoLote || "_________________",
 
@@ -1511,12 +1514,22 @@ function JustificativaParcelamento({ formData, setFormData, isEditing }: GerarTe
 
   switch (eEstudosTecnicosPreliminares) {
     case 'sim': {
-      const textoComValores = substituirPlaceholders(formData.texto_sim_justificativa_parcelamento, valores);
+      const isSim = haveraParcelamentoDoObjeto === 'sim';
+      const isNao = haveraParcelamentoDoObjeto === 'nao';
+      
+      if (!isSim && !isNao) {
+         return <p className="text-gray-400 italic">Selecione se haverá parcelamento do objeto.</p>;
+      }
+
+      const templateKey = isSim ? 'haveraParcelamentoDoObjeto_sim' : 'haveraParcelamentoDoObjeto_nao';
+      const template = isSim ? haveraParcelamentoDoObjeto_sim : haveraParcelamentoDoObjeto_nao;
+      const textoComValores = substituirPlaceholders(template, valores);
+      
       return (
         isEditing ? (
           <EditableTextarea
-            initialValue={formData.texto_sim_justificativa_parcelamento}
-            onSave={(novoValor: string) => handleSave('texto_sim_justificativa_parcelamento', novoValor)}
+            initialValue={template}
+            onSave={(novoValor: string) => handleSave(templateKey, novoValor)}
             className="text-lg"
             isEditing={isEditing}
           />
@@ -1555,7 +1568,7 @@ function JustificativaParcelamento({ formData, setFormData, isEditing }: GerarTe
               />
             </>
           )}
-          
+
           {tipoParcelamentoNaoEtp === 'lote' && (
             <>
               <p
@@ -1598,7 +1611,7 @@ function JustificativaParcelamento({ formData, setFormData, isEditing }: GerarTe
 }
 
 function JustificativaQuantitativo({ formData, setFormData, isEditing }: GerarTextoProps) {
-  const { 
+  const {
     eEstudosTecnicosPreliminares,
     texto_sim_justificativa_quantitativo,
     texto_nao_justificativa_quantitativo,
@@ -1662,13 +1675,13 @@ function JustificativaQuantitativo({ formData, setFormData, isEditing }: GerarTe
         ) : (
           <>
             <p
-            className="text-lg p-2 rounded-md"
-            dangerouslySetInnerHTML={{ __html: textoComValores }}
-          />
-          <p
-            className="text-lg p-2 rounded-md"
-            dangerouslySetInnerHTML={{ __html: textoComValoresDois }}
-          />
+              className="text-lg p-2 rounded-md"
+              dangerouslySetInnerHTML={{ __html: textoComValores }}
+            />
+            <p
+              className="text-lg p-2 rounded-md"
+              dangerouslySetInnerHTML={{ __html: textoComValoresDois }}
+            />
           </>
         )
       );
@@ -1678,7 +1691,7 @@ function JustificativaQuantitativo({ formData, setFormData, isEditing }: GerarTe
   }
 }
 
-function GerarTextoValorEstimado({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoValorEstimado({ formData, setFormData, isEditing }: GerarTextoProps) {
   const { orcamentoSigiloso, tipoValorEstimado } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1717,78 +1730,78 @@ function GerarTextoValorEstimado({formData, setFormData, isEditing}: GerarTextoP
     );
   };
 
- return (
-  <>
-    {orcamentoSigiloso === 'nao' ? (
-      <>
-        {renderTexto(formData.texto_valor_estimado_nao_sigiloso, 'texto_valor_estimado_nao_sigiloso')}
-        
-        {!tipoValorEstimado && !isEditing && (
-          <p className="text-gray-400 italic">Selecione o tipo de valor.</p>
-        )}
-      </>
-    ) : (
-      <>
-        {renderTexto(formData.texto_orcamento_sigiloso, 'texto_orcamento_sigiloso')}
-        
-      </>
-    )}
-    {/* Textos comuns a todos os casos */}
-    {renderTexto(formData.texto_valor_estimado_todos_casos_p1, 'texto_valor_estimado_todos_casos_p1')}
-    {renderTexto(formData.texto_valor_estimado_todos_casos_p2, 'texto_valor_estimado_todos_casos_p2')}
-  </>
-);
-}
-
-function GerarTextoClassificacaoOrcamentaria({formData, setFormData, isEditing}: GerarTextoProps) {
-    const { classificacoesOrcamentarias, eRegistroPreco, elemento_de_despesa } = formData;
-    const isRP = eRegistroPreco === 'sim';
-
-    const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
-      setFormData((prev) => ({ ...prev, [campo]: novoValor }));
-    };
-
-    return (
+  return (
+    <>
+      {orcamentoSigiloso === 'nao' ? (
         <>
-            <EditableTextarea 
-              initialValue={formData.texto_classificacao_orcamentaria_p1}
-              onSave={(v) => handleSave('texto_classificacao_orcamentaria_p1', v)}
-              isEditing={isEditing}
-              className="text-lg"
-            />
+          {renderTexto(formData.texto_valor_estimado_nao_sigiloso, 'texto_valor_estimado_nao_sigiloso')}
 
-            {/* EXIBE O ELEMENTO DE DESPESA QUE VOCÊ DIGITOU NO FORMULÁRIO */}
-            {elemento_de_despesa && (
-              <p className="text-lg mt-2 whitespace-pre-wrap">
-                {elemento_de_despesa}
-              </p>
-            )}
-
-            {classificacoesOrcamentarias.length > 0 ? (
-                <ul className="list-disc pl-8 mt-2 space-y-2 text-lg">
-                    {classificacoesOrcamentarias.map(item => (
-                        <li key={item.id}>
-                            <strong>Elemento de Despesa:</strong> {item.elementoDespesa || "____"}
-                            {!isRP && (
-                                <div className="pl-4" style={{ textIndent: '-1em', paddingLeft: '1em' }}>
-                                    <strong>Fonte:</strong> {item.fonte || "____"}<br/>
-                                    <strong>Unidade:</strong> {item.unidade || "____"}<br/>
-                                    <strong>Programa:</strong> {item.programa || "____"}<br/>
-                                    <strong>Ação:</strong> {item.acao || "____"}<br/>
-                                    <strong>Categoria Econômica:</strong> {item.categoriaEconomica || "____"}
-                                </div>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-              !isEditing && <p className="text-gray-500 italic">[Nenhuma classificação orçamentária adicionada]</p>
-            )}
+          {!tipoValorEstimado && !isEditing && (
+            <p className="text-gray-400 italic">Selecione o tipo de valor.</p>
+          )}
         </>
-    );
+      ) : (
+        <>
+          {renderTexto(formData.texto_orcamento_sigiloso, 'texto_orcamento_sigiloso')}
+
+        </>
+      )}
+      {/* Textos comuns a todos os casos */}
+      {renderTexto(formData.texto_valor_estimado_todos_casos_p1, 'texto_valor_estimado_todos_casos_p1')}
+      {renderTexto(formData.texto_valor_estimado_todos_casos_p2, 'texto_valor_estimado_todos_casos_p2')}
+    </>
+  );
 }
 
-function GerarTextoJustificativaLC123({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoClassificacaoOrcamentaria({ formData, setFormData, isEditing }: GerarTextoProps) {
+  const { classificacoesOrcamentarias, eRegistroPreco, elemento_de_despesa } = formData;
+  const isRP = eRegistroPreco === 'sim';
+
+  const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
+    setFormData((prev) => ({ ...prev, [campo]: novoValor }));
+  };
+
+  return (
+    <>
+      <EditableTextarea
+        initialValue={formData.texto_classificacao_orcamentaria_p1}
+        onSave={(v) => handleSave('texto_classificacao_orcamentaria_p1', v)}
+        isEditing={isEditing}
+        className="text-lg"
+      />
+
+      {/* EXIBE O ELEMENTO DE DESPESA QUE VOCÊ DIGITOU NO FORMULÁRIO */}
+      {elemento_de_despesa && (
+        <p className="text-lg mt-2 whitespace-pre-wrap">
+          {elemento_de_despesa}
+        </p>
+      )}
+
+      {classificacoesOrcamentarias.length > 0 ? (
+        <ul className="list-disc pl-8 mt-2 space-y-2 text-lg">
+          {classificacoesOrcamentarias.map(item => (
+            <li key={item.id}>
+              <strong>Elemento de Despesa:</strong> {item.elementoDespesa || "____"}
+              {!isRP && (
+                <div className="pl-4" style={{ textIndent: '-1em', paddingLeft: '1em' }}>
+                  <strong>Fonte:</strong> {item.fonte || "____"}<br />
+                  <strong>Unidade:</strong> {item.unidade || "____"}<br />
+                  <strong>Programa:</strong> {item.programa || "____"}<br />
+                  <strong>Ação:</strong> {item.acao || "____"}<br />
+                  <strong>Categoria Econômica:</strong> {item.categoriaEconomica || "____"}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        !isEditing && <p className="text-gray-500 italic">[Nenhuma classificação orçamentária adicionada]</p>
+      )}
+    </>
+  );
+}
+
+function GerarTextoJustificativaLC123({ formData, setFormData, isEditing }: GerarTextoProps) {
   const { justificativaBeneficioLC123Opcao } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1816,13 +1829,13 @@ function GerarTextoJustificativaLC123({formData, setFormData, isEditing}: GerarT
     }
     return (
       <>
-          <p className="text-lg p-2 rounded-md">
-            4.3.1.	Em  regra, contratação de serviços com itens ou lotes de valores estimados iguais ou inferiores a R$ 80.000,00 (oitenta) mil reais devem ser objeto de licitações exclusivas para ME, EPP e MEI (cota exclusiva), nos termos do art. 48, inciso I, da LC nº 123/2006.
-          </p>
-              <p
-                className="text-lg text-justify p-2 rounded-md"
-                dangerouslySetInnerHTML={{ __html: substituirPlaceholders(template, valores) }}
-              />
+        <p className="text-lg p-2 rounded-md">
+          4.3.1.	Em  regra, contratação de serviços com itens ou lotes de valores estimados iguais ou inferiores a R$ 80.000,00 (oitenta) mil reais devem ser objeto de licitações exclusivas para ME, EPP e MEI (cota exclusiva), nos termos do art. 48, inciso I, da LC nº 123/2006.
+        </p>
+        <p
+          className="text-lg text-justify p-2 rounded-md"
+          dangerouslySetInnerHTML={{ __html: substituirPlaceholders(template, valores) }}
+        />
       </>
     );
   };
@@ -1833,7 +1846,7 @@ function GerarTextoJustificativaLC123({formData, setFormData, isEditing}: GerarT
     nao_aplicar_art_49: { tpl: formData.texto_cota_exclusiva_nao_art_49, key: 'texto_cota_exclusiva_nao_art_49' },
     nao_aplicar_art_4_lei_14133: { tpl: formData.texto_cota_exclusiva_nao_art_4_lei_14133, key: 'texto_cota_exclusiva_nao_art_4_lei_14133' },
   };
-  
+
   if (!Array.isArray(justificativaBeneficioLC123Opcao) || justificativaBeneficioLC123Opcao.length === 0) {
     return <p className="text-gray-400 italic">Opção de aplicação do benefício (4.3) não selecionada.</p>;
   }
@@ -1850,7 +1863,7 @@ function GerarTextoJustificativaLC123({formData, setFormData, isEditing}: GerarT
 
 // --- SEÇÃO 5 ---
 
-function GerarTextoModalidadeLicitacao({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoModalidadeLicitacao({ formData, setFormData, isEditing }: GerarTextoProps) {
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
     setFormData((prev) => ({ ...prev, [campo]: novoValor }));
   };
@@ -1887,7 +1900,7 @@ function GerarTextoModalidadeLicitacao({formData, setFormData, isEditing}: Gerar
     justificativaInversaoFases: formData.justificativaInversaoFases || "____",
   };
 
-  
+
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
     if (isEditing) {
@@ -1919,7 +1932,7 @@ function GerarTextoModalidadeLicitacao({formData, setFormData, isEditing}: Gerar
   );
 }
 
-function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoProposta({ formData, setFormData, isEditing }: GerarTextoProps) {
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
     setFormData((prev) => ({ ...prev, [campo]: novoValor }));
   };
@@ -1939,7 +1952,7 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
     percentualGarantiaPropostaExtenso: numeroPorExtenso(formData.percentualGarantiaProposta || ''),
     justificativaGarantiaProposta: formData.justificativaGarantiaProposta || "____",
     requerCondicaoPropostaParaos: formData.requerCondicaoPropostaParaos || "____",
-  requerCondicaoPropostaAcompanhadaDoSeguinteDocumento: formData.requerCondicaoPropostaAcompanhadaDoSeguinteDocumento || "____",
+    requerCondicaoPropostaAcompanhadaDoSeguinteDocumento: formData.requerCondicaoPropostaAcompanhadaDoSeguinteDocumento || "____",
     tipoAmostra: mapTipoAmostra[formData.tipoAmostra] || "teste",
     justificativaAmostra: formData.justificativaAmostra || "____",
     prazoAmostraDiasUteis: formData.prazoAmostraDiasUteis || "__",
@@ -1962,22 +1975,22 @@ function GerarTextoProposta({formData, setFormData, isEditing}: GerarTextoProps)
     prova_conceito_redacao_para_todos_os_casos_texto_onze: formData.prova_conceito_redacao_para_todos_os_casos_texto_onze,
     prova_conceito_redacao_para_todos_os_casos_texto_doze: formData.prova_conceito_redacao_para_todos_os_casos_texto_doze,
     prova_conceito_redacao_para_todos_os_casos_texto_treze: formData.prova_conceito_redacao_para_todos_os_casos_texto_treze,
-horarioTerminoApresentacaoAmostra: formData.horarioTerminoApresentacaoAmostra,
-  telefoneParaAgendamento: formData.telefoneParaAgendamento,
-  emailParaAgendamento: formData.emailParaAgendamento,
-  aProvaDeConceito: formData.aProvaDeConceito,
-  duracaoProvaConceitoDiasUteis: formData.duracaoProvaConceitoDiasUteis,
-  duracaoProvaConceitoDiasUteisPorExtenso: numeroPorExtenso(formData.duracaoProvaConceitoDiasUteis || '___'),
-  provaDeConceitoConsistiraEm: formData.provaDeConceitoConsistiraEm,
-  comprovacaoAtendimentoPercentualPorExtenso: numeroPorExtenso(formData.comprovacaoAtendimentoPercentual || '___'),
-  comprovacaoAtendimentoPercentual: formData.comprovacaoAtendimentoPercentual,
-  setorExaminadoreAvaliadorProvaConceito: formData.setorExaminadoreAvaliadorProvaConceito || "____",
-  orgaoEntidadeProvaConceito: formData.orgaoEntidadeProvaConceito || "____",
-  prazoAnaliseProvaConceitoDiasUteis: formData.prazoAnaliseProvaConceitoDiasUteis || "__",
-  prazoAnaliseProvaConceitoDiasUteisExtenso: numeroPorExtenso(formData.prazoAnaliseProvaConceitoDiasUteis || '___'),
-  deInteresseDas: formData.deInteresseDas || "____",
+    horarioTerminoApresentacaoAmostra: formData.horarioTerminoApresentacaoAmostra,
+    telefoneParaAgendamento: formData.telefoneParaAgendamento,
+    emailParaAgendamento: formData.emailParaAgendamento,
+    aProvaDeConceito: formData.aProvaDeConceito,
+    duracaoProvaConceitoDiasUteis: formData.duracaoProvaConceitoDiasUteis,
+    duracaoProvaConceitoDiasUteisPorExtenso: numeroPorExtenso(formData.duracaoProvaConceitoDiasUteis || '___'),
+    provaDeConceitoConsistiraEm: formData.provaDeConceitoConsistiraEm,
+    comprovacaoAtendimentoPercentualPorExtenso: numeroPorExtenso(formData.comprovacaoAtendimentoPercentual || '___'),
+    comprovacaoAtendimentoPercentual: formData.comprovacaoAtendimentoPercentual,
+    setorExaminadoreAvaliadorProvaConceito: formData.setorExaminadoreAvaliadorProvaConceito || "____",
+    orgaoEntidadeProvaConceito: formData.orgaoEntidadeProvaConceito || "____",
+    prazoAnaliseProvaConceitoDiasUteis: formData.prazoAnaliseProvaConceitoDiasUteis || "__",
+    prazoAnaliseProvaConceitoDiasUteisExtenso: numeroPorExtenso(formData.prazoAnaliseProvaConceitoDiasUteis || '___'),
+    deInteresseDas: formData.deInteresseDas || "____",
 
-  
+
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -2010,7 +2023,7 @@ horarioTerminoApresentacaoAmostra: formData.horarioTerminoApresentacaoAmostra,
           {renderTexto(formData.texto_condicoes_proposta, 'texto_condicoes_proposta')}
         </>
       )}
-      
+
       {/* Garantia de Proposta */}
       {formData.requeGarantiaProposta === 'sim' && (
         <>
@@ -2021,61 +2034,61 @@ horarioTerminoApresentacaoAmostra: formData.horarioTerminoApresentacaoAmostra,
       )}
 
       <>
-          <p className="font-semibold">5.2.4 DA AMOSTRA OU EXAME DE CONFORMIDADE OU PROVA DE CONCEITOOU OUTROS TESTES DE INTERESSE DA ADMINISTRAÇÃO (QUANDO FOR O CASO)</p>
-          
-          {renderTexto(formData.texto_amostra_requisicao_p1, 'texto_amostra_requisicao_p1')}
-          {renderTexto(formData.texto_amostra_prazo_p1, 'texto_amostra_prazo_p1')}
-          
-          {formData.faseApresentacaoAmostra === 'julgamento_proposta' && (
-            <>
-              {renderTexto(formData.texto_amostra_fase_julgamento, 'texto_amostra_fase_julgamento')}
-              {renderTexto(formData.texto_dois_amostra_fase_julgamento, 'texto_dois_amostra_fase_julgamento')}
-              {renderTexto(formData.texto_tres_amostra_fase_julgamento, 'texto_tres_amostra_fase_julgamento')}
-            </>
-          )}
+        <p className="font-semibold">5.2.4 DA AMOSTRA OU EXAME DE CONFORMIDADE OU PROVA DE CONCEITOOU OUTROS TESTES DE INTERESSE DA ADMINISTRAÇÃO (QUANDO FOR O CASO)</p>
 
-          {formData.faseApresentacaoAmostra === 'vigencia_contratual' && (
-            <>
+        {renderTexto(formData.texto_amostra_requisicao_p1, 'texto_amostra_requisicao_p1')}
+        {renderTexto(formData.texto_amostra_prazo_p1, 'texto_amostra_prazo_p1')}
+
+        {formData.faseApresentacaoAmostra === 'julgamento_proposta' && (
+          <>
+            {renderTexto(formData.texto_amostra_fase_julgamento, 'texto_amostra_fase_julgamento')}
+            {renderTexto(formData.texto_dois_amostra_fase_julgamento, 'texto_dois_amostra_fase_julgamento')}
+            {renderTexto(formData.texto_tres_amostra_fase_julgamento, 'texto_tres_amostra_fase_julgamento')}
+          </>
+        )}
+
+        {formData.faseApresentacaoAmostra === 'vigencia_contratual' && (
+          <>
             {renderTexto(formData.texto_amostra_fase_contratual, 'texto_amostra_fase_contratual')}
-            </>
-          )}
+          </>
+        )}
 
-          {formData.faseApresentacaoAmostra === 'apos_homologacao' && (
-            <>
+        {formData.faseApresentacaoAmostra === 'apos_homologacao' && (
+          <>
             {renderTexto(formData.texto_amostra_fase_condicao_assinatura, 'texto_amostra_fase_condicao_assinatura')}
-            </>
-          )}
+          </>
+        )}
 
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto, 'prova_conceito_redacao_para_todos_os_casos_texto')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_dois, 'prova_conceito_redacao_para_todos_os_casos_texto_dois')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_tres, 'prova_conceito_redacao_para_todos_os_casos_texto_tres')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_quatro, 'prova_conceito_redacao_para_todos_os_casos_texto_quatro')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_quinto, 'prova_conceito_redacao_para_todos_os_casos_texto_quinto')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_seis, 'prova_conceito_redacao_para_todos_os_casos_texto_seis')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_sete, 'prova_conceito_redacao_para_todos_os_casos_texto_sete')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_oito, 'prova_conceito_redacao_para_todos_os_casos_texto_oito')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_nove, 'prova_conceito_redacao_para_todos_os_casos_texto_nove')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_dez, 'prova_conceito_redacao_para_todos_os_casos_texto_dez')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_onze, 'prova_conceito_redacao_para_todos_os_casos_texto_onze')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_doze, 'prova_conceito_redacao_para_todos_os_casos_texto_doze')}
-          {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_treze, 'prova_conceito_redacao_para_todos_os_casos_texto_treze')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto, 'prova_conceito_redacao_para_todos_os_casos_texto')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_dois, 'prova_conceito_redacao_para_todos_os_casos_texto_dois')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_tres, 'prova_conceito_redacao_para_todos_os_casos_texto_tres')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_quatro, 'prova_conceito_redacao_para_todos_os_casos_texto_quatro')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_quinto, 'prova_conceito_redacao_para_todos_os_casos_texto_quinto')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_seis, 'prova_conceito_redacao_para_todos_os_casos_texto_seis')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_sete, 'prova_conceito_redacao_para_todos_os_casos_texto_sete')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_oito, 'prova_conceito_redacao_para_todos_os_casos_texto_oito')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_nove, 'prova_conceito_redacao_para_todos_os_casos_texto_nove')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_dez, 'prova_conceito_redacao_para_todos_os_casos_texto_dez')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_onze, 'prova_conceito_redacao_para_todos_os_casos_texto_onze')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_doze, 'prova_conceito_redacao_para_todos_os_casos_texto_doze')}
+        {renderTexto(formData.prova_conceito_redacao_para_todos_os_casos_texto_treze, 'prova_conceito_redacao_para_todos_os_casos_texto_treze')}
 
-          {/* Renderiza a lista de critérios */}
-          {formData.descricaoTesteAmostra.length > 0 ? (
-            <ol type="a" className="list-outside list-[upper-alpha] pl-8 text-lg space-y-2">
-              {formData.descricaoTesteAmostra.map((item, index) => (
-                <li key={index} className="text-gray-800 text-justify">{item}</li>
-              ))}
-            </ol>
-          ) : !isEditing && <p className="text-gray-500 italic">[Nenhum critério de teste adicionado]</p>}
-          
-          {renderTexto(formData.texto_amostra_comum_p3, 'texto_amostra_comum_p3')}
-        </>
+        {/* Renderiza a lista de critérios */}
+        {formData.descricaoTesteAmostra.length > 0 ? (
+          <ol type="a" className="list-outside list-[upper-alpha] pl-8 text-lg space-y-2">
+            {formData.descricaoTesteAmostra.map((item, index) => (
+              <li key={index} className="text-gray-800 text-justify">{item}</li>
+            ))}
+          </ol>
+        ) : !isEditing && <p className="text-gray-500 italic">[Nenhum critério de teste adicionado]</p>}
+
+        {renderTexto(formData.texto_amostra_comum_p3, 'texto_amostra_comum_p3')}
+      </>
     </>
   );
 }
 
-function GerarTextoHabilitacao({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoHabilitacao({ formData, setFormData, isEditing }: GerarTextoProps) {
   // Esta função "mãe" apenas estrutura as sub-seções
   return (
     <>
@@ -2088,7 +2101,7 @@ function GerarTextoHabilitacao({formData, setFormData, isEditing}: GerarTextoPro
   );
 }
 
-function GerarTextoHabilitacaoJuridica({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoHabilitacaoJuridica({ formData, setFormData, isEditing }: GerarTextoProps) {
   const { habilitacaoJuridicaLeiEspecial } = formData;
   if (habilitacaoJuridicaLeiEspecial !== 'sim') return null;
 
@@ -2129,7 +2142,7 @@ function GerarTextoHabilitacaoJuridica({formData, setFormData, isEditing}: Gerar
   );
 }
 
-function GerarTextoHabilitacaoTecnica({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoHabilitacaoTecnica({ formData, setFormData, isEditing }: GerarTextoProps) {
   const { requerRegistroEntidadeProfissional, requerComprovacaoAptidao, preveVistoriaPrevia } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -2169,7 +2182,7 @@ function GerarTextoHabilitacaoTecnica({formData, setFormData, isEditing}: GerarT
   return (
     <>
       {requerRegistroEntidadeProfissional === 'sim' && renderTexto(formData.texto_qualificacao_tecnica_registro, 'texto_qualificacao_tecnica_registro')}
-      
+
       {requerComprovacaoAptidao === 'sim' && (
         <>
           {renderTexto(formData.texto_qualificacao_tecnica_aptidao_p1, 'texto_qualificacao_tecnica_aptidao_p1')}
@@ -2190,8 +2203,8 @@ function GerarTextoHabilitacaoTecnica({formData, setFormData, isEditing}: GerarT
   );
 }
 
-function GerarTextoHabilitacaoEconomica({formData, setFormData, isEditing}: GerarTextoProps) {
-   const { habilitacaoEconomicaPor, requerIndicesContabeis, descricao } = formData; // 'descricao' vem da seção 2.5 (consórcio)
+function GerarTextoHabilitacaoEconomica({ formData, setFormData, isEditing }: GerarTextoProps) {
+  const { habilitacaoEconomicaPor, requerIndicesContabeis, descricao } = formData; // 'descricao' vem da seção 2.5 (consórcio)
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
     setFormData((prev) => ({ ...prev, [campo]: novoValor }));
@@ -2201,7 +2214,7 @@ function GerarTextoHabilitacaoEconomica({formData, setFormData, isEditing}: Gera
     'patrimonio_liquido': 'Patrimônio Líquido',
     'capital_social': 'Capital Social'
   };
-  
+
   const valores = {
     habilitacaoEconomicaPor: mapHabilitacaoPor[formData.habilitacaoEconomicaPor as keyof typeof mapHabilitacaoPor] || "____",
     percentualHabilitacaoEconomica: formData.percentualHabilitacaoEconomica || "__",
@@ -2259,7 +2272,7 @@ function GerarTextoHabilitacaoEconomica({formData, setFormData, isEditing}: Gera
   );
 }
 
-function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoRegistroPrecos({ formData, setFormData, isEditing }: GerarTextoProps) {
   if (formData.eRegistroPreco !== 'sim') return null;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -2306,25 +2319,25 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
       />
     );
   };
-  
+
   const renderLista = (itens: string[] | string) => {
-  const array = Array.isArray(itens)
-    ? itens
-    : (itens ? itens.split(/\r?\n/).map(s => s.trim()).filter(Boolean) : []);
-  if (array.length === 0) return null;
-  return (
-    <ol type="a" className="list-outside list-[upper-alpha] pl-8 text-lg space-y-2">
-      {array.map((item, index) => (
-        <li key={index} className="text-gray-800 text-justify">{item}</li>
-      ))}
-    </ol>
-  );
-};
+    const array = Array.isArray(itens)
+      ? itens
+      : (itens ? itens.split(/\r?\n/).map(s => s.trim()).filter(Boolean) : []);
+    if (array.length === 0) return null;
+    return (
+      <ol type="a" className="list-outside list-[upper-alpha] pl-8 text-lg space-y-2">
+        {array.map((item, index) => (
+          <li key={index} className="text-gray-800 text-justify">{item}</li>
+        ))}
+      </ol>
+    );
+  };
 
   return (
     <div>
       <h2 className="text-xl font-bold pt-6 pb-2 text-justify">6. DO REGISTRO DE PREÇOS</h2>
-      
+
       <h3 className="text-lg font-bold pb-2 text-justify">6.1 Justificativa para utilização do Sistema de Registro de Preços</h3>
       {renderTexto(formData.texto_justificativa_srp, 'texto_justificativa_srp')}
 
@@ -2346,19 +2359,19 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.5 PRAZO DE VIGÊNCIA DA ATA DE REGISTRO DE PREÇOS</h3>
       {renderTexto(formData.textoexistePrazoDeVigenciaAta, 'textoexistePrazoDeVigenciaAta')}
-      
+
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.6 Possibilidade de contratação individual de itens registrados em lotes</h3>
 
       {formData.permiteContratacaoIndividualItemLote === 'nao' && (
         <>
-        {renderTexto(formData.permiteContratacaoIndividualItemLoteNao, 'permiteContratacaoIndividualItemLoteNao')}
+          {renderTexto(formData.permiteContratacaoIndividualItemLoteNao, 'permiteContratacaoIndividualItemLoteNao')}
         </>
       )}
 
       {formData.permiteContratacaoIndividualItemLote === 'sim' && (
         <>
-        {renderTexto(formData.texto_contratacao_individual_item_lote, 'texto_contratacao_individual_item_lote')}
-        {renderTexto(formData.texto_contratacao_individual_item_lote_dois, 'texto_contratacao_individual_item_lote_dois')}
+          {renderTexto(formData.texto_contratacao_individual_item_lote, 'texto_contratacao_individual_item_lote')}
+          {renderTexto(formData.texto_contratacao_individual_item_lote_dois, 'texto_contratacao_individual_item_lote_dois')}
         </>
       )}
 
@@ -2373,18 +2386,18 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
         </>
       ) : (
         <>
-        {renderTexto(formData.texto_adesao_nao, 'texto_adesao_nao')}
-        {renderTexto(formData.texto_adesao_nao_texto_dois, 'texto_adesao_nao_texto_dois')}
+          {renderTexto(formData.texto_adesao_nao, 'texto_adesao_nao')}
+          {renderTexto(formData.texto_adesao_nao_texto_dois, 'texto_adesao_nao_texto_dois')}
         </>
       )}
-      
+
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">6.9 Obrigações e responsabilidades da gerenciadora da ATA</h3>
-      
+
       {formData.obrigacoesGerenciadoraIncluirExtras === 'sim' ? (
         <>
           {renderTexto(formData.texto_obrigacoes_gerenciadora_padrao, 'texto_obrigacoes_gerenciadora_padrao')}
         </>
-      ): (
+      ) : (
         <>
           {renderTexto(formData.texto_obrigacoes_gerenciadora_extras, 'texto_obrigacoes_gerenciadora_extras')}
           {renderLista(formData.obrigacoesGerenciadoraExtras)}
@@ -2403,10 +2416,10 @@ function GerarTextoRegistroPrecos({formData, setFormData, isEditing}: GerarTexto
   );
 }
 
-{/* --- FUNÇÕES DE RENDERIZAÇÃO (SEÇÃO 7) --- */}
+{/* --- FUNÇÕES DE RENDERIZAÇÃO (SEÇÃO 7) --- */ }
 
-function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps) {
-  
+function GerarTextoContrato({ formData, setFormData, isEditing }: GerarTextoProps) {
+
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
     setFormData((prev) => ({ ...prev, [campo]: novoValor }));
   };
@@ -2427,7 +2440,7 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
     parcelasAcessoriasSubcontratacao: formData.parcelasAcessoriasSubcontratacao || "____",
     percentualLimiteSubcontratacaoAcessorias: formData.percentualLimiteSubcontratacaoAcessorias || "__",
     aspectosTecnicosSubcontratacao: formData.aspectosTecnicosSubcontratacao || "____",
-    percentualLimiteSubcontratacaoTecnicos: numeroPorExtenso(formData.percentualLimiteSubcontratacaoTecnicos )|| "__",
+    percentualLimiteSubcontratacaoTecnicos: numeroPorExtenso(formData.percentualLimiteSubcontratacaoTecnicos) || "__",
     fundamentoSubcontratacao: formData.fundamentoSubcontratacao || "____",
     meioComunicacaoOficial: formData.meioComunicacaoOficial || "____",
     enderecoEntregaNotaFiscal: formData.enderecoEntregaNotaFiscal || "____",
@@ -2475,7 +2488,7 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
   return (
     <div>
       <h2 className="text-xl font-bold pt-6 pb-2 text-justify">7. DO CONTRATO</h2>
-      
+
       <h3 className="text-lg font-bold pb-2 text-justify">7.1 Prazo de Vigência Contratual</h3>
       {formData.tipoContratoPrazo === 'escopo_definido' && renderTexto(formData.texto_prazo_vigencia_escopo_definido, 'texto_prazo_vigencia_escopo_definido')}
       {formData.tipoContratoPrazo === 'continuo' && (
@@ -2487,37 +2500,37 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
       )}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.2 Prazo para Assinatura do Contrato</h3>
-      {formData.eRegistroPreco === 'sim' && 
+      {formData.eRegistroPreco === 'sim' &&
         <>
-          {renderTexto(formData.texto_prazo_assinatura_contrato_srp, 'texto_prazo_assinatura_contrato_srp')} 
+          {renderTexto(formData.texto_prazo_assinatura_contrato_srp, 'texto_prazo_assinatura_contrato_srp')}
           {renderTexto(formData.texto_prazo_assinatura_contrato_srp_textodois, 'texto_prazo_assinatura_contrato_srp_textodois')}
         </>
       }
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.3 Requisitos da Contratação</h3>
-{formData.requerCartaSolidariedade === 'sim' &&
-  renderTexto(formData.texto_carta_solidariedade, 'texto_carta_solidariedade')}
-{formData.requerRequisitosSustentabilidade === 'sim' &&
-  renderTexto(formData.texto_requisitos_sustentabilidade, 'texto_requisitos_sustentabilidade')}
-{formData.requerClausula73_3 === 'sim' && (
-  <>
-    <h3 className="text-lg font-bold pt-4 pb-2 text-justify">
-      7.3.3. DA EXIGÊNCIA DE CARTA DE SOLIDARIEDADE
-    </h3>
-    {renderTexto(formData.texto_73_3, 'texto_73_3')}
-  </>
-)}
-{formData.requerClausula73_4 === 'sim' && (
-  <>
-    <h3 className="text-lg font-bold pt-4 pb-2 text-justify">
-      7.3.4. REQUISITOS DE SUSTENTABILIDADE
-    </h3>
-    {renderTexto(formData.texto_73_4, 'texto_73_4')}
-  </>
-)}
+      {formData.requerCartaSolidariedade === 'sim' &&
+        renderTexto(formData.texto_carta_solidariedade, 'texto_carta_solidariedade')}
+      {formData.requerRequisitosSustentabilidade === 'sim' &&
+        renderTexto(formData.texto_requisitos_sustentabilidade, 'texto_requisitos_sustentabilidade')}
+      {formData.requerClausula73_3 === 'sim' && (
+        <>
+          <h3 className="text-lg font-bold pt-4 pb-2 text-justify">
+            7.3.3. DA EXIGÊNCIA DE CARTA DE SOLIDARIEDADE
+          </h3>
+          {renderTexto(formData.texto_73_3, 'texto_73_3')}
+        </>
+      )}
+      {formData.requerClausula73_4 === 'sim' && (
+        <>
+          <h3 className="text-lg font-bold pt-4 pb-2 text-justify">
+            7.3.4. REQUISITOS DE SUSTENTABILIDADE
+          </h3>
+          {renderTexto(formData.texto_73_4, 'texto_73_4')}
+        </>
+      )}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.4 Obrigações da Contratante</h3>
-      
+
       {formData.obrigacoesContratanteUsarPadrao === 'nao' && (
         <>
           {renderTexto(formData.texto_obrigacoes_contratante_extras, 'texto_obrigacoes_contratante_extras')}
@@ -2530,10 +2543,10 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
       )}
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.5 Obrigações da Contratada</h3>
-      
+
       {formData.obrigacoesContratadaIncluirExtras === 'sim' ? (
         renderTexto(formData.texto_obrigacoes_contratada_padrao, 'texto_obrigacoes_contratada_padrao')
-      ):(
+      ) : (
         <>
           {renderTexto(formData.texto_obrigacoes_contratada_extras, 'texto_obrigacoes_contratada_extras')}
           {renderLista(formData.obrigacoesContratadaExtras)}
@@ -2542,12 +2555,12 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.6 Previsão e condições de prestação da garantia contratual</h3>
       {formData.preveGarantiaContratual === 'nao' && formData.eEstudosTecnicosPreliminares === 'nao' && (
-        renderTexto(formData.texto_garantia_contratual_nao_2, 'texto_garantia_contratual_nao_2') 
+        renderTexto(formData.texto_garantia_contratual_nao_2, 'texto_garantia_contratual_nao_2')
 
-      ) 
+      )
       }
 
-      {formData.preveGarantiaContratual === 'nao' && formData.eEstudosTecnicosPreliminares === 'sim' &&(
+      {formData.preveGarantiaContratual === 'nao' && formData.eEstudosTecnicosPreliminares === 'sim' && (
         renderTexto(formData.texto_garantia_contratual_nao, 'texto_garantia_contratual_nao')
       )}
 
@@ -2563,9 +2576,9 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
       {formData.permiteSubcontratacao === 'nao' && renderTexto(formData.texto_subcontratacao_nao, 'texto_subcontratacao_nao')}
 
       {formData.qualsubcontratacao === 'sim_acessorias' && renderTexto(formData.texto_subcontratacao_sim_acessorias, 'texto_subcontratacao_sim_acessorias')}
-      
+
       {formData.qualsubcontratacao === 'sim_tecnicos' && renderTexto(formData.texto_subcontratacao_sim_tecnicos, 'texto_subcontratacao_sim_tecnicos')}
-      
+
       {formData.qualsubcontratacao === 'ambas_tecnicos_e_acessorias' && (
         <>
           {renderTexto(formData.texto_subcontratacao_sim_acessorias, 'texto_subcontratacao_sim_acessorias')}
@@ -2582,7 +2595,7 @@ function GerarTextoContrato({formData, setFormData, isEditing}: GerarTextoProps)
 
 
       {/* {formData.permiteSubcontratacao !== 'nao' && renderTexto(formData.texto_subcontratacao_sim_fundamento, 'texto_subcontratacao_sim_fundamento')} */}
-      
+
 
       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">7.8 Modelo de Gestão do Contrato</h3>
       {renderTexto(formData.texto_gestao_contrato_p1, 'texto_gestao_contrato_p1')}
@@ -2600,7 +2613,7 @@ function GerarTabelaAtoresGestao({ atores }: { atores: AtorGestaoContrato[] }) {
   if (atores.length === 0) {
     return <p className="text-gray-500 italic">[Nenhum ator de gestão/fiscalização adicionado]</p>;
   }
-  
+
   return (
     <div className="overflow-x-auto my-4">
       <table className="min-w-full divide-y divide-gray-300 border border-gray-300">
@@ -2628,7 +2641,7 @@ function GerarTabelaAtoresGestao({ atores }: { atores: AtorGestaoContrato[] }) {
 }
 
 // --- SEÇÃO 8: PAGAMENTO ---
-function GerarTextoPagamento({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoPagamento({ formData, setFormData, isEditing }: GerarTextoProps) {
 
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -2681,7 +2694,7 @@ function GerarTextoPagamento({formData, setFormData, isEditing}: GerarTextoProps
 }
 
 // --- SEÇÃO 9: IMR ---
-function GerarTextoIMR({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoIMR({ formData, setFormData, isEditing }: GerarTextoProps) {
   const { usaImr } = formData;
 
   if (usaImr === 'nao') return <p className="text-gray-500 italic">Não será utilizado Instrumento de Medição de Resultado (IMR).</p>;
@@ -2694,7 +2707,7 @@ function GerarTextoIMR({formData, setFormData, isEditing}: GerarTextoProps) {
     quadroIndicadoresImr: formData.quadroIndicadoresImr || "____",
     prazoAtesteMedicao: formData.prazoAtesteMedicao || "__",
     prazoAtesteMedicaoExtenso: numeroPorExtenso(formData.prazoAtesteMedicao)
-    
+
   };
 
   const renderTexto = (template: string, templateKey: keyof FormDataCompleto) => {
@@ -2714,7 +2727,7 @@ function GerarTextoIMR({formData, setFormData, isEditing}: GerarTextoProps) {
 }
 
 // --- SEÇÃO 10: SANÇÕES ---
-function GerarTextoSancoes({formData, setFormData, isEditing}: GerarTextoProps) {
+function GerarTextoSancoes({ formData, setFormData, isEditing }: GerarTextoProps) {
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
     setFormData((prev) => ({ ...prev, [campo]: novoValor }));
   };
@@ -2743,14 +2756,14 @@ function GerarTextoSancoes({formData, setFormData, isEditing}: GerarTextoProps) 
 
       {formData.eRegistroPreco === 'sim' && (
         <>
-           <h3 className="text-lg font-bold pt-4 pb-2 text-justify">10.2 Sanções aplicáveis à Ata de Registro de Preços</h3>
-           {renderTexto(formData.texto_sancoes_ata_padrao, 'texto_sancoes_ata_padrao')}
-           {formData.sancoesAtaIncluirExtras === 'sim' && (
-             <>
-               {renderTexto(formData.texto_sancoes_ata_extras, 'texto_sancoes_ata_extras')}
-               {renderLista(formData.sancoesAtaExtras)}
-             </>
-           )}
+          <h3 className="text-lg font-bold pt-4 pb-2 text-justify">10.2 Sanções aplicáveis à Ata de Registro de Preços</h3>
+          {renderTexto(formData.texto_sancoes_ata_padrao, 'texto_sancoes_ata_padrao')}
+          {formData.sancoesAtaIncluirExtras === 'sim' && (
+            <>
+              {renderTexto(formData.texto_sancoes_ata_extras, 'texto_sancoes_ata_extras')}
+              {renderLista(formData.sancoesAtaExtras)}
+            </>
+          )}
         </>
       )}
 
@@ -2767,8 +2780,8 @@ function GerarTextoSancoes({formData, setFormData, isEditing}: GerarTextoProps) 
 }
 
 // --- SEÇÃO 11: DEMAIS CONDIÇÕES E ANEXOS ---
-function GerarTextoDemaisCondicoes({formData, setFormData, isEditing}: GerarTextoProps) {
-  const { demaisCondicoes,demaisCondicoesIncluir, outrosAnexos } = formData;
+function GerarTextoDemaisCondicoes({ formData, setFormData, isEditing }: GerarTextoProps) {
+  const { demaisCondicoes, demaisCondicoesIncluir, outrosAnexos } = formData;
 
   const handleSave = (novoValor: string) => {
     setFormData((prev) => ({ ...prev, demaisCondicoes: novoValor }));
@@ -2776,22 +2789,22 @@ function GerarTextoDemaisCondicoes({formData, setFormData, isEditing}: GerarText
 
   return (
     <div>
-       {isEditing ? (
-         <EditableTextarea initialValue={demaisCondicoes} onSave={handleSave} isEditing={isEditing} className="text-lg" />
-       ) : (
-         demaisCondicoesIncluir === 'sim' && <p className="text-lg p-2 rounded-md whitespace-pre-wrap">{demaisCondicoes}</p>
-       )}
+      {isEditing ? (
+        <EditableTextarea initialValue={demaisCondicoes} onSave={handleSave} isEditing={isEditing} className="text-lg" />
+      ) : (
+        demaisCondicoesIncluir === 'sim' && <p className="text-lg p-2 rounded-md whitespace-pre-wrap">{demaisCondicoes}</p>
+      )}
 
-       <h3 className="text-lg font-bold pt-4 pb-2 text-justify">12 Anexos</h3>
-       {outrosAnexos.length > 0 && (
-         <ul className="list-disc pl-8 text-lg space-y-2">
-           {outrosAnexos.map(anexo => (
-             <li key={anexo.id}>
-               <strong>{anexo.tipo}:</strong> {anexo.descricao}
-             </li>
-           ))}
-         </ul>
-       )}
+      <h3 className="text-lg font-bold pt-4 pb-2 text-justify">12 Anexos</h3>
+      {outrosAnexos.length > 0 && (
+        <ul className="list-disc pl-8 text-lg space-y-2">
+          {outrosAnexos.map(anexo => (
+            <li key={anexo.id}>
+              <strong>{anexo.tipo}:</strong> {anexo.descricao}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
