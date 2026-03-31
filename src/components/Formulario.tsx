@@ -259,7 +259,7 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
               </SelectComponent>
               {formData.atenderaDeverLegalExposto === 'sim' && (
                 <div>
-                  <label htmlFor="textoAdicional">Citar legislação que fundamente o dever do estado de contratar o objeto e transcrever ou explicitar o conteúdo do que preconiza o dispositivo legal citado, se for o caso,</label>
+                  <label htmlFor="textoAdicional">Citar legislação que fundamente o dever do estado de contratar o objeto e transcrever ou explicitar o conteúdo do que preconiza o dispositivo legal citado, se for o caso.</label>
                   <textarea
                     id="textoAdicional"
                     className='border rounded-sm p-2 w-full'
@@ -323,7 +323,8 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
               <label htmlFor="justificativaEscolhaSolucaoNaoEtp" className="font-semibold">
                 2.3.1. Justificar a razão para escolha desse tipo de serviço frente às demais alternativas para a satisfação da necessidade pública
               </label>
-              <p className="orientacoes mb-2">No caso de contratações que envolvam soluções de TIC informar o alinhamento com as necessidades tecnológicas e de negócio</p>
+              <p className="orientacoes mb-2">No caso de contratações que envolvam soluções de TIC informar o alinhamento com as necessidades tecnológicas e de negócio.</p>
+              <p className="orientacoes mb-2">Exemplo: Quando houver a possibilidade de opção entre aquisição ou locação de bens móveis duráveis.</p>
               <textarea
                 id="justificativaEscolhaSolucaoNaoEtp"
                 className='border rounded-sm p-2 w-full'

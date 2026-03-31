@@ -55,7 +55,7 @@ const defaultFormData = {
   texto_nao_justificativa_quantitativo_textoDois: "2.2.1 O(s) quantitativos(s) previsto(s) neste termo de referência está(ão) fundamentado(s) abaixo:",
   haveraParcelamentoDoObjeto: "",
   haveraParcelamentoDoObjeto_sim: "2.4.1 A Justificativa para o parcelamento encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência, de modo a permitir a ampliação da competitividade, diante das particularidades do caso concreto.",
-  haveraParcelamentoDoObjeto_nao: "2.4.1 O não parcelamento do objeto encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência, de modo a permitir a ampliação da competitividade, diante das particularidades do caso concreto.",
+  haveraParcelamentoDoObjeto_nao: "2.4.1 A Justificativa para o não parcelamento do objeto encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência, de modo a permitir a ampliação da competitividade, diante das particularidades do caso concreto.",
   // 2.3.1
   existEtpOuInformacaoPresenteExtratoSigilosoItemDois_tres: "",
   texto_sim_justificativa_solucao: "2.3.1 A Justificativa da escolha da solução a ser licitada encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",
