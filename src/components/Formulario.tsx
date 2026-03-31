@@ -188,9 +188,10 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
                 </div>
                 <div className="mt-4">
                   <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
-                  {formData.eEstudosTecnicosPreliminares === 'sim' ? (
+                  {formData.eEstudosTecnicosPreliminares === 'sim' && (
                     <p className="orientacoes">Na hipótese de existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).</p>
-                  ) : (
+                  )}
+                  {formData.eEstudosTecnicosPreliminares === 'nao' && (
                     <p className="orientacoes">Na hipótese de não existir ETP ou quando informação do presente tópico não puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).</p>
                   )}
                   <div>
@@ -214,6 +215,14 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
               <div className="mt-4">
                 <div>
                   <label htmlFor="eEstudosTecnicosPreliminares">Existe ETP?</label>
+                  {formData.eEstudosTecnicosPreliminares === 'sim' && (
+                    <p className="orientacoes">Na hipótese de existir ETP ou quando a informação do presente tópico puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).</p>
+                  )}
+                  {
+                    formData.eEstudosTecnicosPreliminares === 'nao' && (
+                      <p className="orientacoes">Na hipótese de não existir ETP ou quando informação do presente tópico não puder ser obtida no extrato do ETP sigiloso (Art. 9º, do decreto Estadual Nº 53.384/2022).</p>
+                    )
+                  }
                   <div>
                     <select
                       name="eEstudosTecnicosPreliminares"
