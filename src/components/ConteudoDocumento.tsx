@@ -367,13 +367,13 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
           setFormData={setFormData}
         />
       </div>
-      <div>
+      {/* <div>
         <ResponsabilidadeEticoProfissional
           formData={formData}
           setFormData={setFormData}
           isEditing={isEditing}
         />
-      </div>
+      </div> */}
       <div>
         <p className="pt-4 text-justify font-semibold">3.3 INDICAÇÃO DE MARCAS OU MODELOS</p>
         <IndicacaoMarcaouModelo

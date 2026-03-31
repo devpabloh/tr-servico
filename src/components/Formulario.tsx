@@ -653,7 +653,7 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
             <select name="objetoSeraRecebido" id="objetoSeraRecebido" value={formData.objetoSeraRecebido} onChange={(e) => setFormData({ ...formData, objetoSeraRecebido: e.target.value })} className="border rounded-sm p-2 flex-grow w-1/5">
               <option value="">Selecione uma opção</option>
               <option value="nao">Não</option>
-              <option value="ProvisorioEDefinitivo">Provisorio e Definitivo</option>
+              <option value="ProvisorioEDefinitivo">Sim</option>
             </select>
           </div>
           {
@@ -704,8 +704,7 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
         </FieldsetContainer>
         <FieldsetContainer titleLegend="3.2.8 O termo detalhado do recebimento provisório">
           <div className="flex flex-col mt-2">
-            <label htmlFor="TermoDetalhadoDeRecebimentoProvisorio" className="font-semibold">Foi elaborado o IMR (Instrumento de Medição de Resultado) para auxiliar o recebimento definitivo?</label>
-            <span className="orientacoes my-1">(Utilizar, se for o caso)</span>
+            <label htmlFor="TermoDetalhadoDeRecebimentoProvisorio" className="font-semibold">Foi elaborado o IMR (Instrumento de Medição de Resultado)</label>
             <select
               name="TermoDetalhadoDeRecebimentoProvisorio"
               id="TermoDetalhadoDeRecebimentoProvisorio"
@@ -786,7 +785,7 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
             </div>
           )}
         </FieldsetContainer>
-        <FieldsetContainer titleLegend="3.4 Vedação de utilização de marca / produto na execução do serviço" explicacao="(Se for o caso)">
+        <FieldsetContainer titleLegend="3.4 Vedação de utilização de marca / produto na execução do serviço (Se for o caso)" >
           <CollapsibleText title="Orientações para preenchimento">
             <p className="orientacoes">
               Embora a contratação seja de serviços, é possível que a Administração vede o emprego de marca ou produto de bens empregados em sua execução, com base em experiência prévia, registrada em processo administrativo, quando restar comprovado que produtos adquiridos e utilizados anteriormente pela Administração não atendem a requisitos indispensáveis ao pleno adimplemento da obrigação contratual, conforme art. 41, III, da Lei nº 14.133, de 2021.

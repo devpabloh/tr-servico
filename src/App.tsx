@@ -141,7 +141,7 @@ const defaultFormData = {
   texto_recebimento_provisorio: "A. Provisoriamente, pelo fiscal do CONTRATO no prazo de {ObjetoRecebidoProvisoriamente} ({prazoPorExtenso}) dias, mediante termo detalhado que ateste o cumprimento das exigências de caráter técnico e administrativo e a comprovação da prestação dos serviços;",
   texto_recebimento_definitivo: "B. Definitivamente, por servidor ou comissão designada pela autoridade competente, no prazo de {ObjetoRecebidoDefinitivamente} ({definitivoPorExtenso}) dias úteis, contados  do recebimento provisório.",
 
-  texto_recebimento_definitivo_podera_ser_excepcionalmente: "b.1.) O prazo para recebimento definitivo poderá ser excepcionalmente prorrogado, de forma justificada, por igual período, quando houver necessidade de diligências para a aferição do atendimento das exigências contratuais. (Utilizar, se for o caso)",
+  texto_recebimento_definitivo_podera_ser_excepcionalmente: "b.1.) O prazo para recebimento definitivo poderá ser excepcionalmente prorrogado, de forma justificada, por igual período, quando houver necessidade de diligências para a aferição do atendimento das exigências contratuais.",
   recebimentoDefinitivoPoderaSerExcepcionalmente: "",
 
   //3.2.7 
