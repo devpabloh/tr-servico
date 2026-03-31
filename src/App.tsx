@@ -73,14 +73,14 @@ const defaultFormData = {
   // Textos para 'nao' ETP -> 'item'
   texto_nao_parcelamento_item_p1: "2.4.1 A regra a ser observada pela Administração nas licitações é a do parcelamento do objeto quando, no caso concreto, a divisão for tecnicamente viável e economicamente vantajosa, de modo a ampliar a competição e evitar a concentração de mercado. (Art. 47, inciso II combinado com §1º do mesmo artigo, da Lei 14.1333/2021).",
   texto_nao_parcelamento_item_p2: "2.4.2 Na presente contratação, resta demonstrado que o parcelamento por item(ns) buscou permitir a participação de maior número de interessados, fomentando, assim, o princípio da ampla concorrência.",
-  texto_nao_parcelamento_item_p3: "2.4.3 A(s) razão(ões) técnica(s) e/ou econômica(s) para a preservação do objeto parcelado por item(ns) foram {razoesParcelamentoItem}.",
+  texto_nao_parcelamento_item_p3: " 2.4.3 A(s) razão(ões) para a preservação do objeto parcelado por item(ns) foram: <br/><br/> {razoesParcelamentoItem}.",
   razoesParcelamentoItem: "",
-  texto_nao_parcelamento_item_p4: "2.4.4 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado tanto técnica quanto economicamente, sem restringir ou prejudicar a competitividade do certame e, consequentemente, o mais adequado para promover a maior vantajosidade para o Estado.",
+  texto_nao_parcelamento_item_p4: "2.4.4 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado, sem restringir ouprejudicar a competitividade do certame e, consequentemente, o mais adequado para promover a maior vantajosidade para o Estado.",
 
   // Textos para 'nao' ETP -> 'lote'
   texto_nao_parcelamento_lote_p1: "2.4.1 Neste caso em concreto, em virtude da natureza do serviço a ser contratado, a opção pelo agrupamento dos itens em grupo(s) é a mais vantajosa para a Administração, uma vez que {justificativaAgrupamentoLote}.",
   justificativaAgrupamentoLote: "",
-  texto_nao_parcelamento_lote_p2: "2.4.2 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado tanto técnica, quanto economicamente, sem restringir ou prejudicar a competitividade do certame e, consequentemente, o mais propício para promover maior vantajosidade para o Estado.",
+  texto_nao_parcelamento_lote_p2: "2.4.2 Conclui-se, portanto, que o modelo definido para esta contratação é o mais adequado, sem restringir ou prejudicar a competitividade do certame e, consequentemente, o mais propício para promover maior vantajosidade para o Estado",
 
   // Textos para 'lotes espelhados' (add-on)
   usaLotesEspelhados: "", // 'sim' ou 'nao'

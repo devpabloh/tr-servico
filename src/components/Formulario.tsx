@@ -389,9 +389,10 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
               {formData.tipoParcelamentoNaoEtp === 'lote' && (
                 <div className="my-4">
                   <label htmlFor="justificativaAgrupamentoLote" className="font-semibold">
-                    2.4.1. Expor os motivos das razões técnicas/econômicas para o parcelamento por grupo(s)
+                    2.4.1. Apresentar justificativa técnica e/ou econômica para o parcelamento por grupo(s)
                   </label>
-                  <p className="orientacoes">Exemplo: Prejuízo com pulverização, regionalização, economia de escala, etc.</p>
+                  <p className="orientacoes">Exemplo: Prejuízo com a excessiva pulverização dos serviços, regionalização, sistema único e
+                    integrado, economia de escala, etc</p>
                   <textarea
                     id="justificativaAgrupamentoLote"
                     className='border rounded-sm p-2 w-full'
@@ -572,7 +573,8 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
         <FieldsetContainer titleLegend="3.2 Da execução dos serviços">
           {formData.qualTipoContratacao !== 'corporativo' && (
             <div className='flex flex-col'>
-              <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em locais e horários fixos?</label>
+              {formData.qualTipoContratacao !== 'corporativo' ? <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em locais e horários fixos?</label> : <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em quais horários e locais (nome
+                do órgão/entidade e endereço)?</label>}
               <textarea id='osServicosSeraoPrestadosNosSeguintesLocaisEHorarios' className='border rounded-sm p-2 w-full' value={formData.locaisEHorarios} onChange={(e) => setFormData({ ...formData, locaisEHorarios: e.target.value })} />
 
             </div>

@@ -164,7 +164,6 @@ export function GerarTextoDoConsorcio({ formData, setFormData, isEditing }: Gera
 export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEdit, className }: Readonly<ConteudoDocumentoProps>) {
   return (
     <FolhaDocumento isEditing={isEditing} onToggleEdit={onToggleEdit} className={className}>
-      {/* --- SEÇÃO 1 --- */}
       <div>
         <h2 className="text-xl font-bold pb-2 text-justify">1. DO OBJETO DA LICITAÇÃO</h2>
         <GerarTextoObjeto
@@ -288,9 +287,13 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
         </div>
         <div>
           <p className="pt-4 text-justify font-semibold">3.2 DA EXECUÇÃO DOS SERVIÇOS</p>
+          {formData.qualTipoContratacao === 'corporativo' && (
+            <p className="pb-1 text-justify">3.2.1 Os serviços descritos neste
+              termo de referência serão prestados nos locais e horários indicados pela contratante</p>
+          )}
           {formData.qualTipoContratacao !== 'corporativo' && (
             <div className="mt-2">
-              <p className="pb-2 text-justify">3.2.1 Os serviços serão prestados em locais e horários fixos?</p>
+              <p className="pb-1 text-justify">3.2.1 Os serviços serão prestados em locais e horários fixos?</p>
               <EditableTextarea
                 initialValue={formData.locaisEHorarios}
                 onSave={(novoValor) => setFormData(prev => ({ ...prev, locaisEHorarios: novoValor }))}
