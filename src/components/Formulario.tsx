@@ -371,9 +371,9 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
               {formData.tipoParcelamentoNaoEtp === 'item' && (
                 <div className="my-4">
 
-                  <label htmlFor="razoesParcelamentoItem" className="font-semibold">
+                  {formData.eEstudosTecnicosPreliminares === 'nao' && formData.haveraParcelamentoDoObjeto === 'nao' ? <label htmlFor="razoesParcelamentoItem" className="font-semibold">
                     Expor os motivos pelos quais a Administração Pública opta pelo parcelamento por item(ns), apresentando argumentos técnicos e/ou econômicos para o parcelamento do objeto em questão.
-                  </label>
+                  </label>: <label htmlFor="razoesParcelamentoItem" className="font-semibold">Expor os motivos pelos quais a administração Pública opta pelo não parcelamento(grupo único), apresentando argumentos técnicos e/ou econômicos</label>}
                   <p className="orientacoes">Exemplo: Quando os percentuais de exigências de qualificação técnica e econômico-financeira forem elevados ou resultarem em quantias vultosas, especialização, etc</p>
                   <textarea
                     id="razoesParcelamentoItem"

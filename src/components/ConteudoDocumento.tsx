@@ -1663,17 +1663,17 @@ function JustificativaQuantitativo({ formData, setFormData, isEditing }: GerarTe
       );
     }
     case 'nao': {
-      const textoComValores = substituirPlaceholders(texto_nao_justificativa_quantitativo, valores);
+      /* const textoComValores = substituirPlaceholders(texto_nao_justificativa_quantitativo, valores); */
       const textoComValoresDois = substituirPlaceholders(texto_nao_justificativa_quantitativo_textoDois, valores);
       return (
         isEditing ? (
           <>
-            <EditableTextarea
+            {/* <EditableTextarea
               initialValue={texto_nao_justificativa_quantitativo}
               onSave={(novoValor: string) => handleSave('texto_nao_justificativa_quantitativo', novoValor)}
               className="text-lg"
               isEditing={isEditing}
-            />
+            /> */}
             <EditableTextarea
               initialValue={texto_nao_justificativa_quantitativo_textoDois}
               onSave={(novoValor: string) => handleSave('texto_nao_justificativa_quantitativo_textoDois', novoValor)}
@@ -1683,10 +1683,10 @@ function JustificativaQuantitativo({ formData, setFormData, isEditing }: GerarTe
           </>
         ) : (
           <>
-            <p
+            {/* <p
               className="text-lg p-2 rounded-md"
               dangerouslySetInnerHTML={{ __html: textoComValores }}
-            />
+            /> */}
             <p
               className="text-lg p-2 rounded-md"
               dangerouslySetInnerHTML={{ __html: textoComValoresDois }}
