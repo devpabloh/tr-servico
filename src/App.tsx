@@ -52,7 +52,7 @@ const defaultFormData = {
   texto_sim_justificativa_quantitativo: "2.2.1 A Justificativa para o quantitativo necessário ao atendimento da necessidade pública encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência.",
   itemEtpQuantitativo: "",
   texto_nao_justificativa_quantitativo: "2.2.1 Os quantitativos previstos no presente Termo de Referência está fundamentado em {fundamentadoEm}, conforme os cálculos apresentados a seguir:",
-  texto_nao_justificativa_quantitativo_textoDois: "2.2.1 O(s) quantitativos(s) previsto(s) neste termo de referência está(ão) fundamentado(s) abaixo:",
+  texto_nao_justificativa_quantitativo_textoDois: "2.2.1 O(s) quantitativos(s) previsto(s) neste termo de referência está(ão) fundamentado(s) abaixo: <br></br> {fundamentadoEm}",
   haveraParcelamentoDoObjeto: "",
   haveraParcelamentoDoObjeto_sim: "2.4.1 A Justificativa para o parcelamento encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência, de modo a permitir a ampliação da competitividade, diante das particularidades do caso concreto.",
   haveraParcelamentoDoObjeto_nao: "2.4.1 A Justificativa para o não parcelamento do objeto encontra-se pormenorizada em tópico específico do Estudo Técnico Preliminar, anexo deste Termo de Referência, de modo a permitir a ampliação da competitividade, diante das particularidades do caso concreto.",
@@ -71,6 +71,7 @@ const defaultFormData = {
   tipoParcelamentoNaoEtp: "lote",
 
   // Textos para 'nao' ETP -> 'item'
+  texto_nao_parcelamento_item_unico: "2.4.1. Neste caso em concreto, em virtude da natureza do serviço, a escolha de um único item, para presente contratação, é a mais vantajosa para administração, uma vez que {razoesParcelamentoItem}",
   texto_nao_parcelamento_item_p1: "2.4.1 A regra a ser observada pela Administração nas licitações é a do parcelamento do objeto quando, no caso concreto, a divisão for tecnicamente viável e economicamente vantajosa, de modo a ampliar a competição e evitar a concentração de mercado. (Art. 47, inciso II combinado com §1º do mesmo artigo, da Lei 14.1333/2021).",
   texto_nao_parcelamento_item_p2: "2.4.2 Na presente contratação, resta demonstrado que o parcelamento por item(ns) buscou permitir a participação de maior número de interessados, fomentando, assim, o princípio da ampla concorrência.",
   texto_nao_parcelamento_item_p3: " 2.4.3 A(s) razão(ões) para a preservação do objeto parcelado por item(ns) foram: <br/><br/> {razoesParcelamentoItem}.",
