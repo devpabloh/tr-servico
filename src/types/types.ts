@@ -60,6 +60,7 @@ export type FormDataCompleto = {
 
   // 1.1 formação de registro de preço
   eRegistroPreco: string;
+  texto_nao_parcelamento_item_unico: string;
   sim_texto_e_registro_preco: string;
   sim_texto_registro_preco_simples: string;
   sim_texto_registro_preco_unificado_saude: string;

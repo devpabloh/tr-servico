@@ -306,42 +306,7 @@ export function ConteudoDocumento({ formData, setFormData, isEditing, onToggleEd
         <div>
           <GerarPrazoDeExecucao formData={formData} setFormData={setFormData} isEditing={isEditing} />
         </div>
-        <div>
-          <p className="pt-4 pb-2 text-justify">
-            3.2.3 Descrição detalhada dos métodos, rotinas, etapas, tecnologias procedimentos, frequência e periodicidade de execução do trabalho:
-          </p>
-          <EditableTextarea
-            initialValue={formData.descricaoDetalhadaMetodosExecucaoTrabalho}
-            onSave={(novoValor) => setFormData(prev => ({ ...prev, descricaoDetalhadaMetodosExecucaoTrabalho: novoValor }))}
-            isEditing={isEditing}
-            className="text-lg"
-          />
-        </div>
-        <div>
-          <p className="pt-4 pb-2 text-justify">
-            3.2.4 Horário da prestação de serviço:
-          </p>
-          <EditableTextarea
-            initialValue={formData.horarioPrestacaoServico}
-            onSave={(novoValor) => setFormData(prev => ({ ...prev, horarioPrestacaoServico: novoValor }))}
-            isEditing={isEditing}
-            className="text-lg"
-          />
-        </div>
-        <div>
-          <CronogramaRealizacaoDosServicos
-            formData={formData}
-            setFormData={setFormData}
-            isEditing={isEditing}
-          />
-        </div>
-        <div>
-          <PerfeitaExecucaoDosServicos
-            formData={formData}
-            setFormData={setFormData}
-            isEditing={isEditing}
-          />
-        </div>
+
       </div>
       {formData.objetoSeraRecebido !== 'nao' && (
         <div>
@@ -1497,7 +1462,8 @@ function JustificativaParcelamento({ formData, setFormData, isEditing }: GerarTe
     usaLotesEspelhados,
     haveraParcelamentoDoObjeto_nao,
     haveraParcelamentoDoObjeto_sim,
-    haveraParcelamentoDoObjeto
+    haveraParcelamentoDoObjeto,
+    texto_nao_parcelamento_item_unico,
   } = formData;
 
   const handleSave = (campo: keyof FormDataCompleto, novoValor: string) => {
@@ -1519,6 +1485,7 @@ function JustificativaParcelamento({ formData, setFormData, isEditing }: GerarTe
 
     // Caso Lotes Espelhados
     argumentosLotesEspelhados: formData.argumentosLotesEspelhados || "_________________",
+    texto_nao_parcelamento_item_unico: texto_nao_parcelamento_item_unico || "_________________",
   };
 
   switch (eEstudosTecnicosPreliminares) {
@@ -1556,39 +1523,96 @@ function JustificativaParcelamento({ formData, setFormData, isEditing }: GerarTe
           {/* Renderiza a sub-opção (Item ou Lote) */}
           {tipoParcelamentoNaoEtp === 'item' && (
             <>
-              <EditableTextarea
-                initialValue={formData.texto_nao_parcelamento_item_p1}
-                onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_item_p1', novoValor)}
-                className="text-lg" isEditing={isEditing}
-              />
-              <EditableTextarea
-                initialValue={formData.texto_nao_parcelamento_item_p2}
-                onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_item_p2', novoValor)}
-                className="text-lg" isEditing={isEditing}
-              />
-              <p
-                className="text-lg p-2 rounded-md"
-                dangerouslySetInnerHTML={{ __html: substituirPlaceholders(formData.texto_nao_parcelamento_item_p3, valores) }}
-              />
-              <EditableTextarea
-                initialValue={formData.texto_nao_parcelamento_item_p4}
-                onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_item_p4', novoValor)}
-                className="text-lg" isEditing={isEditing}
-              />
+              {formData.haveraParcelamentoDoObjeto === 'sim' ? (
+                isEditing ? (
+                  <EditableTextarea
+                    initialValue={formData.texto_nao_parcelamento_item_p1}
+                    onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_item_p1', novoValor)}
+                    className="text-lg" isEditing={isEditing}
+                  />
+                ) : (
+                  <p
+                    className="text-lg p-2 rounded-md"
+                    dangerouslySetInnerHTML={{ __html: substituirPlaceholders(formData.texto_nao_parcelamento_item_p1, valores) }}
+                  />
+                )
+              ) : (
+                isEditing ? (
+                  <EditableTextarea
+                    initialValue={formData.texto_nao_parcelamento_item_unico}
+                    onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_item_unico', novoValor)}
+                    className="text-lg" isEditing={isEditing}
+                  />
+                ) : (
+                  <p
+                    className="text-lg p-2 rounded-md"
+                    dangerouslySetInnerHTML={{ __html: substituirPlaceholders(formData.texto_nao_parcelamento_item_unico, valores) }}
+                  />
+                )
+              )}
+
+              {isEditing ? (
+                <EditableTextarea
+                  initialValue={formData.texto_nao_parcelamento_item_p2}
+                  onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_item_p2', novoValor)}
+                  className="text-lg" isEditing={isEditing}
+                />
+              ) : (
+                <p
+                  className="text-lg p-2 rounded-md"
+                  dangerouslySetInnerHTML={{ __html: substituirPlaceholders(formData.texto_nao_parcelamento_item_p2, valores) }}
+                />
+              )}
+
+              {formData.haveraParcelamentoDoObjeto === 'sim' && !isEditing && (
+                <p
+                  className="text-lg p-2 rounded-md"
+                  dangerouslySetInnerHTML={{ __html: substituirPlaceholders(formData.texto_nao_parcelamento_item_p3, valores) }}
+                />
+              )}
+
+              {isEditing ? (
+                <EditableTextarea
+                  initialValue={formData.texto_nao_parcelamento_item_p4}
+                  onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_item_p4', novoValor)}
+                  className="text-lg" isEditing={isEditing}
+                />
+              ) : (
+                <p
+                  className="text-lg p-2 rounded-md"
+                  dangerouslySetInnerHTML={{ __html: substituirPlaceholders(formData.texto_nao_parcelamento_item_p4, valores) }}
+                />
+              )}
             </>
           )}
 
           {tipoParcelamentoNaoEtp === 'lote' && (
             <>
-              <p
-                className="text-lg p-2 rounded-md"
-                dangerouslySetInnerHTML={{ __html: substituirPlaceholders(formData.texto_nao_parcelamento_lote_p1, valores) }}
-              />
-              <EditableTextarea
-                initialValue={formData.texto_nao_parcelamento_lote_p2}
-                onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_lote_p2', novoValor)}
-                className="text-lg" isEditing={isEditing}
-              />
+              {isEditing ? (
+                <EditableTextarea
+                  initialValue={formData.texto_nao_parcelamento_lote_p1}
+                  onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_lote_p1', novoValor)}
+                  className="text-lg" isEditing={isEditing}
+                />
+              ) : (
+                <p
+                  className="text-lg p-2 rounded-md"
+                  dangerouslySetInnerHTML={{ __html: substituirPlaceholders(formData.texto_nao_parcelamento_lote_p1, valores) }}
+                />
+              )}
+
+              {isEditing ? (
+                <EditableTextarea
+                  initialValue={formData.texto_nao_parcelamento_lote_p2}
+                  onSave={(novoValor: string) => handleSave('texto_nao_parcelamento_lote_p2', novoValor)}
+                  className="text-lg" isEditing={isEditing}
+                />
+              ) : (
+                <p
+                  className="text-lg p-2 rounded-md"
+                  dangerouslySetInnerHTML={{ __html: substituirPlaceholders(formData.texto_nao_parcelamento_lote_p2, valores) }}
+                />
+              )}
             </>
           )}
 

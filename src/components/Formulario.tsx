@@ -373,7 +373,7 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
 
                   {formData.eEstudosTecnicosPreliminares === 'nao' && formData.haveraParcelamentoDoObjeto === 'nao' ? <label htmlFor="razoesParcelamentoItem" className="font-semibold">
                     Expor os motivos pelos quais a Administração Pública opta pelo parcelamento por item(ns), apresentando argumentos técnicos e/ou econômicos para o parcelamento do objeto em questão.
-                  </label>: <label htmlFor="razoesParcelamentoItem" className="font-semibold">Expor os motivos pelos quais a administração Pública opta pelo não parcelamento(grupo único), apresentando argumentos técnicos e/ou econômicos</label>}
+                  </label> : <label htmlFor="razoesParcelamentoItem" className="font-semibold">Expor os motivos pelos quais a administração Pública opta pelo não parcelamento(grupo único), apresentando argumentos técnicos e/ou econômicos</label>}
                   <p className="orientacoes">Exemplo: Quando os percentuais de exigências de qualificação técnica e econômico-financeira forem elevados ou resultarem em quantias vultosas, especialização, etc</p>
                   <textarea
                     id="razoesParcelamentoItem"
@@ -388,9 +388,11 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
               {/* Sub-opção "lote" */}
               {formData.tipoParcelamentoNaoEtp === 'lote' && (
                 <div className="my-4">
-                  <label htmlFor="justificativaAgrupamentoLote" className="font-semibold">
+                  {formData.eEstudosTecnicosPreliminares === 'nao' && formData.haveraParcelamentoDoObjeto === 'nao' && formData.tipoParcelamentoNaoEtp === 'lote' ? <label htmlFor="justificativaAgrupamentoLote" className="font-semibold">
+                    2.4.1. Expor os motivos pelos quais a Administração Pública opta pelo não parcelamento(grupo único), apresentando argumentos técnicos e/ou econômicos
+                  </label> : <label htmlFor="justificativaAgrupamentoLote" className="font-semibold">
                     2.4.1. Apresentar justificativa técnica e/ou econômica para o parcelamento por grupo(s)
-                  </label>
+                  </label>}
                   <p className="orientacoes">Exemplo: Prejuízo com a excessiva pulverização dos serviços, regionalização, sistema único e
                     integrado, economia de escala, etc</p>
                   <textarea
@@ -571,14 +573,17 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
           />
         </FieldsetContainer>
         <FieldsetContainer titleLegend="3.2 Da execução dos serviços">
-          {formData.qualTipoContratacao !== 'corporativo' && (
-            <div className='flex flex-col'>
-              {formData.qualTipoContratacao !== 'corporativo' ? <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em locais e horários fixos?</label> : <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em quais horários e locais (nome
-                do órgão/entidade e endereço)?</label>}
-              <textarea id='osServicosSeraoPrestadosNosSeguintesLocaisEHorarios' className='border rounded-sm p-2 w-full' value={formData.locaisEHorarios} onChange={(e) => setFormData({ ...formData, locaisEHorarios: e.target.value })} />
-
-            </div>
-          )}
+          {/*  {formData.qualTipoContratacao !== 'corporativo' && (
+    
+          )} */}
+          <div className='flex flex-col'>
+            {formData.qualTipoContratacao === 'corporativo' ?
+              <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em quais horários e locais (nome
+                do órgão/entidade e endereço)?</label>
+              :
+              <label htmlFor="osServicosSeraoPrestadosNosSeguintesLocaisEHorarios" className="font-semibold">Os serviços serão prestados em locais e horários fixos?</label>}
+            <textarea id='osServicosSeraoPrestadosNosSeguintesLocaisEHorarios' className='border rounded-sm p-2 w-full' value={formData.locaisEHorarios} onChange={(e) => setFormData({ ...formData, locaisEHorarios: e.target.value })} />
+          </div>
           <FieldsetContainer titleLegend="3.2.2 O início da execução contratual">
             <CollapsibleText title="Orientações para preenchimento">
               <p className="orientacoes">
@@ -608,39 +613,6 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
               )}
             </div>
           </FieldsetContainer>
-        </FieldsetContainer>
-        <FieldsetContainer titleLegend="3.2.3 Descrição detalhada dos métodos, rotinas, etapas, tecnologias procedimentos, frequência e periodicidade de execução do trabalho:">
-          <div className='flex flex-col space-y-1'>
-            <p>3.2.3.Descrição detalhada:</p>
-            <textarea id='nao_havendo_grande_vulto_da_contratacao' className='border rounded-sm p-2 w-full' value={formData.descricaoDetalhadaMetodosExecucaoTrabalho} onChange={(e) => setFormData({ ...formData, descricaoDetalhadaMetodosExecucaoTrabalho: e.target.value })} />
-          </div>
-        </FieldsetContainer>
-        <FieldsetContainer titleLegend="3.2.4 Horário da prestação de serviço">
-          <div className='flex flex-col space-y-1'>
-            <p>3.2.4. Qual o horário da prestação do serviço?</p>
-            <textarea id='horario_prestaca_servico' className='border rounded-sm p-2 w-full' value={formData.horarioPrestacaoServico} onChange={(e) => setFormData({ ...formData, horarioPrestacaoServico: e.target.value })} />
-          </div>
-        </FieldsetContainer>
-        <FieldsetContainer titleLegend="3.2.5 Cronograma de realização dos serviços">
-          <SelectComponent label="Existe cronograma para realização dos serviços" value={formData.existeCronograma} onChange={(e) => setFormData({ ...formData, existeCronograma: e.target.value })}>
-            <option value="">Selecione uma opção</option>
-            <option value="sim">Sim</option>
-            <option value="nao">Não</option>
-          </SelectComponent>
-          {
-            formData.existeCronograma === 'sim' && (
-              <div className='flex flex-col space-y-1'>
-                <p>Qual o cronograma ?</p>
-                <textarea id='cronogramaRealizacaoDosServicos' className='border rounded-sm p-2 w-full' value={formData.cronogramaRealizacaoDosServicos} onChange={(e) => setFormData({ ...formData, cronogramaRealizacaoDosServicos: e.target.value })} />
-              </div>
-            )
-          }
-        </FieldsetContainer>
-        <FieldsetContainer titleLegend="3.2.6 Para a perfeita execução dos serviços, a Contratada deverá disponibilizar os materiais, equipamentos, ferramentas e utensílios necessários, nas quantidades estimadas e qualidades a seguir estabelecidas, promovendo sua substituição quando necessário">
-          <div className='flex flex-col space-y-1'>
-            <p>O que se faz necessário para execução perfeita dos serviços ?</p>
-            <textarea id='perfeitaExecucaoservicos' className='border rounded-sm p-2 w-full' value={formData.perfeitaExecucaoservicos} onChange={(e) => setFormData({ ...formData, perfeitaExecucaoservicos: e.target.value })} />
-          </div>
         </FieldsetContainer>
         <FieldsetContainer titleLegend="3.2.7 O objeto será recebido (deve ser incluído, se cabível)">
           <CollapsibleText title="Orientações para preenchimento">
@@ -683,7 +655,6 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
                 />
                 <div className="flex flex-col mt-2">
                   <label htmlFor="recebimentoDefinitivoPoderaSerExcepcionalmente" className="font-semibold">Haverá possibilidade de prorrogação do recebimento definitivo?</label>
-                  <span className="orientacoes my-1">(Utilizar, se for o caso)</span>
                   <select
                     name="vedacaoOuParticipacaoPessoasFisicas"
                     id="vedacaoOuParticipacaoPessoasFisicas"
