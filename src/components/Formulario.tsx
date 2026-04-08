@@ -1156,6 +1156,8 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
                 onChange={(e) => setFormData({ ...formData, requerCondicaoPropostaParaos: e.target.value })}
               />
               <InputComponent
+                orientacoes="A administração deve avalizar, caso a caso, a necessidade de fazer tal exigência, considerando a eventualidade de reduzir a competitividade em razão da oneração dos licitantes interessados"
+                segundaOrientacao="Atentar que na Lei n° 14.133/2021 este item deixou de fazer parte do rol para habilitação econômica-financeira dos licitantes e, se for necessária a sua inclusão no caso concreto, deverá ser solicitada, de forma justificada, como um requisito de pré habilitação."
                 label="Quais documentos acompanham a proposta"
                 id="documentoQueAcompanhaProposta"
                 value={formData.requerCondicaoPropostaAcompanhadaDoSeguinteDocumento}
@@ -2277,6 +2279,7 @@ export function Formulario({ formData, setFormData, className }: FormularioProps
             </SelectComponent>
             {formData.requerGarantiaAdicionalAntecipacao === 'sim' && (
               <InputComponent
+                orientacoes="(Conforme disposto no artigo 58, 1º, da Lei Federal nº 14.133/2021, o percentual da garantia de proposta não poderá exceder 1% do valor estimado da licitação)"
                 label="Percentual da Garantia Adicional (%)"
                 id="percentualGarantiaAdicionalAntecipacao"
                 type="number"
